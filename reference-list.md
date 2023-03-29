@@ -13,3 +13,5 @@
 [Patience, S., 2022. When did the video game industry overtake Hollywood and the music industry? \[WWW Document\]. Driverless Crocodile. URL https://www.driverlesscrocodile.com/sustainability-and-change/when-did-the-video-game-industry-overtake-hollywood-and-the-music-industry/ (accessed 3.29.23).](https://www.driverlesscrocodile.com/sustainability-and-change/when-did-the-video-game-industry-overtake-hollywood-and-the-music-industry/)
 
 [Read, S., 2022. Gaming boomed in lockdown and market value will reach $320bn. World Economic Forum.](https://www.weforum.org/agenda/2022/07/gaming-pandemic-lockdowns-pwc-growth/)
+
+## Stakeholders
