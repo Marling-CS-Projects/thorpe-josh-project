@@ -15,3 +15,9 @@
 [Read, S., 2022. Gaming boomed in lockdown and market value will reach $320bn. World Economic Forum.](https://www.weforum.org/agenda/2022/07/gaming-pandemic-lockdowns-pwc-growth/)
 
 ## Stakeholders
+
+[Green, C.S., Pouget, A., Bavelier, D., 2010. Improved probabilistic inference as a general learning mechanism with action video games. Current biology : CB 20, 1573–9. https://doi.org/10.1016/j.cub.2010.07.040](https://pubmed.ncbi.nlm.nih.gov/20833324/)
+
+[Sungur, H., Boduroglu, A., 2012. Action video game players form more detailed representation of objects - PubMed. Acta psychologica 139. https://doi.org/10.1016/j.actpsy.2011.12.002](https://pubmed.ncbi.nlm.nih.gov/22266223/)
+
+[Video gaming may be associated with better cognitive performance in children \[WWW Document\], 2022. . National Institutes of Health (NIH). URL https://www.nih.gov/news-events/news-releases/video-gaming-may-be-associated-better-cognitive-performance-children](https://www.nih.gov/news-events/news-releases/video-gaming-may-be-associated-better-cognitive-performance-children)
