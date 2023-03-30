@@ -18,6 +18,8 @@
 
 ## Stakeholders
 
+[Clement, J., 2022. Distribution of video gamers in the United States in 2022, by age group \[WWW Document\]. Statista. URL https://www.statista.com/statistics/189582/age-of-us-video-game-players/ (accessed 3.30.23).](https://www.statista.com/statistics/189582/age-of-us-video-game-players/)
+
 [Entertainment Software Association, 2022. 2022 Essential Facts About the Video Game Industry \[WWW Document\]. Entertainment Software Association. URL https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/ (accessed 3.30.23).](https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/)
 
 [Green, C.S., Pouget, A., Bavelier, D., 2010. Improved probabilistic inference as a general learning mechanism with action video games. Current biology : CB 20, 1573–9. https://doi.org/10.1016/j.cub.2010.07.040](https://pubmed.ncbi.nlm.nih.gov/20833324/)
