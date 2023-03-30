@@ -8,6 +8,8 @@
 
 [Clement, J., 2021. Topic: COVID-19 impact on the gaming industry worldwide \[WWW Document\]. Statista. URL https://www.statista.com/topics/8016/covid-19-impact-on-the-gaming-industry-worldwide/#topicOverview (accessed 3.29.23).](https://www.statista.com/topics/8016/covid-19-impact-on-the-gaming-industry-worldwide/#topicOverview)
 
+[Entertainment Software Association, 2022. 2022 Essential Facts About the Video Game Industry \[WWW Document\]. Entertainment Software Association. URL https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/ (accessed 3.30.23).](https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/)
+
 [Fitzgerald, D., 2020. 2020 Essential Facts About the Video Game Industry \[WWW Document\]. Entertainment Software Association. URL https://www.theesa.com/resource/2020-essential-facts/ (accessed 3.29.23).](reference-list.md#problem-identification)
 
 [Patience, S., 2022. When did the video game industry overtake Hollywood and the music industry? \[WWW Document\]. Driverless Crocodile. URL https://www.driverlesscrocodile.com/sustainability-and-change/when-did-the-video-game-industry-overtake-hollywood-and-the-music-industry/ (accessed 3.29.23).](https://www.driverlesscrocodile.com/sustainability-and-change/when-did-the-video-game-industry-overtake-hollywood-and-the-music-industry/)
@@ -15,6 +17,8 @@
 [Read, S., 2022. Gaming boomed in lockdown and market value will reach $320bn. World Economic Forum.](https://www.weforum.org/agenda/2022/07/gaming-pandemic-lockdowns-pwc-growth/)
 
 ## Stakeholders
+
+[Entertainment Software Association, 2022. 2022 Essential Facts About the Video Game Industry \[WWW Document\]. Entertainment Software Association. URL https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/ (accessed 3.30.23).](https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/)
 
 [Green, C.S., Pouget, A., Bavelier, D., 2010. Improved probabilistic inference as a general learning mechanism with action video games. Current biology : CB 20, 1573–9. https://doi.org/10.1016/j.cub.2010.07.040](https://pubmed.ncbi.nlm.nih.gov/20833324/)
 
