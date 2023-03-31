@@ -28,6 +28,10 @@
 
 [Entertainment Software Association, 2022. 2022 Essential Facts About the Video Game Industry \[WWW Document\]. Entertainment Software Association. URL https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/ (accessed 3.30.23).](https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/)
 
+[Rousseau, J., 2022. ESA: 48% of game players are female and 29% identify as people of color. GamesIndustry.biz.](https://www.gamesindustry.biz/esa-48-percent-of-video-game-players-are-female-and-29-percent-identify-as-people-of-color)
+
+[Williams, Yee, Caplan, 2008. Who plays, how much, and why? Debunking the stereotypical gamer profile. Journal of Computer-Mediated Communication 13, 993–1018. https://doi.org/10.1111/j.1083-6101.2008.00428.x](https://academic.oup.com/jcmc/article/13/4/993/4583542)
+
 [Yee, N., 2021. A Closer Look into the 12 Gamer Motivations - ironSource LevelUp - Medium. ironSource LevelUp.](https://medium.com/ironsource-levelup/a-closer-look-into-the-12-gamer-motivations-8d156ff0151a)
 
 [Yee, N., 2019. Why you need to consider age when designing your game. ironSource LevelUp.](https://medium.com/ironsource-levelup/age-gamer-motivations-259985f27d4e)
