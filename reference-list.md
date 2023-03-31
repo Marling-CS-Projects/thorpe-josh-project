@@ -10,6 +10,8 @@
 
 [Entertainment Software Association, 2022. 2022 Essential Facts About the Video Game Industry \[WWW Document\]. Entertainment Software Association. URL https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/ (accessed 3.30.23).](https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/)
 
+[Farokhmanesh, M., 2021. More than half of Americans turned to video games during lockdown. The Verge.](https://www.theverge.com/2021/1/6/22215786/video-games-covid-19-animal-crossing-among-us)
+
 [Fitzgerald, D., 2020. 2020 Essential Facts About the Video Game Industry \[WWW Document\]. Entertainment Software Association. URL https://www.theesa.com/resource/2020-essential-facts/ (accessed 3.29.23).](reference-list.md#problem-identification)
 
 [Green, C.S., Pouget, A., Bavelier, D., 2010. Improved probabilistic inference as a general learning mechanism with action video games. Current biology : CB 20, 1573–9. https://doi.org/10.1016/j.cub.2010.07.040](https://pubmed.ncbi.nlm.nih.gov/20833324/)
