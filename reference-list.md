@@ -2,7 +2,7 @@
 
 ## Problem Identification
 
-3, 2, 1 Go! Video Gaming is at an All-Time High During COVID-19 \[WWW Document], 2020. . Nielsen. URL [https://www.nielsen.com/insights/2020/3-2-1-go-video-gaming-is-at-an-all-time-high-during-covid-19/](https://www.nielsen.com/insights/2020/3-2-1-go-video-gaming-is-at-an-all-time-high-during-covid-19/) (accessed 3.29.23).
+Nielsen, 2020. 3, 2, 1 Go! Video Gaming is at an All-Time High During COVID-19 \[WWW Document]. Nielsen. URL [https://www.nielsen.com/insights/2020/3-2-1-go-video-gaming-is-at-an-all-time-high-during-covid-19/](https://www.nielsen.com/insights/2020/3-2-1-go-video-gaming-is-at-an-all-time-high-during-covid-19/) (accessed 3.29.23).
 
 Clement, J., 2023. Gaming in the United Kingdom 2022 \[WWW Document]. Statista. URL [https://www.statista.com/statistics/300521/gaming-in-the-united-kingdom/?locale=en](https://www.statista.com/statistics/300521/gaming-in-the-united-kingdom/?locale=en) (accessed 3.29.23).
 
@@ -15,6 +15,8 @@ Entertainment Software Association, 2022. 2022 Essential Facts About the Video G
 Fitzgerald, D., 2020. 2020 Essential Facts About the Video Game Industry \[WWW Document]. Entertainment Software Association. URL [https://www.theesa.com/resource/2020-essential-facts/](https://www.theesa.com/resource/2020-essential-facts/) (accessed 3.29.23).
 
 Green, C.S., Pouget, A., Bavelier, D., 2010. Improved probabilistic inference as a general learning mechanism with action video games. Current biology : CB 20, 1573–9. [https://doi.org/10.1016/j.cub.2010.07.040](https://pubmed.ncbi.nlm.nih.gov/20833324/)
+
+Reynaldo, C., Christian, R., Hosea, H., Gunawan, A.A.S., 2021. Using Video Games to Improve Capabilities in Decision Making and Cognitive Skill: A Literature Review. Procedia Computer Science 179, 211–221. [https://doi.org/10.1016/j.procs.2020.12.027](https://doi.org/10.1016/j.procs.2020.12.027)
 
 Sungur, H., Boduroglu, A., 2012. Action video game players form more detailed representation of objects - PubMed. Acta psychologica 139. [https://doi.org/10.1016/j.actpsy.2011.12.002](https://pubmed.ncbi.nlm.nih.gov/22266223/)
 
@@ -31,6 +33,10 @@ Clement, J., 2022. Distribution of video gamers in the United States in 2022, by
 Entertainment Software Association, 2022. 2022 Essential Facts About the Video Game Industry \[WWW Document]. Entertainment Software Association. URL [https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/](https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/) (accessed 3.30.23).
 
 Howarth, J., 2022. How Many Gamers Are There? (New 2023 Statistics). Exploding Topics. URL [https://explodingtopics.com/blog/number-of-gamers](https://explodingtopics.com/blog/number-of-gamers) (accessed 4.1.23).
+
+PEGI, 2023a. PEGI age ratings \[WWW Document]. Pegi Public Site. URL [https://pegi.info/page/pegi-age-ratings](https://pegi.info/page/pegi-age-ratings) (accessed 4.1.23).
+
+PEGI, 2023b. How we rate games \[WWW Document]. Pegi Public Site. URL [https://pegi.info/page/how-we-rate-games](https://pegi.info/page/how-we-rate-games) (accessed 4.1.23).
 
 [Rousseau, J., 2022. ESA: 48% of game players are female and 29% identify as people of color. GamesIndustry.biz.](https://www.gamesindustry.biz/esa-48-percent-of-video-game-players-are-female-and-29-percent-identify-as-people-of-color)
 
