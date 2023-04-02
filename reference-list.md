@@ -2,7 +2,7 @@
 
 ## Problem Identification
 
-Nielsen, 2020. 3, 2, 1 Go! Video Gaming is at an All-Time High During COVID-19 \[WWW Document]. Nielsen. URL [https://www.nielsen.com/insights/2020/3-2-1-go-video-gaming-is-at-an-all-time-high-during-covid-19/](https://www.nielsen.com/insights/2020/3-2-1-go-video-gaming-is-at-an-all-time-high-during-covid-19/) (accessed 3.29.23).
+Barr, M., Copeland-Stewart, A., 2021. Playing Video Games During the COVID-19 Pandemic and Effects on Players’ Well-Being - Matthew Barr, Alicia Copeland-Stewart, 2022. Games and Culture. [https://doi.org/10.1177\_15554120211017036](https://doi.org/10.1177/15554120211017036)
 
 Clement, J., 2023. Gaming in the United Kingdom 2022 \[WWW Document]. Statista. URL [https://www.statista.com/statistics/300521/gaming-in-the-united-kingdom/?locale=en](https://www.statista.com/statistics/300521/gaming-in-the-united-kingdom/?locale=en) (accessed 3.29.23).
 
@@ -15,6 +15,8 @@ Entertainment Software Association, 2022. 2022 Essential Facts About the Video G
 Fitzgerald, D., 2020. 2020 Essential Facts About the Video Game Industry \[WWW Document]. Entertainment Software Association. URL [https://www.theesa.com/resource/2020-essential-facts/](https://www.theesa.com/resource/2020-essential-facts/) (accessed 3.29.23).
 
 Green, C.S., Pouget, A., Bavelier, D., 2010. Improved probabilistic inference as a general learning mechanism with action video games. Current biology : CB 20, 1573–9. [https://doi.org/10.1016/j.cub.2010.07.040](https://pubmed.ncbi.nlm.nih.gov/20833324/)
+
+Nielsen, 2020. 3, 2, 1 Go! Video Gaming is at an All-Time High During COVID-19 \[WWW Document]. Nielsen. URL [https://www.nielsen.com/insights/2020/3-2-1-go-video-gaming-is-at-an-all-time-high-during-covid-19/](https://www.nielsen.com/insights/2020/3-2-1-go-video-gaming-is-at-an-all-time-high-during-covid-19/) (accessed 3.29.23).
 
 Reynaldo, C., Christian, R., Hosea, H., Gunawan, A.A.S., 2021. Using Video Games to Improve Capabilities in Decision Making and Cognitive Skill: A Literature Review. Procedia Computer Science 179, 211–221. [https://doi.org/10.1016/j.procs.2020.12.027](https://doi.org/10.1016/j.procs.2020.12.027)
 
