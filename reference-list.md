@@ -40,6 +40,8 @@ PEGI, 2023a. PEGI age ratings \[WWW Document]. Pegi Public Site. URL [https://pe
 
 PEGI, 2023b. How we rate games \[WWW Document]. Pegi Public Site. URL [https://pegi.info/page/how-we-rate-games](https://pegi.info/page/how-we-rate-games) (accessed 4.1.23).
 
+PEGI, 2023c. What do the labels mean? \[WWW Document]. Pegi Public Site. URL [https://pegi.info/what-do-the-labels-mean](https://pegi.info/what-do-the-labels-mean) (accessed 4.7.23).
+
 [Rousseau, J., 2022. ESA: 48% of game players are female and 29% identify as people of color. GamesIndustry.biz.](https://www.gamesindustry.biz/esa-48-percent-of-video-game-players-are-female-and-29-percent-identify-as-people-of-color)
 
 Williams, Yee, Caplan, 2008. Who plays, how much, and why? Debunking the stereotypical gamer profile. Journal of Computer-Mediated Communication 13, 993–1018. [https://doi.org/10.1111/j.1083-6101.2008.00428.x](https://doi.org/10.1111/j.1083-6101.2008.00428.x)
