@@ -52,6 +52,24 @@ Williams, Yee, Caplan, 2008. Who plays, how much, and why? Debunking the stereot
 
 ## Research
 
+Gamesgds, 2020. Spelunky 2 – Controls Guide: PC (Keyboard) and Xbox (Controller) \[WWW Document]. Gamesgds | Games, Guides, Walkthroughs, Achievements, Tips, Cheats. URL [https://gamesgds.com/spelunky-2-controls-guide-pc-keyboard-and-xbox-controller/](https://gamesgds.com/spelunky-2-controls-guide-pc-keyboard-and-xbox-controller/) (accessed 4.18.23).
+
+Koziara, A., 2017. ‘Soul Knight’ Review – All the Guns. All of Them. \[WWW Document]. TouchArcade. URL [https://toucharcade.com/2017/03/10/soul-knight-review/](https://toucharcade.com/2017/03/10/soul-knight-review/) (accessed 4.18.23).
+
+[Messner, S., 2016. Enter The Gungeon Has Lots Of Excellent Weapons. Rock Paper Shotgun.](https://www.rockpapershotgun.com/enter-the-gungeon-hands-on)
+
+Saltzman, M., 2020. Spelunky 2 Review \[WWW Document]. IGN. URL [https://www.ign.com/articles/spelunky-2-review](https://www.ign.com/articles/spelunky-2-review) (accessed 4.18.23).
+
+STANDS4 LLC, 2023. What does bullet hell mean? \[WWW Document]. Definitions.net. URL [https://www.definitions.net/definition/bullet+hell](https://www.definitions.net/definition/bullet+hell) (accessed 4.18.23).
+
+[Stout, M., 2010. Boss Battle Design and Structure. Game Developer.](https://www.gamedeveloper.com/design/boss-battle-design-and-structure)
+
+Ybot, 2018. Enter The Gungeon Controls, Key Bindings & Settings \[WWW Document]. Yekbot. URL [https://www.yekbot.com/enter-the-gungeon-controls-key-bindings-settings/](https://www.yekbot.com/enter-the-gungeon-controls-key-bindings-settings/) (accessed 4.18.23).
+
+[ZibraAI, 2021. Why is the Game Development industry still struggling with rendering realistic water and how AI comes to the rescue. Medium.](https://medium.com/@zibraAI/why-is-the-game-development-industry-still-struggling-with-rendering-realistic-water-and-how-ai-3972bfbb3059)
+
+
+
 ## Features of a Proposed Solution
 
 [Wilde, T., 2016. How WASD became the standard PC control scheme. PC Gamer.](https://www.pcgamer.com/how-wasd-became-the-standard-pc-control-scheme/)
