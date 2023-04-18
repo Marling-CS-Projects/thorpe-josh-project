@@ -50,3 +50,8 @@ Williams, Yee, Caplan, 2008. Who plays, how much, and why? Debunking the stereot
 
 [Yee, N., 2019. Why you need to consider age when designing your game. ironSource LevelUp.](https://medium.com/ironsource-levelup/age-gamer-motivations-259985f27d4e)
 
+## Research
+
+## Features of a Proposed Solution
+
+[Wilde, T., 2016. How WASD became the standard PC control scheme. PC Gamer.](https://www.pcgamer.com/how-wasd-became-the-standard-pc-control-scheme/)

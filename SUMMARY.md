@@ -11,6 +11,7 @@
 * [1.4b Computational Methods](analysis/1.4b-computational-methods.md)
 * [1.5 Success Criteria](analysis/1.5-success-criteria.md)
 * [1.6 Hardware and Software Requirements](analysis/1.6-hardware-and-software-requirements.md)
+* [Reference List](analysis/reference-list.md)
 
 ## 2 Design and Development <a href="#design-and-development" id="design-and-development"></a>
 
@@ -28,7 +29,3 @@
 * [4.1 Evaluation of Success Criteria](evaluation/4.1-evaluation-of-success-criteria.md)
 * [4.2 Evaluation of Usability Features](evaluation/4.2-evaluation-of-usability-features.md)
 * [4.3 Maintenance and Future Development](evaluation/4.3-maintenance-and-future-development.md)
-
-***
-
-* [Reference List](reference-list.md)
