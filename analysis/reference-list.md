@@ -4,6 +4,8 @@
 
 Barr, M., Copeland-Stewart, A., 2021. Playing Video Games During the COVID-19 Pandemic and Effects on Players’ Well-Being - Matthew Barr, Alicia Copeland-Stewart, 2022. Games and Culture. [https://doi.org/10.1177\_15554120211017036](https://doi.org/10.1177/15554120211017036)
 
+Brennan, Dan, 2021. Are There Mental Health Benefits of Video Games? \[WWW Document]. WebMD. URL [https://www.webmd.com/mental-health/mental-health-benefits-of-video-games](https://www.webmd.com/mental-health/mental-health-benefits-of-video-games) (accessed 4.24.23).
+
 Clement, J., 2023. Gaming in the United Kingdom 2022 \[WWW Document]. Statista. URL [https://www.statista.com/statistics/300521/gaming-in-the-united-kingdom/?locale=en](https://www.statista.com/statistics/300521/gaming-in-the-united-kingdom/?locale=en) (accessed 3.29.23).
 
 Clement, J., 2021. Topic: COVID-19 impact on the gaming industry worldwide \[WWW Document]. Statista. URL [https://www.statista.com/topics/8016/covid-19-impact-on-the-gaming-industry-worldwide/#topicOverview](https://www.statista.com/topics/8016/covid-19-impact-on-the-gaming-industry-worldwide/#topicOverview) (accessed 3.29.23).
@@ -15,6 +17,10 @@ Entertainment Software Association, 2022. 2022 Essential Facts About the Video G
 Fitzgerald, D., 2020. 2020 Essential Facts About the Video Game Industry \[WWW Document]. Entertainment Software Association. URL [https://www.theesa.com/resource/2020-essential-facts/](https://www.theesa.com/resource/2020-essential-facts/) (accessed 3.29.23).
 
 Green, C.S., Pouget, A., Bavelier, D., 2010. Improved probabilistic inference as a general learning mechanism with action video games. Current biology : CB 20, 1573–9. [https://doi.org/10.1016/j.cub.2010.07.040](https://pubmed.ncbi.nlm.nih.gov/20833324/)
+
+Halbrook, Y.J., O’Donnell, A.T., Msetfi, R.M., 2019. When and How Video Games Can Be Good: A Review of the Positive Effects of Video Games on Well-Being - PubMed. Perspectives on psychological science : a journal of the Association for Psychological Science 14. [https://doi.org/10.1177/1745691619863807](https://doi.org/10.1177/1745691619863807)
+
+Kowal, M., Conroy, E., Ramsbottom, N., Smithies, T., Toth, A., Campbell, M., 2021. Gaming Your Mental Health: A Narrative Review on Mitigating Symptoms of Depression and Anxiety Using Commercial Video Games. JMIR serious games 9, e26575. [https://doi.org/10.2196/26575](https://doi.org/10.2196/26575)
 
 Nielsen, 2020. 3, 2, 1 Go! Video Gaming is at an All-Time High During COVID-19 \[WWW Document]. Nielsen. URL [https://www.nielsen.com/insights/2020/3-2-1-go-video-gaming-is-at-an-all-time-high-during-covid-19/](https://www.nielsen.com/insights/2020/3-2-1-go-video-gaming-is-at-an-all-time-high-during-covid-19/) (accessed 3.29.23).
 
