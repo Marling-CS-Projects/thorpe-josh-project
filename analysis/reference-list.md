@@ -12,7 +12,7 @@ Clement, J., 2021. Topic: COVID-19 impact on the gaming industry worldwide \[WWW
 
 Entertainment Software Association, 2022. 2022 Essential Facts About the Video Game Industry \[WWW Document]. Entertainment Software Association. URL [https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/](https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/) (accessed 3.30.23).
 
-[Farokhmanesh, M., 2021. More than half of Americans turned to video games during lockdown. The Verge.](https://www.theverge.com/2021/1/6/22215786/video-games-covid-19-animal-crossing-among-us)
+Farokhmanesh, M., 2021. [More than half of Americans turned to video games during lockdown.](https://www.theverge.com/2021/1/6/22215786/video-games-covid-19-animal-crossing-among-us) The Verge.
 
 Fitzgerald, D., 2020. 2020 Essential Facts About the Video Game Industry \[WWW Document]. Entertainment Software Association. URL [https://www.theesa.com/resource/2020-essential-facts/](https://www.theesa.com/resource/2020-essential-facts/) (accessed 3.29.23).
 
@@ -30,7 +30,7 @@ Sungur, H., Boduroglu, A., 2012. Action video game players form more detailed re
 
 Patience, S., 2022. When did the video game industry overtake Hollywood and the music industry? \[WWW Document]. Driverless Crocodile. URL [https://www.driverlesscrocodile.com/sustainability-and-change/when-did-the-video-game-industry-overtake-hollywood-and-the-music-industry/](https://www.driverlesscrocodile.com/sustainability-and-change/when-did-the-video-game-industry-overtake-hollywood-and-the-music-industry/) (accessed 3.29.23).
 
-[Read, S., 2022. Gaming boomed in lockdown and market value will reach $320bn. World Economic Forum.](https://www.weforum.org/agenda/2022/07/gaming-pandemic-lockdowns-pwc-growth/)
+Read, S., 2022. [Gaming boomed in lockdown and market value will reach $320bn.](https://www.weforum.org/agenda/2022/07/gaming-pandemic-lockdowns-pwc-growth/) World Economic Forum.
 
 National Institutes of Health, 2022. Video gaming may be associated with better cognitive performance in children \[WWW Document]. National Institutes of Health (NIH). URL [https://www.nih.gov/news-events/news-releases/video-gaming-may-be-associated-better-cognitive-performance-children](https://www.nih.gov/news-events/news-releases/video-gaming-may-be-associated-better-cognitive-performance-children) (accessed 4.1.23).
 
@@ -48,31 +48,35 @@ PEGI, 2023b. How we rate games \[WWW Document]. Pegi Public Site. URL [https://p
 
 PEGI, 2023c. What do the labels mean? \[WWW Document]. Pegi Public Site. URL [https://pegi.info/what-do-the-labels-mean](https://pegi.info/what-do-the-labels-mean) (accessed 4.7.23).
 
-[Rousseau, J., 2022. ESA: 48% of game players are female and 29% identify as people of color. GamesIndustry.biz.](https://www.gamesindustry.biz/esa-48-percent-of-video-game-players-are-female-and-29-percent-identify-as-people-of-color)
+Rousseau, J., 2022. [ESA: 48% of game players are female and 29% identify as people of color.](https://www.gamesindustry.biz/esa-48-percent-of-video-game-players-are-female-and-29-percent-identi) GamesIndustry.biz.
 
 Williams, Yee, Caplan, 2008. Who plays, how much, and why? Debunking the stereotypical gamer profile. Journal of Computer-Mediated Communication 13, 993–1018. [https://doi.org/10.1111/j.1083-6101.2008.00428.x](https://doi.org/10.1111/j.1083-6101.2008.00428.x)
 
-[Yee, N., 2021. A Closer Look into the 12 Gamer Motivations - ironSource LevelUp - Medium. ironSource LevelUp.](https://medium.com/ironsource-levelup/a-closer-look-into-the-12-gamer-motivations-8d156ff0151a)
+Yee, N., 2021. [A Closer Look into the 12 Gamer Motivations.](https://medium.com/ironsource-levelup/a-closer-look-into-the-12-gamer-motivations-8d156ff0151a) ironSource LevelUp.
 
-[Yee, N., 2019. Why you need to consider age when designing your game. ironSource LevelUp.](https://medium.com/ironsource-levelup/age-gamer-motivations-259985f27d4e)
+Yee, N., 2019. [Why you need to consider age when designing your game.](https://medium.com/ironsource-levelup/age-gamer-motivations-259985f27d4e) ironSource LevelUp.
 
 ## Research
+
+Farokhmanesh, M., 2014. [Why in-game dialogue and character conversations matter.](https://www.polygon.com/2014/3/17/5519270/successful-in-game-dialogue-should-carry-players-forward) Polygon.
 
 Gamesgds, 2020. Spelunky 2 – Controls Guide: PC (Keyboard) and Xbox (Controller) \[WWW Document]. Gamesgds | Games, Guides, Walkthroughs, Achievements, Tips, Cheats. URL [https://gamesgds.com/spelunky-2-controls-guide-pc-keyboard-and-xbox-controller/](https://gamesgds.com/spelunky-2-controls-guide-pc-keyboard-and-xbox-controller/) (accessed 4.18.23).
 
 Koziara, A., 2017. ‘Soul Knight’ Review – All the Guns. All of Them. \[WWW Document]. TouchArcade. URL [https://toucharcade.com/2017/03/10/soul-knight-review/](https://toucharcade.com/2017/03/10/soul-knight-review/) (accessed 4.18.23).
 
-[Messner, S., 2016. Enter The Gungeon Has Lots Of Excellent Weapons. Rock Paper Shotgun.](https://www.rockpapershotgun.com/enter-the-gungeon-hands-on)
+Messner, S., 2016. [Enter The Gungeon Has Lots Of Excellent Weapons.](https://www.rockpapershotgun.com/enter-the-gungeon-hands-on) Rock Paper Shotgun.
+
+Perry, H., 2023. [Don’t Be Scared. Play a Roguelike.](https://www.nytimes.com/wirecutter/reviews/what-are-roguelike-games/) Wirecutter.
 
 Saltzman, M., 2020. Spelunky 2 Review \[WWW Document]. IGN. URL [https://www.ign.com/articles/spelunky-2-review](https://www.ign.com/articles/spelunky-2-review) (accessed 4.18.23).
 
 STANDS4 LLC, 2023. What does bullet hell mean? \[WWW Document]. Definitions.net. URL [https://www.definitions.net/definition/bullet+hell](https://www.definitions.net/definition/bullet+hell) (accessed 4.18.23).
 
-[Stout, M., 2010. Boss Battle Design and Structure. Game Developer.](https://www.gamedeveloper.com/design/boss-battle-design-and-structure)
+Stout, M., 2010. [Boss Battle Design and Structure.](https://www.gamedeveloper.com/design/boss-battle-design-and-structure) Game Developer.
 
 Ybot, 2018. Enter The Gungeon Controls, Key Bindings & Settings \[WWW Document]. Yekbot. URL [https://www.yekbot.com/enter-the-gungeon-controls-key-bindings-settings/](https://www.yekbot.com/enter-the-gungeon-controls-key-bindings-settings/) (accessed 4.18.23).
 
-[ZibraAI, 2021. Why is the Game Development industry still struggling with rendering realistic water and how AI comes to the rescue. Medium.](https://medium.com/@zibraAI/why-is-the-game-development-industry-still-struggling-with-rendering-realistic-water-and-how-ai-3972bfbb3059)
+ZibraAI, 2021. [Why is the Game Development industry still struggling with rendering realistic water and how AI comes to the rescue.](https://medium.com/@zibraAI/why-is-the-game-development-industry-still-struggling-with-rendering-realistic-water-and-how-ai-3972bfbb3059) Medium.
 
 
 
@@ -82,4 +86,4 @@ KeySource China Limited, 2011. How to change keyboard layout \[WWW Document]. Ke
 
 Thompson, H., 2019. Why Story Telling Is Important In Games \[WWW Document]. The Nerd Stash. URL [https://thenerdstash.com/why-story-telling-is-important-in-games/](https://thenerdstash.com/why-story-telling-is-important-in-games/) (accessed 4.18.23).
 
-[Wilde, T., 2016. How WASD became the standard PC control scheme. PC Gamer.](https://www.pcgamer.com/how-wasd-became-the-standard-pc-control-scheme/)
+Wilde, T., 2016. [How WASD became the standard PC control scheme.](https://www.pcgamer.com/how-wasd-became-the-standard-pc-control-scheme/) PC Gamer.
