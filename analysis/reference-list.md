@@ -90,3 +90,5 @@ Wilde, T., 2016. [How WASD became the standard PC control scheme.](https://www.p
 
 ## Hardware and Software Requirements
 
+Schardon, L., 2023. Kaboom.js Tutorials – Complete Guide for Easy Game Dev \[WWW Document]. GameDev Academy. URL [https://gamedevacademy.org/kaboom-js-tutorials/#Fast\_and\_lightweight](https://gamedevacademy.org/kaboom-js-tutorials/#Fast\_and\_lightweight) (accessed 5.24.23).
+
