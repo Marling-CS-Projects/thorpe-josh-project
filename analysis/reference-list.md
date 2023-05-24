@@ -87,3 +87,6 @@ KeySource China Limited, 2011. How to change keyboard layout \[WWW Document]. Ke
 Thompson, H., 2019. Why Story Telling Is Important In Games \[WWW Document]. The Nerd Stash. URL [https://thenerdstash.com/why-story-telling-is-important-in-games/](https://thenerdstash.com/why-story-telling-is-important-in-games/) (accessed 4.18.23).
 
 Wilde, T., 2016. [How WASD became the standard PC control scheme.](https://www.pcgamer.com/how-wasd-became-the-standard-pc-control-scheme/) PC Gamer.
+
+## Hardware and Software Requirements
+
