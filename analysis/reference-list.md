@@ -90,5 +90,15 @@ Wilde, T., 2016. [How WASD became the standard PC control scheme.](https://www.p
 
 ## Hardware and Software Requirements
 
+Apple Inc., 2022. Update to the latest version of Safari \[WWW Document]. Apple Support. URL [https://support.apple.com/en-gb/HT204416](https://support.apple.com/en-gb/HT204416) (accessed 5.30.23).
+
+Google Inc., n.d. Chrome browser system requirements \[WWW Document]. Chrome Enterprise and Education Help. URL [https://support.google.com/chrome/a/answer/7100626?hl=en](https://support.google.com/chrome/a/answer/7100626?hl=en) (accessed 5.30.23).
+
+Microsoft Corporation, 2023. Microsoft Edge Supported Operating Systems \[WWW Document]. Microsoft Learn. URL [https://learn.microsoft.com/en-us/deployedge/microsoft-edge-supported-operating-systems](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-supported-operating-systems) (accessed 5.30.23).
+
+Mozilla Corporation, n.d. Firefox  113.0.1 System Requirements \[WWW Document]. Mozilla. URL [https://www.mozilla.org/en-US/firefox/113.0.1/system-requirements/](https://www.mozilla.org/en-US/firefox/113.0.1/system-requirements/) (accessed 5.30.23).
+
+OSXDaily, 2017. Safari for Windows? Download & Run Safari in Windows…. If You Must \[WWW Document]. OS X Daily. URL [https://osxdaily.com/2017/08/27/safari-for-windows-download-run/](https://osxdaily.com/2017/08/27/safari-for-windows-download-run/) (accessed 5.31.23).
+
 Schardon, L., 2023. Kaboom.js Tutorials – Complete Guide for Easy Game Dev \[WWW Document]. GameDev Academy. URL [https://gamedevacademy.org/kaboom-js-tutorials/#Fast\_and\_lightweight](https://gamedevacademy.org/kaboom-js-tutorials/#Fast\_and\_lightweight) (accessed 5.24.23).
 
