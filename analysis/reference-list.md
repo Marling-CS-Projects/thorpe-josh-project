@@ -92,6 +92,8 @@ Wilde, T., 2016. [How WASD became the standard PC control scheme.](https://www.p
 
 Apple Inc., 2022. Update to the latest version of Safari \[WWW Document]. Apple Support. URL [https://support.apple.com/en-gb/HT204416](https://support.apple.com/en-gb/HT204416) (accessed 5.30.23).
 
+Gaubys, J., 2023. Most Popular Web Browsers in 2023 \[Mar ’23 Update]. Oberlo. URL [https://www.oberlo.com/statistics/browser-market-share](https://www.oberlo.com/statistics/browser-market-share) (accessed 5.31.23).
+
 Google Inc., n.d. Chrome browser system requirements \[WWW Document]. Chrome Enterprise and Education Help. URL [https://support.google.com/chrome/a/answer/7100626?hl=en](https://support.google.com/chrome/a/answer/7100626?hl=en) (accessed 5.30.23).
 
 Microsoft Corporation, 2023. Microsoft Edge Supported Operating Systems \[WWW Document]. Microsoft Learn. URL [https://learn.microsoft.com/en-us/deployedge/microsoft-edge-supported-operating-systems](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-supported-operating-systems) (accessed 5.30.23).
