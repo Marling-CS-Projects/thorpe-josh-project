@@ -8,11 +8,11 @@ This diagram shows the different parts of the game that I will focus on creating
 
 ## Usability Features
 
-Usability is an important aspect to my game as I want it to be accessible to all. There are 5 key points of usability to create the best user experience that I will be focusing on when developing my project. These are:
+Usability is an important aspect of my game as I want it to be accessible to as many people as possible. There are 5 key points of usability to create the best user experience that I will be focusing on when developing my project. These are:
 
 ### Effective
 
-Users can achieve the goal with completeness and accuracy. To do this, I will make it easy for the players to realise that they need to reach a goal in order to complete a level. I will make this goal clear to see so there is no confusion over where the players need to go.
+It's important that users are able to complete my game with completeness and accuracy. To do this, I will ensure it is easy for players to understand how to win by introducing the objective at the start of the game. Additionally, I will make the path through each floor clear so that there is no confusion over where the players need to go.
 
 #### Aims
 
@@ -21,7 +21,9 @@ Users can achieve the goal with completeness and accuracy. To do this, I will ma
 
 ### Efficiency
 
-The speed and accuracy to which a user can complete the goal. To do this, I will create a menu system which is easy to navigate through in order for to find what you are looking for. The information which is more important can be found with less clicks.
+Efficiency refers to the speed and accuracy with which a user can complete the goal. To maximise efficiency, I will create a menu system which is easy to navigate through in order to find what you are looking for. Also, I will keep informational dialogue concise to avoid unnecessary complexity.
+
+The controls too must also be efficient in that they are intuative to use and allow the user to carry out multiple actions.
 
 #### Aims
 
@@ -30,7 +32,7 @@ The speed and accuracy to which a user can complete the goal. To do this, I will
 
 ### Engaging
 
-The solution is engaging for the user to use. To do this, I will create 5 levels and an online multiplayer mode to keep the players engaged and allow them to have fun while playing the game. Using vector style art will also make the game nicer to look at than blocks, so will draw more people in, keeping them engaged.
+It is really important that my game is fun and engaging to play. To do this, I will create 3 floors (levels) and include multiple different weapons to keep players engaged and allow them to have fun while playing the game. Additionally, randomised chest and shop items and procedurally generated floors will keep the game engaging and exciting as no two runs are the same. Also, using a pixel art style may help draw in more people as pixel art games have become widely popular in recent years. [(Rocket Brush Studio, 2021)](../analysis/reference-list.md#2.1-design-frame)
 
 #### Aims
 
@@ -40,7 +42,7 @@ The solution is engaging for the user to use. To do this, I will create 5 levels
 
 ### Error Tolerant
 
-The solution should have as few errors as possible and if one does occur, it should be able to correct itself. To do this, I will write my code to manage as many different game scenarios as possible so that it will not crash when someone is playing it.
+My game should have as few errors as possible and if an error does occur, it should be corrected by my program. To do this, I will write my code so that my game will function in as many different game scenarios as possible to ensure that it will not crash when someone is playing it.
 
 #### Aims
 
@@ -49,7 +51,7 @@ The solution should have as few errors as possible and if one does occur, it sho
 
 ### Easy To Learn
 
-The solution should be easy to use and not be over complicated. To do this, I will create simple controls for the game. I will make sure that no more controls are added than are needed in order to keep them as simple as possible for the players.
+My game should be easy to play and not be overly complicated. To do this, I will create simple controls for the game as outlined [here](../analysis/1.4a-features-of-the-proposed-solution.md#controls). I will make sure that no more controls are added than are needed in order to keep them as simple as possible for the players.
 
 #### Aims
 

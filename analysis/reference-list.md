@@ -1,6 +1,6 @@
 # Reference List
 
-## Problem Identification
+## 1.1 Problem Identification
 
 Barr, M., Copeland-Stewart, A., 2021. Playing Video Games During the COVID-19 Pandemic and Effects on Players’ Well-Being - Matthew Barr, Alicia Copeland-Stewart, 2022. Games and Culture. [https://doi.org/10.1177\_15554120211017036](https://doi.org/10.1177/15554120211017036)
 
@@ -34,7 +34,7 @@ Read, S., 2022. [Gaming boomed in lockdown and market value will reach $320bn.](
 
 National Institutes of Health, 2022. Video gaming may be associated with better cognitive performance in children \[WWW Document]. National Institutes of Health (NIH). URL [https://www.nih.gov/news-events/news-releases/video-gaming-may-be-associated-better-cognitive-performance-children](https://www.nih.gov/news-events/news-releases/video-gaming-may-be-associated-better-cognitive-performance-children) (accessed 4.1.23).
 
-## Stakeholders
+## 1.2 Stakeholders
 
 Clement, J., 2022. Distribution of video gamers in the United States in 2022, by age group \[WWW Document]. Statista. URL [https://www.statista.com/statistics/189582/age-of-us-video-game-players/](https://www.statista.com/statistics/189582/age-of-us-video-game-players/) (accessed 3.30.23).
 
@@ -56,7 +56,7 @@ Yee, N., 2021. [A Closer Look into the 12 Gamer Motivations.](https://medium.com
 
 Yee, N., 2019. [Why you need to consider age when designing your game.](https://medium.com/ironsource-levelup/age-gamer-motivations-259985f27d4e) ironSource LevelUp.
 
-## Research
+## 1.3 Research
 
 Farokhmanesh, M., 2014. [Why in-game dialogue and character conversations matter.](https://www.polygon.com/2014/3/17/5519270/successful-in-game-dialogue-should-carry-players-forward) Polygon.
 
@@ -80,7 +80,7 @@ ZibraAI, 2021. [Why is the Game Development industry still struggling with rende
 
 
 
-## Features of a Proposed Solution
+## 1.4a Features of a Proposed Solution
 
 KeySource China Limited, 2011. How to change keyboard layout \[WWW Document]. KeySource. URL [http://www.keysourcechina.com/how-to-change-keyboard-layout.html](http://www.keysourcechina.com/how-to-change-keyboard-layout.html) (accessed 4.19.23).
 
@@ -88,7 +88,7 @@ Thompson, H., 2019. Why Story Telling Is Important In Games \[WWW Document]. The
 
 Wilde, T., 2016. [How WASD became the standard PC control scheme.](https://www.pcgamer.com/how-wasd-became-the-standard-pc-control-scheme/) PC Gamer.
 
-## Hardware and Software Requirements
+## 1.6 Hardware and Software Requirements
 
 Apple Inc., 2022. Update to the latest version of Safari \[WWW Document]. Apple Support. URL [https://support.apple.com/en-gb/HT204416](https://support.apple.com/en-gb/HT204416) (accessed 5.30.23).
 
@@ -104,3 +104,6 @@ OSXDaily, 2017. Safari for Windows? Download & Run Safari in Windows…. If You 
 
 Schardon, L., 2023. Kaboom.js Tutorials – Complete Guide for Easy Game Dev \[WWW Document]. GameDev Academy. URL [https://gamedevacademy.org/kaboom-js-tutorials/#Fast\_and\_lightweight](https://gamedevacademy.org/kaboom-js-tutorials/#Fast\_and\_lightweight) (accessed 5.24.23).
 
+## 2.1 Design Frame
+
+Rocket Brush Studio, 2021. Why Pixel Art Games Have Become Widely Popular \[WWW Document]. Rocket Brush Studio. URL [https://rocketbrush.com/blog/pixel-art-games-popular](https://rocketbrush.com/blog/pixel-art-games-popular) (accessed 6.1.23).
