@@ -20,8 +20,8 @@ It's important that users are able to complete my game with completeness and acc
 
 #### Aims
 
-* Create a clear goal to reach to determine the end of a level
-* Create a clear goal for any multiplayer modes
+* Create bosses as clear objectives to determine the end of a level
+* Create a clear path through each floor
 
 ### Efficiency
 
@@ -41,8 +41,8 @@ It is really important that my game is fun and engaging to play. To do this, I w
 #### Aims
 
 * Create a series of levels to work through
-* Create a multiplayer mode to play
-* Incorporate a style of game art the suits the game
+* Randomise map generation so the game feels different each time
+* Incorporate a style of game art that suits the game
 
 ### Error Tolerant
 
@@ -60,7 +60,7 @@ My game should be easy to play and not be overly complicated. To do this, I will
 #### Aims
 
 * Create a list of controls for the game
-* Create an in-level guide that helps players learn how to play the game
+* Create a simple tutorial that helps players learn how to play the game
 
 ## Pseudocode for the Game
 

@@ -1,10 +1,10 @@
-# Cycle Basis
+# 2.2.1 Cycle 1
 
 ## Design
 
 ### Objectives
 
-My objectives in this cycle are:
+My objectives in this cycle are to:
 
 * [ ] Do a thing
 * [ ] Do another thing
