@@ -2,9 +2,13 @@
 
 ## Systems Diagram
 
-![](https://github.com/Marling-School/alevel-project-template/blob/docs/.gitbook/assets/System%20Diagram.jpg)
+<figure><img src="../.gitbook/assets/systemsdiagramv2.png" alt=""><figcaption></figcaption></figure>
 
-This diagram shows the different parts of the game that I will focus on creating. I have split each section into smaller sub-sections. Throughout the development stage, I will pick one or two of these sections to focus on at a time to gradually build up and piece together the game. I have broken the project down this way as it roughly corresponds to the success criteria.
+This systems diagram shows the different parts of my game that I will focus on creating. I have split each section into smaller sub-sections. Throughout the development stage, I will pick one or two of these sections to focus on at a time to gradually build up and piece together the game. I have broken the project down in this way as it roughly corresponds to my [success criteria](../analysis/1.5-success-criteria.md).
+
+The diagram is colour coded to show how important each feature is to my game, with vital features in <mark style="color:red;">red</mark>, important features in <mark style="color:orange;">orange</mark>, and lesser features in <mark style="color:green;">green</mark>. A colourless version can also be clicked on below for easier viewing.
+
+<figure><img src="../.gitbook/assets/systemsdiagramv1.png" alt=""><figcaption></figcaption></figure>
 
 ## Usability Features
 
