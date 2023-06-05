@@ -4,7 +4,7 @@
 
 ### Objectives
 
-My objectives in this cycle are to:
+My objectives in this cycle are:
 
 * [x] Load a player sprite
 * [x] Be able to move the player with WASD keys
@@ -23,7 +23,7 @@ My objectives in this cycle are to:
 
 ### Pseudocode
 
-```javascript
+```
 import kaboom
 
 load(player)
@@ -60,7 +60,6 @@ if space key pressed: {
 
 ### Outcome
 
-{% code title="main.ts" %}
 ```typescript
 import kaboom from "kaboom";
 import "kaboom/global";
@@ -69,23 +68,23 @@ kaboom();
 
 loadSprite("bean", "/sprites/bean.png");
 
-// movement speed
+  // movement speed
 let speed = 200;
 
-// adds the player
+  // adds the player
 const player = add([
   sprite("bean"),
   pos(100, 200),
 ]);
 
-// dash
+  // dash
 let cooldown = false;
 onKeyDown("space", () => {
   if (!cooldown) {
     cooldown = true;
       //speed increase
     speed += 300;
-    //dash duration
+      //dash duration
     wait(0.5, () => {
         speed -= 300
         wait(3, () => {
@@ -112,13 +111,12 @@ onKeyDown("s", () => {
   player.move(0, speed);
 });
 ```
-{% endcode %}
 
 ### Challenges
 
 Initially, I planned for the dash to be activated using the right mouse button, however, kaboom doesn't have support for detecting right clicks. Therefore I've made it activate with the spacebar instead.
 
-I had a bug where holding the spacebar down would stack the dash, causing the movement speed to be much higher than expected.
+I had a bug where holding the spacebar down would stack the dash, causing the movement speed to be much higher than expected. However, this was an easy fix.
 
 ## Testing
 
@@ -133,4 +131,4 @@ I had a bug where holding the spacebar down would stack the dash, causing the mo
 
 ### Evidence
 
-add youtube video of testing
+{% file src="../.gitbook/assets/cycle 1 evidence.mp4" %}

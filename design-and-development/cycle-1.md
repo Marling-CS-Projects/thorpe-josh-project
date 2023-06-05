@@ -1,4 +1,4 @@
-# Cycle Basis
+# Cycle Template
 
 ## Design
 
@@ -29,13 +29,13 @@ end procedure
 
 ### Outcome
 
+put code here
+
 ### Challenges
 
 Description of challenges
 
 ## Testing
-
-Evidence for testing
 
 ### Tests
 
@@ -44,4 +44,8 @@ Evidence for testing
 | 1    | Run code      | Thing happens     | As expected           | Pass      |
 | 2    | Press buttons | Something happens | As expected           | Pass      |
 
+comment on any failed tests
+
 ### Evidence
+
+add a video link/file of testing
