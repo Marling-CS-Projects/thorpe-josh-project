@@ -6,8 +6,8 @@
 
 My objectives in this cycle are:
 
-* [ ] Create basic floor generation
-* [ ] Make basic room templates
+* [ ] Create a few basic room templates
+* [ ] Create floor generation (3 series of 5 rooms)
 
 ### Usability Features
 

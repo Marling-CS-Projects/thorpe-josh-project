@@ -46,7 +46,10 @@ end loop
 ### Outcome
 
 ```typescript
+loadSprite("egg", "/sprites/egg.png");
+
 const BULLET_SPEED = 1000
+
 function spawnBullet(playerPosition) {
       //gets the direction
     const POINT_CURSOR = player.pos.angle(mousePos()) + 180;
@@ -87,4 +90,4 @@ Testing was successful except the bullet appears slightly outside the player spr
 
 ### Evidence
 
-{% file src="../.gitbook/assets/cycle 2 evidence.mp4" %}
+{% embed url="https://www.youtube.com/watch?v=OezO5c2V2AQ" %}
