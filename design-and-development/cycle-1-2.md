@@ -83,8 +83,8 @@ To fix this I had to add 180 degrees and 90 degrees to the angles for movement d
 
 <table data-full-width="false"><thead><tr><th>Test</th><th>Instructions</th><th>What I expect</th><th>What actually happens</th><th>Pass/Fail</th></tr></thead><tbody><tr><td>1</td><td>Click mouse</td><td>Bullet appears in the player and moves towards mouse cursor</td><td>As expected except the bullet appears outside of the sprite</td><td>Fail</td></tr><tr><td>2</td><td>Click mouse repeatedly</td><td>Multiple bullets appear</td><td>As expected</td><td>Pass</td></tr></tbody></table>
 
-Add a comment here about the failed test.
+Testing was successful except the bullet appears slightly outside the player sprite. This isn't important right now because the current player sprite is temporary but I will fix this in a coming cycle.
 
 ### Evidence
 
-Add a video of testing.
+{% file src="../.gitbook/assets/cycle 2 evidence.mp4" %}

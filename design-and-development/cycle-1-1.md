@@ -60,6 +60,8 @@ if space key pressed: {
 
 ### Outcome
 
+My code achieves all objectives. The player sprite is loaded and added to the screen. Pressing WASD keys moves the player sprite in the corresponding direction by _speed_ pixels per second. By holding the movement speed as a variable, I can alter the movement speed without changing the control's code. Pressing the spacebar increases _speed_ by 300 for half a second which makes the player sprite move faster during that time. The implementation of the _cooldown_ variable prevents this dash ability from being used again within 3 seconds.&#x20;
+
 ```typescript
 import kaboom from "kaboom";
 import "kaboom/global";
@@ -68,14 +70,32 @@ kaboom();
 
 loadSprite("bean", "/sprites/bean.png");
 
-  // movement speed
-let speed = 200;
-
   // adds the player
 const player = add([
   sprite("bean"),
   pos(100, 200),
 ]);
+
+ // movement speed
+let speed = 200;
+
+  //movement controls
+onKeyDown("a", () => {
+  // .move() moves by pixels per second in x and y
+  player.move(-speed, 0);
+});
+
+onKeyDown("d", () => {
+  player.move(speed, 0);main.type
+});
+
+onKeyDown("w", () => {
+  player.move(0, -speed);
+});
+
+onKeyDown("s", () => {
+  player.move(0, speed);
+});
 
   // dash
 let cooldown = false;
@@ -93,30 +113,21 @@ onKeyDown("space", () => {
   });
   }
 });
-
-onKeyDown("a", () => {
-  // .move() moves by pixels per second in x and y
-  player.move(-speed, 0);
-});
-
-onKeyDown("d", () => {
-  player.move(speed, 0);main.type
-});
-
-onKeyDown("w", () => {
-  player.move(0, -speed);
-});
-
-onKeyDown("s", () => {
-  player.move(0, speed);
-});
 ```
 
 ### Challenges
 
-Initially, I planned for the dash to be activated using the right mouse button, however, kaboom doesn't have support for detecting right clicks. Therefore I've made it activate with the spacebar instead.
+Initially, I planned for the dash to be activated using the right mouse button, however, I couldn't find kaboom's support for detecting right clicks. Therefore I made it activate with the spacebar instead.
 
-I had a bug where holding the spacebar down would stack the dash, causing the movement speed to be much higher than expected. However, this was an easy fix.
+```typescript
+onKeyDown("space", () => {
+```
+
+Later I found out how to detect right clicks so I amended my code accordingly.
+
+```typescript
+onMousePress("right", () => {
+```
 
 ## Testing
 
