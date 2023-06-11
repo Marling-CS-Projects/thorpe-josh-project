@@ -60,7 +60,7 @@ if space key pressed: {
 
 ### Outcome
 
-My code achieves all objectives. The player sprite is loaded and added to the screen. Pressing WASD keys moves the player sprite in the corresponding direction by _speed_ pixels per second. By holding the movement speed as a variable, I can alter the movement speed without changing the control's code. Pressing the spacebar increases _speed_ by 300 for half a second which makes the player sprite move faster during that time. The implementation of the _cooldown_ variable prevents this dash ability from being used again within 3 seconds.&#x20;
+The project is initialised and the player sprite is loaded and added to the screen.
 
 ```typescript
 import kaboom from "kaboom";
@@ -75,8 +75,12 @@ const player = add([
   sprite("bean"),
   pos(100, 200),
 ]);
+```
 
- // movement speed
+Pressing WASD keys moves the player sprite in the corresponding direction by _speed_ pixels per second. By holding the movement speed as a variable, I can alter the movement speed without changing the control's code.
+
+```typescript
+// movement speed
 let speed = 200;
 
   //movement controls
@@ -96,7 +100,11 @@ onKeyDown("w", () => {
 onKeyDown("s", () => {
   player.move(0, speed);
 });
+```
 
+Pressing the spacebar increases _speed_ by 300 for half a second which makes the player sprite move faster during this time. The implementation of the _cooldown_ variable prevents this dash ability from being used again within 3 seconds.&#x20;
+
+```typescript
   // dash
 let cooldown = false;
 onKeyDown("space", () => {
@@ -117,13 +125,13 @@ onKeyDown("space", () => {
 
 ### Challenges
 
-Initially, I planned for the dash to be activated using the right mouse button, however, I couldn't find kaboom's support for detecting right clicks. Therefore I made it activate with the spacebar instead.
+I had planned for the dash to be activated using the right mouse button, however, I couldn't find kaboom's support for detecting right clicks. Therefore I made it activate with the spacebar instead.
 
 ```typescript
 onKeyDown("space", () => {
 ```
 
-Later I found out how to detect right clicks so I amended my code accordingly.
+But later I found how to detect right clicks so amended my code accordingly.
 
 ```typescript
 onMousePress("right", () => {
