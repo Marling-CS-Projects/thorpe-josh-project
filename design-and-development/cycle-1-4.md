@@ -1,4 +1,4 @@
-# Cycle Template
+# 2.2.4 Cycle 4
 
 ## Design
 
@@ -6,8 +6,10 @@
 
 My objectives in this cycle are:
 
-* [ ] Do a thing
-* [ ] Do another thing
+* [ ] Fix the bullet spawn position
+* [ ] Change the stage background
+* [ ] Increase the player movement speed
+* [ ] Add a check for beating the last level
 
 ### Usability Features
 
@@ -31,16 +33,6 @@ end procedure
 
 put code here
 
-```
-// Some code
-```
-
-explain
-
-```
-// Some code
-```
-
 ### Challenges
 
 Description of challenges
@@ -58,4 +50,4 @@ comment on any failed tests
 
 ### Evidence
 
-add youtube link of testing
+add a video link

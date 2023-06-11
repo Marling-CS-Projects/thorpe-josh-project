@@ -1,4 +1,4 @@
-# Cycle Template
+# 2.2.5 Cycle 5
 
 ## Design
 
@@ -6,8 +6,10 @@
 
 My objectives in this cycle are:
 
-* [ ] Do a thing
-* [ ] Do another thing
+* [ ] Add player health bar
+* [ ] Standing on spikes deals damage to the player
+* [ ] Taking damage will lower the health bar
+* [ ] Reaching 0 health causes the player to die
 
 ### Usability Features
 
@@ -58,4 +60,4 @@ comment on any failed tests
 
 ### Evidence
 
-add youtube link of testing
+add a video link

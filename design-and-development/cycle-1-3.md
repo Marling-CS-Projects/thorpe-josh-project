@@ -246,15 +246,17 @@ While adjusting the tile dimensions and the position of the level on the screen,
 
 ### Tests
 
-| Test | Instructions                       | What I expect                             | What actually happens                  | Pass/Fail |
-| ---- | ---------------------------------- | ----------------------------------------- | -------------------------------------- | --------- |
-| 1    | Press 't' key                      | Level and player appears                  | As expected                            | Pass      |
-| 2    | Repeated presses of 'r' key        | Game switches to the next level each time | As expected                            | PassPass  |
-| 3    | Move the player with WASD and dash | Works the same as before                  | As expected                            |           |
-| 4    | Shoot with mouse click             | Works the same as before                  | Bullet spawns far away from the player | Fail      |
+| Test | Instructions                       | What I expect                             | What actually happens                                                    | Pass/Fail |
+| ---- | ---------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------ | --------- |
+| 1    | Press 't' key                      | Level and player appears                  | As expected                                                              | Pass      |
+| 2    | Repeated presses of 'r' key        | Game switches to the next level each time | As expected however trying to go past the last level results in an error | Pass      |
+| 3    | Move the player with WASD and dash | Works the same as before                  | As expected                                                              | Pass      |
+| 4    | Shoot with mouse click             | Works the same as before                  | Bullet spawns far away from the player                                   | Fail      |
 
 Unexpectedly the bullet appears far from the player sprite when the mouse is clicked, much further compared to in [Cycle 2](cycle-1-2.md). This is an important bug which I will address in the next cycle.
 
+Testing also revealed that trying to go past the last level resulted in an error, so a catch for this will need to be implemented in an upcoming cycle.
+
 ### Evidence
 
-add a video link/file of testing
+{% embed url="https://www.youtube.com/watch?v=jB5KBBgaLPU" %}
