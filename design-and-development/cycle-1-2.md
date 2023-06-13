@@ -21,9 +21,8 @@ My objectives in this cycle are:
 
 ### Pseudocode
 
-```
-const BULLET_SPEED = 1000
-procedure spawn bullet
+<pre><code><strong>const BULLET_SPEED = 1000
+</strong>procedure spawn bullet
     let player_position = get(player_position);
     const DIRECTION = get(angle between player and cursor);
         add bullet {
@@ -39,7 +38,7 @@ loop
         spawnbullet()
     }
 end loop
-```
+</code></pre>
 
 ## Development
 
