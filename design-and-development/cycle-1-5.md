@@ -6,6 +6,7 @@
 
 My objectives in this cycle are:
 
+* [x] Make the player walk over spikes not under
 * [ ] Add player health bar
 * [ ] Standing on spikes deals damage to the player
 * [ ] Taking damage will lower the health bar

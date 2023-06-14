@@ -149,7 +149,7 @@ onKeyPress("t", () => {
 ```
 {% endcode %}
 
-The xth level from the _possibleLevels_ array is added to the screen. Each character in the symbol representation of the level is translated to a tile which is then placed at that location, for example '=' corresponds to a grass block/wall. This creates the level on screen.
+The xth level from the _possibleLevels_ array is added to the screen. Each character in the symbol representation of the level is translated to a tile which is then placed at that location, for example '=' corresponds to a grass block/wall. This creates the level on screen as seen below.
 
 <figure><img src="../.gitbook/assets/image.png" alt="" width="375"><figcaption></figcaption></figure>
 
@@ -229,10 +229,10 @@ Defines the player from the player sprite which is placed when the level is adde
 ```
 {% endcode %}
 
-I moved the player movement and bullet code inside the scene so that it does not detect key presses until the scene has been activated.
+I moved the player movement and bullet code inside the scene so that key presses do not activate the code until the scene has been activated (levels begun). This will be useful for when I create a main menu at the start of the game.
 
 ```typescript
-    ...   
+    ...   //movement and bullet code
 }
 ```
 
@@ -240,7 +240,7 @@ I moved the player movement and bullet code inside the scene so that it does not
 
 While adjusting the tile dimensions and the position of the level on the screen, the player's starting position became annoying as sometimes it would be outside the level each time I adjusted it. So I made the player's starting point part of the level so that it is always easy to control where it starts in the level. This will also make it easier in the future when I create some proper levels.
 
-<figure><img src="../.gitbook/assets/Screenshot 2023-06-11 010224 (2).png" alt=""><figcaption><p>The player sprites starts as part of the level</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle3playerstart.png" alt=""><figcaption><p>The player sprites starts as part of the level</p></figcaption></figure>
 
 ## Testing
 
@@ -253,11 +253,11 @@ While adjusting the tile dimensions and the position of the level on the screen,
 | 3    | Move the player with WASD and dash | Functions the same as in [Cycle 1](cycle-1-1.md) & [2](cycle-1-2.md) | As expected                                                              | Pass      |
 | 4    | Shoot with mouse click             | Functions the same as in [Cycle 2](cycle-1-2.md)                     | Bullet spawns far away from the player                                   | Fail      |
 
-Unexpectedly the bullet appears far from the player sprite when the mouse is clicked, much further compared to in [Cycle 2](cycle-1-2.md). This is an important bug which I will address in the next cycle.
+Unexpectedly the bullet appears far from the player sprite when the mouse is clicked, much further compared to in [Cycle 2](cycle-1-2.md). This is an important bug which I will address in the next cycle ([Cycle 4](cycle-1-4.md)).
 
-Testing also revealed that trying to go past the last level resulted in an error, so a catch for this will need to be implemented in an upcoming cycle.
+Testing also revealed that trying to go past the last level resulted in an error as the code tried to pull from a position in _possibleLevels_ which did not exist. I will implement a catch for this in the next cycle.
 
-<figure><img src="../.gitbook/assets/Screenshot 2023-06-11 013007.png" alt="" width="375"><figcaption><p>Error shown when pressing r on the last level</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle3error.png" alt="" width="375"><figcaption><p>Error shown when pressing r on the last level</p></figcaption></figure>
 
 ### Evidence
 
