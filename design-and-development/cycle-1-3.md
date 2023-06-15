@@ -149,9 +149,7 @@ onKeyPress("t", () => {
 ```
 {% endcode %}
 
-The xth level from the _possibleLevels_ array is added to the screen. Each character in the symbol representation of the level is translated to a tile which is then placed at that location, for example '=' corresponds to a grass block/wall. This creates the level on screen as seen below.
-
-<figure><img src="../.gitbook/assets/image.png" alt="" width="375"><figcaption></figcaption></figure>
+The xth level from the _possibleLevels_ array is added to the screen. Each character in the symbol representation of the level is translated to a tile which is then placed at that location, for example '=' corresponds to a grass block/wall. This creates the level on screen.
 
 {% code title="main.ts" %}
 ```typescript
@@ -229,7 +227,7 @@ Defines the player from the player sprite which is placed when the level is adde
 ```
 {% endcode %}
 
-I moved the player movement and bullet code inside the scene so that key presses do not activate the code until the scene has been activated (levels begun). This will be useful for when I create a main menu at the start of the game.
+I moved the player movement and bullet code inside a scene so that key presses do not activate the code until the scene has been activated (levels begun). This will be useful for when I create a main menu at the start of the game.
 
 ```typescript
     ...   //movement and bullet code
@@ -257,7 +255,17 @@ Unexpectedly the bullet appears far from the player sprite when the mouse is cli
 
 Testing also revealed that trying to go past the last level resulted in an error as the code tried to pull from a position in _possibleLevels_ which did not exist. I will implement a catch for this in the next cycle.
 
-<figure><img src="../.gitbook/assets/cycle3error.png" alt="" width="375"><figcaption><p>Error shown when pressing r on the last level</p></figcaption></figure>
+### Images
+
+<div data-full-width="false">
+
+<figure><img src="../.gitbook/assets/cycle3error.png" alt="" width="563"><figcaption><p>Error shown when pressing r on the last level</p></figcaption></figure>
+
+ 
+
+<figure><img src="../.gitbook/assets/cycle3level.png" alt="" width="375"><figcaption><p>Level successfully added</p></figcaption></figure>
+
+</div>
 
 ### Evidence
 

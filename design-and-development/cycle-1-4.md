@@ -46,7 +46,7 @@ kaboom({
 });
 ```
 
-I increased the player's movement speed by 50. Since it's a separate variable this was just a case of increasing a number.
+I increased the player's movement speed by 50. Since this is stored as a variable this was simply a case of increasing a number - much easier than if I had to change each key control individually.
 
 <pre class="language-typescript" data-full-width="false"><code class="lang-typescript"><strong>    // movement speed
 </strong>    let playerSpeed = 250;
@@ -55,43 +55,47 @@ I increased the player's movement speed by 50. Since it's a separate variable th
 I updated the bullet spawning function to receive the actual position to spawn at called _truePosition_ and to use that for calculations. This replaces the use of _playerPosition_.
 
 ```typescript
-//spawns the bullet
+    //spawns the bullet
     function spawnBullet(truePosition) {
-         //gets the direction
+        //gets the direction
         const POINT_CURSOR = truePosition.angle(mousePos()) + 180;
-              //adds the bullet
-    		add([
-     			pos(truePosition),               
-    			sprite("egg"),
-    			area(),
-                scale(0.65,0.65),
-    			color(127, 127, 255),
-                anchor("center"),
-                rotate(POINT_CURSOR + 90),
-                move(POINT_CURSOR, BULLET_SPEED),
-    			offscreen({ destroy: true }),
-    			"player_bullet",
-    		])
-    	}
-
+        //adds the bullet
+        add([
+            pos(truePosition),               
+            sprite("egg"),
+            area(),
+            scale(0.65,0.65),
+            color(127, 127, 255),
+            anchor("center"),
+            rotate(POINT_CURSOR + 90),
+            move(POINT_CURSOR, BULLET_SPEED),
+            offscreen({ destroy: true }),
+            "player_bullet",
+        ])
+    }
+    
     //spawns a bullet on click
     onMousePress("left",() => spawnBullet(player.pos.add(vec2(350, 50))));
 ```
 
-I created a new scene called 'win' and modified the level increment code to include a check for if the last level has been reached. If it attempts to increment on the last level then the end screen will appear instead. Currently, the 'win' scene is empty so nothing happens yet when you win.
+I modified the level increment code to include a check for if the last level has been reached. If it attempts to increment on the last level then it will go to the "win" scene which will be the end screen.
 
 ```typescript
-//increments levelId and goes to that level
-onKeyPress("r", () => {
-    levelId += 1;
-    destroyAll("entity");
-    if (levelId > possibleLevels.length - 1) {
-        go("win");
-    } else {
-        go("level", levelId);
-    }
-});
+    //increments levelId and goes to that level
+    onKeyPress("r", () => {
+        levelId += 1;
+        destroyAll("entity");
+        if (levelId > possibleLevels.length - 1) {
+            go("win");
+        } else {
+            go("level", levelId);
+        }
+    });
+```
 
+Currently, the 'win' scene is empty so nothing happens yet when you win.
+
+```typescript
 scene("win", () => {
 })
 ```
@@ -111,10 +115,10 @@ It was challenging to resolve the bullet spawn position issue since I struggled 
 | 3    | Repeated presses of 'r' key to increment level | Game switches to the next level each time and after the last level goes to a blank background (the end scene) | As expected           | Pass      |
 | 4    | Click mouse repeatedly                         | Bullets appear in the player and move towards mouse cursor until going offscreen                              | As expected           | Pass      |
 
-I am pleased that all outstanding issues were successfully resolved.
+### Images
 
 <figure><img src="../.gitbook/assets/cycle4backgroundcolour.png" alt="" width="375"><figcaption><p>Background colour</p></figcaption></figure>
 
 ### Evidence
 
-add a youtube link for testing
+{% embed url="https://youtu.be/1pqgNkmAqj4" %}
