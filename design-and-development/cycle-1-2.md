@@ -14,31 +14,35 @@ My objectives in this cycle are:
 
 ### Key Variables
 
-| Variable Name | Use                                                  |
-| ------------- | ---------------------------------------------------- |
-| BULLET\_SPEED | Holds the set bullet movement speed                  |
-| POINT\_CURSOR | Angle which orientates from the player to the cursor |
+| Variable Name  | Use                                                                                                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| BULLET\_SPEED  | This constant variable represents the speed of the bullet when it is spawned. It is set to a value of 1000.                                                                                                                    |
+| POINT\_CURSOR  | This variable is assigned the value of the player's position angle (in degrees) plus 180, indicating the direction in which the bullet should move. The angle is calculated using the `player.pos.angle(mousePos())` function. |
+| playerPosition | This parameter is passed to the `spawnBullet` function and represents the position of the player. It is used to set the initial position of the bullet.                                                                        |
 
 ### Pseudocode
 
-<pre><code><strong>const BULLET_SPEED = 1000
-</strong>procedure spawn bullet
-    let player_position = get(player_position);
-    const DIRECTION = get(angle between player and cursor);
-        add bullet {
-            position = player_position,
-            rotate(direction),
-            move(BULLET_SPEED, direction),
-        };
-    
-end procedure
+```
+Load sprite "egg" from file path "/sprites/egg.png"
+Set constant BULLET_SPEED to 1000
 
-loop
-    if mouse clicked: {
-        spawnbullet()
-    }
-end loop
-</code></pre>
+Function spawnBullet with parameter playerPosition
+    Set POINT_CURSOR to player's position angle (in degrees) plus 180
+    Create a bullet entity with the following properties:
+        Set sprite to "egg"
+        Add an area component for collision detection
+        Set scale to 0.65, 0.65
+        Set position to playerPosition
+        Set color to (127, 127, 255)
+        Set anchor point to "center"
+        Rotate by POINT_CURSOR plus 90 degrees
+        Move in the direction of POINT_CURSOR with a speed of BULLET_SPEED
+        Destroy if it goes offscreen
+        Tag as "player_bullet"
+
+On mouse press
+    Call spawnBullet with the player's position
+```
 
 ## Development
 
@@ -47,37 +51,51 @@ end loop
 The bullet sprite is loaded and the movement speed is set.
 
 ```typescript
+// Load the sprite named "egg" from the file path "/sprites/egg.png"
 loadSprite("egg", "/sprites/egg.png");
-const BULLET_SPEED = 1000
+
+// Set the constant variable BULLET_SPEED to 1000
+const BULLET_SPEED = 1000;
 ```
 
 When the _spawnBullet_ function is called, it finds the bearing to the mouse cursor and then creates a bullet at the player's location. The bullet is rotated to point at the cursor position before being set to move at the predetermined speed. Once it passes offscreen it is deleted.
 
 ```typescript
+// Define the function spawnBullet with playerPosition as the parameter
 function spawnBullet(playerPosition) {
-      //gets the direction to move
+    // Calculate the direction to move based on the player's position and the mouse position
     const POINT_CURSOR = player.pos.angle(mousePos()) + 180;
-    //adds the bullet
+    
+    // Create a bullet entity with the following properties
     add([
+        // Set the sprite to "egg"
         sprite("egg"),
+        // Add an area component for collision detection
         area(),
-        scale(0.65,0.65),
+        // Scale the bullet sprite to 0.65 of its original size in both x and y directions
+        scale(0.65, 0.65),
+        // Set the position to the player's position
         pos(playerPosition),
+        // Set the color of the bullet to a shade of blue
         color(127, 127, 255),
+        // Set the anchor point of the bullet sprite to the center
         anchor("center"),
-        //point the sprite in the direction of travel
+        // Rotate the bullet sprite to point in the direction of travel
         rotate(POINT_CURSOR + 90),
-        //moves in the direction with speed
+        // Move the bullet in the direction specified by POINT_CURSOR with the given speed
         move(POINT_CURSOR, BULLET_SPEED),
+        // Destroy the bullet entity if it goes offscreen
         offscreen({ destroy: true }),
+        // Assign the tag "player_bullet" to the bullet entity
         "player_bullet",
-    ])
+    ]);
 }
 ```
 
 Clicking the left mouse button calls the spawnBullet function and passes it the player's position.
 
 ```typescript
+// Add an event listener for mouse press
 onMousePress(() => spawnBullet(player.pos));
 ```
 

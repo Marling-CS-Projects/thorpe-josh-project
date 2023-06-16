@@ -16,44 +16,65 @@ My objectives in this cycle are:
 
 ### Key Variables
 
-| Variable Name | Use                                              |
-| ------------- | ------------------------------------------------ |
-| speed         | Holds the player movement speed                  |
-| cooldown      | Holds whether the dash cooldown is active or not |
+| Variable Name | Use                                                                                                                             |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| player        | Represents the player character in the game. It is created using the `add` function and assigned a sprite and initial position. |
+| speed         | Represents the movement speed of the player character. It is initially set to 200.                                              |
+| cooldown      | A boolean variable used to track whether the dash ability is on cooldown or not. It is initially set to `false`.                |
 
 ### Pseudocode
 
 ```
-import kaboom
+import kaboom from "kaboom";
+import "kaboom/global";
 
-load(player)
-place(player)
+kaboom();
 
-if W key pressed: { 
-  move player up by speed
-};
-if A key pressed: {
-  move player left by speed
-};
-if S key pressed: {
-  move player down by speed
-};
-if D key pressed: {
-  move player right by speed
-};
+// Load the sprite for the player character
+loadSprite("bean", "/sprites/bean.png");
 
-let speed = 200
-cooldown = false;
+// Create the player character
+const player = add([
+  sprite("bean"),
+  pos(100, 200),
+]);
 
-if space key pressed: {
-  if  cooldown = false: {
+// Set the initial movement speed
+let speed = 200;
+
+// Set the dash ability cooldown flag
+let cooldown = false;
+
+// Define the movement controls
+onKeyDown("a", () => {
+  player.move(-speed, 0);
+});
+
+onKeyDown("d", () => {
+  player.move(speed, 0);
+});
+
+onKeyDown("w", () => {
+  player.move(0, -speed);
+});
+
+onKeyDown("s", () => {
+  player.move(0, speed);
+});
+
+// Activate the dash ability
+onKeyDown("space", () => {
+  if (!cooldown) {
     cooldown = true;
-    speed = speed + 300;
-    wait 1 second;
-    speed = speed - 300;
-    cooldown = false;
+    speed += 300; // Increase the movement speed
+    wait(0.5, () => {
+      speed -= 300; // Restore the original movement speed
+      wait(3, () => {
+        cooldown = false; // Reset the cooldown flag
+      });
+    });
   }
-}
+});
 ```
 
 ## Development
@@ -70,55 +91,55 @@ kaboom();
 
 loadSprite("bean", "/sprites/bean.png");
 
-  // adds the player
+// Create the player character
 const player = add([
-  sprite("bean"),
-  pos(100, 200),
+  sprite("bean"), // Assign the "bean" sprite to the player character
+  pos(100, 200), // Set the initial position of the player character
 ]);
 ```
 
 Pressing WASD keys moves the player sprite in the corresponding direction by _speed_ pixels per second. By holding the movement speed as a variable, I can alter the movement speed without changing the control's code.
 
 ```typescript
-// movement speed
+// Set the initial movement speed
 let speed = 200;
 
-  //movement controls
+
+// Define the movement controls
 onKeyDown("a", () => {
-  // .move() moves by pixels per second in x and y
-  player.move(-speed, 0);
+  player.move(-speed, 0); // Move the player character to the left (negative x-direction)
 });
 
 onKeyDown("d", () => {
-  player.move(speed, 0);main.type
+  player.move(speed, 0); // Move the player character to the right (positive x-direction)
 });
 
 onKeyDown("w", () => {
-  player.move(0, -speed);
+  player.move(0, -speed); // Move the player character upwards (negative y-direction)
 });
 
 onKeyDown("s", () => {
-  player.move(0, speed);
+  player.move(0, speed); // Move the player character downwards (positive y-direction)
 });
 ```
 
 Pressing the spacebar increases _speed_ by 300 for half a second which makes the player sprite move faster during this time. The implementation of the _cooldown_ variable prevents this dash ability from being used again within 3 seconds.&#x20;
 
 ```typescript
-  // dash
+// Set the dash ability cooldown flag
 let cooldown = false;
+
+// Activate the dash ability
 onKeyDown("space", () => {
   if (!cooldown) {
     cooldown = true;
-      //speed increase
-    speed += 300;
-      //dash duration
+    speed += 300; // Increase the movement speed for dashing
     wait(0.5, () => {
-        speed -= 300
-        wait(3, () => {
-            cooldown = false;
-        });
-  });
+      speed -= 300; // Restore the original movement speed
+      wait(3, () => {
+        cooldown = false; // Reset the cooldown flag after the dash duration
+      });
+    });
   }
 });
 ```

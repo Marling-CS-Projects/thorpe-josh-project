@@ -16,62 +16,102 @@ My objectives in this cycle are:
 
 ### Key Variables
 
-| Variable Name | Use                                                           |
-| ------------- | ------------------------------------------------------------- |
-| levelId       | Holds the position of the level to be selected from the array |
-| level         | Stores the level added on screen                              |
-| player        | Assigned to the player sprite in the level                    |
+| Variable Name  | Use                                                                                                                                                             |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| possibleLevels | It is imported from the "./possibleLevels" file and is an array containing level data for the game.                                                             |
+| levelId        | It represents the current level's identifier.                                                                                                                   |
+| level          | It is the level object created using `addLevel()` function and contains the tile map for the current level. It is used to define the tiles and their behaviors. |
+| player         | It references the player entity in the level. It is obtained using `level.get("player")[0]`.                                                                    |
 
 ### Pseudocode
 
-<pre><code><strong>import levelsList
-</strong>
-when key "t" pressed: {
-    var levelId = 0;
-    go scene ('level', levelId);
-}
+```
+Import "possibleLevels" from "./possibleLevels"
 
-scene 'level' [levelId]: {
-    level = addLevel (levelsList[levelId]): {
-        tiles: {[
-            "=" =>
-            sprite: grass,
-            solid,
-            anchor: centre,
-            "wall",
-            ]},
-            {[
-            sprite: spike,
-            anchor: centre,
-            "spike",
-            ]},
-            {[
-            sprite: mushroom,
-            anchor: centre,
-            solid,
-            "box",
-            ]},
-            {[
-            sprite: bean,
-            anchor: centre,
-            "player",
-            ]},
-        ]}
-    }
-    
-    when key "r" pressed: {
-    var levelId += 1;
-    destroy all;
-    go scene ('level', levelId);
-}
-player = level.get(player);
+Load sprite resources:
+    loadSprite("door", "/sprites/door.png")
+    loadSprite("grass", "/sprites/grass.png")
+    loadSprite("spike", "/sprites/spike.png")
+    loadSprite("mushroom", "/sprites/mushroom.png")
 
-...
-movement code
+Define game start event:
+    onKeyPress("t", () => {
+        levelId = 0
+        goToLevel(levelId)
+    })
 
-}
-end scene
-</code></pre>
+Define scene for each level:
+    scene("level", (levelId) => {
+        level = addLevel(possibleLevels[levelId], {
+            tileWidth: 58,
+            tileHeight: 58,
+            pos: vec2(350, 45),
+            tiles: {
+                "=": () => [
+                    sprite("grass"),
+                    area(),
+                    anchor("center"),
+                    body({ isStatic: true }),
+                    "entity",
+                    "wall",
+                ],
+                "^": () => [
+                    sprite("spike"),
+                    area(),
+                    anchor("center"),
+                    "entity",
+                    "spike",
+                ],
+                "+": () => [
+                    sprite("mushroom"),
+                    area(),
+                    anchor("center"),
+                    body({ isStatic: true }),
+                    "entity",
+                    "box",
+                ],
+                "8": () => [
+                    sprite("door"),
+                    area(),
+                    anchor("center"),
+                    body({ isStatic: true }),
+                    "entity",
+                    "door",
+                ],
+                "@": () => [
+                    sprite("bean"),
+                    area(),
+                    anchor("center"),
+                    body(),
+                    "player",
+                ],
+            }
+        })
+
+        Define event to advance to the next level:
+        onKeyPress("r", () => {
+            levelId += 1
+            destroyAll("entity")
+            goToLevel(levelId)
+        })
+
+        Obtain player entity reference from the level:
+        player = level.get("player")[0]
+
+        // Movement and bullet code goes here
+
+    })
+
+Define function to go to a specific level:
+    function goToLevel(levelId):
+        destroyAll()
+        go("level", levelId)
+
+Start the game:
+    init(() => {
+        // Additional game initialization code
+    })
+```
 
 ## Development
 
@@ -81,8 +121,10 @@ The possibleLevels array is imported from another file and the necessary sprites
 
 {% code title="main.ts" %}
 ```typescript
+// Import the level data from "./possibleLevels"
 import { possibleLevels } from "./possibleLevels";
 
+// Load sprite resources
 loadSprite("door", "/sprites/door.png");
 loadSprite("grass", "/sprites/grass.png");
 loadSprite("spike", "/sprites/spike.png");
@@ -90,7 +132,7 @@ loadSprite("mushroom", "/sprites/mushroom.png");
 ```
 {% endcode %}
 
-_possibleLevels_ holds each level in symbol form which will then be translated into stationary sprites to form the level. It is called _possibleLevels_ because I intend to change this later to be randomly selected rooms.
+possibleLevels holds each level in symbol form which will then be translated into stationary sprites to form the level. It is called _possibleLevels_ because I intend to change this later to be randomly selected rooms.
 
 {% code title="possibleLevels.ts" %}
 ```typescript
@@ -141,10 +183,10 @@ Pressing t starts the level scene with _levelId_ 0. I'm using scenes since it ma
 
 {% code title="main.ts" %}
 ```typescript
-//starts levels
+// Start the game when "t" key is pressed
 onKeyPress("t", () => {
-    let levelId = 0
-    go("level", levelId);
+    let levelId = 0; // Initialize the level identifier
+    go("level", levelId); // Go to the first level
 });
 ```
 {% endcode %}
@@ -153,53 +195,52 @@ The xth level from the _possibleLevels_ array is added to the screen. Each chara
 
 {% code title="main.ts" %}
 ```typescript
+// Define the scene for each level
 scene("level", (levelId) => {
 
+    // Create the level object using the level data from possibleLevels
     const level = addLevel(possibleLevels[levelId], {
-        // define the size of tile block
-        tileWidth: 58,
-        tileHeight: 58,
-        pos: vec2(350, 45),
-        // define what each symbol means
+        tileWidth: 58, // Define the width of each tile block
+        tileHeight: 58, // Define the height of each tile block
+        pos: vec2(350, 45), // Define the position of the level's tile map on the screen
         tiles: {
             "=": () => [
-                sprite("grass"),
+                sprite("grass"), // Set the sprite for grass tiles
                 area(),
                 anchor("center"),
-                //makes the sprite solid and impassible
-                body({ isStatic: true }),
-                "entity",
-                "wall",
+                body({ isStatic: true }), // Make the sprite solid and impassable
+                "entity", // Add the entity component
+                "wall", // Add the wall component
             ],
             "^": () => [
-                sprite("spike"),
+                sprite("spike"), // Set the sprite for spike tiles
                 area(),
                 anchor("center"),
-                "entity",
-                "spike",
+                "entity", // Add the entity component
+                "spike", // Add the spike component
             ],
             "+": () => [
-                sprite("mushroom"),
+                sprite("mushroom"), // Set the sprite for mushroom tiles
                 area(),
                 anchor("center"),
-                body({ isStatic: true }),
-                "entity",
-                "box",
+                body({ isStatic: true }), // Make the sprite solid
+                "entity", // Add the entity component
+                "box", // Add the box component
             ],
             "8": () => [
-                sprite("door"),
+                sprite("door"), // Set the sprite for door tiles
                 area(),
                 anchor("center"),
-                body({ isStatic: true }),
-                "entity",
-                "door",
+                body({ isStatic: true }), // Make the sprite solid
+                "entity", // Add the entity component
+                "door", // Add the door component
             ],
             "@": () => [
-                sprite("bean"),
+                sprite("bean"), // Set the sprite for the player
                 area(),
                 anchor("center"),
-                body(),
-                "player",
+                body(), // Enable physics for the player
+                "player", // Add the player component
             ],
         }
     });
@@ -210,11 +251,11 @@ Pressing r will restart the scene with the next level from _possibleLevels_.
 
 {% code title="main.ts" %}
 ```typescript
-    //increments levelId and goes to that level
+    // Event handler for the "r" key press to advance to the next level
     onKeyPress("r", () => {
-        levelId += 1;
-        destroyAll("entity");
-        go("level", levelId);
+        levelId += 1; // Increment the level identifier
+        destroyAll("entity"); // Destroy all entities
+        go("level", levelId); // Go to the next level
     });
 ```
 {% endcode %}
@@ -223,15 +264,17 @@ Defines the player from the player sprite which is placed when the level is adde
 
 {% code title="main.ts" %}
 ```typescript
-    const player = level.get("player")[0]
+    // Obtain a reference to the player entity
+    const player = level.get("player")[0];
 ```
 {% endcode %}
 
 I moved the player movement and bullet code inside a scene so that key presses do not activate the code until the scene has been activated (levels begun). This will be useful for when I create a main menu at the start of the game.
 
 ```typescript
-    ...   //movement and bullet code
-}
+    // ... Movement and bullet code goes here
+
+});
 ```
 
 ### Challenges

@@ -15,23 +15,27 @@ My objectives in this cycle are:
 
 ### Key Variables
 
-| Variable Name | Use                                                                                |
-| ------------- | ---------------------------------------------------------------------------------- |
-| truePosition  | Holds the actual position of the player, calculated using player.pos and a vector. |
+| Variable Name  | Use                                                                                                                                                 |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| playerSpeed    | Determines the movement speed of the player character in the game.                                                                                  |
+| POINT\_CURSOR  | Calculates the direction for the bullet to travel based on the `truePosition` and the current mouse position. The angle is adjusted by 180 degrees. |
+| levelId        | Represents the current level ID or level number in the game. It is incremented when the "r" key is pressed.                                         |
+| possibleLevels | A collection or array of possible levels in the game.                                                                                               |
+| truePosition   | The calculated position relative to the player's position, used to determine where the bullet should be spawned in the game scene.                  |
 
 ### Pseudocode
 
 For pseudocode on bullet spawning, see [Cycle 2](cycle-1-2.md). Below is the updated pseudocode for level incrementation.&#x20;
 
-<pre><code>when key "r" pressed: {
-<strong>    var levelId += 1;
-</strong>    destroy all;
-    if (levelId > possibleLevels.length - 1) {
-        go scene ('win');
-    } else {
-        go scene ('level', levelId);
-    }
-</code></pre>
+```
+On "r" key press
+    Increment the levelId by 1
+    Destroy all entities with the "entity" tag
+    If levelId is greater than the number of possibleLevels minus 1
+        Go to the "win" scene
+    Else
+        Go to the "level" scene with the updated levelId
+```
 
 ## Development
 
@@ -41,68 +45,68 @@ Initially, sets the background colour and font for the project when initialising
 
 ```typescript
 kaboom({
-    font: "sans-serif",
-    background: [ 153, 111, 101 ],
+    font: "sans-serif", // Set game font to "sans-serif"
+    background: [153, 111, 101], // Set game background color to [153, 111, 101]
 });
 ```
 
 I increased the player's movement speed by 50. Since this is stored as a variable this was simply a case of increasing a number - much easier than if I had to change each key control individually.
 
-<pre class="language-typescript" data-full-width="false"><code class="lang-typescript"><strong>    // movement speed
+<pre class="language-typescript" data-full-width="false"><code class="lang-typescript"><strong>    // Movement speed
 </strong>    let playerSpeed = 250;
 </code></pre>
 
-I updated the bullet spawning function to receive the actual position to spawn at called _truePosition_ and to use that for calculations. This replaces the use of _playerPosition_.
+I updated the bullet spawning function to receive the actual position to spawn at called _truePosition_ and to use that for calculations. This replaces the use of `playerPosition`.
 
 ```typescript
-    //spawns the bullet
-    function spawnBullet(truePosition) {
-        //gets the direction
-        const POINT_CURSOR = truePosition.angle(mousePos()) + 180;
-        //adds the bullet
-        add([
-            pos(truePosition),               
-            sprite("egg"),
-            area(),
-            scale(0.65,0.65),
-            color(127, 127, 255),
-            anchor("center"),
-            rotate(POINT_CURSOR + 90),
-            move(POINT_CURSOR, BULLET_SPEED),
-            offscreen({ destroy: true }),
-            "player_bullet",
-        ])
-    }
-    
-    //spawns a bullet on click
-    onMousePress("left",() => spawnBullet(player.pos.add(vec2(350, 50))));
+// Spawns the bullet
+function spawnBullet(truePosition) {
+    // Gets the direction
+    const POINT_CURSOR = truePosition.angle(mousePos()) + 180; // Calculate the angle between truePosition and mouse position, adjusted by 180 degrees
+
+    // Adds the bullet
+    add([
+        pos(truePosition), // Set the position of the bullet to truePosition
+        sprite("egg"), // Assign the sprite "egg" to the bullet entity
+        area(), // Add a collision area to the bullet entity
+        scale(0.65, 0.65), // Scale the bullet entity to 65% of its original size
+        color(127, 127, 255), // Set the color of the bullet entity to a shade of purple
+        anchor("center"), // Set the anchor point of the bullet entity to its center
+        rotate(POINT_CURSOR + 90), // Rotate the bullet entity based on POINT_CURSOR, adjusted by 90 degrees
+        move(POINT_CURSOR, BULLET_SPEED), // Move the bullet entity in the direction of POINT_CURSOR at BULLET_SPEED units per second
+        offscreen({ destroy: true }), // Remove the bullet entity if it goes off-screen
+        "player_bullet", // Tag the bullet entity as "player_bullet"
+    ]);
+}
 ```
 
 I modified the level increment code to include a check for if the last level has been reached. If it attempts to increment on the last level then it will go to the "win" scene which will be the end screen.
 
 ```typescript
-    //increments levelId and goes to that level
-    onKeyPress("r", () => {
-        levelId += 1;
-        destroyAll("entity");
-        if (levelId > possibleLevels.length - 1) {
-            go("win");
-        } else {
-            go("level", levelId);
-        }
-    });
+// Increments levelId and goes to that level
+onKeyPress("r", () => {
+    levelId += 1; // Increment levelId by 1
+    destroyAll("entity"); // Remove all entities with the "entity" tag
+    if (levelId > possibleLevels.length - 1) {
+        go("win"); // Go to the "win" scene if levelId exceeds the number of possibleLevels
+    } else {
+        go("level", levelId); // Go to the "level" scene with the updated levelId
+    }
+});
 ```
 
 Currently, the 'win' scene is empty so nothing happens yet when you win.
 
 ```typescript
+// Defines the "win" scene
 scene("win", () => {
-})
+    // Scene logic for the "win" scene can be added here
+});
 ```
 
 ### Challenges
 
-It was challenging to resolve the bullet spawn position issue since I struggled to locate what was wrong. Through testing, I found the issue to be something wrong with player.pos. To resolve the issue I experimented with adding a vector onto player.pos to create _truePosition_ to make it correct. I'm not sure what's wrong with player.pos but it could be something to do with how i define player from the level generation.
+It was challenging to resolve the bullet spawn position issue since I struggled to locate what was wrong. Through testing, I found the issue to be something wrong with player.pos. To resolve the issue I experimented with adding a vector onto player.pos to create `truePosition` to make it correct. I'm not sure what's wrong with player.pos but it could be something to do with how i define player from the level generation.
 
 ## Testing
 
