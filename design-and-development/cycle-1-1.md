@@ -1,4 +1,4 @@
-# 2.2.1 Cycle 1
+# 2.2.1 Cycle 1 - Player & Movement
 
 ## Design
 
@@ -8,7 +8,7 @@ My objectives in this cycle are:
 
 * [x] Load a player sprite
 * [x] Be able to move the player with WASD keys
-* [x] Dash to momentarily increase speed for a second
+* [x] Dash can be activated to increase movement speed
 * [x] Dash can only be used every 3 seconds
 * [x] Dash lasts a second
 

@@ -1,17 +1,16 @@
-# 2.2.6 Cycle 6
+# 2.2.6 Cycle 6 - Basic Enemies
 
 ## Design
 
 ### Objectives
 
-My objectives in this cycle are:
+My objective in this cycle is to focus on creating basic enemies. In this cycle I plan to:
 
-* [ ] add enemies?
-* [ ] sort levels?
-* [ ] level increment?
-* [ ] something else?
-
-
+* [x] Add enemies to the level generation so that they can appear in levels
+* [x] Enemies will move toward the player
+* [ ] After a random amount of time each enemy will stop to shoot then move again
+* [ ] Enemies have set health and will take damage upon collision with bullets
+* [ ] Enemies die after all health is lost
 
 ### Usability Features
 
@@ -47,7 +46,7 @@ explain
 
 ### Challenges
 
-Description of challenges
+I am facing challenges with 'After a random amount of time each enemy will stop to shoot then move again'.
 
 ## Testing
 

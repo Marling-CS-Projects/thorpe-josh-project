@@ -1,4 +1,4 @@
-# 2.2.3 Cycle 3
+# 2.2.3 Cycle 3 - Room Generation & Collisions
 
 ## Design
 
@@ -7,10 +7,11 @@
 My objectives in this cycle are:
 
 * [x] Create rooms in a grid system
-* [x] Made of walls, spikes and boxes
-* [x] Press t to start playing rooms
-* [x] Press r to move on to the next room through the rooms
-* [x] Add collision for walls and boxes
+* [x] Rooms consist of walls, spikes, and boxes
+* [x] Every room is stored in an array so that the next one can be added when the last is defeated
+* [x] Press t to start playing rooms (this will be replaced with a main menu system)
+* [x] Press r to move on to the next room (this will be replaced with a door when all enemies have been defeated)
+* [x] Add player collision for walls and boxes so the player can not walk through
 
 ### Usability Features
 

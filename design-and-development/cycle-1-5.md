@@ -1,4 +1,4 @@
-# 2.2.5 Cycle 5
+# 2.2.5 Cycle 5 - Health Bar & Player Death
 
 ## Design
 
@@ -19,7 +19,7 @@ My objectives in this cycle are:
 | Variable Name   | Use                                                                                                                                                                             |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | playerHP        | Represents the current hit points of the player. It is initially set to 100 and gets updated when the player gets hurt.                                                         |
-| ORIGINALHP      | Represents the starting hit points of the player. It is set to the initial value of _playerHP_ and is used to calculate the health bar width.                                   |
+| ORIGINALHP      | Represents the starting hit points of the player. It is set to the initial value of `playerHP` and is used to calculate the health bar width.                                   |
 | HEALTHBARWIDTH  | Represents the width of the health bar in pixels.                                                                                                                               |
 | HEALTHBARHEIGHT | Represents the height of the health bar in pixels.                                                                                                                              |
 | healthBarBorder | Represents the health bar's border entity. It is a rectangle with a width and height slightly larger than the health bar itself.                                                |
@@ -99,7 +99,7 @@ function createHealthBar() {
 
 ### Outcome
 
-I set the layer of the player above the layer of the spikes using the z() property.
+I set the layer of the player above the layer of the spikes using the `z()` property.
 
 <pre class="language-typescript"><code class="lang-typescript"><strong>...
 </strong><strong>
@@ -125,7 +125,7 @@ health(playerHP),
 ],
 </code></pre>
 
-I placed the following code outside of the level scene so that _playerHP_ is not reset to 100 at the start of each level. Also, it would be a computational waste to repeatedly define constants.
+I placed the following code outside of the level scene so that `playerHP` is not reset to 100 at the start of each level. Also, it would be a computational waste to repeatedly define constants.
 
 ```typescript
 // Sets the player hitpoints and saves the starting point
@@ -165,7 +165,7 @@ const healthBar = add([
 ]);
 ```
 
-When the player collides with a spike the player takes 5 damage and the updateHealthBar function is called to update the width of the health bar using the player's new hp value. _spikeCooldown_ is used to prevent the player from taking spike damage again within 0.5 seconds.
+When the player collides with a spike the player takes 5 damage and the updateHealthBar function is called to update the width of the health bar using the player's new hp value. `spikeCooldown` is used to prevent the player from taking spike damage again within 0.5 seconds.
 
 ```typescript
 let spikeCooldown = false; // Spike collision cooldown flag
@@ -184,7 +184,7 @@ onCollide("player", "spike", () => {
 });
 ```
 
-updateHealthBar sets the new width of the health bar by finding the proportion of the original width it should be.
+`updateHealthBar` sets the new width of the health bar by finding the proportion of the original width it should be.
 
 ```typescript
 // Update the health bar width based on player's hit points
@@ -241,4 +241,4 @@ Initially, I had planned to set the player's health to a variable which could th
 
 ### Evidence
 
-add a video link
+{% embed url="https://youtu.be/_iNutoGY3jY" %}
