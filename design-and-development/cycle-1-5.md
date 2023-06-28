@@ -16,17 +16,17 @@ My objectives in this cycle are:
 
 ### Key Variables
 
-| Variable Name   | Use                                                                                                                                                                             |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| playerHP        | Represents the current hit points of the player. It is initially set to 100 and gets updated when the player gets hurt.                                                         |
-| ORIGINALHP      | Represents the starting hit points of the player. It is set to the initial value of `playerHP` and is used to calculate the health bar width.                                   |
-| HEALTHBARWIDTH  | Represents the width of the health bar in pixels.                                                                                                                               |
-| HEALTHBARHEIGHT | Represents the height of the health bar in pixels.                                                                                                                              |
-| healthBarBorder | Represents the health bar's border entity. It is a rectangle with a width and height slightly larger than the health bar itself.                                                |
-| healthBarBg     | Represents the background of the health bar. It is a rectangle that provides the visual backdrop for the health bar.                                                            |
-| healthBar       | Represents the actual health bar entity. It is a rectangle whose width represents the player's current health.                                                                  |
-| spikeCooldown   | Represents a boolean flag indicating whether the player is currently in a cooldown state after colliding with a spike. It prevents the player from getting hurt too frequently. |
-| player          | Represents the player entity in the game.                                                                                                                                       |
+| Variable Name     | Use                                                                                                                                                                             |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `playerHP`        | Represents the current hit points of the player. It is initially set to 100 and gets updated when the player gets hurt.                                                         |
+| `ORIGINALHP`      | Represents the starting hit points of the player. It is set to the initial value of `playerHP` and is used to calculate the health bar width.                                   |
+| `HEALTHBARWIDTH`  | Represents the width of the health bar in pixels.                                                                                                                               |
+| `HEALTHBARHEIGHT` | Represents the height of the health bar in pixels.                                                                                                                              |
+| `healthBarBorder` | Represents the health bar's border entity. It is a rectangle with a width and height slightly larger than the health bar itself.                                                |
+| `healthBarBg`     | Represents the background of the health bar. It is a rectangle that provides the visual backdrop for the health bar.                                                            |
+| `healthBar`       | Represents the actual health bar entity. It is a rectangle whose width represents the player's current health.                                                                  |
+| `spikeCooldown`   | Represents a boolean flag indicating whether the player is currently in a cooldown state after colliding with a spike. It prevents the player from getting hurt too frequently. |
+| `player`          | Represents the player entity in the game.                                                                                                                                       |
 
 ### Pseudocode
 
@@ -231,11 +231,11 @@ Initially, I had planned to set the player's health to a variable which could th
 
 <div>
 
-<figure><img src="../.gitbook/assets/Screenshot 2023-06-16 105519.png" alt=""><figcaption><p>Full health bar</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle5healthbarfull.png" alt=""><figcaption><p>Full health bar</p></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/Screenshot 2023-06-16 105538.png" alt=""><figcaption><p>Health bar after standing on multiple spikes</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle5healthbardamaged.png" alt=""><figcaption><p>Health bar after standing on multiple spikes</p></figcaption></figure>
 
 </div>
 

@@ -23,8 +23,9 @@
 * [2.2.4 Cycle 4 - Bug Fixes & Minor Changes](design-and-development/cycle-1-4.md)
 * [2.2.5 Cycle 5 - Health Bar & Player Death](design-and-development/cycle-1-5.md)
 * [2.2.6 Cycle 6 - Basic Enemies](design-and-development/cycle-1-6.md)
-* [2.2.7 Cycle 7 - Improved Level System](design-and-development/cycle-1-7.md)
-* [2.2.8 Cycle 8](design-and-development/cycle-1-8.md)
+* [2.2.7 Cycle 7 - Improved Room Generation](design-and-development/cycle-1-7.md)
+* [2.2.8 Cycle 8 - Empty](design-and-development/cycle-1-8.md)
+* [Todo](design-and-development/todo.md)
 
 ## 3 Testing <a href="#testing" id="testing"></a>
 

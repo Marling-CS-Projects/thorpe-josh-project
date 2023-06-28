@@ -17,12 +17,12 @@ My objectives in this cycle are:
 
 ### Key Variables
 
-| Variable Name  | Use                                                                                                                                                             |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| possibleLevels | It is imported from the "./possibleLevels" file and is an array containing level data for the game.                                                             |
-| levelId        | It represents the current level's identifier.                                                                                                                   |
-| level          | It is the level object created using `addLevel()` function and contains the tile map for the current level. It is used to define the tiles and their behaviors. |
-| player         | It references the player entity in the level. It is obtained using `level.get("player")[0]`.                                                                    |
+| Variable Name    | Use                                                                                                                                                             |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `possibleLevels` | It is imported from the "./possibleLevels" file and is an array containing level data for the game.                                                             |
+| `levelId`        | It represents the current level's identifier.                                                                                                                   |
+| `level`          | It is the level object created using `addLevel()` function and contains the tile map for the current level. It is used to define the tiles and their behaviors. |
+| `player`         | It references the player entity in the level. It is obtained using `level.get("player")[0]`.                                                                    |
 
 ### Pseudocode
 

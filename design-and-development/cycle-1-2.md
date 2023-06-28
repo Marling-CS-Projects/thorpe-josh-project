@@ -1,4 +1,4 @@
-# 2.2.2 Cycle 2
+# 2.2.2 Cycle 2 - Aiming & Bullets
 
 ## Design
 
@@ -6,7 +6,7 @@
 
 My objectives in this cycle are:
 
-* [x] &#x20;Clicking the mouse creates a bullet at the player's position
+* [x] Clicking the mouse creates a bullet at the player's position
 * [x] The bullet moves towards where the cursor was upon click
 * [x] The bullet is orientated to point in the direction of travel
 
@@ -14,11 +14,11 @@ My objectives in this cycle are:
 
 ### Key Variables
 
-| Variable Name  | Use                                                                                                                                                                                                                            |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| BULLET\_SPEED  | This constant variable represents the speed of the bullet when it is spawned. It is set to a value of 1000.                                                                                                                    |
-| POINT\_CURSOR  | This variable is assigned the value of the player's position angle (in degrees) plus 180, indicating the direction in which the bullet should move. The angle is calculated using the `player.pos.angle(mousePos())` function. |
-| playerPosition | This parameter is passed to the `spawnBullet` function and represents the position of the player. It is used to set the initial position of the bullet.                                                                        |
+| Variable Name    | Use                                                                                                                                                                                                                            |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `BULLET_SPEED`   | This constant variable represents the speed of the bullet when it is spawned. It is set to a value of 1000.                                                                                                                    |
+| `POINT_CURSOR`   | This variable is assigned the value of the player's position angle (in degrees) plus 180, indicating the direction in which the bullet should move. The angle is calculated using the `player.pos.angle(mousePos())` function. |
+| `playerPosition` | This parameter is passed to the `spawnBullet` function and represents the position of the player. It is used to set the initial position of the bullet.                                                                        |
 
 ### Pseudocode
 

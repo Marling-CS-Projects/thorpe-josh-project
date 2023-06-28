@@ -1,4 +1,4 @@
-# 2.2.4 Cycle 4
+# 2.2.4 Cycle 4 - Bug Fixes & Minor Changes
 
 ## Design
 
@@ -15,13 +15,13 @@ My objectives in this cycle are:
 
 ### Key Variables
 
-| Variable Name  | Use                                                                                                                                                 |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| playerSpeed    | Determines the movement speed of the player character in the game.                                                                                  |
-| POINT\_CURSOR  | Calculates the direction for the bullet to travel based on the `truePosition` and the current mouse position. The angle is adjusted by 180 degrees. |
-| levelId        | Represents the current level ID or level number in the game. It is incremented when the "r" key is pressed.                                         |
-| possibleLevels | A collection or array of possible levels in the game.                                                                                               |
-| truePosition   | The calculated position relative to the player's position, used to determine where the bullet should be spawned in the game scene.                  |
+| Variable Name    | Use                                                                                                                                                 |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `playerSpeed`    | Determines the movement speed of the player character in the game.                                                                                  |
+| `POINT_CURSOR`   | Calculates the direction for the bullet to travel based on the `truePosition` and the current mouse position. The angle is adjusted by 180 degrees. |
+| `levelId`        | Represents the current level ID or level number in the game. It is incremented when the "r" key is pressed.                                         |
+| `possibleLevels` | A collection or array of possible levels in the game.                                                                                               |
+| `truePosition`   | The calculated position relative to the player's position, used to determine where the bullet should be spawned in the game scene.                  |
 
 ### Pseudocode
 

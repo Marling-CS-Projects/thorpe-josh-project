@@ -18,9 +18,9 @@ My objectives in this cycle are:
 
 | Variable Name | Use                                                                                                                             |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| player        | Represents the player character in the game. It is created using the `add` function and assigned a sprite and initial position. |
-| speed         | Represents the movement speed of the player character. It is initially set to 200.                                              |
-| cooldown      | A boolean variable used to track whether the dash ability is on cooldown or not. It is initially set to `false`.                |
+| `player`      | Represents the player character in the game. It is created using the `add` function and assigned a sprite and initial position. |
+| `speed`       | Represents the movement speed of the player character. It is initially set to 200.                                              |
+| `cooldown`    | A boolean variable used to track whether the dash ability is on cooldown or not. It is initially set to `false`.                |
 
 ### Pseudocode
 
