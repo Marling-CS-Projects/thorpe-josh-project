@@ -18,6 +18,8 @@ Fitzgerald, D., 2020. 2020 Essential Facts About the Video Game Industry \[WWW D
 
 Green, C.S., Pouget, A., Bavelier, D., 2010. Improved probabilistic inference as a general learning mechanism with action video games. Current biology : CB 20, 1573–9. [https://doi.org/10.1016/j.cub.2010.07.040](https://pubmed.ncbi.nlm.nih.gov/20833324/)
 
+Griffiths, M., 2020. Coronavirus: making friends through online video games \[WWW Document]. The Conversation. URL [https://theconversation.com/coronavirus-making-friends-through-online-video-games-134459](https://theconversation.com/coronavirus-making-friends-through-online-video-games-134459) (accessed 6.28.23).
+
 Halbrook, Y.J., O’Donnell, A.T., Msetfi, R.M., 2019. When and How Video Games Can Be Good: A Review of the Positive Effects of Video Games on Well-Being - PubMed. Perspectives on psychological science : a journal of the Association for Psychological Science 14. [https://doi.org/10.1177/1745691619863807](https://doi.org/10.1177/1745691619863807)
 
 Kowal, M., Conroy, E., Ramsbottom, N., Smithies, T., Toth, A., Campbell, M., 2021. Gaming Your Mental Health: A Narrative Review on Mitigating Symptoms of Depression and Anxiety Using Commercial Video Games. JMIR serious games 9, e26575. [https://doi.org/10.2196/26575](https://doi.org/10.2196/26575)
@@ -35,6 +37,8 @@ Read, S., 2022. [Gaming boomed in lockdown and market value will reach $320bn.](
 National Institutes of Health, 2022. Video gaming may be associated with better cognitive performance in children \[WWW Document]. National Institutes of Health (NIH). URL [https://www.nih.gov/news-events/news-releases/video-gaming-may-be-associated-better-cognitive-performance-children](https://www.nih.gov/news-events/news-releases/video-gaming-may-be-associated-better-cognitive-performance-children) (accessed 4.1.23).
 
 ## 1.2 Stakeholders
+
+Clement, J., 2021. Importance of social aspects of online gaming 2021 \[WWW Document]. Statista. URL [https://www.statista.com/statistics/1235068/online-gaming-social-aspects/](https://www.statista.com/statistics/1235068/online-gaming-social-aspects/) (accessed 6.28.23).
 
 Clement, J., 2022. Distribution of video gamers in the United States in 2022, by age group \[WWW Document]. Statista. URL [https://www.statista.com/statistics/189582/age-of-us-video-game-players/](https://www.statista.com/statistics/189582/age-of-us-video-game-players/) (accessed 3.30.23).
 
