@@ -40,7 +40,15 @@ Clement, J., 2022. Distribution of video gamers in the United States in 2022, by
 
 Entertainment Software Association, 2022. 2022 Essential Facts About the Video Game Industry \[WWW Document]. Entertainment Software Association. URL [https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/](https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/) (accessed 3.30.23).
 
+Gossett, S., 2023. The Real Social Benefits of Video Games \[WWW Document]. Built In. URL [https://builtin.com/media-gaming/online-gaming-social-benefits](https://builtin.com/media-gaming/online-gaming-social-benefits) (accessed 6.28.23).
+
+Griffiths, M.D., Davies, M.N.O., Chappell, D., 2003. Breaking the stereotype: the case of online gaming - PubMed. Cyberpsychology & behavior : the impact of the Internet, multimedia and virtual reality on behavior and society 6.[ https://doi.org/10.1089/109493103321167992](https://doi.org/10.1089/109493103321167992)
+
+Hon, A., 2022. How achievements took over the video game industry \[WWW Document]. Fast Company. URL [https://www.fastcompany.com/90786023/how-achievements-took-over-the-video-game-industry](https://www.fastcompany.com/90786023/how-achievements-took-over-the-video-game-industry) (accessed 6.28.23).
+
 Howarth, J., 2022. How Many Gamers Are There? (New 2023 Statistics). Exploding Topics. URL [https://explodingtopics.com/blog/number-of-gamers](https://explodingtopics.com/blog/number-of-gamers) (accessed 4.1.23).
+
+Kowert, R., 2019. [Video Games and Well-being: Press Start.](https://www.amazon.com/Video-Games-Well-being-Palgrave-Cyberpsychology/dp/3030327698) Springer Nature.
 
 PEGI, 2023a. PEGI age ratings \[WWW Document]. Pegi Public Site. URL [https://pegi.info/page/pegi-age-ratings](https://pegi.info/page/pegi-age-ratings) (accessed 4.1.23).
 
