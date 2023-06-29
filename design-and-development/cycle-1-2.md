@@ -4,7 +4,7 @@
 
 ### Objectives
 
-My objectives in this cycle are:
+My focus in this cycle will be on aiming and bullets. My objectives are:
 
 * [x] Clicking the mouse creates a bullet at the player's position
 * [x] The bullet moves towards where the cursor was upon click
@@ -48,8 +48,6 @@ On mouse press
 
 ### Outcome
 
-The bullet sprite is loaded and the movement speed is set.
-
 ```typescript
 // Load the sprite named "egg" from the file path "/sprites/egg.png"
 loadSprite("egg", "/sprites/egg.png");
@@ -58,7 +56,7 @@ loadSprite("egg", "/sprites/egg.png");
 const BULLET_SPEED = 1000;
 ```
 
-When the _spawnBullet_ function is called, it finds the bearing to the mouse cursor and then creates a bullet at the player's location. The bullet is rotated to point at the cursor position before being set to move at the predetermined speed. Once it passes offscreen it is deleted.
+When the `spawnBullet` function is called, it finds the bearing to the mouse cursor and then creates a bullet at the player's location. The bullet is rotated to point at the cursor position before being set to move at `BULLET_SPEED`.
 
 ```typescript
 // Define the function spawnBullet with playerPosition as the parameter
@@ -101,7 +99,7 @@ onMousePress(() => spawnBullet(player.pos));
 
 ### Challenges
 
-I experienced a bug where the bullet was:
+I experienced bugs where the bullet was:
 
 * Moving in the opposite direction to the cursor
 * Travelling side-on as opposed to pointing in the direction of travel
@@ -112,7 +110,7 @@ To fix this I had to add 180 degrees and 90 degrees to the angles for movement d
 
 ### Tests
 
-<table data-full-width="false"><thead><tr><th>Test</th><th>Instructions</th><th>What I expect</th><th>What actually happens</th><th>Pass/Fail</th></tr></thead><tbody><tr><td>1</td><td>Click mouse</td><td>Bullet appears in the player and moves towards mouse cursor</td><td>As expected except the bullet appears outside of the sprite</td><td>Fail</td></tr><tr><td>2</td><td>Click mouse repeatedly</td><td>Multiple bullets appear</td><td>As expected</td><td>Pass</td></tr></tbody></table>
+<table data-full-width="false"><thead><tr><th>Test</th><th>Instructions</th><th>What I expect</th><th>What actually happens</th><th>Pass/Fail</th></tr></thead><tbody><tr><td>1</td><td>Click mouse.</td><td>Bullet appears in the player and moves towards mouse cursor. Bullet is orientated correctly.</td><td>As expected except the bullet appears outside of the sprite.</td><td>Fail.</td></tr><tr><td>2</td><td>Click mouse repeatedly.</td><td>Multiple bullets appear and behave correctly.</td><td>As expected.</td><td>Pass.</td></tr></tbody></table>
 
 Testing was successful except the bullets appeared slightly outside the player sprite. I will aim to fix this in an upcoming cycle.
 

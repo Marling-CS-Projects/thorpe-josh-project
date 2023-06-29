@@ -4,7 +4,7 @@
 
 ### Objectives
 
-My objectives in this cycle are:
+My focus in the first cycle will be on the player and movement. My objectives are:
 
 * [x] Load a player sprite
 * [x] Be able to move the player with WASD keys
@@ -98,7 +98,7 @@ const player = add([
 ]);
 ```
 
-Pressing WASD keys moves the player sprite in the corresponding direction by _speed_ pixels per second. By holding the movement speed as a variable, I can alter the movement speed without changing the control's code.
+Pressing the WASD keys moves the player sprite in the corresponding direction by `speed` pixels per second. By holding the movement speed as a variable, I can easily change the player's speed without having to modify the entire code.
 
 ```typescript
 // Set the initial movement speed
@@ -123,7 +123,7 @@ onKeyDown("s", () => {
 });
 ```
 
-Pressing the spacebar increases _speed_ by 300 for half a second which makes the player sprite move faster during this time. The implementation of the _cooldown_ variable prevents this dash ability from being used again within 3 seconds.&#x20;
+Pressing the spacebar increases `speed` by 300 for half a second. The `cooldown` variable prevents this dash ability from being used again within 3 seconds.&#x20;
 
 ```typescript
 // Set the dash ability cooldown flag
@@ -152,7 +152,7 @@ I had planned for the dash to be activated using the right mouse button, however
 onKeyDown("space", () => {
 ```
 
-But later I found how to detect right clicks so amended my code accordingly.
+But later I found how to detect right clicks so modified my code accordingly.
 
 ```typescript
 onMousePress("right", () => {
@@ -162,12 +162,12 @@ onMousePress("right", () => {
 
 ### Tests
 
-| Test | Instructions                                                   | What I expect                                         | What actually happens | Pass/Fail |
-| ---- | -------------------------------------------------------------- | ----------------------------------------------------- | --------------------- | --------- |
-| 1    | Run code                                                       | Player sprite appears on stage                        | As expected           | Pass      |
-| 2    | Move using W A S D                                             | Player moves up, left, down and right accordingly     | As expected           | Pass      |
-| 3    | Press spacebar while moving                                    | Movement speed increases for a short duration         | As expected           | Pass      |
-| 4    | Press spacebar multiple times in quick succession while moving | Dash only activates once until 3 seconds have elapsed | As expected           | Pass      |
+| Test | Instructions                                                    | What I expect                                          | What actually happens | Pass/Fail |
+| ---- | --------------------------------------------------------------- | ------------------------------------------------------ | --------------------- | --------- |
+| 1    | Run code.                                                       | Player sprite appears on stage.                        | As expected.          | Pass.     |
+| 2    | Move using W, A, S and D.                                       | Player moves up, left, down and right accordingly.     | As expected.          | Pass.     |
+| 3    | Press spacebar while moving.                                    | Movement speed increases for a short duration.         | As expected.          | Pass.     |
+| 4    | Press spacebar multiple times in quick succession while moving. | Dash only activates once until 3 seconds have elapsed. | As expected.          | Pass.     |
 
 ### Evidence
 

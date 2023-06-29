@@ -4,7 +4,7 @@
 
 ### Objectives
 
-My objectives in this cycle are:
+My focus in this cycle is on room generation. My objectives are:
 
 * [x] Create rooms in a grid system
 * [x] Rooms consist of walls, spikes, and boxes
@@ -17,12 +17,12 @@ My objectives in this cycle are:
 
 ### Key Variables
 
-| Variable Name    | Use                                                                                                                                                             |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `possibleLevels` | It is imported from the "./possibleLevels" file and is an array containing level data for the game.                                                             |
-| `levelId`        | It represents the current level's identifier.                                                                                                                   |
-| `level`          | It is the level object created using `addLevel()` function and contains the tile map for the current level. It is used to define the tiles and their behaviors. |
-| `player`         | It references the player entity in the level. It is obtained using `level.get("player")[0]`.                                                                    |
+| Variable Name    | Use                                                                                                                                                          |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `possibleLevels` | Is imported from the "./possibleLevels" file and is an array containing level data for the game.                                                             |
+| `levelId`        | Represents the current level's identifier.                                                                                                                   |
+| `level`          | Is the level object created using `addLevel()` function and contains the tile map for the current level. It is used to define the tiles and their behaviors. |
+| `player`         | References the player entity in the level. It is obtained using `level.get("player")[0]`.                                                                    |
 
 ### Pseudocode
 
@@ -133,7 +133,7 @@ loadSprite("mushroom", "/sprites/mushroom.png");
 ```
 {% endcode %}
 
-possibleLevels holds each level in symbol form which will then be translated into stationary sprites to form the level. It is called _possibleLevels_ because I intend to change this later to be randomly selected rooms.
+The `possibleLevels` array holds each level in symbol form which will then be translated into stationary sprites to form the level. It is called `possibleLevels` because I intend to modify generation later to be randomly selected.
 
 {% code title="possibleLevels.ts" %}
 ```typescript
@@ -180,7 +180,7 @@ export const possibleLevels = [
 ```
 {% endcode %}
 
-Pressing t starts the level scene with _levelId_ 0. I'm using scenes since it makes it easier to organise the project and understand what is going on.
+Pressing t starts the level scene with `levelId` 0. I'm using scenes since it makes it easier to organise the project and understand what is going on.
 
 {% code title="main.ts" %}
 ```typescript
@@ -192,7 +192,7 @@ onKeyPress("t", () => {
 ```
 {% endcode %}
 
-The xth level from the _possibleLevels_ array is added to the screen. Each character in the symbol representation of the level is translated to a tile which is then placed at that location, for example '=' corresponds to a grass block/wall. This creates the level on screen.
+The xth level from the `possibleLevels` array is added to the screen. Each character in the symbol representation of the level is translated to a tile which is then placed at that location, for example '=' corresponds to a grass block/wall. This creates the level on the screen.
 
 {% code title="main.ts" %}
 ```typescript
@@ -248,7 +248,7 @@ scene("level", (levelId) => {
 ```
 {% endcode %}
 
-Pressing r will restart the scene with the next level from _possibleLevels_.
+Pressing r will restart the scene with the next level from `possibleLevels`.
 
 {% code title="main.ts" %}
 ```typescript
@@ -270,7 +270,7 @@ Defines the player from the player sprite which is placed when the level is adde
 ```
 {% endcode %}
 
-I moved the player movement and bullet code inside a scene so that key presses do not activate the code until the scene has been activated (levels begun). This will be useful for when I create a main menu at the start of the game.
+I moved the player movement and bullet code inside a scene so that key presses do not activate the code until the scene has been activated (levels have begun). This will be useful when I create a main menu at the start of the game.
 
 ```typescript
     // ... Movement and bullet code goes here
@@ -280,7 +280,7 @@ I moved the player movement and bullet code inside a scene so that key presses d
 
 ### Challenges
 
-While adjusting the tile dimensions and the position of the level on the screen, the player's starting position became annoying as sometimes it would be outside the level each time I adjusted it. So I made the player's starting point part of the level so that it is always easy to control where it starts in the level. This will also make it easier in the future when I create some proper levels.
+While adjusting the tile dimensions and the position of the level on the screen, the player's starting position was sometimes outside the level. To simplify things, I made the player's starting point part of the level so that it is always easy to control where the player starts. This will also make it easier in the future when I replace the test levels with some proper levels.
 
 <figure><img src="../.gitbook/assets/cycle3playerstart.png" alt=""><figcaption><p>The player sprites starts as part of the level</p></figcaption></figure>
 
@@ -288,14 +288,14 @@ While adjusting the tile dimensions and the position of the level on the screen,
 
 ### Tests
 
-| Test | Instructions                       | What I expect                                                        | What actually happens                                                    | Pass/Fail |
-| ---- | ---------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------ | --------- |
-| 1    | Press 't' key                      | Level and player appears                                             | As expected                                                              | Pass      |
-| 2    | Repeated presses of 'r' key        | Game switches to the next level each time                            | As expected however trying to go past the last level results in an error | Pass      |
-| 3    | Move the player with WASD and dash | Functions the same as in [Cycle 1](cycle-1-1.md) & [2](cycle-1-2.md) | As expected                                                              | Pass      |
-| 4    | Shoot with mouse click             | Functions the same as in [Cycle 2](cycle-1-2.md)                     | Bullet spawns far away from the player                                   | Fail      |
+| Test | Instructions                        | What I expect                                                         | What actually happens                                                     | Pass/Fail |
+| ---- | ----------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------- | --------- |
+| 1    | Press 't' key.                      | Level and player appears.                                             | As expected.                                                              | Pass.     |
+| 2    | Repeated presses of 'r' key.        | Game switches to the next level each time.                            | As expected however trying to go past the last level results in an error. | Pass.     |
+| 3    | Move the player with WASD and dash. | Functions the same as in [Cycle 1](cycle-1-1.md) & [2](cycle-1-2.md). | As expected.                                                              | Pass.     |
+| 4    | Shoot with mouse click.             | Functions the same as in [Cycle 2](cycle-1-2.md).                     | Bullet spawns far away from the player.                                   | Fail.     |
 
-Unexpectedly the bullet appears far from the player sprite when the mouse is clicked, much further compared to in [Cycle 2](cycle-1-2.md). This is an important bug which I will address in the next cycle ([Cycle 4](cycle-1-4.md)).
+Unexpectedly the bullet appears far from the player sprite when the mouse is clicked, much further compared to in [Cycle 2](cycle-1-2.md). This is a major bug which I will address in the next cycle ([Cycle 4](cycle-1-4.md)).
 
 Testing also revealed that trying to go past the last level resulted in an error as the code tried to pull from a position in _possibleLevels_ which did not exist. I will implement a catch for this in the next cycle.
 

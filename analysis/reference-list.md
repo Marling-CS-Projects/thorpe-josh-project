@@ -6,9 +6,9 @@ Barr, M., Copeland-Stewart, A., 2021. Playing Video Games During the COVID-19 Pa
 
 Brennan, Dan, 2021. Are There Mental Health Benefits of Video Games? \[WWW Document]. WebMD. URL [https://www.webmd.com/mental-health/mental-health-benefits-of-video-games](https://www.webmd.com/mental-health/mental-health-benefits-of-video-games) (accessed 4.24.23).
 
-Clement, J., 2023. Gaming in the United Kingdom 2022 \[WWW Document]. Statista. URL [https://www.statista.com/statistics/300521/gaming-in-the-united-kingdom/?locale=en](https://www.statista.com/statistics/300521/gaming-in-the-united-kingdom/?locale=en) (accessed 3.29.23).
-
 Clement, J., 2021. Topic: COVID-19 impact on the gaming industry worldwide \[WWW Document]. Statista. URL [https://www.statista.com/topics/8016/covid-19-impact-on-the-gaming-industry-worldwide/#topicOverview](https://www.statista.com/topics/8016/covid-19-impact-on-the-gaming-industry-worldwide/#topicOverview) (accessed 3.29.23).
+
+Clement, J., 2023. Gaming in the United Kingdom 2022 \[WWW Document]. Statista. URL [https://www.statista.com/statistics/300521/gaming-in-the-united-kingdom/?locale=en](https://www.statista.com/statistics/300521/gaming-in-the-united-kingdom/?locale=en) (accessed 3.29.23).
 
 Entertainment Software Association, 2022. 2022 Essential Facts About the Video Game Industry \[WWW Document]. Entertainment Software Association. URL [https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/](https://www.theesa.com/resource/2022-essential-facts-about-the-video-game-industry/) (accessed 3.30.23).
 

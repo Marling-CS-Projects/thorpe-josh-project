@@ -41,8 +41,6 @@ On "r" key press
 
 ### Outcome
 
-Initially, sets the background colour and font for the project when initialising.
-
 ```typescript
 kaboom({
     font: "sans-serif", // Set game font to "sans-serif"
@@ -50,13 +48,11 @@ kaboom({
 });
 ```
 
-I increased the player's movement speed by 50. Since this is stored as a variable this was simply a case of increasing a number - much easier than if I had to change each key control individually.
-
 <pre class="language-typescript" data-full-width="false"><code class="lang-typescript"><strong>    // Movement speed
 </strong>    let playerSpeed = 250;
 </code></pre>
 
-I updated the bullet spawning function to receive the actual position to spawn at called _truePosition_ and to use that for calculations. This replaces the use of `playerPosition`.
+I updated the bullet spawning function to receive the actual position to spawn at called `truePosition` and to use that for calculations. This replaces the use of `playerPosition`.
 
 ```typescript
 // Spawns the bullet
@@ -80,7 +76,7 @@ function spawnBullet(truePosition) {
 }
 ```
 
-I modified the level increment code to include a check for if the last level has been reached. If it attempts to increment on the last level then it will go to the "win" scene which will be the end screen.
+I modified the level increment code to include a check for if the last level has been reached. If it attempts to increment on the last level then it will go to the "win" scene, which will be the end screen.
 
 ```typescript
 // Increments levelId and goes to that level
@@ -106,18 +102,18 @@ scene("win", () => {
 
 ### Challenges
 
-It was challenging to resolve the bullet spawn position issue since I struggled to locate what was wrong. Through testing, I found the issue to be something wrong with player.pos. To resolve the issue I experimented with adding a vector onto player.pos to create `truePosition` to make it correct. I'm not sure what's wrong with player.pos but it could be something to do with how i define player from the level generation.
+It was challenging to resolve the bullet spawn position issue since I struggled to locate what was wrong. Through testing, I found the issue to be something wrong with the use of `player.pos`. To resolve the issue I experimented with adding a vector onto `player.pos` to create `truePosition`. I did this until it resulted in the bullets appearing perfectly in the player. I'm not sure what's wrong with `player.pos` but it could be something to do with how I define `player` from the level generation. I'm not sure.
 
 ## Testing
 
 ### Tests
 
-| Test | Instructions                                   | What I expect                                                                                                 | What actually happens | Pass/Fail |
-| ---- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
-| 1    | Run code                                       | Background is the correct colour ([this](https://color-hex.org/color/996f65))                                 | As expected           | Pass      |
-| 2    | Move around with WASD and dash                 | Player moves faster than in [Cycle 3](cycle-1-3.md)                                                           | As expected           | Pass      |
-| 3    | Repeated presses of 'r' key to increment level | Game switches to the next level each time and after the last level goes to a blank background (the end scene) | As expected           | Pass      |
-| 4    | Click mouse repeatedly                         | Bullets appear in the player and move towards mouse cursor until going offscreen                              | As expected           | Pass      |
+| Test | Instructions                                    | What I expect                                                                                                  | What actually happens | Pass/Fail |
+| ---- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
+| 1    | Run code.                                       | Background is the correct colour ([this](https://color-hex.org/color/996f65)).                                 | As expected.          | Pass.     |
+| 2    | Move around with WASD and dash.                 | Player moves faster than in [Cycle 3](cycle-1-3.md).                                                           | As expected.          | Pass.     |
+| 3    | Repeated presses of 'r' key to increment level. | Game switches to the next level each time and after the last level goes to a blank background (the end scene). | As expected.          | Pass.     |
+| 4    | Click mouse repeatedly.                         | Bullets appear in the player and move towards mouse cursor until going offscreen.                              | As expected.          | Pass.     |
 
 ### Images
 

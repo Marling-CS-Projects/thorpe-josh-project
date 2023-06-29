@@ -4,7 +4,7 @@
 
 ### Objectives
 
-My objectives in this cycle are:
+My focus in this cycle is to add a health bar. My objectives are:
 
 * [x] Make the player walk over spikes not under
 * [x] Add player health bar
@@ -137,7 +137,7 @@ const HEALTHBARWIDTH = 100; // Width of the health bar
 const HEALTHBARHEIGHT = 20; // Height of the health bar
 ```
 
-First I created the health bar border, health bar border and the health bar itself. They are rendered as rectangles of width and length. I set the layers so that the health bar border is at the back and is slightly bigger so you can see its edges. I gave them each a different colour so that they are easily distinguished.
+First I created the health bar border, health bar border and the health bar itself. They are rendered as coloured rectangles of a certain width and length. I set the layers so that the health bar border is at the back and is slightly bigger so you can see its edges around the health bar.
 
 ```typescript
 // Create the health bar border
@@ -165,7 +165,7 @@ const healthBar = add([
 ]);
 ```
 
-When the player collides with a spike the player takes 5 damage and the updateHealthBar function is called to update the width of the health bar using the player's new hp value. `spikeCooldown` is used to prevent the player from taking spike damage again within 0.5 seconds.
+When the player collides with a spike the player takes 5 damage and the `updateHealthBar` function is called to update the width of the health bar using the player's new hp value. `spikeCooldown` is used to prevent the player from taking spike damage again within 0.5 seconds.
 
 ```typescript
 let spikeCooldown = false; // Spike collision cooldown flag
@@ -213,19 +213,19 @@ scene("lose", () => {
 
 ### Challenges
 
-Initially, I had planned to set the player's health to a variable which could then be changed and updated as needed. However, this was not possible so I implemented it the other way around instead.
+Initially, I had planned to set the player's health to a variable which could then be changed and updated as needed. However, this was not possible due to Kaboom's limitations therefore I did it the other way around instead.
 
 ## Testing
 
 ### Tests
 
-| Test | Instructions                                   | What I expect                                                                                                                                                                                                           | What actually happens | Pass/Fail |
-| ---- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
-| 1    | Run code and start levels                      | Correct health bar in the top left of the screen                                                                                                                                                                        | As expected           | Pass      |
-| 2    | Walk over spike with player                    | <ol><li>Player's sprite passes over the spike instead of under</li><li>The healthbar decreases</li></ol>                                                                                                                | As expected           | Pass      |
-| 3    | Repeatedly touch spikes in quick succession    | <ol><li>Health bar decreases by constant amount each time</li><li>Health bar does not decrease if the next spike is touched in too quick of a succession</li><li>Health bar background becomes visible (grey)</li></ol> | As expected           | Pass      |
-| 4    | Touch spikes until the health bar reaches zero | Game switches to the end screen (which is currently empty)                                                                                                                                                              | As expected           | Pass      |
-| 5    | Move, shoot and increase levels                | All function as before                                                                                                                                                                                                  | As expected           | Pass      |
+| Test | Instructions                                    | What I expect                                                                                                                                                                                                              | What actually happens | Pass/Fail |
+| ---- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
+| 1    | Run code and start levels.                      | Correct health bar in the top left of the screen.                                                                                                                                                                          | As expected.          | Pass.     |
+| 2    | Walk over spike with player.                    | <ol><li>Player's sprite passes over the spike instead of under.</li><li>The healthbar decreases.</li></ol>                                                                                                                 | As expected.          | Pass.     |
+| 3    | Repeatedly touch spikes in quick succession.    | <ol><li>Health bar decreases by constant amount each time.</li><li>Health bar does not decrease if the next spike is touched in too quick of a succession.</li><li>Health bar background becomes visible (grey).</li></ol> | As expected.          | Pass.     |
+| 4    | Touch spikes until the health bar reaches zero. | Game switches to the end screen (which is currently empty).                                                                                                                                                                | As expected.          | Pass.     |
+| 5    | Move, shoot and increase levels.                | All functions the same as in [Cycle 4](cycle-1-4.md).                                                                                                                                                                      | As expected.          | Pass.     |
 
 ### Images
 
