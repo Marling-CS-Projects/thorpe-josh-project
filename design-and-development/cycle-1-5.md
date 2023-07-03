@@ -195,7 +195,7 @@ function updateHealthBar() {
 
 ```
 
-If the player loses all health points then the levels are replaced with the 'lose' scene. The 'lose' scene is empty so nothing happens yet when you lose.
+If the player loses all health points then the levels are replaced with the 'lose' scene. This scene is empty so nothing happens yet when you lose.
 
 ```typescript
 // Player death event
@@ -213,7 +213,7 @@ scene("lose", () => {
 
 ### Challenges
 
-Initially, I had planned to set the player's health to a variable which could then be changed and updated as needed. However, this was not possible due to Kaboom's limitations therefore I did it the other way around instead.
+Initially, I had planned to set the player's health to a variable which could then be changed and updated as needed. However, this was not possible due to Kaboom limitations therefore I did it the other way around instead.
 
 ## Testing
 

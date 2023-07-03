@@ -19,7 +19,7 @@ My focus in this cycle is on room generation. My objectives are:
 
 | Variable Name    | Use                                                                                                                                                          |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `possibleLevels` | Is imported from the "./possibleLevels" file and is an array containing level data for the game.                                                             |
+| `possibleLevels` | Is imported from the `./possibleLevels` file and is an array containing level data for the game.                                                             |
 | `levelId`        | Represents the current level's identifier.                                                                                                                   |
 | `level`          | Is the level object created using `addLevel()` function and contains the tile map for the current level. It is used to define the tiles and their behaviors. |
 | `player`         | References the player entity in the level. It is obtained using `level.get("player")[0]`.                                                                    |
@@ -118,7 +118,7 @@ Start the game:
 
 ### Outcome
 
-The possibleLevels array is imported from another file and the necessary sprites are loaded.
+The `possibleLevels` array is imported from another file and the necessary sprites are loaded.
 
 {% code title="main.ts" %}
 ```typescript
@@ -133,7 +133,7 @@ loadSprite("mushroom", "/sprites/mushroom.png");
 ```
 {% endcode %}
 
-The `possibleLevels` array holds each level in symbol form which will then be translated into stationary sprites to form the level. It is called `possibleLevels` because I intend to modify generation later to be randomly selected.
+The `possibleLevels` array holds each level in symbol form which will then be translated into stationary sprites to form the level. It is called `possibleLevels` because I intend to modify the generation later to be randomly selected.
 
 {% code title="possibleLevels.ts" %}
 ```typescript
@@ -180,7 +180,7 @@ export const possibleLevels = [
 ```
 {% endcode %}
 
-Pressing t starts the level scene with `levelId` 0. I'm using scenes since it makes it easier to organise the project and understand what is going on.
+Pressing 't' starts the level scene with an of `levelId` 0. I'm using scenes to organise the project since it makes it easy to understand what is happening.
 
 {% code title="main.ts" %}
 ```typescript
@@ -192,7 +192,7 @@ onKeyPress("t", () => {
 ```
 {% endcode %}
 
-The xth level from the `possibleLevels` array is added to the screen. Each character in the symbol representation of the level is translated to a tile which is then placed at that location, for example '=' corresponds to a grass block/wall. This creates the level on the screen.
+The _x_th level from the `possibleLevels` array is added to the screen. Each character in the symbolic representation of the level is translated to a tile placed at that location, for example `=` corresponds to a grass block/wall. This creates the level on the screen.
 
 {% code title="main.ts" %}
 ```typescript
@@ -297,7 +297,7 @@ While adjusting the tile dimensions and the position of the level on the screen,
 
 Unexpectedly the bullet appears far from the player sprite when the mouse is clicked, much further compared to in [Cycle 2](cycle-1-2.md). This is a major bug which I will address in the next cycle ([Cycle 4](cycle-1-4.md)).
 
-Testing also revealed that trying to go past the last level resulted in an error as the code tried to pull from a position in _possibleLevels_ which did not exist. I will implement a catch for this in the next cycle.
+Testing also revealed that trying to go past the last level resulted in an error as the code tried to pull from a position in `possibleLevels` which did not exist. I will implement a catch for this in the next cycle.
 
 ### Images
 

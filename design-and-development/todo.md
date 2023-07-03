@@ -1,6 +1,5 @@
 # Todo
 
-* add cooldown for shooting
 * add enemy attacks
 * add coin drops from enemy deaths
 * add dash cooldown bar

@@ -1,4 +1,4 @@
-# 2.2.8 Cycle 8
+# 2.2.8 Cycle 8 - Enemy Attacks & Box Destruction
 
 ## Design
 
@@ -6,8 +6,10 @@
 
 My objectives in this cycle are:
 
-* [ ] Do a thing
-* [ ] Do another thing
+* [ ] Add enemy projectile attacks
+* [ ] Enemy projectiles can damage the player
+* [ ] Add 3 more enemy types which can be put in levels
+* [ ] Make enemy and player bullets be able to destroy boxes (which are currently mushrooms)
 
 ### Usability Features
 

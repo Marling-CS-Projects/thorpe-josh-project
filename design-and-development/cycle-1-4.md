@@ -117,7 +117,7 @@ It was challenging to resolve the bullet spawn position issue since I struggled 
 
 ### Images
 
-<figure><img src="../.gitbook/assets/cycle4backgroundcolour.png" alt="" width="375"><figcaption><p>Background colour</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle4backgroundcolour.png" alt="" width="375"><figcaption><p>Correct background colour</p></figcaption></figure>
 
 ### Evidence
 
