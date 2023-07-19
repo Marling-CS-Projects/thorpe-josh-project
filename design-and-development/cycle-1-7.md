@@ -1,4 +1,4 @@
-# 2.2.7 Cycle 7 - Gun Cooldown & Improved Room Generation
+# 2.2.7 Cycle 7 - Improved Room Generation & Gun Cooldown
 
 ## Design
 
@@ -89,8 +89,8 @@ const level = addLevel(chosenLevels[levelId], {...});
 
 I made a new file called `./fixedLevels` to hold the shop and boss levels.
 
-{% code title="fixedLevels.ts" %}
-```typescript
+{% code title="fixedLevels.js" %}
+```javascript
 export const fixedLevels = [
     [
     "====================",
@@ -137,7 +137,8 @@ export const fixedLevels = [
 
 3 floors are created, each with a shop room, 5 random levels, and then a boss room. They are all combined into one array called `chosenLevels`.
 
-```typescript
+{% code title="main.js" %}
+```javascript
 // Import necessary modules
 import { fixedLevels } from "./fixedLevels";
 
@@ -154,10 +155,12 @@ for (let j = 0; j < 3; j++) {
     chosenLevels.push(fixedLevels[1]); // Add boss level
 }
 ```
+{% endcode %}
 
 `addLevel()` and the check for the last level were updated to use the `chosenLevels` array.
 
-```typescript
+{% code title="main.js" %}
+```javascript
 // Get the current level configuration
 const level = addLevel(chosenLevels[levelId], {...})
 
@@ -172,10 +175,12 @@ onKeyPress("r", () => {
     }
 });
 ```
+{% endcode %}
 
 I modified how the `addBullet()` function is called so that it can only be called every 2 seconds. I've used a variable for the cooldown time so that it can be easily modified in the future when I add different weapons which have different statistics.
 
-```typescript
+{% code title="main.js" %}
+```javascript
 let gunCooldownTime = 2; // Cooldown time for the gun in seconds
 
 let gunCooldown = false; // Flag to track gun cooldown status
@@ -191,6 +196,7 @@ onMousePress("left", () => {
     }
 });
 ```
+{% endcode %}
 
 ### Challenges
 

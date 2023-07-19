@@ -48,7 +48,7 @@ On mouse press
 
 ### Outcome
 
-```typescript
+```javascript
 // Load the sprite named "egg" from the file path "/sprites/egg.png"
 loadSprite("egg", "/sprites/egg.png");
 
@@ -58,7 +58,7 @@ const BULLET_SPEED = 1000;
 
 When the `spawnBullet` function is called, it finds the bearing to the mouse cursor and then creates a bullet at the player's location. The bullet is rotated to point at the cursor position before being set to move at `BULLET_SPEED`.
 
-```typescript
+```javascript
 // Define the function spawnBullet with playerPosition as the parameter
 function spawnBullet(playerPosition) {
     // Calculate the direction to move based on the player's position and the mouse position
@@ -92,7 +92,7 @@ function spawnBullet(playerPosition) {
 
 Clicking the left mouse button calls the spawnBullet function and passes it the player's position.
 
-```typescript
+```javascript
 // Add an event listener for mouse press
 onMousePress(() => spawnBullet(player.pos));
 ```

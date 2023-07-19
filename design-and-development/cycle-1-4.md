@@ -41,20 +41,20 @@ On "r" key press
 
 ### Outcome
 
-```typescript
+```javascript
 kaboom({
     font: "sans-serif", // Set game font to "sans-serif"
     background: [153, 111, 101], // Set game background color to [153, 111, 101]
 });
 ```
 
-<pre class="language-typescript" data-full-width="false"><code class="lang-typescript"><strong>    // Movement speed
+<pre class="language-javascript" data-full-width="false"><code class="lang-javascript"><strong>    // Movement speed
 </strong>    let playerSpeed = 250;
 </code></pre>
 
 I updated the bullet spawning function to receive the actual position to spawn at called `truePosition` and to use that for calculations. This replaces the use of `playerPosition`.
 
-```typescript
+```javascript
 // Spawns the bullet
 function spawnBullet(truePosition) {
     // Gets the direction
@@ -78,7 +78,7 @@ function spawnBullet(truePosition) {
 
 I modified the level increment code to include a check for if the last level has been reached. If it attempts to increment on the last level then it will go to the "win" scene, which will be the end screen.
 
-```typescript
+```javascript
 // Increments levelId and goes to that level
 onKeyPress("r", () => {
     levelId += 1; // Increment levelId by 1
@@ -93,7 +93,7 @@ onKeyPress("r", () => {
 
 Currently, the 'win' scene is empty so nothing happens yet when you win.
 
-```typescript
+```javascript
 // Defines the "win" scene
 scene("win", () => {
     // Scene logic for the "win" scene can be added here

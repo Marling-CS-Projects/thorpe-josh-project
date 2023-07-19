@@ -120,7 +120,7 @@ onCollide("player_bullet", "mob", (b, m):
 
 ### Outcome
 
-```typescript
+```javascript
 // Constants
 const ENEMY1HP = 50;
 const ENEMY2HP = 50;
@@ -130,7 +130,7 @@ let bulletDamage = 10;
 
 I added a new tile definition to the level generation for enemies.
 
-```typescript
+```javascript
 // Level Setup
 const level = addLevel(possibleLevels[levelId], {
   tileWidth: 58,
@@ -159,7 +159,7 @@ const level = addLevel(possibleLevels[levelId], {
 
 The `activateEnemy1` function contains the idle and move states for an enemy and switches between them after a random time.
 
-```typescript
+```javascript
 const enemies1 = level.get("enemy1");
 
 // Enemy Movement
@@ -201,7 +201,7 @@ function activateEnemy1(enemy1) {
 
 The `activateEnemy1` function is called for each `enemy1` present.
 
-```typescript
+```javascript
 // Activate Enemy Movement for each enemy1
 const enemies1 = level.get("enemy1");
 for (let i = 0; i < enemies1.length; i++) {
@@ -211,7 +211,7 @@ for (let i = 0; i < enemies1.length; i++) {
 
 When a bullet collides with an enemy, the enemy loses `bulletDamage` health and if they lose all their health they die.
 
-```typescript
+```javascript
 // Bullet-Mob Collision
 const mobs = level.get("mob");
 onCollide("player_bullet", "mob", (b, m) => {

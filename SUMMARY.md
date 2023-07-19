@@ -23,8 +23,11 @@
 * [2.2.4 Cycle 4 - Bug Fixes & Minor Changes](design-and-development/cycle-1-4.md)
 * [2.2.5 Cycle 5 - Health Bar & Player Death](design-and-development/cycle-1-5.md)
 * [2.2.6 Cycle 6 - Basic Enemies](design-and-development/cycle-1-6.md)
-* [2.2.7 Cycle 7 - Gun Cooldown & Improved Room Generation](design-and-development/cycle-1-7.md)
-* [2.2.8 Cycle 8 - Enemy Attacks & Box Destruction](design-and-development/cycle-1-8.md)
+* [2.2.7 Cycle 7 - Improved Room Generation & Gun Cooldown](design-and-development/cycle-1-7.md)
+* [2.2.8.1 Cycle 8a - Enemy Attacks](design-and-development/cycle-1-8.md)
+* [2.2.8.2 Cycle 8b - Overhauling Enemy System & Adding Attacks](design-and-development/cycle-1-9.md)
+* [2.2.9 Cycle 9 - Empty](design-and-development/cycle-1-10.md)
+* [2.2.10 Cycle 10 - Empty](design-and-development/cycle-1-11.md)
 * [Todo](design-and-development/todo.md)
 
 ## 3 Testing <a href="#testing" id="testing"></a>

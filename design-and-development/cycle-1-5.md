@@ -101,7 +101,7 @@ function createHealthBar() {
 
 I set the layer of the player above the layer of the spikes using the `z()` property.
 
-<pre class="language-typescript"><code class="lang-typescript"><strong>...
+<pre class="language-javascript"><code class="lang-javascript"><strong>...
 </strong><strong>
 </strong><strong>"^": () => [
 </strong>sprite("spike"),
@@ -127,7 +127,7 @@ health(playerHP),
 
 I placed the following code outside of the level scene so that `playerHP` is not reset to 100 at the start of each level. Also, it would be a computational waste to repeatedly define constants.
 
-```typescript
+```javascript
 // Sets the player hitpoints and saves the starting point
 let playerHP = 100; // Player's current hit points
 const ORIGINALHP = playerHP; // Starting hit points
@@ -139,7 +139,7 @@ const HEALTHBARHEIGHT = 20; // Height of the health bar
 
 First I created the health bar border, health bar border and the health bar itself. They are rendered as coloured rectangles of a certain width and length. I set the layers so that the health bar border is at the back and is slightly bigger so you can see its edges around the health bar.
 
-```typescript
+```javascript
 // Create the health bar border
 const healthBarBorder = add([
   rect(HEALTHBARWIDTH + 4, HEALTHBARHEIGHT + 4), // Rectangle size including border
@@ -167,7 +167,7 @@ const healthBar = add([
 
 When the player collides with a spike the player takes 5 damage and the `updateHealthBar` function is called to update the width of the health bar using the player's new hp value. `spikeCooldown` is used to prevent the player from taking spike damage again within 0.5 seconds.
 
-```typescript
+```javascript
 let spikeCooldown = false; // Spike collision cooldown flag
 
 // Player and spike collision
@@ -186,7 +186,7 @@ onCollide("player", "spike", () => {
 
 `updateHealthBar` sets the new width of the health bar by finding the proportion of the original width it should be.
 
-```typescript
+```javascript
 // Update the health bar width based on player's hit points
 function updateHealthBar() {
   const newWidth = (playerHP / ORIGINALHP) * HEALTHBARWIDTH;
@@ -197,7 +197,7 @@ function updateHealthBar() {
 
 If the player loses all health points then the levels are replaced with the 'lose' scene. This scene is empty so nothing happens yet when you lose.
 
-```typescript
+```javascript
 // Player death event
 player.on("death", () => {
   destroy(player); // Destroy the player entity

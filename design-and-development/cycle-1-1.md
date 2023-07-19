@@ -83,7 +83,7 @@ onKeyDown("space", () => {
 
 The project is initialised and the player sprite is loaded and added to the screen.
 
-```typescript
+```javascript
 import kaboom from "kaboom";
 import "kaboom/global";
 
@@ -100,7 +100,7 @@ const player = add([
 
 Pressing the WASD keys moves the player sprite in the corresponding direction by `speed` pixels per second. By holding the movement speed as a variable, I can easily change the player's speed without having to modify the entire code.
 
-```typescript
+```javascript
 // Set the initial movement speed
 let speed = 200;
 
@@ -125,7 +125,7 @@ onKeyDown("s", () => {
 
 Pressing the spacebar increases `speed` by 300 for half a second. The `cooldown` variable prevents this dash ability from being used again within 3 seconds.&#x20;
 
-```typescript
+```javascript
 // Set the dash ability cooldown flag
 let cooldown = false;
 

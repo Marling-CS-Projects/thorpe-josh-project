@@ -120,8 +120,8 @@ Start the game:
 
 The `possibleLevels` array is imported from another file and the necessary sprites are loaded.
 
-{% code title="main.ts" %}
-```typescript
+{% code title="main.js" %}
+```javascript
 // Import the level data from "./possibleLevels"
 import { possibleLevels } from "./possibleLevels";
 
@@ -135,8 +135,8 @@ loadSprite("mushroom", "/sprites/mushroom.png");
 
 The `possibleLevels` array holds each level in symbol form which will then be translated into stationary sprites to form the level. It is called `possibleLevels` because I intend to modify the generation later to be randomly selected.
 
-{% code title="possibleLevels.ts" %}
-```typescript
+{% code title="possibleLevels.js" %}
+```javascript
 export const possibleLevels = [
     [
     "====================",
@@ -182,8 +182,8 @@ export const possibleLevels = [
 
 Pressing 't' starts the level scene with an of `levelId` 0. I'm using scenes to organise the project since it makes it easy to understand what is happening.
 
-{% code title="main.ts" %}
-```typescript
+{% code title="main.js" %}
+```javascript
 // Start the game when "t" key is pressed
 onKeyPress("t", () => {
     let levelId = 0; // Initialize the level identifier
@@ -194,8 +194,8 @@ onKeyPress("t", () => {
 
 The _x_th level from the `possibleLevels` array is added to the screen. Each character in the symbolic representation of the level is translated to a tile placed at that location, for example `=` corresponds to a grass block/wall. This creates the level on the screen.
 
-{% code title="main.ts" %}
-```typescript
+{% code title="main.js" %}
+```javascript
 // Define the scene for each level
 scene("level", (levelId) => {
 
@@ -250,8 +250,8 @@ scene("level", (levelId) => {
 
 Pressing r will restart the scene with the next level from `possibleLevels`.
 
-{% code title="main.ts" %}
-```typescript
+{% code title="main.js" %}
+```javascript
     // Event handler for the "r" key press to advance to the next level
     onKeyPress("r", () => {
         levelId += 1; // Increment the level identifier
@@ -263,8 +263,8 @@ Pressing r will restart the scene with the next level from `possibleLevels`.
 
 Defines the player from the player sprite which is placed when the level is added. This new system makes it easier to change the location the player appears for each level.
 
-{% code title="main.ts" %}
-```typescript
+{% code title="main.js" %}
+```javascript
     // Obtain a reference to the player entity
     const player = level.get("player")[0];
 ```
@@ -272,11 +272,13 @@ Defines the player from the player sprite which is placed when the level is adde
 
 I moved the player movement and bullet code inside a scene so that key presses do not activate the code until the scene has been activated (levels have begun). This will be useful when I create a main menu at the start of the game.
 
-```typescript
+{% code title="main.js" %}
+```javascript
     // ... Movement and bullet code goes here
 
 });
 ```
+{% endcode %}
 
 ### Challenges
 
