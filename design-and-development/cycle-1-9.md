@@ -23,9 +23,9 @@ My objective in this cycle is to redo enemies using a class system. My objective
 | `randomIndex` and `randomLevel`    | Variables used to select a random index from `possibleLevels` array and create a `randomLevel` object based on that index.                                                                                  |
 | `position` and `targetPos`         | These variables are used to store positions within the game world. `position` is the initial spawn position for enemies, and `targetPos` is the position that enemies move towards or shoot projectiles at. |
 | `direction`                        | A vector representing the direction from one point to another. It's calculated for enemy movement and projectile shooting.                                                                                  |
-| `moveSpeed`                        | A constant representing the speed at which enemies move towards their target position.                                                                                                                      |
-| `numSteps`                         | A constant determining the number of steps for smoother enemy movement. It's used within the loop that gradually moves the enemy towards its target.                                                        |
-| `projectileSpeed`                  | A constant representing the speed of the projectiles that enemies shoot towards the player.                                                                                                                 |
+| `MOVE_SPEED`                       | A constant representing the speed at which enemies move towards their target position.                                                                                                                      |
+| `NUM_STEPS`                        | A constant determining the number of steps for smoother enemy movement. It's used within the loop that gradually moves the enemy towards its target.                                                        |
+| `BULLET_SPEED`                     | A constant representing the speed of the projectiles that enemies shoot towards the player.                                                                                                                 |
 | `latestTargetPos`                  | A variable that stores an updated target position. It's used to determine where enemies should shoot projectiles.                                                                                           |
 | `min` and `max`                    | These variables are used to define the range for generating random idle times for different enemy types.                                                                                                    |
 | `diff`                             | The difference between `max` and `min` values, used for calculating the range of random idle times for enemy types.                                                                                         |
@@ -286,11 +286,11 @@ class Enemy {
             const targetPos = player.pos.add(vec2(350, 50));
             const direction = targetPos.sub(this.entity.pos).unit();
 
-            const moveSpeed = 100; // Adjust as needed
-            const numSteps = 20; // Adjust the number of steps for smoother gliding
+            const MOVE_SPEED = 100; // Adjust as needed
+            const NUM_STEPS = 20; // Adjust the number of steps for smoother gliding
 
-            for (let i = 0; i < numSteps; i++) {
-                const moveAmount = moveSpeed / numSteps;
+            for (let i = 0; i < NUM_STEPS; i++) {
+                const moveAmount = MOVE_SPEED / NUM_STEPS;
                 this.entity.moveBy(direction.scale(moveAmount));
                 await wait(0.02); // Adjust the wait period between each step
             };
@@ -306,7 +306,7 @@ class Enemy {
 }
 
     shootProjectile(targetPos: Vec2) {
-        const projectileSpeed = 500;
+        const BULLET_SPEED = 500;
         const direction = targetPos.sub(this.entity.pos);
 
         add([
@@ -318,7 +318,7 @@ class Enemy {
             anchor("center"),
             z(2),
             rotate(this.entity.pos.angle(targetPos) + 270),
-            move(direction, projectileSpeed),
+            move(direction, BULLET_SPEED),
             "enemy_projectile",
             offscreen({ destroy: true }),
         ]);
