@@ -216,7 +216,7 @@ for (let j = 0; j < 3; j++) {
 ```
 {% endcode %}
 
-Enemy class code.
+The enemy class. It starts with a constructor which sets a number of different parameters depending on the enemy type. It also contains functions that spawn the enemy, move the enemy, spawn enemy bullets, damage the enemy, and destroy the enemy when the health is 0. The benefit of using a class for enemies is that it makes it really easy to add new enemy types in the future because I just need to set what the statistics will be and then its done.
 
 {% code title="main.ts" %}
 ```typescript
@@ -332,6 +332,8 @@ class Enemy {
 See [Cycle 8a](cycle-1-8.md) for some of the challenges I experienced which caused me to take this approach.
 
 While creating the enemy movement in the class I had some difficulty getting the enemies to move correctly. Unbeknownst to me there are many movement types (_move_, _moveBy_, _moveTo_, _follow_), which is what was causing the issue.
+
+It took me quite a while to get the enemy class working correctly as I had to deal with a few other bugs too, which was made harder since I hadn't really had much experience with classes before so it was also a bit of a learning experience for me at the same time.
 
 ## Testing
 
