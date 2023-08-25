@@ -4,7 +4,7 @@
 
 ### Objectives
 
-My objectives in this cycle are:
+In this cycle, I will. My objectives in this cycle are:
 
 * [ ] Do a thing
 * [ ] Do another thing
@@ -31,13 +31,13 @@ end procedure
 
 explain the code
 
-```
+```typescript
 // Some code
 ```
 
 explain some more
 
-```
+```typescript
 // Some more code
 ```
 
@@ -49,13 +49,13 @@ Describe challenges you faced and how they were overcome
 
 ### Tests
 
-| Test | Instructions  | What I expect     | What actually happens | Pass/Fail |
-| ---- | ------------- | ----------------- | --------------------- | --------- |
-| 1    | Run code      | Thing happens     | As expected           | Pass      |
-| 2    | Press buttons | Something happens | As expected           | Pass      |
+| Test | Instructions   | What I expect      | What actually happens | Pass/Fail |
+| ---- | -------------- | ------------------ | --------------------- | --------- |
+| 1    | Run code.      | Thing happens.     | As expected.          | Pass.     |
+| 2    | Press buttons. | Something happens. | As expected.          | Pass.     |
 
-comment on any failed tests and how you plan to resolve them
+Comment on any failed tests and how you plan to resolve them
 
 ### Evidence
 
-put youtube video testing link here
+Put YouTube video testing link here

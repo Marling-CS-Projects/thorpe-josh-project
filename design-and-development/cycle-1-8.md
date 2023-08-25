@@ -7,34 +7,122 @@
 My objectives in this cycle are to:
 
 * [x] Add enemy projectile attacks
-* [ ] Enemy projectiles can damage the player
-* [ ] Add 3 more enemy types which can be put in levels
-* [ ] Enemy types have different movements, attacks, damage and health
-* [ ] Make enemy and player bullets able to destroy boxes (which are currently mushrooms)
+* [ ] ~~Enemy projectiles can damage the player~~
+* [ ] ~~Add 3 more enemy types which can be put in levels~~
+* [ ] ~~Enemy types have different movements, attacks, damage and health~~
+* [ ] ~~Make enemy and player bullets able to destroy boxes (which are currently mushrooms)~~
 
 ## Development
 
-explain the code
+Enemies were stored as part of the tile map for each level and were spawned from that.
 
-```javascript
-// Some code
+<pre class="language-javascript"><code class="lang-javascript">"1": () => [
+<strong>    sprite("ghosty"),
+</strong>    area(),
+    anchor("center"),
+    z(2),
+    state("idle", ["idle", "move"]),
+    body(),
+    health(ENEMY1HP),
+    "enemy1",
+    "mob",
+],
+</code></pre>
+
+Function for enemy movement using states.
+
+```typescript
+function activateEnemy1(enem) {
+    let _t = 0;
+
+    enem.onStateEnter("idle", (time) => {
+      wait(time || rand(1, 3), () =>
+        enem.enterState("move", rand(1, 3))
+      );
+    });
+
+    enem.onStateUpdate("idle", () => {
+      _t += dt();
+      const t = _t % 2 - 1;
+      enem.color = lerp(
+        rgb(255, 255, 255),
+        rgb(128, 128, 128),
+        t < 0 ? -t : t
+      );
+    });
+
+    enem.onStateEnter("move", (time) => {
+        if (mobs[enem]) {
+        spawnEnemyBullet(enem.pos.add(vec2(350, 50)), 1)
+        }
+        wait(time, () => enem.enterState("idle", rand(1, 5)));
+        enem.color = rgb(255, 255, 255);
+    });
+
+    enem.onStateUpdate("move", () => {
+      enem.moveTo(player.pos, 100);
+    });
+  }
+
+    let mobs = level.get("mob");
+    //calls enemy movement for each enemy
+    for (let i = 0; i < mobs.length; i++) {
+        activateEnemy1(mobs[i]);
+    }
 ```
 
-explain some more
+Collision handling and function for enemy bullets.
 
-```javascript
-// Some more code
+```typescript
+    function spawnEnemyBullet(enemyPos, type) {
+    const POINTPLAYER = enemyPos.angle(player.pos.add(vec2(350, 50))) + 180;
+    add([
+        pos(enemyPos),
+        sprite("egg"),
+        area(),
+        scale(0.65, 0.65),
+        color(0, 0, 255),
+        anchor("center"),
+        z(0),
+        rotate(POINTPLAYER + 90),
+        move(POINTPLAYER, 500),
+        offscreen({ destroy: true }),
+        "mob_bullet",
+    ]);
+};
+
+    onCollide("player_bullet", "mob", (b, m) => {
+        destroy(b);
+        if (mobs[m]) {
+            mobs[m].health -= bulletDamage;
+            if (mobs[m].health <= 0) {
+                delete mobs[m];
+                destroy(m);
+            }
+        } else {
+            let initialHealth = 0
+            if (m.is("enemy1")) {
+                initialHealth = ENEMY1HP;
+            } else if (m.is("enemy2")) {
+                initialHealth = ENEMY2HP;
+            } else if (m.is("enemy3")) {
+                initialHealth = ENEMY3HP;
+            }
+            initialHealth = initialHealth - bulletDamage;
+            mobs[m] = { health: initialHealth }; 
+        }
+    });
 ```
 
 ### Challenges
 
-While implementing enemy attacks I experienced a bug where after an enemy died, bullets would continue to fire at the player from the position the enemy died at.
+While implementing attempting to implement enemy attacks I experienced a bug where after an enemy died, bullets would continue to fire at the player from the position the enemy died at.
 
 {% embed url="https://youtu.be/Makqcr3obds" %}
 
 Then I was able to make it so that after an enemy died, the remaining enemies stopped firing too.&#x20;
 
-I've now concluded that my approach was is challenging to make work correctly. Therefore I've decided to rework my approach to enemies completely, using an object-oriented approach.&#x20;
+I concluded that this approach was challenging to make work correctly. Therefore I decided to rework my approach to enemies with an object-oriented approach.&#x20;
 
 ## Testing
 

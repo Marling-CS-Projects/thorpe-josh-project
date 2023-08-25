@@ -1,4 +1,4 @@
-# 2.2.9 Cycle 9 - Empty
+# 2.2.9 Cycle 9 - Re-adding Content & Bullet Damage
 
 ## Design
 
@@ -6,8 +6,10 @@
 
 My objectives in this cycle are:
 
-* [ ] Do a thing
-* [ ] Do another thing
+* [ ] Re-add player health system and spikes
+* [ ] Re-add health bar
+* [ ] Re-add background colour
+* [ ] Enemy bullets can damage the player&#x20;
 
 ### Usability Features
 
@@ -31,13 +33,13 @@ end procedure
 
 explain the code
 
-```
+```typescript
 // Some code
 ```
 
 explain some more
 
-```
+```typescript
 // Some more code
 ```
 
@@ -51,8 +53,8 @@ Describe challenges you faced and how they were overcome
 
 | Test | Instructions  | What I expect     | What actually happens | Pass/Fail |
 | ---- | ------------- | ----------------- | --------------------- | --------- |
-| 1    | Run code      | Thing happens     | As expected           | Pass      |
-| 2    | Press buttons | Something happens | As expected           | Pass      |
+| 1    | Run code      | Thing happens     | As expected.          | Pass.     |
+| 2    | Press buttons | Something happens | As expected.          | Pass.     |
 
 comment on any failed tests and how you plan to resolve them
 
