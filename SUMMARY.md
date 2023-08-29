@@ -27,7 +27,9 @@
 * [2.2.8.1 Cycle 8a - Enemy Attacks](design-and-development/cycle-1-8.md)
 * [2.2.8.2 Cycle 8b - Overhauling Enemies](design-and-development/cycle-1-9.md)
 * [2.2.9 Cycle 9 - Bullet Damage and Coins](design-and-development/cycle-1-10.md)
-* [2.2.10 Cycle 10 - Empty](design-and-development/cycle-1-11.md)
+* [2.2.10 Cycle 10 - Different Weapons & Inventory](design-and-development/cycle-1-11.md)
+* [2.2.11 Cycle 11 - Empty](design-and-development/cycle-1-12.md)
+* [2.2.12 Cycle 12 - Empty](design-and-development/cycle-1-13.md)
 * [Todo](design-and-development/todo.md)
 
 ## 3 Testing <a href="#testing" id="testing"></a>

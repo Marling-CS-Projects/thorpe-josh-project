@@ -1,6 +1,5 @@
 # Todo
 
-* add coin drops from enemy deaths
 * add dash cooldown bar
 * make health bar bigger
 * shop

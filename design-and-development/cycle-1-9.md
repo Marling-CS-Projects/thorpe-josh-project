@@ -113,6 +113,8 @@ for level in chosenLevels:
 ## Development
 
 {% embed url="https://www.youtube.com/watch?v=qQn3Gl8OyVA" %}
+Early version of enemies and without bullet collision or damage
+{% endembed %}
 
 ### Outcome
 
