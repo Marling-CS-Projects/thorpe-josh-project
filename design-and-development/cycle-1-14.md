@@ -1,4 +1,4 @@
-# 2.2.12 Cycle 12 - Proper Levels
+# 2.2.13 Cycle 13 - More Weapons & Shop
 
 ## Design
 
@@ -6,11 +6,8 @@
 
 In this cycle, I will. My objectives in this cycle are:
 
-* [ ] Player and enemy bullets can destroy the boxes (mushrooms)
-* [ ] Make some proper levels
-* [ ] Change level spawning so that it pulls from 3 lists - 1 for each floor (this is so the enemy difficulty can increase over time
-* [ ] Enemies spawn in proper locations within the level
-* [ ] Text appears at the top of the screen when entering a new floor or, when starting a boss level
+* [ ] Do a thing
+* [ ] Do another thing
 
 ### Usability Features
 
