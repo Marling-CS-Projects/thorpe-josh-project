@@ -29,8 +29,9 @@
 * [2.2.9 Cycle 9 - Bullet Damage and Coins](design-and-development/cycle-1-10.md)
 * [2.2.10 Cycle 10 - Different Weapons & Inventory](design-and-development/cycle-1-11.md)
 * [2.2.11 Cycle 11 - Main Menu & Character Select](design-and-development/cycle-1-12.md)
-* [2.2.12 Cycle 12 - Proper Levels](design-and-development/cycle-1-13.md)
-* [2.2.13 Cycle 13 - More Weapons & Shop](design-and-development/cycle-1-14.md)
+* [2.2.12 Cycle 12 - Proper Levels & Spawning](design-and-development/cycle-1-13.md)
+* [2.2.13 Cycle 13 - New Sprites and Shop](design-and-development/cycle-1-14.md)
+* [2.2.13 Cycle 13 - Boss Fights](design-and-development/cycle-1-15.md)
 * [Todo](design-and-development/todo.md)
 
 ## 3 Testing <a href="#testing" id="testing"></a>

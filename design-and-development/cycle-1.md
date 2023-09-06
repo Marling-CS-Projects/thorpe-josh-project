@@ -41,6 +41,18 @@ explain some more
 // Some more code
 ```
 
+explain another part
+
+```typescript
+// Some code
+```
+
+and another
+
+```typescript
+// Some code
+```
+
 ### Challenges
 
 Describe challenges you faced and how they were overcome

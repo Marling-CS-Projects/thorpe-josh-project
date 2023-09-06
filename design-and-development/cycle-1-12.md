@@ -9,9 +9,9 @@ In this cycle, I will. My objectives in this cycle are:
 * [x] Add shopkeeper sprite
 * [x] Fix enemy shooting once after death bug
 * [x] When the game starts you are greeted with a main menu
-* [x] It has 'play', 'how to play' and 'credits'
+* [x] There are buttons for play, how to play and credits which each take you to a separate menu
 * [x] 'play' takes you to character select where choose your character
-* [x] you can choose from 3 characters which each have different stats and starting weapons
+* [x] you can choose from 3 characters, each have different statistics
 * [x] 'how to play' gives some basic instructions
 * [x] 'credits' gives sprite, sound effect and music credits
 * [x] health bar starting width scales with the health of character

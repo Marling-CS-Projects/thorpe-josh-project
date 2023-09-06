@@ -1,4 +1,4 @@
-# 2.2.13 Cycle 13 - New Sprites and Shop
+# 2.2.13 Cycle 13 - Boss Fights
 
 ## Design
 
@@ -6,13 +6,11 @@
 
 In this cycle, I will. My objectives in this cycle are:
 
-* [x] Change the first shop level to an introduction level which displays a starting message when touching the shopkeeper
-* [x] Make the shopkeeper unmoveable
-* [x] Add a new sprite for enemy 4
-* [x] Add a new sprite for enemy 5
-* [x] Add a new sprite for enemy 6
-* [x] Touching the shopkeeper in a shop level will display a message which says the prices for each item
-* [ ] Each item can be bought with each key if the player has enough coins to meet the price
+* [x] Add doors to shop and boss fight levels
+* [x] rebalance guns and enemies
+* [ ] Create a boss class which creates bosses in boss levels
+* [ ] Bosses are bigger and stronger than normal enemies
+* [ ] Bosses can spawn more enemies around them
 
 ### Usability Features
 
