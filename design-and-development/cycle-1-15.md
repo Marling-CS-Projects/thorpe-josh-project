@@ -1,4 +1,4 @@
-# 2.2.13 Cycle 13 - Boss Fights
+# 2.2.14 Cycle 14 - Boss Fights
 
 ## Design
 
@@ -11,6 +11,7 @@ In this cycle, I will. My objectives in this cycle are:
 * [ ] Create a boss class which creates bosses in boss levels
 * [ ] Bosses are bigger and stronger than normal enemies
 * [ ] Bosses can spawn more enemies around them
+* [ ] CHANGE THIS
 
 ### Usability Features
 
