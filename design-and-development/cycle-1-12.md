@@ -26,81 +26,156 @@ In this cycle, my objective is to create a main menu at the start of the game wi
 
 ### Key Variables
 
-| Variable Name | Use                   |
-| ------------- | --------------------- |
-| foo           | does something useful |
+| Variable Name                                                      | Use                                                                                                                                                                                                                                  |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `characterData`                                                    | This variable stores an array of objects, each representing character information (e.g., name, sprite, health, speed).                                                                                                               |
+| `characterSpacing`, `characterY`                                   | These variables define the spacing and vertical position of character elements in the `characterSelect` scene.                                                                                                                       |
+| `playerHP`, `playerSpeed`, `ORIGINALHP`, `selectedCharacterSprite` | <p></p><p>These variables are used to store and manage player-related data, such as health, speed, and the selected character's sprite. They are modified when a character is selected and used in the <code>level</code> scene.</p> |
+| `chosenLevelIndex`                                                 | <p></p><p>This variable is used to store the index of the chosen level when transitioning to the "level" scene. It determines which level the player will start.</p>                                                                 |
 
 ### Pseudocode
 
 ```
-procedure do_something
-    
-end procedure
+# Main Menu Scene
+scene("mainMenu"):
+    create playButton
+    create howToPlayButton
+    create creditsButton
+
+    playButton.onClick():
+        transition to "characterSelect" scene
+
+    howToPlayButton.onClick():
+        transition to "howToPlay" scene
+
+    creditsButton.onClick():
+        transition to "credits" scene
+
+# How to Play Scene
+scene("howToPlay"):
+    create backButton
+    create howToPlayText
+
+    backButton.onClick():
+        transition to "mainMenu" scene
+
+# Credits Scene
+scene("credits"):
+    create backButton
+    create creditsText
+
+    backButton.onClick():
+        transition to "mainMenu" scene
+
+# Character Selection Scene
+scene("characterSelect"):
+    create characterData
+
+    for each character in characterData:
+        create characterName
+        create characterSprite
+
+        characterSprite.onClick():
+            set playerHP to character's health
+            set ORIGINALHP to playerHP
+            set playerSpeed to character's speed
+            show whiteOutline around selected character
+
+    create playButton
+    create backButton
+
+    playButton.onClick():
+        set chosenLevelIndex to 0
+        transition to "level" scene with chosenLevelIndex
+
+    backButton.onClick():
+        transition to "mainMenu" scene
+
+# Level Scene
+scene("level", chosenLevelIndex):
+    # Game logic for the actual gameplay goes here
+
+# Initialize the game by starting at the Main Menu
+go("mainMenu")
 ```
 
 ## Development
 
 ### Outcome
 
-explain the code
+Each screen of the main menu is contained within a separate scene. To move between pages of the menu, the game moves between scenes.
 
 ```typescript
+// Main Menu Scene
 scene("mainMenu", () => {
+    // Create play button
     const playButton = add([
         text("Play", {
             size: 40,
         }),
         pos(width() / 2, height() / 2 - 40),
         anchor("center"),
-        area({ cursor: "pointer" }),
+        area({ cursor: "pointer" }), // Make it clickable
         z(10),
     ]);
 
+    // Create "How to Play" button
     const howToPlayButton = add([
         text("How to Play", {
             size: 40,
         }),
         pos(width() / 2, height() / 2 + 20),
         anchor("center"),
-        area({ cursor: "pointer" }),
+        area({ cursor: "pointer" }), // Make it clickable
         z(10),
     ]);
 
+    // Create Credits button
     const creditsButton = add([
         text("Credits", {
             size: 40,
         }),
         pos(width() / 2, height() / 2 + 80),
         anchor("center"),
-        area({ cursor: "pointer" }),
+        area({ cursor: "pointer" }), // Make it clickable
         z(10),
     ]);
 
+    // Handle play button click
     playButton.onClick(() => {
-        go("characterSelect");
+        go("characterSelect"); // Transition to character selection scene
     });
 
+    // Handle "How to Play" button click
     howToPlayButton.onClick(() => {
-        go("howToPlay");
+        go("howToPlay"); // Transition to "How to Play" scene
     });
 
+    // Handle Credits button click
     creditsButton.onClick(() => {
-        go("credits");
+        go("credits"); // Transition to Credits scene
     });
 });
 
+```
+
+How to play page of the menu.
+
+```typescript
 // How to Play Scene
 scene("howToPlay", () => {
+    // Create Back to Main Menu button
     const backButton = add([
         text("Back to Main Menu", {
             size: 20,
         }),
         pos(width() / 2, height() - 30),
         anchor("center"),
-        area({ cursor: "pointer" }),
+        area({ cursor: "pointer" }), // Make it clickable
         z(10),
     ]);
 
+    // Create text explaining how to play
     const howToPlayText = add([
         text("Instructions:\n\nWASD to move\nLeft click to shoot\nRight click to dash\nNumber keys to switch weapons\nClear all the enemies in a room to advance\nEscape the dungeon!",
         {
@@ -113,23 +188,30 @@ scene("howToPlay", () => {
         z(10),
     ]);
 
+    // Handle Back to Main Menu button click
     backButton.onClick(() => {
-        go("mainMenu");
+        go("mainMenu"); // Transition back to Main Menu
     });
 });
+```
 
+Credits page of the menu.
+
+```typescript
 // Credits Scene
 scene("credits", () => {
+    // Create Back to Main Menu button
     const backButton = add([
         text("Back to Main Menu", {
             size: 20,
         }),
         pos(width() / 2, height() - 30),
         anchor("center"),
-        area({ cursor: "pointer" }),
+        area({ cursor: "pointer" }), // Make it clickable
         z(10),
     ]);
 
+    // Create text for credits
     const creditsText = add([
         text("Programming by Josh Thorpe\nMusic by none\nSprites by Kaboom",
         {
@@ -142,12 +224,19 @@ scene("credits", () => {
         z(10),
     ]);
 
+    // Handle Back to Main Menu button click
     backButton.onClick(() => {
-        go("mainMenu");
+        go("mainMenu"); // Transition back to Main Menu
     });
 });
+```
 
+Character selection page of the menu. The statistics of each character are stored in `characterData` and when each sprite is clicked on, the player's stats are set to those of the character. The play button starts the game with the player's current stats.
+
+```typescript
+// Character Selection Scene
 scene("characterSelect", () => {
+    // Define character data
     const characterData = [
         {
             name: "Scarlett Blackthorn",
@@ -178,18 +267,20 @@ scene("characterSelect", () => {
     const characterSpacing = 310;
     const characterY = height() / 2;
 
-
-     const whiteOutline = add([
-        rect(400, 600),// Rectangle size and dimensions
+    // Create a white outline (hidden by default)
+    const whiteOutline = add([
+        rect(400, 600), // Rectangle size and dimensions
         rgb(255, 255, 255), // Transparent white
         z(10),
         pos((characterSpacing * 2) - 60, characterY), // Initial position (off-screen)
         anchor("center"),
         z(8), // Behind the sprites
-        opacity(0),
+        opacity(0), // Hidden by default
     ]);
 
+    // Iterate through character data to create character selection elements
     characterData.forEach((character, index) => {
+        // Create character name text
         const characterName = add([
             text(character.name, {
                 size: 40,
@@ -200,13 +291,14 @@ scene("characterSelect", () => {
             color(BLACK),
         ]);
 
+        // Create character sprite
         const characterSprite = add([
             sprite(character.sprite),
             pos((index + 2) * characterSpacing, characterY),
             anchor("center"),
-            area({ cursor: "pointer" }),
+            area({ cursor: "pointer" }), // Make it clickable
             z(10),
-            "character",
+            "character", // Tag as a character
             {
                 health: character.health,
                 speed: character.speed,
@@ -214,51 +306,62 @@ scene("characterSelect", () => {
             scale(3),
         ]);
 
+        // Handle character selection
         characterSprite.onClick(() => {
             playerHP = characterSprite.health;
             ORIGINALHP = playerHP;
             playerSpeed = characterSprite.speed;
-            whiteOutline.opacity = 1;
+            whiteOutline.opacity = 1; // Show white outline around selected character
             whiteOutline.pos = characterSprite.pos;
             selectedCharacterSprite = character.sprite;
         });
     });
 
+    // Create Play button
     const playButton = add([
         text("Play", {
             size: 40,
         }),
         pos(width() / 2, height() - 90),
         anchor("center"),
-        area({ cursor: "pointer" }),
+        area({ cursor: "pointer" }), // Make it clickable
         z(10),
     ]);
 
+    // Handle Play button click
     playButton.onClick(() => {
         let chosenLevelIndex = 0;
-        go("level", chosenLevelIndex);
+        go("level", chosenLevelIndex); // Transition to the level scene with the selected character
     });
 
+    // Create Back to Main Menu button
     const backButton = add([
         text("Back to Main Menu", {
             size: 20,
         }),
         pos(width() / 2, height() - 30),
         anchor("center"),
-        area({ cursor: "pointer" }),
+        area({ cursor: "pointer" }), // Make it clickable
         z(10),
     ]);
 
+    // Handle Back to Main Menu button click
     backButton.onClick(() => {
-        go("mainMenu");
+        go("mainMenu"); // Transition back to Main Menu
     });
 });
 
 
+
+```
+
+The game starts in the main menu.
+
+```typescript
 go("mainMenu");
 ```
 
-explain some more
+The sprite of the player now depends on the character which was selected.
 
 ```typescript
  "@": () => [
@@ -272,7 +375,7 @@ explain some more
             ],
 ```
 
-I added an `isAlive` flag in the enemy class which is used to check if the enemy is still alive before it spawns a bullet.
+I also added an `isAlive` flag in the enemy class which is used to check if the enemy is still alive before it spawns a bullet.
 
 ### Challenges
 

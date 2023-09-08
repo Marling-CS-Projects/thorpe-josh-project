@@ -171,6 +171,10 @@ I found adding `shootDamage` to a bullet was a bit difficult at first, however, 
 
 All tests were successful except for a small bug in test 3.  In an upcoming cycle. will implement a check just before an enemy bullet is spawned which checks that the enemy is still alive before the bullet is shot.
 
+{% embed url="https://youtu.be/4n-FJICG0yk" %}
+Example of the bug
+{% endembed %}
+
 ### Images
 
 <figure><img src="../.gitbook/assets/cycle9coindisplay.png" alt="" width="418"><figcaption><p>Coin display after killing 4 enemies</p></figcaption></figure>
