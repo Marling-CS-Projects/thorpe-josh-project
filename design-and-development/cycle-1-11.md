@@ -7,12 +7,15 @@
 In this cycle, I aim to set up a proper weapon and inventory system. My objectives are to:
 
 * [x] Change player bullet damage to be stored on each individual bullet
-* [x] Add 'Brass Spraygun' (machine gun)
-* [x] Add 'Boomstick' (shotgun) (shotgun, fires multiple bullets at once)
-* [x] The current shooting is 'Gear gun'
-* [x] Modify the statistics of each gun to balance them a bit (proper game balancing will come later)
+* [x] Add 'Brass Spraygun' (machine gun with high rate of fire but low damage)
+* [x] Add 'Boomstick' (shotgun which fires multiple bullets at once)
+* [x] The current shooting is now the 'Gear gun' which is the weapon you start with
+* [x] Modify the statistics of each gun to balance them somewhat (I can properly balance everything towards the end of development)
 * [x] Guns can be changed with the number keys
 * [x] The inventory system displays your weapons on the number keys As you unlock new weapons they appear in the inventory in that order (i.e., the first weapon unlocked is key 1, the second is key 2, etc.)
+
+#### Smaller Changes
+
 * [x] Change the size and position of the coin counter
 * [x] Move the enemy spawning logic into a separate file
 
@@ -252,11 +255,11 @@ It took me a while to wrap my head around how I was going to implement the inven
 
 ### Tests
 
-| Test | Instructions                                                                                      | What I expect                                                                                                                                                                                                                                                                  | What actually happens | Pass/Fail |
-| ---- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------- | --------- |
-| 1    | Run code and start game with 't'. Attempt to press the 2 and 3 keys and fire the gun by clicking. | <ul><li>Gun should behave the same as pistol.</li><li>Inventory should only display Gear gun.</li></ul>                                                                                                                                                                        | As expected.          | Pass.     |
-| 2    | Now try switching weapon after pressing keys 'o' and 'p'. Fire them with by clicking.             | <ul><li>'o' and 'p' unlock the brass spraygun and boomstick and they appear in the inventory after being unlocked.</li><li>Weapons can be switched between in the same same order as they were unlocked.</li><li>Accuracy and spread of each weapon are as expected.</li></ul> | As expected.          | Pass.     |
-| 3    | Start a level with 'r' and fire each weapon on enemies.                                           | <ul><li>Each weapon appears to do the correct damage.</li><li>Weapon bullets behave correctly.</li></ul>                                                                                                                                                                       | As expected.          | Pass.     |
+| Test | Instructions                                                                             | What I expect                                                                                                                                                                                                                                                                  | What actually happens | Pass/Fail |
+| ---- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------- | --------- |
+| 1    | Run code and start game. Attempt to press the 2 and 3 keys and fire the gun by clicking. | <ul><li>Gun should behave the same as pistol.</li><li>Inventory should only display Gear gun.</li></ul>                                                                                                                                                                        | As expected.          | Pass.     |
+| 2    | Now try switching weapon after pressing keys 'o' and 'p'. Fire them with by clicking.    | <ul><li>'o' and 'p' unlock the brass spraygun and boomstick and they appear in the inventory after being unlocked.</li><li>Weapons can be switched between in the same same order as they were unlocked.</li><li>Accuracy and spread of each weapon are as expected.</li></ul> | As expected.          | Pass.     |
+| 3    | Start a level and fire each weapon on enemies.                                           | <ul><li>Each weapon appears to do the correct damage.</li><li>Weapon bullets behave correctly.</li></ul>                                                                                                                                                                       | As expected.          | Pass.     |
 
 ### Evidence
 

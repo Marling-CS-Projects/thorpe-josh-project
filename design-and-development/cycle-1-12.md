@@ -4,17 +4,23 @@
 
 ### Objectives
 
-In this cycle, I will. My objectives in this cycle are:
+In this cycle, my objective is to create a main menu at the start of the game with character selection. My objectives in this cycle are:
 
-* [x] Add shopkeeper sprite
-* [x] Fix enemy shooting once after death bug
 * [x] When the game starts you are greeted with a main menu
-* [x] There are buttons for play, how to play and credits which each take you to a separate menu
-* [x] 'play' takes you to character select where choose your character
-* [x] you can choose from 3 characters, each have different statistics
+* [x] There are buttons for 'play', 'how to play', and 'credits' which each take you to a separate menu
 * [x] 'how to play' gives some basic instructions
-* [x] 'credits' gives sprite, sound effect and music credits
-* [x] health bar starting width scales with the health of character
+* [x] 'credits' gives sprite, sound effects and music credits
+* [x] 'play' goes to the character select menu
+* [x] You can choose from 3 characters, each with different statistics
+* [x] Click on the character and then click another play button to start the game
+* [x] When a character is clicked on, there is a white selection box behind it
+* [x] The selection box moves behind the next one which is clicked
+* [x] Health bar starting width scales with the health of the character
+
+#### Smaller Changes
+
+* [x] Add shopkeeper sprite in the shop levels
+* [x] Fix enemies shooting once after death bug
 
 ### Usability Features
 
@@ -266,23 +272,23 @@ explain some more
             ],
 ```
 
-I added an isAlive flag in the enemy class which is used to check if the enemy is still alive before it spawns a bullet.
+I added an `isAlive` flag in the enemy class which is used to check if the enemy is still alive before it spawns a bullet.
 
 ### Challenges
 
-I found using variables to pass information between scenes challenging because the variables must be defined outside the scenes to make it a global variable.
+At first, I found using variables to pass information between scenes challenging since I had to define each variable outside of scenes to make it a global variable.
 
 ## Testing
 
 ### Tests
 
-| Test | Instructions                                               | What I expect                                                 | What actually happens | Pass/Fail |
-| ---- | ---------------------------------------------------------- | ------------------------------------------------------------- | --------------------- | --------- |
-| 1    | Start game.                                                | Start on the main menu.                                       | As expected.          | Pass.     |
-| 2    | Click each button and then the return to main menu button. | Page opens each time before returning to main menu each time. | As expected.          | Pass.     |
-| 3    | Open character selection menu and click on each sprite.    | White selection box moves to each one expected.               | As expected.          | Pass.     |
-| 4    | Click play for each charater.                              | Health bar is different for each character.                   | As expected.          | Pass.     |
-| 5    | Use 'r' key to cycle through levels.                       | For the designated shop levels there is a shopkeeper sprite.  | As expected.          | Pass.     |
+| Test | Instructions                                               | What I expect                                                                                                  | What actually happens | Pass/Fail |
+| ---- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
+| 1    | Start game.                                                | Game starts on the main menu.                                                                                  | As expected.          | Pass.     |
+| 2    | Click each button and then the return to main menu button. | Page opens each time before returning to main menu each time when the back button is clicked.                  | As expected.          | Pass.     |
+| 3    | Open character selection menu and click on each sprite.    | White selection box moves to each one expected.                                                                | As expected.          | Pass.     |
+| 4    | Click play for each character.                             | <ul><li>Health bar is different for each character.</li><li>Each character has different move speed.</li></ul> | As expected.          | Pass.     |
+| 5    | Use r key to cycle through levels.                         | When there is a shop level there is a shopkeeper sprite in it.                                                 | As expected.          | Pass.     |
 
 During testing, I noticed an instance of a bullet spawning from a deleted enemy when moving between levels. However, I've managed to reduce cases of this greatly. I'll see if it noticeably continues and if it does then I will fix it in an upcoming cycle.
 

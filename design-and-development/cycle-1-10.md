@@ -1,18 +1,26 @@
-# 2.2.9 Cycle 9 - Bullet Damage and Coins
+# 2.2.9 Cycle 9 - Bullet Damage & Coins
 
 ## Design
 
 ### Objectives
 
-My objectives in this cycle are:
+My main objective in this cycle is to add damage from the enemy bullets. I will also re-add features that I removed for simplicity while developing the enemy class in [Cycle 8b](cycle-1-9.md). My objectives are:
 
 * [x] Re-add player health system and spikes
 * [x] Re-add health bar
 * [x] Re-add background colour
 * [x] Enemy bullets can damage the player
 * [x] Different enemy types deal different amounts of damage
-* [x] Make dash time shorter but with a shorter cooldown
+
+My secondary objective is to add a coin system to the game:
+
 * [x] Add a coin system where killing an enemy gives +1 coin
+* [x] The number of coins is displayed by a counter in the corner of the screen
+* [x] The coin counter accurately displays the number of coins, being updated after each enemy kill
+
+#### Smaller Changes
+
+* [x] Make the dash duration shorter but with a reduced cooldown time
 
 ### Usability Features
 
@@ -20,10 +28,10 @@ My objectives in this cycle are:
 
 | Variable Name | Use                                                                                                                                                                                                                                                                                                                                        |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| coins         | This variable keeps track of the number of coins collected by the player throughout the game. It's incremented by 1 each time the player defeats an enemy. The `updateCoinCounter()` function is then called to update the displayed coin count on the UI.                                                                                 |
-| coinCounter   | This variable represents a UI element that displays the current coin count on the screen. It is positioned on the screen and is updated whenever the `coins` variable changes. This provides a visual representation of the current coin count to the player.                                                                              |
-| shootDamage   | Represents the amount of damage dealt by the enemy's bullets to the player upon collision. This value is assigned to each bullet entity when it is created. It's used in the collision event handler between the bullets and the player to reduce the player's health points by the specified `shootDamage` value when a collision occurs. |
-| playerHP      | Stores the current health points of the player. It's updated when the player is hit by an enemy bullet or touches a spike.                                                                                                                                                                                                                 |
+| `coins`       | This variable keeps track of the number of coins collected by the player throughout the game. It's incremented by 1 each time the player defeats an enemy. The `updateCoinCounter()` function is then called to update the displayed coin count on the UI.                                                                                 |
+| `coinCounter` | This variable represents a UI element that displays the current coin count on the screen. It is positioned on the screen and is updated whenever the `coins` variable changes. This provides a visual representation of the current coin count to the player.                                                                              |
+| `shootDamage` | Represents the amount of damage dealt by the enemy's bullets to the player upon collision. This value is assigned to each bullet entity when it is created. It's used in the collision event handler between the bullets and the player to reduce the player's health points by the specified `shootDamage` value when a collision occurs. |
+| `playerHP`    | Stores the current health points of the player. It's updated when the player is hit by an enemy bullet or touches a spike.                                                                                                                                                                                                                 |
 
 ### Pseudocode
 
@@ -154,18 +162,20 @@ I found adding `shootDamage` to a bullet was a bit difficult at first, however, 
 
 ### Tests
 
-| Test | Instructions                                          | What I expect                                                                     | What actually happens                                                                                                                                              | Pass/Fail   |
-| ---- | ----------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------- |
-| 1    | Start level with 't' and get hit by enemy projectiles | Health bar decreases and enemy bullet is destroyed.                               | As expected.                                                                                                                                                       | Pass.       |
-| 2    | Click to shoot at enemies.                            | Upon collision, the player bullet is destroyed.                                   | As expected.                                                                                                                                                       | Pass.       |
-| 3    | Continue to shoot at enemies.                         | After being repeatedly hit, enemies die and the coin counter is incremented by 1. | As expected except sometimes if an enemy dies just before it is about to attack, the bullet will be spawned despite the enemy having been killed a second earlier. | Borderline. |
-| 4    | Continue to get hit by enemy bullets.                 | Health bar descreases until it is empty and the player dies.                      | As expected.                                                                                                                                                       | Pass.       |
+| Test | Instructions                                        | What I expect                                                                     | What actually happens                                                                                                                                              | Pass/Fail   |
+| ---- | --------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------- |
+| 1    | Start level with t and get hit by enemy projectiles | Health bar decreases and enemy bullet is destroyed.                               | As expected.                                                                                                                                                       | Pass.       |
+| 2    | Click to shoot at enemies.                          | Upon collision, the player bullet is destroyed.                                   | As expected.                                                                                                                                                       | Pass.       |
+| 3    | Continue to shoot at enemies.                       | After being repeatedly hit, enemies die and the coin counter is incremented by 1. | As expected except sometimes if an enemy dies just before it is about to attack, the bullet will be spawned despite the enemy having been killed a second earlier. | Borderline. |
+| 4    | Continue to get hit by enemy bullets.               | Health bar decreases until it is empty and the player dies.                       | As expected.                                                                                                                                                       | Pass.       |
 
-Following the result from test 3, I will implement a check just before an enemy bullet is spawned which checks that the enemy is still alive before the bullet is shot, in an upcoming cycle.
+All tests were successful except for a small bug in test 3.  In an upcoming cycle. will implement a check just before an enemy bullet is spawned which checks that the enemy is still alive before the bullet is shot.
 
 ### Images
 
 <figure><img src="../.gitbook/assets/cycle9coindisplay.png" alt="" width="418"><figcaption><p>Coin display after killing 4 enemies</p></figcaption></figure>
+
+The coin counter displays correctly but I'll just move it more to the right so that it is in the corner.
 
 ### Evidence
 

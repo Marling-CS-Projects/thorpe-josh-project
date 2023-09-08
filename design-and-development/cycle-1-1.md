@@ -162,12 +162,12 @@ onMousePress("right", () => {
 
 ### Tests
 
-| Test | Instructions                                                    | What I expect                                          | What actually happens | Pass/Fail |
-| ---- | --------------------------------------------------------------- | ------------------------------------------------------ | --------------------- | --------- |
-| 1    | Run code.                                                       | Player sprite appears on stage.                        | As expected.          | Pass.     |
-| 2    | Move using W, A, S and D.                                       | Player moves up, left, down and right accordingly.     | As expected.          | Pass.     |
-| 3    | Press spacebar while moving.                                    | Movement speed increases for a short duration.         | As expected.          | Pass.     |
-| 4    | Press spacebar multiple times in quick succession while moving. | Dash only activates once until 3 seconds have elapsed. | As expected.          | Pass.     |
+| Test | Instructions                                                    | What I expect                                             | What actually happens | Pass/Fail |
+| ---- | --------------------------------------------------------------- | --------------------------------------------------------- | --------------------- | --------- |
+| 1    | Run code.                                                       | Player sprite appears on stage.                           | As expected.          | Pass.     |
+| 2    | Move using WASD keys.                                           | Player moves in the correct direction for each key press. | As expected.          | Pass.     |
+| 3    | Press spacebar while moving.                                    | Movement speed increases for a short duration.            | As expected.          | Pass.     |
+| 4    | Press spacebar multiple times in quick succession while moving. | Dash only activates once every 3 seconds.                 | As expected.          | Pass.     |
 
 ### Evidence
 

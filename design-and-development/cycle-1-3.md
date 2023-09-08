@@ -292,14 +292,14 @@ While adjusting the tile dimensions and the position of the level on the screen,
 
 | Test | Instructions                        | What I expect                                                         | What actually happens                                                     | Pass/Fail |
 | ---- | ----------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------- | --------- |
-| 1    | Press 't' key.                      | Level and player appears.                                             | As expected.                                                              | Pass.     |
-| 2    | Repeated presses of 'r' key.        | Game switches to the next level each time.                            | As expected however trying to go past the last level results in an error. | Pass.     |
+| 1    | Press t key.                        | Level and player appears.                                             | As expected.                                                              | Pass.     |
+| 2    | Repeatedly press the r key.         | Game switches to the next level each time.                            | As expected however trying to go past the last level results in an error. | Pass.     |
 | 3    | Move the player with WASD and dash. | Functions the same as in [Cycle 1](cycle-1-1.md) & [2](cycle-1-2.md). | As expected.                                                              | Pass.     |
 | 4    | Shoot with mouse click.             | Functions the same as in [Cycle 2](cycle-1-2.md).                     | Bullet spawns far away from the player.                                   | Fail.     |
 
 Unexpectedly the bullet appears far from the player sprite when the mouse is clicked, much further compared to in [Cycle 2](cycle-1-2.md). This is a major bug which I will address in the next cycle ([Cycle 4](cycle-1-4.md)).
 
-Testing also revealed that trying to go past the last level resulted in an error as the code tried to pull from a position in `possibleLevels` which did not exist. I will implement a catch for this in the next cycle.
+Testing also revealed that trying to go past the last level resulted in an error as the code tried to pull from a position in `possibleLevels` which did not exist. I will also implement a catch for this in the next cycle.
 
 ### Images
 

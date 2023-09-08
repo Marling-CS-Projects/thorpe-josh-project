@@ -110,7 +110,7 @@ To fix this I had to add 180 degrees and 90 degrees to the angles for movement d
 
 ### Tests
 
-<table data-full-width="false"><thead><tr><th>Test</th><th>Instructions</th><th>What I expect</th><th>What actually happens</th><th>Pass/Fail</th></tr></thead><tbody><tr><td>1</td><td>Click mouse.</td><td>Bullet appears in the player and moves towards mouse cursor. Bullet is orientated correctly.</td><td>As expected except the bullet appears outside of the sprite.</td><td>Fail.</td></tr><tr><td>2</td><td>Click mouse repeatedly.</td><td>Multiple bullets appear and behave correctly.</td><td>As expected.</td><td>Pass.</td></tr></tbody></table>
+<table data-full-width="false"><thead><tr><th>Test</th><th>Instructions</th><th>What I expect</th><th>What actually happens</th><th>Pass/Fail</th></tr></thead><tbody><tr><td>1</td><td>Click mouse.</td><td><ul><li>Bullet appears in the player and moves towards mouse cursor.</li><li>Bullet is orientated correctly.</li></ul></td><td><ul><li>The bullet appears outside of the player sprite.</li><li>As expected.</li></ul></td><td>Fail.</td></tr><tr><td>2</td><td>Click mouse repeatedly.</td><td>Multiple bullets appear and behave correctly.</td><td>As expected.</td><td>Pass.</td></tr></tbody></table>
 
 Testing was successful except the bullets appeared slightly outside the player sprite. I will aim to fix this in an upcoming cycle.
 

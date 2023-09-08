@@ -108,12 +108,12 @@ It was challenging to resolve the bullet spawn position issue since I struggled 
 
 ### Tests
 
-| Test | Instructions                                    | What I expect                                                                                                  | What actually happens | Pass/Fail |
-| ---- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
-| 1    | Run code.                                       | Background is the correct colour ([this](https://color-hex.org/color/996f65)).                                 | As expected.          | Pass.     |
-| 2    | Move around with WASD and dash.                 | Player moves faster than in [Cycle 3](cycle-1-3.md).                                                           | As expected.          | Pass.     |
-| 3    | Repeated presses of 'r' key to increment level. | Game switches to the next level each time and after the last level goes to a blank background (the end scene). | As expected.          | Pass.     |
-| 4    | Click mouse repeatedly.                         | Bullets appear in the player and move towards mouse cursor until going offscreen.                              | As expected.          | Pass.     |
+| Test | Instructions                               | What I expect                                                                                                  | What actually happens | Pass/Fail |
+| ---- | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
+| 1    | Run code.                                  | Background is the correct colour ([this](https://color-hex.org/color/996f65)).                                 | As expected.          | Pass.     |
+| 2    | Move around with WASD and dash.            | Player moves faster than in [Cycle 3](cycle-1-3.md).                                                           | As expected.          | Pass.     |
+| 3    | Repeatedly press r to increment the level. | Game switches to the next level each time and after the last level goes to a blank background (the end scene). | As expected.          | Pass.     |
+| 4    | Click mouse repeatedly.                    | Bullets appear in the player and move towards mouse cursor until going offscreen.                              | As expected.          | Pass.     |
 
 ### Images
 
