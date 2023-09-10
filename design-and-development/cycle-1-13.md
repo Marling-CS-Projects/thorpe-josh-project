@@ -40,10 +40,8 @@ I created levels for each floor which are stored in separate files for ease of a
 
 Below are a couple of possible example levels from floor 2. As the floor increases, the levels become more difficult with more boxes and spikes and harder enemies spawn.
 
-{% code title="possibleLevels2.ts" %}
-```typescript
-export const possibleLevels2 = [
-    {
+<pre class="language-typescript" data-title="possibleLevels2.ts"><code class="lang-typescript"><strong>export const possibleLevels2 = [
+</strong>    {
         id: 11,
         enemy1Spawns: [],
         enemy2Spawns: [
@@ -113,8 +111,8 @@ export const possibleLevels2 = [
     },
     
     ... //rest of the levels
-```
-{% endcode %}
+]
+</code></pre>
 
 Below is the updated level selection code which now handles the three lists to draw for each floor. I moved it into a separate file since it got so long.
 

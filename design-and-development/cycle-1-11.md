@@ -16,7 +16,7 @@ In this cycle, I aim to set up a proper weapon and inventory system. My objectiv
 
 #### Smaller Changes
 
-* [x] Change the size and position of the coin counter
+* [x] Adjust the size and position of the coin counter
 * [x] Move the enemy spawning logic into a separate file
 
 ### Usability Features
@@ -119,7 +119,7 @@ const weapons = [
 ];
 ```
 
-The pistol weapon is unlocked at the start of the game. When I add character selection in a future cycle, each character will start with a different weapon.
+A weapon is unlocked by pushing it to the `unlockedWeapons` array. The pistol weapon is unlocked by default at the start of the game.
 
 ```typescript
     // Function to unlock a weapon
@@ -133,7 +133,7 @@ unlockWeapon(0); // Unlock pistol
 currentWeapon = unlockedWeapons[0];
 ```
 
-I moved the enemy spawning logic to a separate file to make `main.ts` easier to navigate.
+I moved the enemy spawning logic to a separate file named `spawn enemies.ts` make `main.ts` easier to navigate.
 
 <pre class="language-typescript"><code class="lang-typescript">import { spawnEnemies} from "./spawn enemies";
 <strong>
@@ -208,7 +208,7 @@ The machine gun and shotgun can be unlocked with the 'o' and 'p' keys. The `unlo
     }); // Unlock shotgun
 </code></pre>
 
-Weapons can be switched to with the number keys depending on the order they were unlocked. The if statements check that enough weapons have actually been unlocked to use each key, preventing an error.
+The current weapon can be switched with the number keys. Each number key corresponds to the order in which the weapons were unlocked. The if statements check that enough weapons have actually been unlocked to use each key, preventing an error.
 
 ```typescript
     onKeyPress("1", () => {
@@ -249,7 +249,7 @@ The `updateText` function is stored inside `inventoryText`. It adds the name of 
 
 ### Challenges
 
-It took me a while to wrap my head around how I was going to implement the inventory system.
+It was challenging to find how to update the inventory when a new weapon is unlocked. I was not aware that embedding a function within inventoryText was possible as this was not described in the documentation. Instead, I came across an example of it while viewing some Kaboom code online and thought that it could work in this scenario.
 
 ## Testing
 

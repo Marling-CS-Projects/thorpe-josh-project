@@ -108,14 +108,15 @@ Each screen of the main menu is contained within a separate scene. To move betwe
 ```typescript
 // Main Menu Scene
 scene("mainMenu", () => {
-    // Create play button
+
+    // Create "Play" button
     const playButton = add([
         text("Play", {
             size: 40,
         }),
         pos(width() / 2, height() / 2 - 40),
         anchor("center"),
-        area({ cursor: "pointer" }), // Make it clickable
+        area({ cursor: "pointer" }),
         z(10),
     ]);
 
@@ -126,44 +127,45 @@ scene("mainMenu", () => {
         }),
         pos(width() / 2, height() / 2 + 20),
         anchor("center"),
-        area({ cursor: "pointer" }), // Make it clickable
+        area({ cursor: "pointer" }),
         z(10),
     ]);
 
-    // Create Credits button
+    // Create "Credits" button
     const creditsButton = add([
         text("Credits", {
             size: 40,
         }),
         pos(width() / 2, height() / 2 + 80),
         anchor("center"),
-        area({ cursor: "pointer" }), // Make it clickable
+        area({ cursor: "pointer" }),
         z(10),
     ]);
 
-    // Handle play button click
+    // Handle Play button click
     playButton.onClick(() => {
-        go("characterSelect"); // Transition to character selection scene
+        go("characterSelect"); // Transition to "Character Select" scene
     });
 
-    // Handle "How to Play" button click
+    // Handle How to Play button click
     howToPlayButton.onClick(() => {
         go("howToPlay"); // Transition to "How to Play" scene
     });
 
     // Handle Credits button click
     creditsButton.onClick(() => {
-        go("credits"); // Transition to Credits scene
+        go("credits"); // Transition to "Credits" scene
     });
 });
 
 ```
 
-How to play page of the menu.
+How to play page of the menu. It contains some text which describes how to play and a button which takes you back to the main menu.
 
 ```typescript
 // How to Play Scene
 scene("howToPlay", () => {
+
     // Create Back to Main Menu button
     const backButton = add([
         text("Back to Main Menu", {
@@ -171,7 +173,7 @@ scene("howToPlay", () => {
         }),
         pos(width() / 2, height() - 30),
         anchor("center"),
-        area({ cursor: "pointer" }), // Make it clickable
+        area({ cursor: "pointer" }),
         z(10),
     ]);
 
@@ -195,7 +197,7 @@ scene("howToPlay", () => {
 });
 ```
 
-Credits page of the menu.
+Credits page of the menu. It contains some text for the credits and a button which takes you back to the main menu.
 
 ```typescript
 // Credits Scene
@@ -207,7 +209,7 @@ scene("credits", () => {
         }),
         pos(width() / 2, height() - 30),
         anchor("center"),
-        area({ cursor: "pointer" }), // Make it clickable
+        area({ cursor: "pointer" }),
         z(10),
     ]);
 
@@ -231,16 +233,17 @@ scene("credits", () => {
 });
 ```
 
-Character selection page of the menu. The statistics of each character are stored in `characterData` and when each sprite is clicked on, the player's stats are set to those of the character. The play button starts the game with the player's current stats.
+Character selection page of the menu. The statistics of each character are stored in `characterData` and the player's stats are set to those of the character when each sprite is clicked. The play button starts the game with the player's current stats while the back button takes you back to the main menu.
 
 ```typescript
 // Character Selection Scene
 scene("characterSelect", () => {
+
     // Define character data
     const characterData = [
         {
             name: "Scarlett Blackthorn",
-            sprite: "apple",
+            sprite: "apple", // These are all the stats which vary for each character
             health: 80,
             speed: 300,
             dashLength: 1,
@@ -264,15 +267,16 @@ scene("characterSelect", () => {
         },
     ];
 
+    // Spacing of the character sprites on the selection screen
     const characterSpacing = 310;
     const characterY = height() / 2;
 
-    // Create a white outline (hidden by default)
+    // Create a white box (hidden by default)
     const whiteOutline = add([
         rect(400, 600), // Rectangle size and dimensions
-        rgb(255, 255, 255), // Transparent white
+        rgb(255, 255, 255), // white
         z(10),
-        pos((characterSpacing * 2) - 60, characterY), // Initial position (off-screen)
+        pos(0, characterY), // Initial position
         anchor("center"),
         z(8), // Behind the sprites
         opacity(0), // Hidden by default
@@ -311,8 +315,8 @@ scene("characterSelect", () => {
             playerHP = characterSprite.health;
             ORIGINALHP = playerHP;
             playerSpeed = characterSprite.speed;
-            whiteOutline.opacity = 1; // Show white outline around selected character
-            whiteOutline.pos = characterSprite.pos;
+            whiteOutline.pos = characterSprite.pos; // White outline moves to selected character
+            whiteOutline.opacity = 1; // Show white outline
             selectedCharacterSprite = character.sprite;
         });
     });
@@ -324,7 +328,7 @@ scene("characterSelect", () => {
         }),
         pos(width() / 2, height() - 90),
         anchor("center"),
-        area({ cursor: "pointer" }), // Make it clickable
+        area({ cursor: "pointer" }),
         z(10),
     ]);
 
@@ -341,7 +345,7 @@ scene("characterSelect", () => {
         }),
         pos(width() / 2, height() - 30),
         anchor("center"),
-        area({ cursor: "pointer" }), // Make it clickable
+        area({ cursor: "pointer" }),
         z(10),
     ]);
 
@@ -355,16 +359,16 @@ scene("characterSelect", () => {
 
 ```
 
-The game starts in the main menu.
+The game starts in the main menu scene.
 
 ```typescript
 go("mainMenu");
 ```
 
-The sprite of the player now depends on the character which was selected.
+The sprite of the player now depends on the character which was selected instead of being constant each time.
 
 ```typescript
- "@": () => [
+ "@": () => [ // @ represents the player in the tile maps
                 sprite(selectedCharacterSprite),
                 area(),
                 anchor("center"),
@@ -375,11 +379,11 @@ The sprite of the player now depends on the character which was selected.
             ],
 ```
 
-I also added an `isAlive` flag in the enemy class which is used to check if the enemy is still alive before it spawns a bullet.
+I have also added an `isAlive` flag in the enemy class which is used to check if the enemy is still alive before it spawns a bullet. This is to eliminate the bug where an enemy may still shoot its projectile shortly after dying.
 
 ### Challenges
 
-At first, I found using variables to pass information between scenes challenging since I had to define each variable outside of scenes to make it a global variable.
+To use a variable between different scenes it must be declared globally at the start of the project. I found development a bit challenging until I realised this.
 
 ## Testing
 
@@ -393,7 +397,7 @@ At first, I found using variables to pass information between scenes challenging
 | 4    | Click play for each character.                             | <ul><li>Health bar is different for each character.</li><li>Each character has different move speed.</li></ul> | As expected.          | Pass.     |
 | 5    | Use r key to cycle through levels.                         | When there is a shop level there is a shopkeeper sprite in it.                                                 | As expected.          | Pass.     |
 
-During testing, I noticed an instance of a bullet spawning from a deleted enemy when moving between levels. However, I've managed to reduce cases of this greatly. I'll see if it noticeably continues and if it does then I will fix it in an upcoming cycle.
+During testing, I noticed an instance of a bullet spawning from a deleted enemy when moving between levels. This can be seen in the evidence video below. I was surprised by this since I thought that the bug would be completely fixed with the `isAlive` flag I added to each enemy. It may have occurred due to a brief lag spike because I could not replicate it. If it happens again or more frequently, then I will address it in a later cycle.
 
 ### Evidence
 

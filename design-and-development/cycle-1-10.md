@@ -179,7 +179,7 @@ Example of the bug
 
 <figure><img src="../.gitbook/assets/cycle9coindisplay.png" alt="" width="418"><figcaption><p>Coin display after killing 4 enemies</p></figcaption></figure>
 
-The coin counter displays correctly but I'll just move it more to the right so that it is in the corner.
+The coin counter displays correctly but I will move it more to the right in the next cycle so that it's in the corner more.
 
 ### Evidence
 
