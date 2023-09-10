@@ -13,7 +13,12 @@ In this cycle, I will. My objectives in this cycle are:
 * [ ] Boss 2 shoots in bursts
 * [ ] Boss 3 shoots like a shotgun
 * [ ] Bosses can spawn more enemies around them
-*
+
+#### Smaller Changes
+
+* [ ] Reduce the number of spikes and boxes on floor 3 because it is too difficult to move around at the moment
+* [ ] Add spikes to boss levels
+* [ ] Make the background for the introduction message partially transparent
 
 ### Usability Features
 

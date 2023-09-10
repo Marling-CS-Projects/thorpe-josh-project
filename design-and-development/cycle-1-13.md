@@ -18,16 +18,58 @@ In this cycle, my goal is to make some proper levels with enemies spawning in th
 
 ### Key Variables
 
-| Variable Name | Use                   |
-| ------------- | --------------------- |
-| foo           | does something useful |
+| Variable Name      | Use                                                                                                                                                                                              |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `chosenLevels`     | <p></p><p>This variable is an array used to store the selected game levels. It is populated with level data from different sources (fixed levels and randomly chosen levels).</p>                |
+| `floorNumber`      | This variable is used to store and track the current floor number. It is updated based on the chosen level index and used to display the floor number in `newFloorText`.                         |
+| `enemiesRemaining` | <p></p><p>This variable tracks the number of remaining enemies in a level. It is checked to determine whether the player can progress to the next level after defeating all enemies.</p>         |
+| `chosenLevelIndex` | <p></p><p>This variable is used to store and track the index of the currently selected level. It is updated when the player progresses to the next level and determines which level to load.</p> |
 
 ### Pseudocode
 
 ```
-procedure do_something
-    
-end procedure
+# Initialize game variables
+InitializeGameVariables()
+
+# Boss Fight Text
+bossFightText = CreateBossFightText()
+
+if (chosenLevelIndex is 6 or chosenLevelIndex is 13 or chosenLevelIndex is 20):
+    DisplayBossFightText()
+    WaitAndHideBossFightText()
+
+# New Floor Text
+newFloorText = CreateNewFloorText()
+
+if (chosenLevelIndex is 0):
+    SetFloorNumberTo1()
+    DisplayNewFloorText()
+    WaitAndHideNewFloorText()
+elif (chosenLevelIndex is 7):
+    SetFloorNumberTo2()
+    DisplayNewFloorText()
+    WaitAndHideNewFloorText()
+elif (chosenLevelIndex is 14):
+    SetFloorNumberTo3()
+    DisplayNewFloorText()
+    WaitAndHideNewFloorText()
+
+# Box Collision Handling
+HandleBoxCollisions()
+
+# "door" Object
+doorObject = CreateDoorObject()
+
+HandlePlayerCollisionsWithDoor()
+
+# Player Bullets and Enemy Bullets
+DefineTagsForBullets()
+
+# Remaining Enemies Tracking
+enemiesRemaining = CountRemainingEnemies()
+
+if (enemiesRemaining is 0):
+    ProceedToNextLevel()
 ```
 
 ## Development
@@ -288,7 +330,7 @@ const bossFightText = add([
 ```
 {% endcode %}
 
-When a `player_bullet` or `enemy_bullet` collides with a `box` then both the box and the bullet are destroyed.
+When a `player_bullet` or `enemy_bullet` collides with a `box`, both the box and the bullet are destroyed.
 
 {% code title="main.ts" %}
 ```typescript
