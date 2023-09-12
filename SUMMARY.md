@@ -20,7 +20,7 @@
 * [2.2.1 Cycle 1 - Player & Movement](design-and-development/cycle-1-1.md)
 * [2.2.2 Cycle 2 - Aiming & Bullets](design-and-development/cycle-1-2.md)
 * [2.2.3 Cycle 3 - Room Generation & Collisions](design-and-development/cycle-1-3.md)
-* [2.2.4 Cycle 4 - Bug Fixes & Minor Changes](design-and-development/cycle-1-4.md)
+* [2.2.4 Cycle 4 - Bug Fixes & Changes](design-and-development/cycle-1-4.md)
 * [2.2.5 Cycle 5 - Health Bar & Player Death](design-and-development/cycle-1-5.md)
 * [2.2.6 Cycle 6 - Basic Enemies](design-and-development/cycle-1-6.md)
 * [2.2.7 Cycle 7 - Improved Room Generation](design-and-development/cycle-1-7.md)

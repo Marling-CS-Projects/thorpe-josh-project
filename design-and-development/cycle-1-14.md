@@ -113,7 +113,7 @@ Create healthBar (actual health bar)
 
 ### Outcome
 
-explain the code
+The introduction text and the shop text are handled in the same way. In the introduction level and shop levels respectively, when the player touches the shopkeeper the message and background are added. When the player stops touching the shopkeeper they are removed.
 
 ```typescript
 // Function to show shop text
@@ -199,10 +199,10 @@ explain the code
     })
 ```
 
-explain some more
+I modified the function to unlock a weapon so that there must be enough coins to purchase the desired weapon. If there are enough coins then the amount of coins gets subtracted from the total coin balance.
 
 ```typescript
-    // Function to unlock a weapon
+    // Attempt to unlock a weapon
     function unlockWeapon(index) {
         if (canUnlockWeapon(index)) {
             weapons[index].unlocked = true;
@@ -227,19 +227,6 @@ explain some more
         unlockWeapon(4);
     }); // Unlock rifle
 
-    function restoreHealth() {
-        if (coins >= 5) {
-            coins -= 5; // Deduct 5 coins
-            playerHP += 10; // Restore 10 health
-            updateHealthBar(); // Update the health bar
-            updateCoinCounter(); // Update the coin counter
-        };
-    };
-
-// Listen for the "l" key press to restore health
-onKeyPress("l", () => {
-    restoreHealth();
-});
 
     // Key press events to equip weapons (1, 2, 3, 4, 5, etc.)
     onKeyPress("1", () => {
@@ -258,7 +245,25 @@ onKeyPress("l", () => {
     })
 ```
 
+If the player has enough coins, they can restore a portion of their health.
 
+```typescript
+    function restoreHealth() {
+        if (coins >= 5) {
+            coins -= 5; // Deduct 5 coins
+            playerHP += 10; // Restore 10 health
+            updateHealthBar(); // Update the health bar
+            updateCoinCounter(); // Update the coin counter
+        };
+    };
+
+// Listen for the "l" key press to restore health
+onKeyPress("l", () => {
+    restoreHealth();
+});
+```
+
+I added this temporary feature to make testing each weapon during development easier. Pressing m adds a coin to the coin count.
 
 ```typescript
     // Key press event to add a coin
@@ -299,23 +304,23 @@ I adjusted `healthBar`'s width simply to be equal to `playerHP` instead of using
 
 #### New Sprites
 
-Over the coming cycles, I will be replacing some of the sprites currently used in the game. Below are the sprites I added in this cycle.
+Over the coming cycles, I will replace some of the sprites in the game. Below are the sprites I added in this cycle.
 
 <div>
 
-<figure><img src="../.gitbook/assets/scarlett.png" alt=""><figcaption><p>Scarlet Blackthorn</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle13scarlettsprite.png" alt=""><figcaption><p>Scarlet Blackthorn</p></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/Sprite-dhdsafhakghggthdd0001.png" alt=""><figcaption><p>Enemy 4</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle13enemy4sprite.png" alt=""><figcaption><p>Enemy 4</p></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/Sprite-dhdsafhakghggd0001.png" alt=""><figcaption><p>Enemy 5</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle13enemy5sprite.png" alt=""><figcaption><p>Enemy 5</p></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/Sprite-dhdgd0001.png" alt=""><figcaption><p>Enemy 6</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle13enemy6sprite.png" alt=""><figcaption><p>Enemy 6</p></figcaption></figure>
 
 </div>
 
@@ -327,10 +332,17 @@ Describe challenges you faced and how they were overcome.
 
 ### Tests
 
-| Test | Instructions   | What I expect      | What actually happens | Pass/Fail |
-| ---- | -------------- | ------------------ | --------------------- | --------- |
-| 1    | Run code.      | Thing happens.     | As expected.          | Pass.     |
-| 2    | Press buttons. | Something happens. | As expected.          | Pass.     |
+| Test | Instructions                                               | What I expect                                                                                     | What actually happens | Pass/Fail |
+| ---- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | --------------------- | --------- |
+| 1    | Start game and touch shopkeeper.                           | Introduction text appears.                                                                        | As expected.          | Pass.     |
+| 2    | Move away from shopkeeper.                                 | Message disappears.                                                                               | As expected.          | Pass.     |
+| 3    | Cycle through levels and observe enemy sprites.            | Enemies 4, 5 and 6 should be using the new sprites.                                               | As expected.          | Pass.     |
+| 4    | Touch the shopkeeper in shop levels.                       | Shop message appears.                                                                             | As expected.          | Pass.     |
+| 5    | Repeat test 2 for shop levels.                             | Message disappears.                                                                               | As expected.          | Pass.     |
+| 6    | Attempt to buy each item in the shop without enough coins. | Nothing happens and items are not bought.                                                         | As expected.          | Pass.     |
+| 7    | Add coins with m and attempt to buy each item.             | Each item can be bought and weapons appear in the inventory in the order that they are purchased. | As expected.          | Pass.     |
+| 8    | Buy health restorations.                                   | Health increases by the same amount each time.                                                    | As expected.          | Pass.     |
+| 9    | Restart game as Scarlett Blackthorn character.             | Game uses her new sprite.                                                                         | As expected.          | Pass.     |
 
 The new sprite for my Scarlett Blackthorn character is a bit big so I will scale her down and make sure when I add new sprites for other characters that they are scaled down too.
 

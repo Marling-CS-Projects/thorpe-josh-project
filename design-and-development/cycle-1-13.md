@@ -78,7 +78,7 @@ if (enemiesRemaining is 0):
 
 I created levels for each floor which are stored in separate files for ease of access.
 
-<figure><img src="../.gitbook/assets/levels for floors.png" alt=""><figcaption><p>Files for possible levels of each floor</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle12files.png" alt=""><figcaption><p>Files for possible levels of each floor</p></figcaption></figure>
 
 Below are a couple of possible example levels from floor 2. As the floor increases, the levels become more difficult with more boxes and spikes and harder enemies spawn.
 

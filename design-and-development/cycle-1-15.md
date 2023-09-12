@@ -6,19 +6,24 @@
 
 In this cycle, I will. My objectives in this cycle are:
 
-* [ ] Add spikes to boss levels
 * [x] Rebalance the guns and enemies
-* [ ] Add boss enemies as new enemy types to the enemy class
-* [ ] Bosses are bigger and stronger than normal enemies
-* [ ] Boss 2 shoots in bursts
+* [x] Add boss enemies as new enemy types to the enemy class
+* [x] Bosses are bigger and stronger than normal enemies
+* [x] Boss 2 shoots in bursts
 * [ ] Boss 3 shoots like a shotgun
-* [ ] Bosses can spawn more enemies around them
+* [x] Bosses can spawn more enemies around them
+* [x] Harder bosses will spawn harder enemies
+* [x] Bosses have custom sprites
+* [x] Add spikes to boss levels
 
 #### Smaller Changes
 
-* [ ] Reduce the number of spikes and boxes on floor 3 because it is too difficult to move around at the moment
-* [ ] Add spikes to boss levels
-* [ ] Make the background for the introduction message partially transparent
+* [x] Reduce the number of spikes and boxes on floor 3 because it is too difficult to move around at the moment
+* [x] Remove spikes next to the player spawn as it is unfair
+* [x] Make the background for the introduction message partially transparent
+* [x] Destroy enemy and player bullets when they collide with a wall
+* [x] Make the door unmoveable
+* [x] Add bullet speed to enemy properties - allows for customisable bullet speeds for enemies in the future
 
 ### Usability Features
 
