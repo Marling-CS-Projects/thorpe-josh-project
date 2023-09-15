@@ -1,18 +1,26 @@
-# 2.2.16 Cycle 16 - Boss Healthbar & Automatic Weapons \[UPCOMING]
+# 2.2.16 Cycle 16 - Smaller Features and Error Prevention \[UPCOMING]
 
 ## Design
 
 ### Objectives
 
-In this cycle, I will. My objectives in this cycle are:
+In this cycle, I will make some changes to improve the weapon system. My objectives in this cycle are to:
 
-* [ ] &#x20;Add a boss healthbar for boss fights
-* [ ] Make the machine pistol and brass spraygun automatic weapons ( you can hold down click to shoot them)
+* [ ] &#x20;Change the player bullets to rectangles, and make the shotgun fire small pellets
+* [ ] Make the machine pistol and brass spraygun automatic weapons (you can hold down click to shoot them)
+
+Currently, my game is missing a few checks which can cause it to break.
+
+* [ ] Starting the game without selecting a character throws an error
+* [ ] Dashing into the next level does not reset the speed
+* [ ] Players can purchase weapons which they already own, which get put in the inventory twice
 
 #### Smaller Changes
 
-* [ ] Fix the bug where if you dash into a new level you do not return to the original speed
 * [ ] Add new sprites for the walls, spikes, boxes and doors
+* [ ] Further reduce the number of spikes and boxes in levels (there are still too many, which is annoying
+* [ ] Adjust some of the enemy spawn locations in levels so that they are not too close to the player
+* [ ] Rename Ironclad Carbine to Ironclad Rifle (easier name for players to understand)
 
 ### Usability Features
 

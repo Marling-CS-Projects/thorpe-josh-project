@@ -11,14 +11,14 @@ In this cycle, my goal is to add boss fights to the game. My objectives in this 
 * [x] Boss 2 shoots in bursts
 * [x] Boss 3 shoots like a shotgun
 * [x] Bosses can spawn more enemies around them
-* [x] Harder bosses will spawn harder enemies
+* [x] Harder bosses will spawn more challenging enemies
 * [x] Bosses have custom sprites
 * [x] Add spikes to boss levels
 
 #### Smaller Changes
 
 * [x] Reduce the number of spikes and boxes on floor 3 because it is too difficult to move around at the moment
-* [x] Remove spikes next to the player spawn as it is unfair
+* [x] Remove spikes next to the player spawn location
 * [x] Make the background for the introduction message partially transparent
 * [x] Destroy enemy and player bullets when they collide with a wall
 * [x] Make the door unmoveable
@@ -29,16 +29,117 @@ In this cycle, my goal is to add boss fights to the game. My objectives in this 
 
 ### Key Variables
 
-| Variable Name | Use                   |
-| ------------- | --------------------- |
-| foo           | does something useful |
+| Variable Name                               | Use                                                                                                                                                                                                                      |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `BOSSSPAWNINGPOS`                           | This constant holds the position where boss enemies spawn. It is used to ensure that boss enemies consistently spawn at the same location.                                                                               |
+| `chosenLevelIndex`                          | This variable is used to determine the current game level, and based on the level, it spawns specific boss enemies using the `Enemy` class. It also controls when to display and hide the boss fight text.               |
+| `enemy7`, `enemy8`, `enemy9`                | These variables represent instances of the `Enemy` class, each corresponding to a different boss enemy type. They are created and spawned at the specified position (`BOSSSPAWNINGPOS`) when certain levels are reached. |
+| Various properties within the `Enemy` class | These properties store information about the enemy, such as its health, speed, damage, and species. They are initialized based on the `type` parameter when creating an instance of the `Enemy` class.                   |
 
 ### Pseudocode
 
 ```
-procedure do_something
+// Import necessary modules and functions
+
+// Define the Enemy class
+class Enemy {
+    // Properties declaration
+
+    // Constructor method
+    constructor(sprite, type) {
+        // Initialize properties based on the enemy type
+    }
+
+    // Method to spawn the enemy at a given position
+    spawn(position, player) {
+        // Create the enemy entity
+        // Set entity properties and behaviors
+        // Activate the enemy
+    }
+
+    // Method to update the enemy's health
+    updateHealth(amount) {
+        // Update the enemy's health and check for death
+    }
+
+    // Method to destroy the enemy
+    destroy() {
+        // Destroy the entity, mark as not alive, and update the coin counter
+    }
+
+    // Method to activate the enemy's behavior
+    activate(player) {
+        // Register an update event for the enemy
+        // Implement the enemy's movement, shooting, and spawning behavior
+    }
+
+    // Method to shoot a projectile at a target position
+    shootProjectile(targetPos) {
+        // Calculate the shooting direction and spread angle
+        // Create a projectile entity and set its properties
+    }
+
+    // Method to spawn minions
+    spawnMinions(player) {
+        // Define positions for minions relative to the boss
+        // Check if the boss is alive
+        // Spawn minions at specified positions based on boss species
+    }
+}
+
+// Export the Enemy class
+
+
+...
+
+
+// Define a constant for the boss enemy spawning position
+const BOSSSPAWNINGPOS = vec2(1200, 450);
+
+// Check the current level to determine boss spawns and boss fight text display
+if (chosenLevelIndex === 6) {
+    // Create a boss enemy instance of type 7
+    const enemy7 = new Enemy("firstboss", 7);
     
-end procedure
+    // Spawn the boss enemy at the specified position
+    enemy7.spawn(BOSSSPAWNINGPOS, player);
+    
+    // Display boss fight text
+    bossFightText.opacity = 1;
+
+    // Wait for 2 seconds and then hide the boss fight text
+    wait(2, () => {
+        bossFightText.opacity = 0;
+    });
+} else if (chosenLevelIndex === 13) {
+    // Create a boss enemy instance of type 8
+    const enemy8 = new Enemy("secondboss", 8);
+    
+    // Spawn the boss enemy at the specified position
+    enemy8.spawn(BOSSSPAWNINGPOS, player);
+    
+    // Display boss fight text
+    bossFightText.opacity = 1;
+
+    // Wait for 2 seconds and then hide the boss fight text
+    wait(2, () => {
+        bossFightText.opacity = 0;
+    });
+} else if (chosenLevelIndex === 20) {
+    // Create a boss enemy instance of type 9
+    const enemy9 = new Enemy("thirdboss", 9);
+    
+    // Spawn the boss enemy at the specified position
+    enemy9.spawn(BOSSSPAWNINGPOS, player);
+    
+    // Display boss fight text
+    bossFightText.opacity = 1;
+
+    // Wait for 2 seconds and then hide the boss fight text
+    wait(2, () => {
+        bossFightText.opacity = 0;
+    });
+}
 ```
 
 ## Development

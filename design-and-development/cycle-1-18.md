@@ -1,4 +1,4 @@
-# 2.2.17 Cycle 17 - Empty \[UPCOMING]
+# 2.2.17 Cycle 17 - Sound Effects & Music \[UPCOMING]
 
 ## Design
 
@@ -6,8 +6,16 @@
 
 In this cycle, I will. My objectives in this cycle are:
 
-* [ ] Do a thing
-* [ ] Do another thing
+* [ ] Add sound effects for key events
+  * [ ] Boss level start
+  * [ ] New floor start
+  * [ ] Hitting enemy
+  * [ ] Taking damage
+  * [ ] Shop purchase
+  * [ ] Shopkeeper message
+  * [ ] Swapping weapon
+* [ ] Add music in levels
+* [ ] Add music in main menu
 
 ### Usability Features
 
