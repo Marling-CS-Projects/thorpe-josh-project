@@ -1,26 +1,32 @@
-# 2.2.16 Cycle 16 - Smaller Features and Error Prevention \[UPCOMING]
+# 2.2.16 Cycle 16 - Smaller Features and Error Prevention \[IN PROGRESS]
 
 ## Design
 
 ### Objectives
 
-In this cycle, I will make some changes to improve the weapon system. My objectives in this cycle are to:
+In this cycle, I will make some smaller changes and fixes. First, I would like to:
 
-* [ ] &#x20;Change the player bullets to rectangles, and make the shotgun fire small pellets
+* [x] &#x20;Change the player bullets to rectangles, except for  the shotgun which fires small pellets
+* [x] Enemies and bosses fire red rectangles
 * [ ] Make the machine pistol and brass spraygun automatic weapons (you can hold down click to shoot them)
 
-Currently, my game is missing a few checks which can cause it to break.
+I would also like to add a boss healthbar to display how much of a boss's health is left.
+
+* [ ] Add boss healthbar to boss fights
+
+Currently, my game is missing a few checks which can cause it to break or cause bugs. In this cycle, I will fix those.
 
 * [ ] Starting the game without selecting a character throws an error
 * [ ] Dashing into the next level does not reset the speed
 * [ ] Players can purchase weapons which they already own, which get put in the inventory twice
+* [ ] Purchasing items will deduct one less coin than required
 
 #### Smaller Changes
 
 * [ ] Add new sprites for the walls, spikes, boxes and doors
 * [ ] Further reduce the number of spikes and boxes in levels (there are still too many, which is annoying
 * [ ] Adjust some of the enemy spawn locations in levels so that they are not too close to the player
-* [ ] Rename Ironclad Carbine to Ironclad Rifle (easier name for players to understand)
+* [x] Rename Ironclad Carbine to Ironclad Rifle (easier name for players to understand)
 
 ### Usability Features
 

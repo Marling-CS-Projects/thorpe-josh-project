@@ -146,7 +146,7 @@ if (chosenLevelIndex === 6) {
 
 ### Outcome
 
-explain the code
+I added the boss enemies as strong enemies within the `Enemy` class. Bosses will shoot differently. The first boss shoots normally, the second boss shoots in bursts, and the third boss shoots like a shotgun. After shooting, each boss has a chance to spawn a couple of enemies next to them, the strength of which depends on the boss.
 
 {% code title="enemy class.ts" %}
 ```typescript
@@ -390,7 +390,7 @@ export class Enemy {
 ```
 {% endcode %}
 
-explain some more
+When the current level is a boss level (`chosenLevelIndex` is 6, 13, or 20) then a boss is spawned. The strength of the boss depends on the level.
 
 ```typescript
 const BOSSSPAWNINGPOS = vec2(1200, 450);
@@ -421,7 +421,7 @@ const BOSSSPAWNINGPOS = vec2(1200, 450);
     };
 ```
 
-
+The door was made stationary with `isStatic:true`.
 
 ```typescript
             "#": () => [
@@ -434,10 +434,9 @@ const BOSSSPAWNINGPOS = vec2(1200, 450);
             ],
 ```
 
-
+Player and enemy bullets are destroyed when they collide with a wall.
 
 ```typescript
-// Destroy bullets when they collide with the walls
     onCollide("enemy_bullet", "wall", (bullet, box) => {
         destroy(bullet); // Destroy the bullet
     });

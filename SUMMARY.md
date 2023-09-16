@@ -33,7 +33,7 @@
 * [2.2.13 Cycle 13 - Shop & More Weapons](design-and-development/cycle-1-14.md)
 * [2.2.14 Cycle 14 - Boss Fights](design-and-development/cycle-1-15.md)
 * [2.2.15 Cycle 15 - Dash Cooldown Bar & Improved UI & Menus](design-and-development/cycle-1-16.md)
-* [2.2.16 Cycle 16 - Smaller Features and Error Prevention \[UPCOMING\]](design-and-development/cycle-1-17.md)
+* [2.2.16 Cycle 16 - Smaller Features and Error Prevention \[IN PROGRESS\]](design-and-development/cycle-1-17.md)
 * [2.2.17 Cycle 17 - Sound Effects & Music \[UPCOMING\]](design-and-development/cycle-1-18.md)
 
 ## 3 Testing <a href="#testing" id="testing"></a>

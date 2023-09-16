@@ -257,17 +257,13 @@ scene("mainMenu", () => {
 
 #### New Sprites
 
-<div>
+<div data-full-width="false">
 
-<figure><img src="../.gitbook/assets/scarlett.png" alt=""><figcaption><p>Scarlett Blackthorn</p></figcaption></figure>
-
- 
-
-<figure><img src="../.gitbook/assets/dave.png" alt=""><figcaption><p>Deadeye Dave</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle15davesprite.png" alt=""><figcaption><p>Deadeye Dave</p></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/galahad.png" alt=""><figcaption><p>Sir Galahad</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle15galahadsprite.png" alt=""><figcaption><p>Sir Galahad</p></figcaption></figure>
 
 </div>
 
