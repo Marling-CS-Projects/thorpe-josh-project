@@ -8,7 +8,7 @@ In this cycle, I will make some smaller changes and fixes. First, I would like t
 
 * [x] &#x20;Change the player bullets to rectangles, except for  the shotgun which fires small pellets
 * [x] Enemies and bosses fire red rectangles
-* [ ] Make the machine pistol and brass spraygun automatic weapons (you can hold down click to shoot them)
+* [x] Make the machine pistol and brass spraygun automatic weapons (you can hold down click to shoot them)
 
 I would also like to add a boss healthbar to display how much of a boss's health is left.
 
@@ -16,17 +16,18 @@ I would also like to add a boss healthbar to display how much of a boss's health
 
 Currently, my game is missing a few checks which can cause it to break or cause bugs. In this cycle, I will fix those.
 
-* [ ] Starting the game without selecting a character throws an error
-* [ ] Dashing into the next level does not reset the speed
-* [ ] Players can purchase weapons which they already own, which get put in the inventory twice
-* [ ] Purchasing items will deduct one less coin than required
+* [x] Starting the game without selecting a character throws an error
+* [x] Dashing into the next level does not reset the speed after the dash
+* [x] Players can purchase weapons which they already own, which get put in the inventory twice
+* [x] Purchasing items will deduct one less coin than required
 
 #### Smaller Changes
 
-* [ ] Add new sprites for the walls, spikes, boxes and doors
-* [ ] Further reduce the number of spikes and boxes in levels (there are still too many, which is annoying
+* [x] Add new sprites for the walls, spikes and boxes
+* [x] Further reduce the number of spikes and boxes in levels
 * [ ] Adjust some of the enemy spawn locations in levels so that they are not too close to the player
 * [x] Rename Ironclad Carbine to Ironclad Rifle (easier name for players to understand)
+* [x] Adjust coin counter position
 
 ### Usability Features
 
@@ -71,6 +72,24 @@ and another
 ```typescript
 // Some code
 ```
+
+#### New Sprites
+
+
+
+<div>
+
+<figure><img src="../.gitbook/assets/wall5.png" alt=""><figcaption><p>Wall</p></figcaption></figure>
+
+ 
+
+<figure><img src="../.gitbook/assets/box3.png" alt=""><figcaption><p>Box</p></figcaption></figure>
+
+ 
+
+<figure><img src="../.gitbook/assets/spike2.png" alt=""><figcaption><p>Spike</p></figcaption></figure>
+
+</div>
 
 ### Challenges
 

@@ -620,12 +620,13 @@ However, I kept getting strange behaviour and errors despite most of the code be
 
 ### Tests
 
-| Test | Instructions   | What I expect      | What actually happens | Pass/Fail |
-| ---- | -------------- | ------------------ | --------------------- | --------- |
-| 1    | Run code.      | Thing happens.     | As expected.          | Pass.     |
-| 2    | Press buttons. | Something happens. | As expected.          | Pass.     |
-
-Comment on any failed tests and how you plan to resolve them
+| Test | Instructions                                            | What I expect                                                                                                                          | What actually happens | Pass/Fail |
+| ---- | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
+| 1    | Start levels and cycle to first boss fight.             | Boss has correct sprite and shoots towards enemy. Every so often spawns 2 enemies next to it after shooting.                           | As expected.          | Pass.     |
+| 2    | Cycle to second boss fight.                             | Boss has correct sprite and shoots a series of 5 bullets each attacks. Every so often spawns 2 enemies next to it after shooting.      | As expected.          | Pass.     |
+| 3    | Cycle to third boss fight.                              | Boss has correct sprite and shoots 5 bullets at once with a shotgun spread. Every so often spawns 2 enemies next to it after shooting. | As expected.          | Pass.     |
+| 4    | Shoot at each boss until it dies.                       | Boss dies and you can move to next room.                                                                                               | As expected.          | Pass.     |
+| 5    | Shoot at the walls and let enemy bullets hit the walls. | Bullets get destroyed by walls.                                                                                                        | As expected.          | Pass.     |
 
 ### Evidence
 

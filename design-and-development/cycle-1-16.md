@@ -22,22 +22,97 @@ In this cycle, I will. My objectives in this cycle are:
 #### Smaller Changes
 
 * [x] Add sprites for Sir Galahad and Deadeye Dave
-* [x] Ensure that the player is the correct size to fit between boxes in the game
+* [x] Reduce the size of player sprites so that they can move in the level easier
 
 ### Usability Features
 
 ### Key Variables
 
-| Variable Name | Use                   |
-| ------------- | --------------------- |
-| foo           | does something useful |
+| Variable Name      | Use                                                                  |
+| ------------------ | -------------------------------------------------------------------- |
+| `dashDuration`     | Defines how long a dash lasts.                                       |
+| `dashRecharge`     | Defines the total recharge time for the dash ability.                |
+| `dashCooldown`     | A boolean flag to check if the dash ability is on cooldown.          |
+| `weapons`          | Is an array that holds different weapon types.                       |
+| `unlockedWeapons`  | Stores the weapons that the player has unlocked.                     |
+| `currentWeapon`    | Represents the currently equipped weapon.                            |
+| `coins`            | Keep track of the player's in-game currency.                         |
+| `enemiesRemaining` | Tracks the number of enemies left in the game.                       |
+| `chosenLevels`     | This array is used to store the randomly chosen levels for the game. |
 
 ### Pseudocode
 
 ```
-procedure do_something
+// Define global variables
+let coins
+let enemiesRemaining
+let weapons
+let unlockedWeapons
+let currentWeapon
+let chosenLevels
+let dashCooldown
+let playerSpeed
+let dashDuration
+let dashRecharge
+let floorNumber
+
+// Define game scenes
+scene("win", () => {
+    // Create win screen elements
+    // Handle "Return to Main Menu" button click
+});
+
+scene("lose", () => {
+    // Create lose screen elements
+    // Handle "Return to Main Menu" button click
+    // Cleanup erroneous enemies
+});
+
+scene("mainMenu", () => {
+    // Initialize game state
+    coins = 0
+    enemiesRemaining = 0
+    unlockedWeapons = []
     
-end procedure
+    // Unlock the first weapon (e.g., pistol)
+    unlockWeapon(0)
+
+    // Choose random levels
+    chooseLevels(chosenLevels)
+
+    // Set up main menu elements
+    // Handle menu interactions (e.g., selecting levels, choosing weapons)
+});
+
+// Define game loop
+loop(() => {
+    // Update game logic
+    // Handle player input (e.g., dashing)
+    // Update enemy behavior
+    // Check win or lose conditions
+    // Update UI elements (e.g., coin count, cooldown bar)
+});
+
+// Define functions
+function unlockWeapon(index) {
+    // Unlock a weapon and add it to unlockedWeapons
+}
+
+function chooseLevels(chosenLevels) {
+    // Randomly select levels and add them to chosenLevels
+}
+
+function wait(time, callback) {
+    // Wait for a specified time and then execute a callback
+}
+
+// Define event handlers
+onMousePress("right", () => {
+    // Handle right mouse button click (e.g., player dash)
+});
+
+// Start the game in the main menu scene
+go("mainMenu")
 ```
 
 ## Development
@@ -288,4 +363,4 @@ At first, when trying to resize the player sprites, I tried to use `scale()` whe
 
 ### Evidence
 
-Put YouTube video testing link here
+{% embed url="https://youtu.be/OFSUixsebSE" %}
