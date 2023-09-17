@@ -14,18 +14,19 @@ I would also like to add a boss healthbar to display how much of a boss's health
 
 * [ ] Add boss healthbar to boss fights
 
-Currently, my game is missing a few checks which can cause it to break or cause bugs. In this cycle, I will fix those.
+Currently, my game is missing many checks which causes bugs or crashes when carrying out unexpected behaviour. I will fix these issues in this cycle, which should help improve the robustness of my game.
 
 * [x] Starting the game without selecting a character throws an error
 * [x] Dashing into the next level does not reset the speed after the dash
 * [x] Players can purchase weapons which they already own, which get put in the inventory twice
 * [x] Purchasing items will deduct one less coin than required
+* [ ] Players can purchase items from the shop even when not in a shop level
 
 #### Smaller Changes
 
 * [x] Add new sprites for the walls, spikes and boxes
 * [x] Further reduce the number of spikes and boxes in levels
-* [ ] Adjust some of the enemy spawn locations in levels so that they are not too close to the player
+* [x] Adjust some of the enemy spawn locations in levels so that they are not too close to the player
 * [x] Rename Ironclad Carbine to Ironclad Rifle (easier name for players to understand)
 * [x] Adjust coin counter position
 
@@ -79,15 +80,15 @@ and another
 
 <div>
 
-<figure><img src="../.gitbook/assets/wall5.png" alt=""><figcaption><p>Wall</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle16wallsprite.png" alt=""><figcaption><p>Wall</p></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/box3.png" alt=""><figcaption><p>Box</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle16boxsprite.png" alt=""><figcaption><p>Box</p></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/spike2.png" alt=""><figcaption><p>Spike</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle16spikesprite.png" alt=""><figcaption><p>Spike</p></figcaption></figure>
 
 </div>
 

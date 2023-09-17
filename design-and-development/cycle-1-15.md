@@ -4,25 +4,26 @@
 
 ### Objectives
 
-In this cycle, my goal is to add boss fights to the game. My objectives in this cycle are to:
+In this cycle, my main goal is to add boss fights to the game. My objectives in this cycle are to:
 
 * [x] Add boss enemies as new enemy types to the enemy class
 * [x] Bosses are bigger and stronger than normal enemies
+* [x] Boss 1 shoots like a regular enemy
 * [x] Boss 2 shoots in bursts
 * [x] Boss 3 shoots like a shotgun
-* [x] Bosses can spawn more enemies around them
+* [x] Bosses can spawn enemies around them with a % chance
 * [x] Harder bosses will spawn more challenging enemies
 * [x] Bosses have custom sprites
 * [x] Add spikes to boss levels
 
 #### Smaller Changes
 
-* [x] Reduce the number of spikes and boxes on floor 3 because it is too difficult to move around at the moment
-* [x] Remove spikes next to the player spawn location
-* [x] Make the background for the introduction message partially transparent
 * [x] Destroy enemy and player bullets when they collide with a wall
 * [x] Make the door unmoveable
-* [x] Add bullet speed to enemy properties - allows for customisable bullet speeds for enemies in the future
+* [x] Reduce the number of spikes and boxes on floor 3
+* [x] Remove spikes next to the player spawn location in all levels
+* [x] Make the background for the introduction message partially transparent
+* [x] Add bullet speed to enemy class parameters
 * [x] Somewhat balance the guns and enemies
 
 ### Usability Features
@@ -446,6 +447,24 @@ Player and enemy bullets are destroyed when they collide with a wall.
     });
 ```
 
+#### Boss Sprites
+
+
+
+<div>
+
+<figure><img src="../.gitbook/assets/cycle14boss1sprite.png" alt=""><figcaption><p>Boss 1</p></figcaption></figure>
+
+ 
+
+<figure><img src="../.gitbook/assets/cycle14boss2sprite.png" alt=""><figcaption><p>Boss 2</p></figcaption></figure>
+
+ 
+
+<figure><img src="../.gitbook/assets/cycle14boss3sprite.png" alt=""><figcaption><p>Boss 3</p></figcaption></figure>
+
+</div>
+
 ### Challenges
 
 Initially, I planned to implement bosses using a separate boss class with the special boss behaviour which I could then call when a boss level started.
@@ -612,7 +631,7 @@ export class Boss {
 ```
 {% endcode %}
 
-However, I kept getting strange behaviour and errors despite most of the code being duplicated from the Enemy class. This confused me and I realised that it would be much simpler to use the Enemy class for bosses and add a few special functions which only the boss enemies call. Below is a video of my first attempt at bosses.
+However, I was experiencing strange behaviour despite most of the code being copied from the `Enemy` class. I realised that it would be much simpler to use the `Enemy` class for bosses and add a few special functions which only the boss enemies call. Below is a video of some of the issues experienced.
 
 {% embed url="https://youtu.be/x5ntEovn-fM" %}
 

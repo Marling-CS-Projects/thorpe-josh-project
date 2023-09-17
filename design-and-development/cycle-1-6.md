@@ -253,10 +253,10 @@ So I went back to my old method and after a while, I managed to get it to work t
 
 | Test | Instructions                                                   | What I expect                                                             | What actually happens | Pass/Fail |
 | ---- | -------------------------------------------------------------- | ------------------------------------------------------------------------- | --------------------- | --------- |
-| 1    | Run code and start level by pressing t.                        | Enemies appear in the level.                                              | As expected.          | Pass.     |
+| 1    | Run code and start level by pressing 'T'.                      | Enemies appear in the level.                                              | As expected.          | Pass.     |
 | 2    | Wait.                                                          | Enemies swap between moving towards the player and standing still.        | As expected.          | Pass.     |
 | 3    | Shoot an enemy 5 times.                                        | The bullet disappears each time and on the 5th shot the enemy disappears. | As expected.          | Pass.     |
-| 4    | Go to the next level with 'r' and attempt to kill the enemies. | Enemies function and die the same as before.                              | As expected.          | Pass.     |
+| 4    | Go to the next level with 'R' and attempt to kill the enemies. | Enemies function and die the same as before.                              | As expected.          | Pass.     |
 
 ### Images
 

@@ -208,15 +208,15 @@ Initially, I had the boss level and shop level stored in separate files as an ar
 
 ### Tests
 
-| Test | Instructions                                                                 | What I expect                                                                | What actually happens | Pass/Fail |
-| ---- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------- | --------- |
-| 1    | Run code & start levels.                                                     | Empty level with player in the middle.                                       | As expected.          | Pass.     |
-| 2    | Press r 5 times.                                                             | Game cycles through 5 random levels.                                         | As expected.          | Pass.     |
-| 3    | Press r again.                                                               | Empty level with player towards the top left.                                | As expected.          | Pass.     |
-| 4    | Press r again.                                                               | Empty level with player in the middle.                                       | As expected.          | Pass.     |
-| 5    | Repeat tests 2  - 4 twice more.                                              | Same results as in tests 2 - 4, but with different random levels for test 2. | As expected.          | Pass.     |
-| 6    | Press 'r' again.                                                             | Game goes to end screen (empty screen).                                      | As expected.          | Pass.     |
-| 7    | Restart game and attempt to shoot the gun really fast by clicking very fast. | A bullet only spawns every 2 seconds.                                        | As expected.          | Pass.     |
+| Test | Instructions                                                                        | What I expect                                                                | What actually happens | Pass/Fail |
+| ---- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------- | --------- |
+| 1    | Run code & start levels.                                                            | Empty level with player in the middle.                                       | As expected.          | Pass.     |
+| 2    | Press 'R' 5 times.                                                                  | Game cycles through 5 random levels.                                         | As expected.          | Pass.     |
+| 3    | Press 'R' again.                                                                    | Empty level with player towards the top left.                                | As expected.          | Pass.     |
+| 4    | Press 'R' again.                                                                    | Empty level with player in the middle.                                       | As expected.          | Pass.     |
+| 5    | Repeat tests 2  - 4 twice more.                                                     | Same results as in tests 2 - 4, but with different random levels for test 2. | As expected.          | Pass.     |
+| 6    | Press 'R' again.                                                                    | Game goes to end screen (empty screen).                                      | As expected.          | Pass.     |
+| 7    | Attempt to shoot the gun faster than the cooldown by clicking very fast repeatedly. | A bullet only spawns every 2 seconds.                                        | As expected.          | Pass.     |
 
 ### Evidence
 

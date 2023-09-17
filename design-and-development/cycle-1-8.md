@@ -126,4 +126,4 @@ I concluded that this approach was challenging to make work correctly. Therefore
 
 ## Testing
 
-During development, I quickly realised that my approach was buggy and confusing, so I decided that approaching the cycle in this way was not a good idea. See [Cycle 8b](cycle-1-9.md) for the restart of Cycle 8.
+During development, I quickly realised that my approach was buggy and would not be easy to develop long-term, so I decided that approaching the cycle in this way was not a good idea. See [Cycle 8b](cycle-1-9.md) for the restart of Cycle 8.

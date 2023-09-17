@@ -389,13 +389,13 @@ To use a variable between different scenes it must be declared globally at the s
 
 ### Tests
 
-| Test | Instructions                                               | What I expect                                                                                                  | What actually happens | Pass/Fail |
-| ---- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
-| 1    | Start game.                                                | Game starts on the main menu.                                                                                  | As expected.          | Pass.     |
-| 2    | Click each button and then the return to main menu button. | Page opens each time before returning to main menu each time when the back button is clicked.                  | As expected.          | Pass.     |
-| 3    | Open character selection menu and click on each sprite.    | White selection box moves to each one expected.                                                                | As expected.          | Pass.     |
-| 4    | Click play for each character.                             | <ul><li>Health bar is different for each character.</li><li>Each character has different move speed.</li></ul> | As expected.          | Pass.     |
-| 5    | Use r key to cycle through levels.                         | When there is a shop level there is a shopkeeper sprite in it.                                                 | As expected.          | Pass.     |
+| Test | Instructions                                               | What I expect                                                                                                                     | What actually happens                               | Pass/Fail |
+| ---- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | --------- |
+| 1    | Start game.                                                | Game starts on the main menu.                                                                                                     | As expected.                                        | Pass.     |
+| 2    | Click each button and then the return to main menu button. | Page opens each time before returning to main menu each time when the back button is clicked.                                     | As expected.                                        | Pass.     |
+| 3    | Open character selection menu and click on each sprite.    | White selection box moves to each one expected.                                                                                   | As expected.                                        | Pass.     |
+| 4    | Click play for each character.                             | <ol><li>Health bar is different for each character.</li></ol><ol start="2"><li>Each character has different move speed.</li></ol> | <ol><li>As expected.</li><li>As expected.</li></ol> | Pass.     |
+| 5    | Use r key to cycle through levels.                         | When there is a shop level there is a shopkeeper sprite in it.                                                                    | As expected.                                        | Pass.     |
 
 During testing, I noticed an instance of a bullet spawning from a deleted enemy when moving between levels. This can be seen in the evidence video below. I was surprised by this since I thought that the bug would be completely fixed with the `isAlive` flag I added to each enemy. It may have occurred due to a brief lag spike because I could not replicate it. If it happens again or more frequently, then I will address it in a later cycle.
 

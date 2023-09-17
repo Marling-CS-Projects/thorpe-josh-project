@@ -4,7 +4,7 @@
 
 ### Objectives
 
-In this cycle, I will. My objectives in this cycle are:
+In this cycle, my goal is to improve the game UI and menus. My objectives are:
 
 * [x] Add a dash cooldown bar
 * [x] Make boss fight text and new floor text last until the next level
@@ -15,13 +15,14 @@ In this cycle, I will. My objectives in this cycle are:
 * [x] The game should be fully repeatable after restarting
 * [x] Make main menu buttons and text bigger
 * [x] Add character descriptions in character selection
-* [x] Move shopkeeper messages to the bottom of the screen
 * [x] Add menu titles to the main menu (including a name for the game)
 * [x] Add a background colour to the main menu
 
 #### Smaller Changes
 
-* [x] Add sprites for Sir Galahad and Deadeye Dave
+* [x] Add a new sprite for Sir Galahad character
+* [x] Add a new sprite for Deadeye Dave character
+* [x] Move shopkeeper messages to the bottom of the screen
 * [x] Reduce the size of player sprites so that they can move in the level easier
 
 ### Usability Features
@@ -332,7 +333,7 @@ scene("mainMenu", () => {
 
 #### New Sprites
 
-<div data-full-width="false">
+<div align="center" data-full-width="false">
 
 <figure><img src="../.gitbook/assets/cycle15davesprite.png" alt=""><figcaption><p>Deadeye Dave</p></figcaption></figure>
 
@@ -344,22 +345,22 @@ scene("mainMenu", () => {
 
 ### Challenges
 
-At first, when trying to resize the player sprites, I tried to use `scale()` when creating the player sprite. However, this made the player collision very strange in that you could clip through the walls for some reason. So to avoid this, I instead shrunk the sprites themselves using an image resizer.
+For my initial attempt at resizing the player sprites, I tried using `scale()` to reduce the size when the player was added. However, this made the player collision very strange in that you could clip into the walls and other objects for some reason. To avoid this, I instead shrunk the sprites themselves using an image resizer and added them to the game as the version which the player plays.
 
 ## Testing
 
 ### Tests
 
-| Test | Instructions                                                                             | What I expect                                                                                                             | What actually happens | Pass/Fail |
-| ---- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
-| 1    | Start game and look around each menu.                                                    | <ul><li>Text sizes and titles are correct and in the right places.</li></ul>                                              | As expected.          | Pass.     |
-| 2    | Go into character selection menu and click on different characters.                      | <ul><li>Character outline is correct size, position and colour.</li><li>Each character is using the new sprite.</li></ul> | As expected.          | Pass.     |
-| 3    | Start levels and activate dash.                                                          | Dash cooldown bar becomes empty and replenishes over time.                                                                | As expected.          | Pass.     |
-| 4    | Try to dash while bar is recharging.                                                     | Nothing happens. Cannot dash until bar has recharged.                                                                     | As expected.          | Pass.     |
-| 5    | Cycle through the levels to reach the win screen.                                        | Win screen appears after the final boss and is correct.                                                                   | As expected.          | Pass.     |
-| 6    | Restart game by using the menu button to go back into the main menu. Then play the game. | Game works without issue after being restarted.                                                                           | As expected.          | Pass.     |
-| 7    | Get the player killed when health reaches 0.                                             | Lose screen appears with the correct floor number reached.                                                                | As expected.          | Pass.     |
-| 8    | Touch shopkeeper.                                                                        | Messages appear in the correct place.                                                                                     | As expected.          | Pass.     |
+| Test | Instructions                                                                             | What I expect                                                                                                                                | What actually happens                               | Pass/Fail |
+| ---- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | --------- |
+| 1    | Start game and look around each menu.                                                    | Text sizes and titles are correct and in the right places.                                                                                   | As expected.                                        | Pass.     |
+| 2    | Go into character selection menu and click on different characters.                      | <ol><li>Character outline is correct size, position and colour.</li></ol><ol start="2"><li>Each character is using the new sprite.</li></ol> | <ol><li>As expected.</li><li>As expected.</li></ol> | Pass.     |
+| 3    | Start levels and activate dash.                                                          | Dash cooldown bar becomes empty and replenishes over time.                                                                                   | As expected.                                        | Pass.     |
+| 4    | Try to dash while bar is recharging.                                                     | Nothing happens. Cannot dash until bar has recharged.                                                                                        | As expected.                                        | Pass.     |
+| 5    | Cycle through the levels to reach the win screen.                                        | Win screen appears after the final boss and is correct.                                                                                      | As expected.                                        | Pass.     |
+| 6    | Restart game by using the menu button to go back into the main menu. Then play the game. | Game works without issue after being restarted.                                                                                              | As expected.                                        | Pass.     |
+| 7    | Get the player killed when health reaches 0.                                             | Lose screen appears with the correct floor number reached.                                                                                   | As expected.                                        | Pass.     |
+| 8    | Touch shopkeeper.                                                                        | Messages appear in the correct place.                                                                                                        | As expected.                                        | Pass.     |
 
 ### Evidence
 

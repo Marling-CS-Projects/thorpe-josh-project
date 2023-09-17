@@ -18,9 +18,11 @@ In this cycle, I plan to add the shop feature. My objectives in this cycle are t
 
 #### Smaller Changes
 
-* [x] Fix health bar bug with it not updating correctly
-* [x] Add new sprites for enemies 4, 5, and 6
-* [x] Add sprite for Scarlet Blackthorn character
+* [x] Fix the health bar bug with it not updating correctly
+* [x] Add a new sprite for enemy 4
+* [x] Add a new sprite for enemy 5
+* [x] Add a new sprite for enemy 6
+* [x] Add a new sprite for Scarlet Blackthorn character
 
 ### Usability Features
 

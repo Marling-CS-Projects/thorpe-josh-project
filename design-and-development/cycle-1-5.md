@@ -13,7 +13,7 @@ My focus in this cycle is to add a health bar. My objectives are:
 
 #### Smaller Changes
 
-* [x] Change the layer of the player's sprite to be above the layer of spikes
+* [x] Set the player sprite's layer above the spike's layer
 
 ### Usability Features
 
@@ -222,13 +222,13 @@ Initially, I had planned to set the player's health to a variable which could th
 
 ### Tests
 
-| Test | Instructions                                    | What I expect                                                                                                                                                                                                              | What actually happens | Pass/Fail |
-| ---- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
-| 1    | Run code and start levels.                      | Correct health bar in the top left of the screen.                                                                                                                                                                          | As expected.          | Pass.     |
-| 2    | Walk over spike with player.                    | <ol><li>Player's sprite passes over the spike instead of under.</li><li>The health bar decreases by a fixed amount.</li></ol>                                                                                              | As expected.          | Pass.     |
-| 3    | Repeatedly touch spikes in quick succession.    | <ol><li>Health bar decreases by constant amount each time.</li><li>Health bar does not decrease if the next spike is touched in too quick of a succession.</li><li>Health bar background becomes visible (grey).</li></ol> | As expected.          | Pass.     |
-| 4    | Touch spikes until the health bar reaches zero. | Game switches to the end screen (which is currently empty).                                                                                                                                                                | As expected.          | Pass.     |
-| 5    | Move, shoot and increase levels.                | All functions the same as in [Cycle 4](cycle-1-4.md).                                                                                                                                                                      | As expected.          | Pass.     |
+| Test | Instructions                                    | What I expect                                                                                                                                                                                                              | What actually happens                                                    | Pass/Fail |
+| ---- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | --------- |
+| 1    | Run code and start levels.                      | Correct health bar in the top left of the screen.                                                                                                                                                                          | As expected.                                                             | Pass.     |
+| 2    | Walk over spike with player.                    | <ol><li>Player's sprite passes over the spike instead of under.</li><li>The health bar decreases by a fixed amount.</li></ol>                                                                                              | <ol><li>As expected.</li><li>As expected.</li></ol>                      | Pass.     |
+| 3    | Repeatedly touch spikes in quick succession.    | <ol><li>Health bar decreases by constant amount each time.</li><li>Health bar does not decrease if the next spike is touched in too quick of a succession.</li><li>Health bar background becomes visible (grey).</li></ol> | <ol><li>As expected.</li><li>As expected.</li><li>As expected.</li></ol> | Pass.     |
+| 4    | Touch spikes until the health bar reaches zero. | Game switches to the end screen (which is currently empty).                                                                                                                                                                | As expected.                                                             | Pass.     |
+| 5    | Move, shoot and increase levels.                | All functions the same as in [Cycle 4](cycle-1-4.md).                                                                                                                                                                      | As expected.                                                             | Pass.     |
 
 ### Images
 

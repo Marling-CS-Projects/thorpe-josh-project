@@ -292,8 +292,8 @@ While adjusting the tile dimensions and the position of the level on the screen,
 
 | Test | Instructions                        | What I expect                                                         | What actually happens                                                     | Pass/Fail |
 | ---- | ----------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------- | --------- |
-| 1    | Press t key.                        | Level and player appears.                                             | As expected.                                                              | Pass.     |
-| 2    | Repeatedly press the r key.         | Game switches to the next level each time.                            | As expected however trying to go past the last level results in an error. | Pass.     |
+| 1    | Press the T key.                    | Level and player appears.                                             | As expected.                                                              | Pass.     |
+| 2    | Repeatedly press the R key.         | Game switches to the next level each time.                            | As expected however trying to go past the last level results in an error. | Pass.     |
 | 3    | Move the player with WASD and dash. | Functions the same as in [Cycle 1](cycle-1-1.md) & [2](cycle-1-2.md). | As expected.                                                              | Pass.     |
 | 4    | Shoot with mouse click.             | Functions the same as in [Cycle 2](cycle-1-2.md).                     | Bullet spawns far away from the player.                                   | Fail.     |
 

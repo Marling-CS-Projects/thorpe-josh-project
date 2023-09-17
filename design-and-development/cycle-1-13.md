@@ -7,7 +7,7 @@
 In this cycle, my goal is to make some proper levels with enemies spawning in the correct places. My objectives in this cycle are to:
 
 * [x] Make some proper level layouts
-* [x] Change level spawning so that it pulls from 3 lists - 1 for each floor (this is so the enemy difficulty can increase over time
+* [x] Change level spawning so that it pulls from 3 lists - 1 for each floor (so that I can increase enemy difficulty as you progress)
 * [x] Enemies spawn in proper locations within the level
 * [x] Text appears in the corner of your screen when entering a new floor saying the floor number
 * [x] Text appears declaring when you have entered a boss fight
@@ -330,7 +330,7 @@ const bossFightText = add([
 ```
 {% endcode %}
 
-When a `player_bullet` or `enemy_bullet` collides with a `box`, both the box and the bullet are destroyed.
+When a `player_bullet` or `enemy_bullet` collides with a `box`, both the bullet and box are destroyed.
 
 {% code title="main.ts" %}
 ```typescript
@@ -347,7 +347,7 @@ When a `player_bullet` or `enemy_bullet` collides with a `box`, both the box and
 ```
 {% endcode %}
 
-
+Doors are added as part of the level tile map are are represented by a `#`.
 
 <pre class="language-typescript" data-title="main.ts"><code class="lang-typescript"><strong>    "#": () => [
 </strong>          sprite("door"),
@@ -357,9 +357,13 @@ When a `player_bullet` or `enemy_bullet` collides with a `box`, both the box and
           body(),
           "door",
       ],
-                                               
-<strong> onCollide("player", "door", (bullet, box) => {
-</strong>        enemiesRemaining = get("enemy").length;
+</code></pre>
+
+When the player touches the door, the game checks if there are any enemies present and if they have all been killed it advances to the next level. Otherwise, nothing happens.
+
+```typescript
+ onCollide("player", "door", (bullet, box) => {
+        enemiesRemaining = get("enemy").length;
         if (enemiesRemaining === 0) {
             chosenLevelIndex += 1;
             destroyAll("entity");
@@ -370,20 +374,23 @@ When a `player_bullet` or `enemy_bullet` collides with a `box`, both the box and
             }
         };
     });
-</code></pre>
+```
 
 ### Challenges
 
-At first, I did not know which way around visible and invisible were for opacity.
+It would have taken a very long time to type out each level individually so I used a random generator for the tile map and enemy spawn positions. This undoubtedly saved me a lot of time.
 
 ## Testing
 
 ### Tests
 
-| Test | Instructions   | What I expect      | What actually happens | Pass/Fail |
-| ---- | -------------- | ------------------ | --------------------- | --------- |
-| 1    | Run code.      | Thing happens.     | As expected.          | Pass.     |
-| 2    | Press buttons. | Something happens. | As expected.          | Pass.     |
+| Test | Instructions                                                      | What I expect                                                                                                                                                                                                                                                                        | What actually happens                                                                         | Pass/Fail |
+| ---- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- | --------- |
+| 1    | Cycle through levels.                                             | <ol><li>When starting a new floor, the floor test appears displaying the floor number.</li><li>When entering a boss fight, the boss fight text appears.</li><li>Each level has a seemingly random layout of spikes and boxes.</li><li>All enemies spawn withing the walls.</li></ol> | <ol><li>As expected.</li><li>As expected.</li><li>As expected.</li><li>As expected.</li></ol> | Pass.     |
+| 2    | Shoot at the boxes.                                               | Boxes are destroyed by bullets.                                                                                                                                                                                                                                                      | As expected.                                                                                  | Pass.     |
+| 3    | Let the enemies shoot boxes.                                      | Boxes are destroyed by enemy bullets.                                                                                                                                                                                                                                                | As expected.                                                                                  | Pass.     |
+| 4    | Attempt to go through a door while there are still enemies alive. | Nothing happens.                                                                                                                                                                                                                                                                     | As expected.                                                                                  | Pass.     |
+| 5    | Attempt to go through a door when all the enemies are dead.       | Game advances to next level.                                                                                                                                                                                                                                                         | As expected.                                                                                  | Pass.     |
 
 ### Evidence
 
