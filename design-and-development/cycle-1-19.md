@@ -1,27 +1,25 @@
-# 2.2.17 Cycle 17 - More Smaller Features \[IN PROGRESS]
+# 2.2.18 Cycle 18 - Sound Effects & Music \[UPCOMING]
 
 ## Design
 
 ### Objectives
 
-In this cycle, I aim to add a pause menu; a damage effect, and a background for the HUD elements. My objectives in this cycle are to:
+In this cycle, I will. My objectives in this cycle are:
 
-* [ ] Add pause menu with escape key
-* [x] Small screen shake when taking damage
-* [x] Red screen effect when taking damage
-* [ ] Add HUD background for sides around the level itself
-* [ ] Change level background colour to fit better
-
-#### Smaller Features
-
-* [ ] Add a new door sprite
-* [ ] Add notch lines to the boss health bar
-* [ ] When boss dies make sure the health bar is completely empty
-* [ ] When starting new game after death, reset the weapon to gear gun
+* [ ] Add sound effects for key events
+  * [ ] Boss level start
+  * [ ] New floor start
+  * [ ] Hitting enemy
+  * [ ] Taking damage
+  * [ ] Shop purchase
+  * [ ] Shopkeeper message
+  * [ ] Swapping weapon
+* [ ] Add music to levels
+* [ ] Add music to main menu
+* [ ] Update credits for music and sound effects
+* [ ] Music becomes quieter when the game is paused
 
 ### Usability Features
-
-maybe put something here
 
 ### Key Variables
 
