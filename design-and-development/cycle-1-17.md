@@ -35,23 +35,96 @@ Currently, my game is missing many checks which causes bugs or crashes when carr
 
 ### Key Variables
 
-| Variable Name | Use                   |
-| ------------- | --------------------- |
-| foo           | does something useful |
+| Variable Name      | Use                                                                                                                                        |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `BOSSSPAWNINGPOS`  | Represents the spawning position for boss enemies in specific levels.                                                                      |
+| `chosenLevelIndex` | A variable that holds the current level index. It's used to determine which boss enemy to spawn and when to show boss-related UI elements. |
 
 ### Pseudocode
 
 ```
-procedure do_something
+// Define key constants
+const BOSSHEALTHBARHEIGHT =  // Set the height of the boss health bar
+const BOSSSPAWNINGPOS = vec2(1200, 450)  // Set the position for boss enemy spawning
+
+// Define the Player class
+class Player:
+    // Properties for player character
+    pos = vec2(x, y)
+    // ...
+
+// Define the Enemy class
+class Enemy:
+    // Properties for enemies
+    // ...
+
+// Define functions for spawning player bullets
+function spawnPlayerBullet(truePosition, weapon):
+    // Calculate bullet direction
+    POINT_CURSOR = angle(truePosition, mousePos()) + 180
+    // Calculate bullet spread
+    spreadAngle = random() * weapon.accuracy - weapon.accuracy / 2
+
+    // Create and add player bullet entity
+    addEntity(
+        shape = circle(5),
+        pos = truePosition,
+        color = color(255, 213, 0),
+        // Other properties and behaviors
+    )
+
+// Define functions for spawning enemy bullets
+function spawnEnemyBullet(targetPos, inaccuracy):
+    // Calculate bullet direction
+    direction = angle(enemy.pos, targetPos) + 180
+    // Calculate bullet spread
+    spreadAngle = random() * inaccuracy - inaccuracy / 2
+
+    // Create and add enemy bullet entity
+    addEntity(
+        shape = rect(7, 15),
+        pos = enemy.pos,
+        color = color(255, 7, 3),
+        // Other properties and behaviors
+    )
+
+// Define functions for managing boss UI elements
+function addBossUI():
+    bossFightText.opacity = 1
+    bossHealthBar.height = BOSSHEALTHBARHEIGHT
+    bossHealthBar.opacity = 1
+    bossHealthBarBackground.opacity = 1
+    bossHealthBarBorder.opacity = 1
+
+// Main game loop
+while gameIsRunning:
+    // Handle player input and movement
+    player.handleInput()
     
-end procedure
+    // Check for collisions between player bullets and enemies
+    checkCollisions(playerBullets, enemies)
+
+    // Check for collisions between enemy bullets and the player
+    checkCollisions(enemyBullets, player)
+
+    // Spawn bullets and enemies based on game logic and conditions
+    if (chosenLevelIndex === 6):
+        spawnBoss("firstboss")
+        addBossUI()
+    else if (chosenLevelIndex === 13):
+        spawnBoss("secondboss")
+        addBossUI()
+    else if (chosenLevelIndex === 20):
+        spawnBoss("thirdboss")
+        bossFightText.text = "Final\nBoss!"
+        addBossUI()
 ```
 
 ## Development
 
 ### Outcome
 
-If the gun is the boomstick, the bullets should be spherical pellets, otherwise, create them as a rectanglular bullet.
+If the current weapon is the Boomstick then the bullets should be spherical pellets, otherwise, create them as rectangular bullets.
 
 {% code title="spawn bullet.ts" %}
 ```typescript
@@ -122,10 +195,8 @@ I modified bullet spawning in the enemy class to use a rectangle too.
 
 Like the dash cooldown bar and the player healthbar, the boss healthbar is made up of a background, a border, and the actual bar itself. When a boss level starts, the `opacity` of all the objects is set to 1, otherwise, it is 0 and they are invisible in regular levels. When a `player_bullet` collides with an `enemy`, if it is a boss then modify the boss health bar accordingly.
 
-{% code title="main.ts" %}
-```typescript
-const bossHealthBar = add([
-        rect(80, BOSSHEALTHBARHEIGHT),
+<pre class="language-typescript" data-title="main.ts"><code class="lang-typescript"><strong>const bossHealthBar = add([
+</strong>        rect(80, BOSSHEALTHBARHEIGHT),
         pos(160, 240),
         z(10),
         color(255, 0, 0),
@@ -196,8 +267,7 @@ const bossHealthBar = add([
             bossHealthBar.height = newHeight;
         };
     });
-```
-{% endcode %}
+</code></pre>
 
 I added a check to the start button in character selection which checks that a character has been selected before proceeding.
 
@@ -293,21 +363,17 @@ onKeyPress("o", () => {
 
 </div>
 
-### Challenges
-
-Describe challenges you faced and how they were overcome
-
 ## Testing
 
 ### Tests
 
-| Test | Instructions   | What I expect      | What actually happens | Pass/Fail |
-| ---- | -------------- | ------------------ | --------------------- | --------- |
-| 1    | Run code.      | Thing happens.     | As expected.          | Pass.     |
-| 2    | Press buttons. | Something happens. | As expected.          | Pass.     |
-| 3    |                |                    |                       |           |
-| 4    |                |                    |                       |           |
-| 5    |                |                    |                       |           |
+| Test | Instructions                                    | What I expect                                                      | What actually happens | Pass/Fail |
+| ---- | ----------------------------------------------- | ------------------------------------------------------------------ | --------------------- | --------- |
+| 1    | Fire the clockwork revolver and brass spraygun. | Can hold down mouse to fire weapons. Releasing mouse stops firing. | As expected.          | Pass.     |
+| 2    | Fire the boomstick.                             | Bullets are circular pellets instead of rectangles.                | As expected.          | Pass.     |
+| 3    |                                                 |                                                                    |                       |           |
+| 4    |                                                 |                                                                    |                       |           |
+| 5    |                                                 |                                                                    |                       |           |
 
 ### Evidence
 

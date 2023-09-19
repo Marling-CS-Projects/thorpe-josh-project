@@ -4,20 +4,23 @@
 
 ### Objectives
 
-In this cycle, I aim to add a pause menu; a damage effect, and a background for the HUD elements. My objectives in this cycle are to:
+In this cycle, I aim to add a pause feature, an effect when the player takes damage, and a background for the HUD elements. My objectives in this cycle are to:
 
-* [ ] Add pause menu with escape key
+* [x] Add pause menu with escape key
+* [x] Update how to play menu with pause info
 * [x] Small screen shake when taking damage
 * [x] Red screen effect when taking damage
-* [ ] Add HUD background for sides around the level itself
-* [ ] Change level background colour to fit better
+* [x] Add HUD background for sides around the level itself
+* [x] Change level background colour to fit better
 
 #### Smaller Features
 
-* [ ] Add a new door sprite
+* [ ] Fix boss healthbar ending early
+* [x] Add a new door sprite
 * [ ] Add notch lines to the boss health bar
-* [ ] When boss dies make sure the health bar is completely empty
-* [ ] When starting new game after death, reset the weapon to gear gun
+* [x] When starting a new game after death, reset the weapon to gear gun
+* [x] Fix the health potion deducting 4 coins instead of 5
+* [x] Reduce spikes in boss levels
 
 ### Usability Features
 
