@@ -29,17 +29,15 @@ In this cycle, my goal is to improve the game UI and menus. My objectives are:
 
 ### Key Variables
 
-| Variable Name      | Use                                                                  |
-| ------------------ | -------------------------------------------------------------------- |
-| `dashDuration`     | Defines how long a dash lasts.                                       |
-| `dashRecharge`     | Defines the total recharge time for the dash ability.                |
-| `dashCooldown`     | A boolean flag to check if the dash ability is on cooldown.          |
-| `weapons`          | Is an array that holds different weapon types.                       |
-| `unlockedWeapons`  | Stores the weapons that the player has unlocked.                     |
-| `currentWeapon`    | Represents the currently equipped weapon.                            |
-| `coins`            | Keep track of the player's in-game currency.                         |
-| `enemiesRemaining` | Tracks the number of enemies left in the game.                       |
-| `chosenLevels`     | This array is used to store the randomly chosen levels for the game. |
+| Variable Name                                                   | Use                                                                                                                  |
+| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `winTitle`, `backButton`, `winText`, `loseTitle` and `loseText` | These variables are used to create text elements for the titles, and informational texts in the win and lose scenes. |
+| `menuBackground`                                                | This variable is a background rectangle for all the menu scenes to give them a background colour.                    |
+| `dashCooldownBarBackground` and `dashCooldownBarBorder`         | These are graphical elements for the cooldown bar.                                                                   |
+| `dashCooldownBar`                                               | Represents the actual cooldown progress bar.                                                                         |
+| `dashCooldown`                                                  | A boolean flag to check if the dash ability is on cooldown.                                                          |
+| `dashDuration`                                                  | Defines how long a dash lasts.                                                                                       |
+| `dashRecharge`                                                  | Defines the total recharge time for the dash ability.                                                                |
 
 ### Pseudocode
 

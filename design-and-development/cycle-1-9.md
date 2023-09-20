@@ -15,21 +15,18 @@ My objective in this cycle is to redo enemies using a class system. My objective
 
 ### Key Variables
 
-| Variable Name                      | Use                                                                                                                                                                                                         |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `possibleLevels` and `fixedLevels` | These arrays hold level configurations including layout and enemy spawns for both dynamic (possible) levels and fixed levels.                                                                               |
-| `chosenLevelFormat`                | An interface defining the structure of a chosen level, including `id`, `layout`, and enemy spawn positions for three different types of enemies.                                                            |
-| `chosenLevels`                     | An array where selected levels are stored. It's populated with fixed levels, random possible levels, and then another fixed level for each iteration in the outer loop.                                     |
-| `randomIndex` and `randomLevel`    | Variables used to select a random index from `possibleLevels` array and create a `randomLevel` object based on that index.                                                                                  |
-| `position` and `targetPos`         | These variables are used to store positions within the game world. `position` is the initial spawn position for enemies, and `targetPos` is the position that enemies move towards or shoot projectiles at. |
-| `direction`                        | A vector representing the direction from one point to another. It's calculated for enemy movement and projectile shooting.                                                                                  |
-| `MOVE_SPEED`                       | A constant representing the speed at which enemies move towards their target position.                                                                                                                      |
-| `NUM_STEPS`                        | A constant determining the number of steps for smoother enemy movement. It's used within the loop that gradually moves the enemy towards its target.                                                        |
-| `BULLET_SPEED`                     | A constant representing the speed of the projectiles that enemies shoot towards the player.                                                                                                                 |
-| `latestTargetPos`                  | A variable that stores an updated target position. It's used to determine where enemies should shoot projectiles.                                                                                           |
-| `min` and `max`                    | These variables are used to define the range for generating random idle times for different enemy types.                                                                                                    |
-| `diff`                             | The difference between `max` and `min` values, used for calculating the range of random idle times for enemy types.                                                                                         |
-| `player`                           | The object representing the player entity within the game. It's used for calculating target positions for enemy movement and shooting.                                                                      |
+| Variable Name                   | Use                                                                                                                                                                                                         |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chosenLevelFormat`             | An interface defining the structure of a chosen level, including `id`, `layout`, and enemy spawn positions for three different types of enemies.                                                            |
+| `randomIndex` and `randomLevel` | Variables used to select a random index from `possibleLevels` array and create a `randomLevel` object based on that index.                                                                                  |
+| `position` and `targetPos`      | These variables are used to store positions within the game world. `position` is the initial spawn position for enemies, and `targetPos` is the position that enemies move towards or shoot projectiles at. |
+| `direction`                     | A vector representing the direction from one point to another. It's calculated for enemy movement and projectile shooting.                                                                                  |
+| `MOVE_SPEED`                    | A constant representing the speed at which enemies move towards their target position.                                                                                                                      |
+| `NUM_STEPS`                     | A constant determining the number of steps for smoother enemy movement. It's used within the loop that gradually moves the enemy towards its target.                                                        |
+| `BULLET_SPEED`                  | A constant representing the speed of the projectiles that enemies shoot towards the player.                                                                                                                 |
+| `latestTargetPos`               | A variable that stores an updated target position. It's used to determine where enemies should shoot projectiles.                                                                                           |
+| `min` and `max`                 | These variables are used to define the range for generating random idle times for different enemy types.                                                                                                    |
+| `diff`                          | The difference between `max` and `min` values, used for calculating the range of random idle times for enemy types.                                                                                         |
 
 ### Pseudocode
 

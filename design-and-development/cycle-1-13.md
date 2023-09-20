@@ -18,12 +18,10 @@ In this cycle, my goal is to make some proper levels with enemies spawning in th
 
 ### Key Variables
 
-| Variable Name      | Use                                                                                                                                                                                              |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `chosenLevels`     | <p></p><p>This variable is an array used to store the selected game levels. It is populated with level data from different sources (fixed levels and randomly chosen levels).</p>                |
-| `floorNumber`      | This variable is used to store and track the current floor number. It is updated based on the chosen level index and used to display the floor number in `newFloorText`.                         |
-| `enemiesRemaining` | <p></p><p>This variable tracks the number of remaining enemies in a level. It is checked to determine whether the player can progress to the next level after defeating all enemies.</p>         |
-| `chosenLevelIndex` | <p></p><p>This variable is used to store and track the index of the currently selected level. It is updated when the player progresses to the next level and determines which level to load.</p> |
+| Variable Name      | Use                                                                                                                                                                        |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `floorNumber`      | This variable is used to store and track the current floor number. It is updated based on the chosen level index and used to display the floor number in `newFloorText`.   |
+| `enemiesRemaining` | This variable tracks the number of remaining enemies in a level. It is checked to determine whether the player can progress to the next level after defeating all enemies. |
 
 ### Pseudocode
 

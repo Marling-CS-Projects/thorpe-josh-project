@@ -1,4 +1,4 @@
-# 2.2.18 Cycle 18 - Sound Effects & Music \[IN PROGRESS]
+# 2.2.19 Cycle 19 - Game Balance & Removing Test Features \[UPCOMING]
 
 ## Design
 
@@ -6,24 +6,15 @@
 
 In this cycle, I will. My objectives in this cycle are:
 
-* [ ] Add sound effects for key events
-  * [ ] Boss level start
-  * [ ] New floor start
-  * [ ] Hitting enemy
-  * [ ] Taking damage
-  * [ ] Shop purchase
-  * [ ] Shopkeeper message
-  * [ ] Swapping weapon
-* [ ] Add music to levels
-* [ ] Add music to main menu
-* [ ] Update credits for music and sound effects
-* [ ] Music becomes quieter when the game is paused
-
-#### Smaller Features
-
-* [ ] Player and enemy bullets are destroyed when colliding with the door
+* [ ] Balance the weapons, enemies, bosses and levels accordingly so that the game feels fun and fair
+* [ ] Ensure that no enemies spawn too close to the player
+* [ ] Remove the features I added for development purposes
+  * [ ] Go to the next level by pressing r
+  * [ ] Add a coin by pressing m
 
 ### Usability Features
+
+maybe put something here
 
 ### Key Variables
 

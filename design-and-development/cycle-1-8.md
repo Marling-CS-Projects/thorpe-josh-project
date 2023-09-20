@@ -14,7 +14,7 @@ My objectives in this cycle are to:
 
 ## Development
 
-Enemies were stored as part of the tile map for each level and were spawned from that.
+Enemies were stored as part of the tile map for each level so were spawned when the level was added.
 
 <pre class="language-javascript"><code class="lang-javascript">"1": () => [
 <strong>    sprite("ghosty"),

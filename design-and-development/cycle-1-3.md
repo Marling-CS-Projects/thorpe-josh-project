@@ -22,7 +22,6 @@ My focus in this cycle is on room generation. My objectives are:
 | `possibleLevels` | Is imported from the `./possibleLevels` file and is an array containing level data for the game.                                                             |
 | `levelId`        | Represents the current level's identifier.                                                                                                                   |
 | `level`          | Is the level object created using `addLevel()` function and contains the tile map for the current level. It is used to define the tiles and their behaviors. |
-| `player`         | References the player entity in the level. It is obtained using `level.get("player")[0]`.                                                                    |
 
 ### Pseudocode
 

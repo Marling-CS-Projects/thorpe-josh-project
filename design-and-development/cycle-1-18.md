@@ -1,10 +1,10 @@
-# 2.2.17 Cycle 17 - More Smaller Features \[IN PROGRESS]
+# 2.2.17 Cycle 17 - Pause Menu & Damage Effect
 
 ## Design
 
 ### Objectives
 
-In this cycle, I aim to add a pause feature, an effect when the player takes damage, and a background for the HUD elements. My objectives in this cycle are to:
+In this cycle, my goal is to add a working pause menu which pauses the entire game and an effect to make it obvious when the player takes damage. My objectives in this cycle are to:
 
 * [x] Add pause menu with escape key
 * [x] Update how to play menu with pause info
@@ -28,9 +28,17 @@ maybe put something here
 
 ### Key Variables
 
-| Variable Name | Use                   |
-| ------------- | --------------------- |
-| foo           | does something useful |
+| Variable Name      | Use                                                                                                                                                               |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `floorBackground`  | Represents the background of the `level` scene's floor. It's a rectangle with specific dimensions, position, colour, and z-index.                                 |
+| `gameState`        | A variable that stores the current state of the game (either "playing" or "paused"). It is used to control the game flow and manage pause functionality.          |
+| `pauseBackground`  | A background element displayed when the game is paused. It's a semi-transparent rectangle that covers the entire game area.                                       |
+| `pauseTitle`       | Text element displaying "Game Paused" in the pause menu. It's centred at the top of the screen when the game is paused.                                           |
+| `pauseText`        | Text element displaying instructions for resuming the game. It's centred on the screen when the game is paused.                                                   |
+| `playerBullets`    | An array containing all the player's bullets. It is used to pause and unpause player bullets when the game state changes.                                         |
+| `enemyBullets`     | An array containing all the enemy's bullets. It is used to pause and unpause enemy bullets when the game state changes.                                           |
+| `flashOverlay`     | A red-coloured rectangle that flashes to create a damage effect on the screen when the player takes damage.                                                       |
+| `BARLINEINCREMENT` | A constant variable defining the vertical spacing between notches on the boss health bar. It determines the intervals at which lines are drawn on the health bar. |
 
 ### Pseudocode
 
@@ -156,9 +164,8 @@ explain another part
 
 and another
 
-```typescript
-const flashOverlay = add([
-        rect(width(), height()),
+<pre class="language-typescript"><code class="lang-typescript"><strong>const flashOverlay = add([
+</strong>        rect(width(), height()),
         pos(width() / 2, height() / 2),
         z(50), // Make sure it's above other elements
         color(255, 0, 0), // Red color
@@ -169,14 +176,14 @@ const flashOverlay = add([
     function playerDamageEffect() {
         shake(15);
         flashOverlay.opacity = 0.5;
-        for (let k = 0; k < 5; k++) {
+        for (let k = 0; k &#x3C; 5; k++) {
             wait(0.075, () => {
                 flashOverlay.opacity -= 0.1;
             });
         };
     };
 
-```
+</code></pre>
 
 a
 

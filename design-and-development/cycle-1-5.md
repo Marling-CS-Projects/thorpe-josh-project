@@ -29,7 +29,6 @@ My focus in this cycle is to add a health bar. My objectives are:
 | `healthBarBg`     | Represents the background of the health bar. It is a rectangle that provides the visual backdrop for the health bar.                                                            |
 | `healthBar`       | Represents the actual health bar entity. It is a rectangle whose width represents the player's current health.                                                                  |
 | `spikeCooldown`   | Represents a boolean flag indicating whether the player is currently in a cooldown state after colliding with a spike. It prevents the player from getting hurt too frequently. |
-| `player`          | Represents the player entity in the game.                                                                                                                                       |
 
 ### Pseudocode
 

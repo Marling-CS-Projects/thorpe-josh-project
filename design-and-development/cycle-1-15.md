@@ -30,12 +30,9 @@ In this cycle, my main goal is to add boss fights to the game. My objectives in 
 
 ### Key Variables
 
-| Variable Name                               | Use                                                                                                                                                                                                                      |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `BOSSSPAWNINGPOS`                           | This constant holds the position where boss enemies spawn. It is used to ensure that boss enemies consistently spawn at the same location.                                                                               |
-| `chosenLevelIndex`                          | This variable is used to determine the current game level, and based on the level, it spawns specific boss enemies using the `Enemy` class. It also controls when to display and hide the boss fight text.               |
-| `enemy7`, `enemy8`, `enemy9`                | These variables represent instances of the `Enemy` class, each corresponding to a different boss enemy type. They are created and spawned at the specified position (`BOSSSPAWNINGPOS`) when certain levels are reached. |
-| Various properties within the `Enemy` class | These properties store information about the enemy, such as its health, speed, damage, and species. They are initialized based on the `type` parameter when creating an instance of the `Enemy` class.                   |
+| Variable Name     | Use                                                                                                                                        |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `BOSSSPAWNINGPOS` | This constant holds the position where boss enemies spawn. It is used to ensure that boss enemies consistently spawn at the same location. |
 
 ### Pseudocode
 

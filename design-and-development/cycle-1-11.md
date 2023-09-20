@@ -28,8 +28,6 @@ In this cycle, I aim to set up a proper weapon and inventory system. My objectiv
 | `weapons`         | An array containing objects that represent different weapon types. Each object includes properties like `unlocked`, `name`, `bulletDamage`, `bulletSpeed`, `cooldown`, and `accuracy`. |
 | `unlockedWeapons` | An array that stores unlocked weapon objects.                                                                                                                                          |
 | `currentWeapon`   | Holds the currently selected weapon from the `unlockedWeapons` array.                                                                                                                  |
-| `gunCooldown`     | A boolean variable used to manage the cooldown between shots.                                                                                                                          |
-| `POINT_CURSOR`    | Represents the angle towards which bullets are aimed.                                                                                                                                  |
 | `spreadAngle`     | A random angle used to simulate bullet inaccuracy.                                                                                                                                     |
 | `inventoryText`   | Represents the text entity displaying the player's unlocked weapons.                                                                                                                   |
 

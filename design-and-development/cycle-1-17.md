@@ -1,4 +1,4 @@
-# 2.2.16 Cycle 16 - Smaller Features & Fixing Errors
+# 2.2.16 Cycle 16 - Boss Health Bar & Automatic Weapons & Fixing Bugs
 
 ## Design
 
@@ -6,15 +6,15 @@
 
 In this cycle, I will add some smaller features and fixes. First, I would like to:
 
+* [x] Make the machine pistol and brass spraygun automatic weapons (you can hold down left mouse button to shoot them)
 * [x] &#x20;Change the player bullets to rectangles, except for the shotgun which fires small pellets
 * [x] Enemies and bosses fire red rectangles
-* [x] Make the machine pistol and brass spraygun automatic weapons (you can hold down left mouse button to shoot them)
 
 I would also like to add a boss healthbar to display how much of a boss's health is left.
 
 * [x] Add boss healthbar to boss fights
 
-Currently, my game is missing many checks which causes bugs or crashes when carrying out unexpected behaviour. I will fix these issues in this cycle, which should help improve the robustness of my game.
+Currently, my game is missing many checks which causes bugs or issues when carrying out unexpected behaviour. I will fix these issues in this cycle, which should help improve the robustness of my game. I will check each box when the issue has been resolved.
 
 * [x] Starting the game without selecting a character throws an error
 * [x] Dashing into the next level does not reset the speed after the dash
@@ -29,16 +29,16 @@ Currently, my game is missing many checks which causes bugs or crashes when carr
 * [x] Adjust some of the enemy spawn locations in levels so that they are not too close to the player
 * [x] Rename Ironclad Carbine to Ironclad Rifle (easier name for players to understand)
 * [x] Adjust coin counter position
-* [x] Correct the dash cooldown bar border
+* [x] Fix the dash cooldown bar border
 
 ### Usability Features
 
 ### Key Variables
 
-| Variable Name      | Use                                                                                                                                        |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `BOSSSPAWNINGPOS`  | Represents the spawning position for boss enemies in specific levels.                                                                      |
-| `chosenLevelIndex` | A variable that holds the current level index. It's used to determine which boss enemy to spawn and when to show boss-related UI elements. |
+| Variable Name                                       | Use                                                                                                                       |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `bossHealthBarBackground` and `bossHealthBarBorder` | These variables define UI elements for the boss's health bar. They represent the bar's background and border.             |
+| `bossHealthBar`                                     | This variable represents the bar part of the boss health bar. It is used to display the boss's health during boss fights. |
 
 ### Pseudocode
 
