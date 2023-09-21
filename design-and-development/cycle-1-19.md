@@ -8,20 +8,24 @@ In this cycle, I will. My objectives in this cycle are:
 
 * [ ] Add sound effects for key events
   * [ ] Boss level start
-  * [ ] New floor start
+  * [x] New floor start
   * [ ] Hitting enemy
   * [ ] Taking damage
-  * [ ] Shop purchase
+  * [x] Shop purchase
   * [ ] Shopkeeper message
-  * [ ] Swapping weapon
+  * [x] Swapping weapon
+  * [x] Clicking buttons in main menu
+  * [x] Winning the game
+  * [ ] Player dying
 * [ ] Add music to levels
 * [ ] Add music to main menu
-* [ ] Update credits for music and sound effects
+* [x] Update credits for music and sound effects
 * [ ] Music becomes quieter when the game is paused
 
 #### Smaller Features
 
-* [ ] Player and enemy bullets are destroyed when colliding with the door
+* [x] Player and enemy bullets are destroyed when colliding with the door
+* [x] Remove debug logging for when the game is paused and unpaused
 
 ### Usability Features
 

@@ -367,13 +367,15 @@ onKeyPress("o", () => {
 
 ### Tests
 
-| Test | Instructions                                    | What I expect                                                      | What actually happens | Pass/Fail |
-| ---- | ----------------------------------------------- | ------------------------------------------------------------------ | --------------------- | --------- |
-| 1    | Fire the clockwork revolver and brass spraygun. | Can hold down mouse to fire weapons. Releasing mouse stops firing. | As expected.          | Pass.     |
-| 2    | Fire the boomstick.                             | Bullets are circular pellets instead of rectangles.                | As expected.          | Pass.     |
-| 3    |                                                 |                                                                    |                       |           |
-| 4    |                                                 |                                                                    |                       |           |
-| 5    |                                                 |                                                                    |                       |           |
+| Test | Instructions                                           | What I expect                                                      | What actually happens                                                      | Pass/Fail   |
+| ---- | ------------------------------------------------------ | ------------------------------------------------------------------ | -------------------------------------------------------------------------- | ----------- |
+| 1    | Fire the clockwork revolver and brass spraygun.        | Can hold down mouse to fire weapons. Releasing mouse stops firing. | As expected.                                                               | Pass.       |
+| 2    | Fire the boomstick.                                    | Bullets are circular pellets instead of rectangles.                | As expected.                                                               | Pass.       |
+| 3    | Engage in boss fight and kill boss.                    | Health bar depletes as the boss takes damage.                      | As expected, except the boss seems to die before the end of the healthbar. | Borderline. |
+| 4    | Dash into next level.                                  | Speed is reset to normal.                                          | As expected.                                                               | Pass.       |
+| 5    | Attempt to start game without selecting a character.   | Nothing happens.                                                   | As expected.                                                               | Pass.       |
+| 6    | Try to purchase a weapon which is already owned.       | Nothing happens.                                                   | As expected.                                                               | Pass.       |
+| 7    | Try to purchase items from the shop in a regular leve. | Nothing happens.                                                   | As expected.                                                               | Pass.       |
 
 ### Evidence
 

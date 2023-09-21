@@ -43,16 +43,66 @@ maybe put something here
 ### Pseudocode
 
 ```
-procedure do_something
-    
-end procedure
+// Initialize the game with a specific font and background color
+InitializeGame({
+    font: "sans-serif",
+    background: [62, 82, 115],
+});
+
+// Create the floor background for the level scene
+CreateFloorBackground();
+
+// Define a function to toggle the game pause state
+Function TogglePause() {
+    If (gameState is "playing") {
+        Set gameState to "paused";
+        CreatePauseMenuElements();
+        PauseAllBullets();
+    } Else If (gameState is "paused") {
+        Set gameState to "playing";
+        DestroyAllPauseMenuElements();
+        ResumeAllBullets();
+    }
+}
+
+// Listen for the "escape" key press to toggle pause
+OnKeyPress("escape", TogglePause);
+
+// Initialize the game state as "playing" by default
+Let gameState = "playing";
+
+// Update enemy activity based on the game state
+OnUpdate("enemy", UpdateEnemyActivity);
+
+// Create a red flash overlay for player damage effect
+CreateFlashOverlay();
+
+// Define a function to handle player damage effect
+Function PlayerDamageEffect() {
+    ShakeScreen();
+    FlashRedOverlay();
+}
+
+// Handle collision between player bullets and enemies
+OnCollide("player_bullet", "enemy", HandlePlayerBulletCollision);
+
+// Create the boss health bar and "Boss Fight!" text
+CreateBossUI();
+
+// Main game loop
+While (game is running) {
+    If (gameState is "playing") {
+        UpdateGameLogic();
+    }
+    RenderGame();
+}
 ```
 
 ## Development
 
 ### Outcome
 
-explain the code
+I changed the background colour of the game and then added a background rectangle in the level scene to have a separate background colour for within the walls of the game.
 
 ```typescript
 kaboom({
@@ -71,13 +121,12 @@ kaboom({
     ]);
 ```
 
-explain some more
+Function for toggling the pause menu. If the `gameState` is 'playing' it's set to 'paused' and vice versa. When being paused, the pause menu elements are added to the screen. I added a check for all the key actions in the game (for example player movement) which requires `gameState` to be playing to do anything. To pause the movement of bullets, I use `.paused` which can stop and start their movement. When the game is resumed, the pause menu elements are destroyed and bullet movement is resumed. All of the actions in the game will be able to happen again.
 
 ```typescript
 function togglePause() {
         if (gameState === "playing") {
             gameState = "paused";
-            debug.log(gameState);
 
             // Add pause menu elements
 
@@ -128,7 +177,6 @@ function togglePause() {
 
         } else if (gameState === "paused") {
             gameState = "playing";
-            debug.log(gameState);
             destroyAll("pauseMenu");
 
             let playerBullets = get("player_bullet")
@@ -142,7 +190,11 @@ function togglePause() {
             });
         };
     };
+```
 
+Pausing and unpausing are toggled using the escape key. By default when starting a level the `gameState` will be 'playing'.
+
+```typescript
     onKeyPress("escape", () => {
         togglePause();
     });
@@ -150,7 +202,7 @@ function togglePause() {
     let gameState = "playing"; // Default game state
 ```
 
-explain another part
+If the game is paused, set the active parameter of each enemy to false. This is used in the enemy class functions to prevent actions when the game is paused (for example moving and shooting).
 
 ```typescript
  onUpdate("enemy", (enemy) => {
@@ -162,7 +214,7 @@ explain another part
     });
 ```
 
-and another
+When the player takes damage, shake the screen and flash the red `flashOverlay` quickly on screen which acts like a blood effect.
 
 <pre class="language-typescript"><code class="lang-typescript"><strong>const flashOverlay = add([
 </strong>        rect(width(), height()),
@@ -185,7 +237,7 @@ and another
 
 </code></pre>
 
-a
+I combined the enemy update health `onCollide` and the boss health bar `onCollide` into one to fix the issue of the boss health bar updating early.
 
 ```typescript
     // Update the enemies' health when hit by a bullet
@@ -199,7 +251,9 @@ a
     });
 ```
 
-b
+I modified the addBossUI function to bring in some components of the boss health bar. This means that there will be less hidden elements when playing a normal level, which should improve performance slightly.&#x20;
+
+To add notches to the boss healthbar, I added a small horizontal line at 3 locations which represent 75%, 50% and 25% boss health.
 
 ```typescript
  const bossHealthBar = add([
@@ -223,7 +277,6 @@ b
         z(10),
         "bossFightText",
     ]);
-
 
 
     function addBossUI() {
@@ -289,4 +342,4 @@ Comment on any failed tests and how you plan to resolve them
 
 ### Evidence
 
-Put YouTube video testing link here
+{% embed url="https://youtu.be/_sCDYP37dg8" %}
