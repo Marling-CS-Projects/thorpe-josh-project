@@ -1,174 +1,119 @@
-# 2.2.1 Cycle 1 - Player & Movement
+# 2.2.2 Cycle 2 - Aiming & Bullets
 
 ## Design
 
 ### Objectives
 
-My focus in the first cycle will be on the player and movement. My objectives are:
+My focus in this cycle will be on aiming and bullets. My objectives are:
 
-* [x] Load a player sprite
-* [x] Be able to move the player with WASD keys
-* [x] Dash can be activated to increase movement speed
-* [x] Dash can only be used every 3 seconds
-* [x] Dash lasts a second
+* [x] Clicking the mouse creates a bullet at the player's position
+* [x] The bullet moves towards where the cursor was upon click
+* [x] The bullet is orientated to point in the direction of travel
 
 ### Usability Features
 
 ### Key Variables
 
-| Variable Name | Use                                                                                                                             |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `player`      | Represents the player character in the game. It is created using the `add` function and assigned a sprite and initial position. |
-| `speed`       | Represents the movement speed of the player character. It is initially set to 200.                                              |
-| `cooldown`    | A boolean variable used to track whether the dash ability is on cooldown or not. It is initially set to `false`.                |
+| Variable Name    | Use                                                                                                                                                                                                                            |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `BULLET_SPEED`   | This constant variable represents the speed of the bullet when it is spawned. It is set to a value of 1000.                                                                                                                    |
+| `POINT_CURSOR`   | This variable is assigned the value of the player's position angle (in degrees) plus 180, indicating the direction in which the bullet should move. The angle is calculated using the `player.pos.angle(mousePos())` function. |
+| `playerPosition` | This parameter is passed to the `spawnBullet` function and represents the position of the player. It is used to set the initial position of the bullet.                                                                        |
 
 ### Pseudocode
 
 ```
-import kaboom from "kaboom";
-import "kaboom/global";
+Load sprite "egg" from file path "/sprites/egg.png"
+Set constant BULLET_SPEED to 1000
 
-kaboom();
+Function spawnBullet with parameter playerPosition
+    Set POINT_CURSOR to player's position angle (in degrees) plus 180
+    Create a bullet entity with the following properties:
+        Set sprite to "egg"
+        Add an area component for collision detection
+        Set scale to 0.65, 0.65
+        Set position to playerPosition
+        Set color to (127, 127, 255)
+        Set anchor point to "center"
+        Rotate by POINT_CURSOR plus 90 degrees
+        Move in the direction of POINT_CURSOR with a speed of BULLET_SPEED
+        Destroy if it goes offscreen
+        Tag as "player_bullet"
 
-// Load the sprite for the player character
-loadSprite("bean", "/sprites/bean.png");
-
-// Create the player character
-const player = add([
-  sprite("bean"),
-  pos(100, 200),
-]);
-
-// Set the initial movement speed
-let speed = 200;
-
-// Set the dash ability cooldown flag
-let cooldown = false;
-
-// Define the movement controls
-onKeyDown("a", () => {
-  player.move(-speed, 0);
-});
-
-onKeyDown("d", () => {
-  player.move(speed, 0);
-});
-
-onKeyDown("w", () => {
-  player.move(0, -speed);
-});
-
-onKeyDown("s", () => {
-  player.move(0, speed);
-});
-
-// Activate the dash ability
-onKeyDown("space", () => {
-  if (!cooldown) {
-    cooldown = true;
-    speed += 300; // Increase the movement speed
-    wait(0.5, () => {
-      speed -= 300; // Restore the original movement speed
-      wait(3, () => {
-        cooldown = false; // Reset the cooldown flag
-      });
-    });
-  }
-});
+On mouse press
+    Call spawnBullet with the player's position
 ```
 
 ## Development
 
 ### Outcome
 
-The project is initialised and the player sprite is loaded and added to the screen.
-
 ```javascript
-import kaboom from "kaboom";
-import "kaboom/global";
+// Load the sprite named "egg" from the file path "/sprites/egg.png"
+loadSprite("egg", "/sprites/egg.png");
 
-kaboom();
-
-loadSprite("bean", "/sprites/bean.png");
-
-// Create the player character
-const player = add([
-  sprite("bean"), // Assign the "bean" sprite to the player character
-  pos(100, 200), // Set the initial position of the player character
-]);
+// Set the constant variable BULLET_SPEED to 1000
+const BULLET_SPEED = 1000;
 ```
 
-Pressing the WASD keys moves the player sprite in the corresponding direction by `speed` pixels per second. By holding the movement speed as a variable, I can easily change the player's speed without having to modify the entire code.
+When the `spawnBullet` function is called, it finds the bearing to the mouse cursor and then creates a bullet at the player's location. The bullet is rotated to point at the cursor position before being set to move at `BULLET_SPEED`.
 
 ```javascript
-// Set the initial movement speed
-let speed = 200;
-
-
-// Define the movement controls
-onKeyDown("a", () => {
-  player.move(-speed, 0); // Move the player character to the left (negative x-direction)
-});
-
-onKeyDown("d", () => {
-  player.move(speed, 0); // Move the player character to the right (positive x-direction)
-});
-
-onKeyDown("w", () => {
-  player.move(0, -speed); // Move the player character upwards (negative y-direction)
-});
-
-onKeyDown("s", () => {
-  player.move(0, speed); // Move the player character downwards (positive y-direction)
-});
+// Define the function spawnBullet with playerPosition as the parameter
+function spawnBullet(playerPosition) {
+    // Calculate the direction to move based on the player's position and the mouse position
+    const POINT_CURSOR = player.pos.angle(mousePos()) + 180;
+    
+    // Create a bullet entity with the following properties
+    add([
+        // Set the sprite to "egg"
+        sprite("egg"),
+        // Add an area component for collision detection
+        area(),
+        // Scale the bullet sprite to 0.65 of its original size in both x and y directions
+        scale(0.65, 0.65),
+        // Set the position to the player's position
+        pos(playerPosition),
+        // Set the color of the bullet to a shade of blue
+        color(127, 127, 255),
+        // Set the anchor point of the bullet sprite to the center
+        anchor("center"),
+        // Rotate the bullet sprite to point in the direction of travel
+        rotate(POINT_CURSOR + 90),
+        // Move the bullet in the direction specified by POINT_CURSOR with the given speed
+        move(POINT_CURSOR, BULLET_SPEED),
+        // Destroy the bullet entity if it goes offscreen
+        offscreen({ destroy: true }),
+        // Assign the tag "player_bullet" to the bullet entity
+        "player_bullet",
+    ]);
+}
 ```
 
-Pressing the spacebar increases `speed` by 300 for half a second. The `cooldown` variable prevents this dash ability from being used again within 3 seconds.&#x20;
+Clicking the left mouse button calls the spawnBullet function and passes it the player's position.
 
 ```javascript
-// Set the dash ability cooldown flag
-let cooldown = false;
-
-// Activate the dash ability
-onKeyDown("space", () => {
-  if (!cooldown) {
-    cooldown = true;
-    speed += 300; // Increase the movement speed for dashing
-    wait(0.5, () => {
-      speed -= 300; // Restore the original movement speed
-      wait(3, () => {
-        cooldown = false; // Reset the cooldown flag after the dash duration
-      });
-    });
-  }
-});
+// Add an event listener for mouse press
+onMousePress(() => spawnBullet(player.pos));
 ```
 
 ### Challenges
 
-I had planned for the dash to be activated using the right mouse button, however, I couldn't find kaboom's support for detecting right clicks. Therefore I made it activate with the spacebar instead.
+I experienced bugs where the bullet was:
 
-```typescript
-onKeyDown("space", () => {
-```
+* Moving in the opposite direction to the cursor
+* Travelling side-on as opposed to pointing in the direction of travel
 
-But later I found how to detect right clicks so modified my code accordingly.
-
-```typescript
-onMousePress("right", () => {
-```
+To fix this I had to add 180 degrees and 90 degrees to the angles for movement direction and rotation so the bullet moves correctly.
 
 ## Testing
 
 ### Tests
 
-| Test | Instructions                                                    | What I expect                                             | What actually happens | Pass/Fail |
-| ---- | --------------------------------------------------------------- | --------------------------------------------------------- | --------------------- | --------- |
-| 1    | Run code.                                                       | Player sprite appears on stage.                           | As expected.          | Pass.     |
-| 2    | Move using WASD keys.                                           | Player moves in the correct direction for each key press. | As expected.          | Pass.     |
-| 3    | Press spacebar while moving.                                    | Movement speed increases for a short duration.            | As expected.          | Pass.     |
-| 4    | Press spacebar multiple times in quick succession while moving. | Dash only activates once every 3 seconds.                 | As expected.          | Pass.     |
+<table data-full-width="false"><thead><tr><th>Test</th><th>Instructions</th><th>What I expect</th><th>What actually happens</th><th>Pass/Fail</th></tr></thead><tbody><tr><td>1</td><td>Click mouse.</td><td><ol><li>Bullet appears in the player and moves towards mouse cursor.</li><li>Bullet is orientated correctly.</li></ol></td><td><ol><li>The bullet appears outside of the player sprite.</li><li>As expected.</li></ol></td><td>Fail.</td></tr><tr><td>2</td><td>Click mouse repeatedly.</td><td>Multiple bullets appear and behave correctly.</td><td>As expected.</td><td>Pass.</td></tr></tbody></table>
+
+Testing was successful except the bullets appeared slightly outside the player sprite. I will aim to fix this in an upcoming cycle.
 
 ### Evidence
 
-{% embed url="https://www.youtube.com/watch?v=gfo_MYvjkGA" %}
+{% embed url="https://www.youtube.com/watch?v=OezO5c2V2AQ" %}

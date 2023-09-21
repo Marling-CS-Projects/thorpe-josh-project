@@ -1,395 +1,351 @@
-# 2.2.12 Cycle 12 - Proper Levels & Enemy Spawning
+# 2.2.13 Cycle 13 - Shop & More Weapons
 
 ## Design
 
 ### Objectives
 
-In this cycle, my goal is to make some proper levels with enemies spawning in the correct places. My objectives in this cycle are to:
+In this cycle, I plan to add the shop feature. My objectives in this cycle are to:
 
-* [x] Make some proper level layouts
-* [x] Change level spawning so that it pulls from 3 lists - 1 for each floor (so that I can increase enemy difficulty as you progress)
-* [x] Enemies spawn in proper locations within the level
-* [x] Text appears in the corner of your screen when entering a new floor saying the floor number
-* [x] Text appears declaring when you have entered a boss fight
-* [x] The player can advance through a door if all enemies have been killed
-* [x] Make player and enemy bullets be able to destroy the boxes (mushrooms)
+* [x] Make the shopkeeper unmoveable when you walk into him
+* [x] Add 2 new weapons (Clockwork Revolver and Ironclad Carbine)
+* [x] Touching the shopkeeper at a shop level will display a message that says the prices for each item
+* [x] Each item can be bought with each key if the player has enough coins to meet the price
+* [x] All the locked weapons are in the shop
+* [x] Add healing potion in the shop
+* [x] Add doors to shop and boss fight levels
+* [x] Change the first shop level to an introduction level which displays a starting message when touching the shopkeeper
+* [x] Pressing 'm' key will add a coin. This is a temporary feature which will make it easier for me to test each weapon works correctly.
+
+#### Smaller Changes
+
+* [x] Fix the health bar bug with it not updating correctly
+* [x] Add a new sprite for enemy 4
+* [x] Add a new sprite for enemy 5
+* [x] Add a new sprite for enemy 6
+* [x] Add a new sprite for Scarlet Blackthorn character
 
 ### Usability Features
 
 ### Key Variables
 
-| Variable Name      | Use                                                                                                                                                                        |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `floorNumber`      | This variable is used to store and track the current floor number. It is updated based on the chosen level index and used to display the floor number in `newFloorText`.   |
-| `enemiesRemaining` | This variable tracks the number of remaining enemies in a level. It is checked to determine whether the player can progress to the next level after defeating all enemies. |
+| Variable Name                   | Use                                                                                                                                                                                                |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `shopText` and `message`        | These variables are used to create and display a shop dialogue box with a black background and text. `shopText` is the black background, and `message` is the text displayed in the shop dialogue. |
+| `loreText` and `message`        | These variables are used to create and display a lore dialogue box with a black background and text. `loreText` is the black background, and `message` is the text displayed in the lore dialogue. |
+| `weapons` and `unlockedWeapons` | These arrays store information about the available weapons in the game and the weapons that the player has unlocked, respectively.                                                                 |
+| `currentWeapon`                 | This variable represents the weapon currently equipped by the player.                                                                                                                              |
 
 ### Pseudocode
 
 ```
-# Initialize game variables
-InitializeGameVariables()
+# Display Shop and Lore Text
+function showShopText():
+    Create shopText (black background)
+    Create message (shop dialogue text)
 
-# Boss Fight Text
-bossFightText = CreateBossFightText()
+function showLoreText():
+    Create loreText (black background)
+    Create message (lore dialogue text)
 
-if (chosenLevelIndex is 6 or chosenLevelIndex is 13 or chosenLevelIndex is 20):
-    DisplayBossFightText()
-    WaitAndHideBossFightText()
+# Hide Shop and Lore Text
+function hideShopText():
+    Destroy all entities with tag "shopDialogue"
 
-# New Floor Text
-newFloorText = CreateNewFloorText()
+function hideLoreText():
+    Destroy all entities with tag "loreDialogue"
 
-if (chosenLevelIndex is 0):
-    SetFloorNumberTo1()
-    DisplayNewFloorText()
-    WaitAndHideNewFloorText()
-elif (chosenLevelIndex is 7):
-    SetFloorNumberTo2()
-    DisplayNewFloorText()
-    WaitAndHideNewFloorText()
-elif (chosenLevelIndex is 14):
-    SetFloorNumberTo3()
-    DisplayNewFloorText()
-    WaitAndHideNewFloorText()
+# Handle Player Collisions
+onCollide("player", "shopkeeper"):
+    If chosenLevelIndex is 7 or 14:
+        ShowShopText()
+    Else if chosenLevelIndex is 0:
+        ShowLoreText()
 
-# Box Collision Handling
-HandleBoxCollisions()
+onCollideEnd("player", "shopkeeper"):
+    HideShopText()
+    HideLoreText()
 
-# "door" Object
-doorObject = CreateDoorObject()
+# Unlock Weapons
+function unlockWeapon(index):
+    If canUnlockWeapon(index):
+        Mark weapon as unlocked
+        Add unlocked weapon to the player's inventory
+        Deduct weapon cost from player's coins
+        Update coin counter
+        Update inventory text
 
-HandlePlayerCollisionsWithDoor()
+# Handle Key Press Events
+onKeyPress("o"):
+    UnlockWeapon(1) # Machine gun
 
-# Player Bullets and Enemy Bullets
-DefineTagsForBullets()
+onKeyPress("p"):
+    UnlockWeapon(2) # Shotgun
 
-# Remaining Enemies Tracking
-enemiesRemaining = CountRemainingEnemies()
+onKeyPress("u"):
+    UnlockWeapon(3) # Machine pistol
 
-if (enemiesRemaining is 0):
-    ProceedToNextLevel()
+onKeyPress("i"):
+    UnlockWeapon(4) # Rifle
+
+onKeyPress("l"):
+    RestoreHealth() # Restore player's health
+
+onKeyPress("1"):
+    EquipWeapon(1) # Equip weapon 1
+
+# Additional Equip Weapon Key Presses (2, 3, 4, 5)...
+
+onKeyPress("m"):
+    UpdateCoinCounter() # Add a coin
+
+# Update Health Bar
+function updateHealthBar():
+    Calculate new health bar width based on playerHP
+    Set healthBar's width to the new width
+
+# Define Health Bar Components
+Create healthBarBorder (border of health bar)
+Create healthBarBg (background of health bar)
+Create healthBar (actual health bar)
 ```
 
 ## Development
 
 ### Outcome
 
-I created levels for each floor which are stored in separate files for ease of access.
+The introduction text and the shop text are handled in the same way. In the introduction level and shop levels respectively, when the player touches the shopkeeper the message and background are added. When the player stops touching the shopkeeper they are removed.
 
-<figure><img src="../.gitbook/assets/cycle12files.png" alt=""><figcaption><p>Files for possible levels of each floor</p></figcaption></figure>
-
-Below are a couple of possible example levels from floor 2. As the floor increases, the levels become more difficult with more boxes and spikes and harder enemies spawn.
-
-<pre class="language-typescript" data-title="possibleLevels2.ts"><code class="lang-typescript"><strong>export const possibleLevels2 = [
-</strong>    {
-        id: 11,
-        enemy1Spawns: [],
-        enemy2Spawns: [
-            [397, 556],
-            [1297, 343],
-            [822, 273],
-        ],
-        enemy3Spawns: [
-            [816, 580],
-            [826, 111],
-        ],
-        enemy4Spawns: [],
-        enemy5Spawns: [],
-        enemy6Spawns: [],
-        layout: [
-            "====================",
-            "= +    ^ +         =",
-            "=  +            ^  =",
-            "=   +     +        =",
-            "= ^           +    =",
-            "= +     +  ^       =",
-            "=       ^     +    =",
-            "= +   +         ^  =",
-            "=@      +          #",
-            "=                  =",
-            "= +     ^      +   =",
-            "=         +  ^ +   =",
-            "= +           +  ++=",
-            "=   ^              =",
-            "=         ^^       =",
-            "====================",
-        ],
-    },
-    {
-        id: 12,
-        enemy1Spawns: [],
-        enemy2Spawns: [
-            [1152, 234],
-        ],
-        enemy3Spawns: [
-            [1099, 94],
-            [1189, 759],
-        ],
-        enemy4Spawns: [
-            [405, 264],
-        ],
-        enemy5Spawns: [],
-        enemy6Spawns: [],
-        layout: [
-            "====================",
-            "=   +              =",
-            "=  +  ^      +     =",
-            "= + ^ +   ^        =",
-            "=   +      +     + =",
-            "=     + ^      ^   =",
-            "=  +            +  =",
-            "=     + +  +    +  =",
-            "=@  +              #",
-            "=                  =",
-            "= + ^   +    ^  +  =",
-            "=      +        +  =",
-            "= +         +   +++=",
-            "=   ^              =",
-            "=         ^^       =",
-            "====================",
-        ],
-    },
-    
-    ... //rest of the levels
-]
-</code></pre>
-
-Below is the updated level selection code which now handles the three lists to draw for each floor. I moved it into a separate file since it got so long.
-
-{% code title="level selection.ts" %}
 ```typescript
-import { possibleLevels } from "./possibleLevels";
-import { possibleLevels2 } from "./possibleLevels2";
-import { possibleLevels3 } from "./possibleLevels3";
-import { fixedLevels } from "./fixedLevels";
+// Function to show shop text
+    function showShopText() {
+        const shopText = add([
+            rect(1250,300), // Create a black background for the text
+            pos(width() / 2, height() / 2),
+            z(11),
+            anchor("center"),
+            opacity(0.5),
+            color(0, 0, 0),
+            "shopDialogue",
+        ]);
 
-
-export function chooseLevels(chosenLevels) {
-    chosenLevels.push({
-        id: fixedLevels[0].id,
-        layout: fixedLevels[0].layout,
-        enemy1Spawns: fixedLevels[0].enemy1Spawns,
-        enemy2Spawns: fixedLevels[0].enemy2Spawns,
-        enemy3Spawns: fixedLevels[0].enemy3Spawns,
-        enemy4Spawns: fixedLevels[0].enemy4Spawns,
-        enemy5Spawns: fixedLevels[0].enemy5Spawns,
-        enemy6Spawns: fixedLevels[0].enemy6Spawns,
-    });
-    for (let i = 0; i < 5; i++) {
-        let randomIndex = Math.floor(Math.random() * possibleLevels.length);
-        let randomLevel = {
-            id: possibleLevels[randomIndex].id,
-            layout: possibleLevels[randomIndex].layout,
-            enemy1Spawns: possibleLevels[randomIndex].enemy1Spawns,
-            enemy2Spawns: possibleLevels[randomIndex].enemy2Spawns,
-            enemy3Spawns: possibleLevels[randomIndex].enemy3Spawns,
-            enemy4Spawns: possibleLevels[randomIndex].enemy4Spawns,
-            enemy5Spawns: possibleLevels[randomIndex].enemy5Spawns,
-            enemy6Spawns: possibleLevels[randomIndex].enemy6Spawns,
-        };
-        chosenLevels.push(randomLevel);
+        // Create and display the shop dialogue message
+        const message = add([
+            text("Welcome back adventurer! I can sell you some of my wares.\nIf you have enough coins you can buy an item in my shop with the corresponding key press.\n10 coins - Brass Spraygun: O key\n10 coins - Boomstick: P key\n15 coins - Clockwork Revolver: U key\n15 coins - Ironclad Carbine: I key\nAdditionally for 5 coins you can restore 10 health with a potion - L key.",  {
+                size: 30,
+                width: width() - 40,
+                align: "center",
+            }),
+            pos(width() / 2, height() / 2),
+            z(12),
+            anchor("center"),
+            color(255, 255, 255),
+            "shopDialogue",
+        ]);
     }
-    chosenLevels.push({
-        id: fixedLevels[1].id,
-        layout: fixedLevels[1].layout,
-        enemy1Spawns: fixedLevels[1].enemy1Spawns,
-        enemy2Spawns: fixedLevels[1].enemy2Spawns,
-        enemy3Spawns: fixedLevels[1].enemy3Spawns,
-        enemy4Spawns: fixedLevels[1].enemy4Spawns,
-        enemy5Spawns: fixedLevels[1].enemy5Spawns,
-        enemy6Spawns: fixedLevels[1].enemy6Spawns,
-    });
-    chosenLevels.push({
-        id: fixedLevels[0].id,
-        layout: fixedLevels[0].layout,
-        enemy1Spawns: fixedLevels[0].enemy1Spawns,
-        enemy2Spawns: fixedLevels[0].enemy2Spawns,
-        enemy3Spawns: fixedLevels[0].enemy3Spawns,
-        enemy4Spawns: fixedLevels[0].enemy4Spawns,
-        enemy5Spawns: fixedLevels[0].enemy5Spawns,
-        enemy6Spawns: fixedLevels[0].enemy6Spawns,
-    });
-    for (let i = 0; i < 5; i++) {
-        let randomIndex = Math.floor(Math.random() * possibleLevels2.length);
-        let randomLevel = {
-            id: possibleLevels2[randomIndex].id,
-            layout: possibleLevels2[randomIndex].layout,
-            enemy1Spawns: possibleLevels2[randomIndex].enemy1Spawns,
-            enemy2Spawns: possibleLevels2[randomIndex].enemy2Spawns,
-            enemy3Spawns: possibleLevels2[randomIndex].enemy3Spawns,
-            enemy4Spawns: possibleLevels2[randomIndex].enemy4Spawns,
-            enemy5Spawns: possibleLevels2[randomIndex].enemy5Spawns,
-            enemy6Spawns: possibleLevels2[randomIndex].enemy6Spawns,
-        };
-        chosenLevels.push(randomLevel);
-    }
-    chosenLevels.push({
-        id: fixedLevels[1].id,
-        layout: fixedLevels[1].layout,
-        enemy1Spawns: fixedLevels[1].enemy1Spawns,
-        enemy2Spawns: fixedLevels[1].enemy2Spawns,
-        enemy3Spawns: fixedLevels[1].enemy3Spawns,
-        enemy4Spawns: fixedLevels[1].enemy4Spawns,
-        enemy5Spawns: fixedLevels[1].enemy5Spawns,
-        enemy6Spawns: fixedLevels[1].enemy6Spawns,
-    });
-    chosenLevels.push({
-        id: fixedLevels[0].id,
-        layout: fixedLevels[0].layout,
-        enemy1Spawns: fixedLevels[0].enemy1Spawns,
-        enemy2Spawns: fixedLevels[0].enemy2Spawns,
-        enemy3Spawns: fixedLevels[0].enemy3Spawns,
-        enemy4Spawns: fixedLevels[0].enemy4Spawns,
-        enemy5Spawns: fixedLevels[0].enemy5Spawns,
-        enemy6Spawns: fixedLevels[0].enemy6Spawns,
-    });
-    for (let i = 0; i < 5; i++) {
-        let randomIndex = Math.floor(Math.random() * possibleLevels3.length);
-        let randomLevel = {
-            id: possibleLevels3[randomIndex].id,
-            layout: possibleLevels3[randomIndex].layout,
-            enemy1Spawns: possibleLevels3[randomIndex].enemy1Spawns,
-            enemy2Spawns: possibleLevels3[randomIndex].enemy2Spawns,
-            enemy3Spawns: possibleLevels3[randomIndex].enemy3Spawns,
-            enemy4Spawns: possibleLevels3[randomIndex].enemy4Spawns,
-            enemy5Spawns: possibleLevels3[randomIndex].enemy5Spawns,
-            enemy6Spawns: possibleLevels3[randomIndex].enemy6Spawns,
-        };
-        chosenLevels.push(randomLevel);
-    }
-    chosenLevels.push({
-        id: fixedLevels[1].id,
-        layout: fixedLevels[1].layout,
-        enemy1Spawns: fixedLevels[1].enemy1Spawns,
-        enemy2Spawns: fixedLevels[1].enemy2Spawns,
-        enemy3Spawns: fixedLevels[1].enemy3Spawns,
-        enemy4Spawns: fixedLevels[1].enemy4Spawns,
-        enemy5Spawns: fixedLevels[1].enemy5Spawns,
-        enemy6Spawns: fixedLevels[1].enemy6Spawns,
-    });
-};
-```
-{% endcode %}
 
-Here is the code within the level scene which is responsible for the boss and floor text which appears. The text entities are created with their `opacity` set to 0 and when the desired level appears, the `opacity` is set to 1 for a short duration which reveals the text before it is hidden again.
-
-{% code title="main.ts" %}
-```typescript
-const bossFightText = add([
-        text("Boss Fight", {
-            size: 70,
-        }),
-        pos(1550, 60),
-        area({ cursor: "pointer" }),
-        z(10),
-        opacity(0),
-        "bossFightText",
+    // Function to show lore text
+    function showLoreText() {
+    // Create a black background for the lore text
+    const loreText = add([
+        rect(1600, 150),
+        pos(width() / 2, height() / 2),
+        z(11),
+        anchor("center"),
+        color(0, 0, 0),
+        "loreDialogue",
     ]);
 
-    if (chosenLevelIndex === 6 || chosenLevelIndex === 13 || chosenLevelIndex === 20) {
-        bossFightText.opacity = 1;
-        wait(2, () => {
-            bossFightText.opacity = 0;
-        });
+    // Create and display the lore dialogue message
+    const message = add([
+        text("The Evil Shapes are invading our world from another dimension!\nYou must defeat The Evil Shapes through 3 floors and defeat the Shape King to restore balance before it is too late.\nEnemies get stronger the further you go. If you find me later I can sell you some items to help.\nGood luck!",  {
+                size: 30,
+                width: width() - 40,
+                align: "center",
+            }),
+        pos(width() / 2, (height() / 2)),
+        z(12),
+        opacity(0.5),
+        anchor("center"),
+        color(255, 255, 255),
+        "loreDialogue",
+    ]);
+}
+
+    // Function to hide shop text
+    function hideShopText() {
+        // Destroy all entities with the "shopDialogue" tag
+        destroyAll("shopDialogue",);
+    }
+
+        // Function to hide shop text
+    function hideLoreText() {
+        // Destroy all entities with the "loreDialogue" tag
+        destroyAll("loreDialogue",);
+    }
+
+    // Handle collision between player and shopkeeper
+    onCollide("player", "shopkeeper", () => {
+        if (chosenLevelIndex === 7 || chosenLevelIndex === 14) {
+        showShopText(); // Show shop text if on certain levels
+        } else if (chosenLevelIndex === 0) {
+            showLoreText(); // Show lore text if on level 0
+        }
+    })
+    
+    // Handle the end of collision between player and shopkeeper
+    onCollideEnd("player", "shopkeeper", () => {
+        hideShopText();
+        hideLoreText();
+    })
+```
+
+I modified the function to unlock a weapon so that there must be enough coins to purchase the desired weapon. If there are enough coins then the amount of coins gets subtracted from the total coin balance.
+
+```typescript
+    // Attempt to unlock a weapon
+    function unlockWeapon(index) {
+        if (canUnlockWeapon(index)) {
+            weapons[index].unlocked = true;
+            unlockedWeapons.push(weapons[index]);
+            coins -= weapons[index].cost;
+            updateCoinCounter();
+            inventoryText.updateText();
+        }
+    }
+
+    // Key press events to unlock weapons
+    onKeyPress("o", () => {
+        unlockWeapon(1);
+    }); // Unlock machine gun
+    onKeyPress("p", () => {
+        unlockWeapon(2);
+    }); // Unlock shotgun
+        onKeyPress("u", () => {
+        unlockWeapon(3);
+    }); // Unlock machine pistol
+    onKeyPress("i", () => {
+        unlockWeapon(4);
+    }); // Unlock rifle
+
+
+    // Key press events to equip weapons (1, 2, 3, 4, 5, etc.)
+    onKeyPress("1", () => {
+
+    ... // Other weapon equip keys
+    
+    onKeyPress("4", () => {
+        if (unlockedWeapons[3]) {
+            currentWeapon = unlockedWeapons[3];
+        }
+    })
+    onKeyPress("5", () => {
+        if (unlockedWeapons[4]) {
+            currentWeapon = unlockedWeapons[4];
+        }
+    })
+```
+
+If the player has enough coins, they can restore a portion of their health.
+
+```typescript
+    function restoreHealth() {
+        if (coins >= 5) {
+            coins -= 5; // Deduct 5 coins
+            playerHP += 10; // Restore 10 health
+            updateHealthBar(); // Update the health bar
+            updateCoinCounter(); // Update the coin counter
+        };
     };
 
-        const newFloorText = add([
-        text("Floor " + floorNumber, {
-        size: 70,
-        }),
-        pos(1550, 60),
-        z(10),
-        opacity(0),
-        "newFloorText",
+// Listen for the "l" key press to restore health
+onKeyPress("l", () => {
+    restoreHealth();
+});
+```
+
+I added this temporary feature to make testing each weapon during development easier. Pressing m adds a coin to the coin count.
+
+```typescript
+    // Key press event to add a coin
+    onKeyPress("m", () => {
+        updateCoinCounter();
+    });
+```
+
+I adjusted `healthBar`'s width simply to be equal to `playerHP` instead of using the maths which I had come before. This fixed the bug with the health bar increasing instead of decreasing after getting damaged.
+
+```typescript
+    // Health bar components
+    const healthBarBorder = add([
+        rect(ORIGINALHP + 4, HEALTHBARHEIGHT + 4),
+        pos(10, 10),
+        z(3),
+        color(0, 0, 0),
+    ]);
+    const healthBarBg = add([
+        rect(ORIGINALHP, HEALTHBARHEIGHT),
+        pos(12, 12),
+        z(4),
+        color(79, 75, 75),
+    ]);
+    const healthBar = add([
+        rect(playerHP, HEALTHBARHEIGHT),
+        pos(12, 12),
+        z(5),
+        color(92, 204, 12),
     ]);
     
-    if (chosenLevelIndex === 0) {
-        floorNumber = 1;
-        newFloorText.text = "Floor " + floorNumber,
-        newFloorText.opacity = 1;
-        wait(2, () => {
-            newFloorText.opacity = 0;
-        });
-    } else if (chosenLevelIndex === 7) {
-        floorNumber = 2;
-        newFloorText.text = "Floor " + floorNumber,
-        newFloorText.opacity = 1;
-        wait(2, () => {
-            newFloorText.opacity = 0;
-        });
-    } else if (chosenLevelIndex === 14) {
-        floorNumber = 3;
-        newFloorText.text = "Floor " + floorNumber,
-        newFloorText.opacity = 1;
-        wait(2, () => {
-            newFloorText.opacity = 0;
-        });
-    };
+    //health bar updater
+    function updateHealthBar() {
+        const newWidth = playerHP;
+        healthBar.width = newWidth;
+    }
 ```
-{% endcode %}
 
-When a `player_bullet` or `enemy_bullet` collides with a `box`, both the bullet and box are destroyed.
+#### New Sprites
 
-{% code title="main.ts" %}
-```typescript
-//box collision
-    onCollide("player_bullet", "box", (bullet, box) => {
-        destroy(bullet); // Destroy the bullet
-        destroy(box);   // Destroy the box
-    });
+Over the coming cycles, I will replace some of the sprites in the game. Below are the sprites I added in this cycle.
 
-    onCollide("enemy_bullet", "box", (bullet, box) => {
-        destroy(bullet); // Destroy the bullet
-        destroy(box);   // Destroy the box
-    });
-```
-{% endcode %}
+<div>
 
-Doors are added as part of the level tile map are are represented by a `#`.
+<figure><img src="../.gitbook/assets/cycle13scarlettsprite.png" alt=""><figcaption><p>Scarlet Blackthorn</p></figcaption></figure>
 
-<pre class="language-typescript" data-title="main.ts"><code class="lang-typescript"><strong>    "#": () => [
-</strong>          sprite("door"),
-          area(),
-          anchor("center"),
-          z(2),
-          body(),
-          "door",
-      ],
-</code></pre>
+ 
 
-When the player touches the door, the game checks if there are any enemies present and if they have all been killed it advances to the next level. Otherwise, nothing happens.
+<figure><img src="../.gitbook/assets/cycle13enemy4sprite.png" alt=""><figcaption><p>Enemy 4</p></figcaption></figure>
 
-```typescript
- onCollide("player", "door", (bullet, box) => {
-        enemiesRemaining = get("enemy").length;
-        if (enemiesRemaining === 0) {
-            chosenLevelIndex += 1;
-            destroyAll("entity");
-            if (chosenLevelIndex > chosenLevels.length - 1) {
-                go("win");
-            } else {
-                go("level", chosenLevelIndex);
-            }
-        };
-    });
-```
+ 
+
+<figure><img src="../.gitbook/assets/cycle13enemy5sprite.png" alt=""><figcaption><p>Enemy 5</p></figcaption></figure>
+
+ 
+
+<figure><img src="../.gitbook/assets/cycle13enemy6sprite.png" alt=""><figcaption><p>Enemy 6</p></figcaption></figure>
+
+</div>
 
 ### Challenges
 
-It would have taken a very long time to type out each level individually so I used a random generator for the tile map and enemy spawn positions. This undoubtedly saved me a lot of time.
+Describe challenges you faced and how they were overcome.
 
 ## Testing
 
 ### Tests
 
-| Test | Instructions                                                      | What I expect                                                                                                                                                                                                                                                                        | What actually happens                                                                         | Pass/Fail |
-| ---- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- | --------- |
-| 1    | Cycle through levels.                                             | <ol><li>When starting a new floor, the floor test appears displaying the floor number.</li><li>When entering a boss fight, the boss fight text appears.</li><li>Each level has a seemingly random layout of spikes and boxes.</li><li>All enemies spawn withing the walls.</li></ol> | <ol><li>As expected.</li><li>As expected.</li><li>As expected.</li><li>As expected.</li></ol> | Pass.     |
-| 2    | Shoot at the boxes.                                               | Boxes are destroyed by bullets.                                                                                                                                                                                                                                                      | As expected.                                                                                  | Pass.     |
-| 3    | Let the enemies shoot boxes.                                      | Boxes are destroyed by enemy bullets.                                                                                                                                                                                                                                                | As expected.                                                                                  | Pass.     |
-| 4    | Attempt to go through a door while there are still enemies alive. | Nothing happens.                                                                                                                                                                                                                                                                     | As expected.                                                                                  | Pass.     |
-| 5    | Attempt to go through a door when all the enemies are dead.       | Game advances to next level.                                                                                                                                                                                                                                                         | As expected.                                                                                  | Pass.     |
+| Test | Instructions                                               | What I expect                                                                                     | What actually happens | Pass/Fail |
+| ---- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | --------------------- | --------- |
+| 1    | Start game and touch shopkeeper.                           | Introduction text appears.                                                                        | As expected.          | Pass.     |
+| 2    | Move away from shopkeeper.                                 | Message disappears.                                                                               | As expected.          | Pass.     |
+| 3    | Cycle through levels and observe enemy sprites.            | Enemies 4, 5 and 6 should be using the new sprites.                                               | As expected.          | Pass.     |
+| 4    | Touch the shopkeeper in shop levels.                       | Shop message appears.                                                                             | As expected.          | Pass.     |
+| 5    | Repeat test 2 for shop levels.                             | Message disappears.                                                                               | As expected.          | Pass.     |
+| 6    | Attempt to buy each item in the shop without enough coins. | Nothing happens and items are not bought.                                                         | As expected.          | Pass.     |
+| 7    | Add coins with m and attempt to buy each item.             | Each item can be bought and weapons appear in the inventory in the order that they are purchased. | As expected.          | Pass.     |
+| 8    | Buy health restorations.                                   | Health increases by the same amount each time.                                                    | As expected.          | Pass.     |
+| 9    | Restart game as Scarlett Blackthorn character.             | Game uses her new sprite.                                                                         | As expected.          | Pass.     |
+
+The new sprite for my Scarlett Blackthorn character is a bit big so I will scale her down and make sure when I add new sprites for other characters that they are scaled down too.
 
 ### Evidence
 
-{% embed url="https://youtu.be/8OWUxVaDSTw" %}
+{% embed url="https://youtu.be/mRRvETbc29U" %}

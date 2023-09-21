@@ -1,115 +1,85 @@
-# 2.2.6 Cycle 6 - Basic Enemies
+# 2.2.7 Cycle 7 - Improved Room Generation
 
 ## Design
 
 ### Objectives
 
-My focus in this cycle is to add some enemies. My objectives are:
+My main objective in this cycle is to alter the level system within the game so that:
 
-* [x] Add enemies to the level generation so that they can appear in levels
-* [x] Enemies will move toward the player
-* [x] After a random amount of time, each enemy will stop and then move again
-* [x] Enemies have set health and will take damage upon collision with bullets
-* [x] Enemies die after all health is lost
+* [x] Each floor starts with a shop room (empty for now)
+* [x] 5 random levels are chosen from the `possibleLevels` array and these are played next
+* [x] A floor ends with a boss room (empty for now)
+
+#### Smaller Changes
+
+I also want to add a cooldown to the gun so that the player can't just click their mouse really fast to kill all of the enemies.
+
+* [x] Add a gun cooldown which limits how fast the gun can shoot
 
 ### Usability Features
 
 ### Key Variables
 
-| Variable Name(s)                       | Use                                                                                                                                                                                                                                                  |
-| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ENEMY1HP`, `ENEMY2HP`  and `ENEMY3HP` | These constants represent the initial health points for different enemy types. They are used to set the initial health of enemies and determine when an enemy is defeated. For now, there is only 1 type of enemy so only `ENEMY1HP` is called upon. |
-| `bulletDamage`                         | This variable represents the amount of damage inflicted by a bullet. It is used to subtract the bullet's damage from an enemy's health.                                                                                                              |
-| `enemies1`                             | This variable stores an array of enemy objects of type "enemy1" present in the level. It is obtained using the `level.get` method.                                                                                                                   |
-| `_t`                                   | This variable is a time counter used in the enemy's movement logic. It is incremented by the `dt()` function, which returns the time since the last frame.                                                                                           |
-| `mobs`                                 | This variable represents a collection of mobile game objects. It is obtained using the `level.get` method and initially contains enemy objects. Later, it also stores additional mobile game objects collided with the player's bullets.             |
+| Variable Name     | Use                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fixedLevels`     | An array of fixed level configurations, where each level is represented as an array of strings. It is imported from the `fixedLevels.js` module.                                                                                                                                                                                                                                                                                              |
+| `chosenLevels`    | An array that stores the selected levels for gameplay. It initially starts as an empty array and is populated with level configurations based on the `fixedLevels` array and randomly chosen levels from `possibleLevels` (which is not defined in the provided code snippet). The structure of `chosenLevels` is `[shop level, random level 1, random level 2, ..., random level 5, boss level]`, and this sequence is repeated three times. |
+| `gunCooldownTime` | A variable that represents the cooldown time in seconds for the player's gun. It is set to 2 seconds.                                                                                                                                                                                                                                                                                                                                         |
+| `gunCooldown`     | A boolean variable that keeps track of whether the gun is on cooldown or not. It is initially set to `false` and is used to prevent the player from firing the gun during the cooldown period.                                                                                                                                                                                                                                                |
 
 ### Pseudocode
 
 ```
-// Constants
-const ENEMY1HP = 50
-const ENEMY2HP = 50
-const ENEMY3HP = 50
-let bulletDamage = 10
+// Import necessary modules
+import { fixedLevels } from "./fixedLevels";
 
-// Level Setup
-level = addLevel(possibleLevels[levelId], {
-    tileWidth: 58,
-    tileHeight: 58,
-    pos: vec2(350, 45),
-    tiles: {
-        "=": () => [...],
-        "^": () => [...],
-        "+": () => [...],
-        "8": () => [...],
-        "@": () => [...],
-        "1": () => [
-            sprite("ghosty"),
-            area(),
-            anchor("center"),
-            z(2),
-            state("idle", ["idle", "move"]),
-            body(),
-            health(ENEMY1HP),
-            "enemy1",
-            "mob",
-        ],
-    },
-})
+// Define key variables
+let chosenLevels = []
+let levelId = 0
+let gunCooldownTime = 2;
+let gunCooldown = false;
 
-// Enemy Movement
-function activateEnemy1(enemy1):
-    _t = 0
+// Function to handle level completion
+function handleLevelCompletion() {
+    if (levelId > chosenLevels.length - 1) {
+        go("win");
+    } else {
+        go("level", levelId);
+    }
+}
 
-    enemy1.onStateEnter("idle", time):
-        wait(time || rand(1, 3), () =>
-            enemy1.enterState("move", rand(1, 3))
-        )
+// Function to handle gun cooldown
+function handleGunCooldown() {
+    gunCooldown = true;
+    spawnBullet(player.pos.add(vec2(350, 50)));
+    wait(gunCooldownTime, () => {
+        gunCooldown = false;
+    });
+}
 
-    enemy1.onStateUpdate("idle"):
-        _t += dt()
-        t = _t % 2 - 1
-        enemy1.color = lerp(
-            rgb(255, 255, 255),
-            rgb(128, 128, 128),
-            t < 0 ? -t : t
-        )
+// Event handlers
+onKeyPress("r", () => {
+    handleLevelCompletion();
+});
 
-    enemy1.onStateEnter("move", time):
-        wait(time, () => enemy1.enterState("idle", rand(1, 5)))
-        enemy1.color = rgb(255, 255, 255)
+onMousePress("left", () => {
+    if (!gunCooldown) {
+        handleGunCooldown();
+    }
+});
 
-    enemy1.onStateUpdate("move"):
-        enemy1.moveTo(player.pos, 100)
+// Main code execution
+for (let j = 0; j < 3; j++) {
+    chosenLevels.push(fixedLevels[0]);
+    for (let i = 0; i < 5; i++) {
+        let randomIndex = Math.floor(Math.random() * possibleLevels.length);
+        let randomLevel = possibleLevels[randomIndex];
+        chosenLevels.push(randomLevel);
+    }
+    chosenLevels.push(fixedLevels[1]);
+}
 
-    return enemy1
-
-// Activate Enemy Movement for each enemy1
-enemies1 = level.get("enemy1")
-for i = 0 to enemies1.length:
-    activateEnemy1(enemies1[i])
-
-// Bullet-Mob Collision
-mobs = level.get("mob")
-onCollide("player_bullet", "mob", (b, m):
-    destroy(b)
-    if mobs[m]:
-        mobs[m].health -= bulletDamage
-        if mobs[m].health <= 0:
-            destroy(m)
-            delete mobs[m]
-    else:
-        initialHealth = 0
-        if m.is("enemy1"):
-            initialHealth = ENEMY1HP
-        else if m.is("enemy2"):
-            initialHealth = ENEMY2HP
-        else if m.is("enemy3"):
-            initialHealth = ENEMY3HP
-        initialHealth -= bulletDamage
-        mobs[m] = { health: initialHealth }
-)
+const level = addLevel(chosenLevels[levelId], {...});
 
 ```
 
@@ -117,156 +87,135 @@ onCollide("player_bullet", "mob", (b, m):
 
 ### Outcome
 
-```javascript
-// Constants
-const ENEMY1HP = 50;
-const ENEMY2HP = 50;
-const ENEMY3HP = 50;
-let bulletDamage = 10;
-```
+I made a new file called `./fixedLevels` to hold the shop and boss levels.
 
-I added a new tile definition to the level generation for enemies.
-
+{% code title="fixedLevels.js" %}
 ```javascript
-// Level Setup
-const level = addLevel(possibleLevels[levelId], {
-  tileWidth: 58,
-  tileHeight: 58,
-  pos: vec2(350, 45),
-  tiles: {
-    "=": () => [...],
-    "^": () => [...],
-    "+": () => [...],
-    "8": () => [...],
-    "@": () => [...],
-    "1": () => [
-      sprite("ghosty"),
-      area(),
-      anchor("center"),
-      z(2),
-      state("idle", ["idle", "move"]),
-      body(),
-      health(ENEMY1HP),
-      "enemy1",
-      "mob",
+export const fixedLevels = [
+    [
+    "====================",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=        @         =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "====================",
     ],
-  },
+    [
+    "====================",
+    "=   @              =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "=                  =",
+    "====================",
+    ],
+];
+
+// 1st level shop level
+// 2nd level boss level
+```
+{% endcode %}
+
+3 floors are created, each with a shop room, 5 random levels, and then a boss room. They are all combined into one array called `chosenLevels`.
+
+{% code title="main.js" %}
+```javascript
+// Import necessary modules
+import { fixedLevels } from "./fixedLevels";
+
+let chosenLevels = [] // Array to store selected levels
+// Loop to generate chosenLevels array
+for (let j = 0; j < 3; j++) {
+    chosenLevels.push(fixedLevels[0]); // Add shop level
+    for (let i = 0; i < 5; i++) {
+        let randomIndex = Math.floor(Math.random() * possibleLevels.length); // Randomly select a level index
+        let randomLevel = possibleLevels[randomIndex]; // Get the randomly selected level
+        chosenLevels.push(randomLevel); // Add the random level to chosenLevels
+    }
+
+    chosenLevels.push(fixedLevels[1]); // Add boss level
+}
+```
+{% endcode %}
+
+`addLevel()` and the check for the last level were updated to use the `chosenLevels` array.
+
+{% code title="main.js" %}
+```javascript
+// Get the current level configuration
+const level = addLevel(chosenLevels[levelId], {...})
+
+// Event handler for "r" key press
+onKeyPress("r", () => {
+    ...; // Other code
+     // Check if levelId exceeds the chosenLevels array length
+    if (levelId > chosenLevels.length - 1) {
+        go("win"); // Go to the "win" scene if all levels are completed
+    } else {
+        go("level", levelId); // Go to the next level scene
+    }
 });
 ```
+{% endcode %}
 
-The `activateEnemy1` function contains the idle and move states for an enemy and switches between them after a random time.
+I modified how the `addBullet()` function is called so that it can only be called every 2 seconds. I've used a variable for the cooldown time so that it can be easily modified in the future when I add different weapons which have different statistics.
 
+{% code title="main.js" %}
 ```javascript
-const enemies1 = level.get("enemy1");
+let gunCooldownTime = 2; // Cooldown time for the gun in seconds
 
-// Enemy Movement
-function activateEnemy1(enemy1) {
-  let _t = 0;
-
-  enemy1.onStateEnter("idle", (time) => {
-    // Enemy goes into idle state for a random duration
-    wait(time || rand(1, 3), () =>
-      enemy1.enterState("move", rand(1, 3))
-    );
-  });
-
-  enemy1.onStateUpdate("idle", () => {
-    // Update enemy's appearance/color while idle
-    _t += dt();
-    const t = _t % 2 - 1;
-    enemy1.color = lerp(
-      rgb(255, 255, 255),
-      rgb(128, 128, 128),
-      t < 0 ? -t : t
-    );
-  });
-
-  enemy1.onStateEnter("move", (time) => {
-    // Enemy goes into move state for a specified duration
-    wait(time, () => enemy1.enterState("idle", rand(1, 5)));
-    enemy1.color = rgb(255, 255, 255);
-  });
-
-  enemy1.onStateUpdate("move", () => {
-    // Enemy moves towards the player's position
-    enemy1.moveTo(player.pos, 100);
-  });
-
-  return enemy1;
-}
-```
-
-The `activateEnemy1` function is called for each `enemy1` present.
-
-```javascript
-// Activate Enemy Movement for each enemy1
-const enemies1 = level.get("enemy1");
-for (let i = 0; i < enemies1.length; i++) {
-  activateEnemy1(enemies1[i]);
-}
-```
-
-When a bullet collides with an enemy, the enemy loses `bulletDamage` health and if they lose all their health they die.
-
-```javascript
-// Bullet-Mob Collision
-const mobs = level.get("mob");
-onCollide("player_bullet", "mob", (b, m) => {
-  destroy(b);
-  if (mobs[m]) {
-    // If the mob already exists in the mobs object, reduce its health
-    mobs[m].health -= bulletDamage;
-    if (mobs[m].health <= 0) {
-      // If the mob's health reaches zero or below, destroy it
-      destroy(m);
-      delete mobs[m];
+let gunCooldown = false; // Flag to track gun cooldown status
+// Event handler for left mouse button press
+onMousePress("left", () => {
+    // Check if the gun is not on cooldown
+    if (!gunCooldown) {
+        gunCooldown = true; // Set the gun cooldown flag
+        spawnBullet(player.pos.add(vec2(350, 50))); // Spawn a bullet at the player's position
+        wait(gunCooldownTime, () => {
+            gunCooldown = false; // Reset the gun cooldown flag after the specified cooldown time
+        });
     }
-  } else {
-    // If the mob is a new enemy type, initialize its health
-    let initialHealth = 0;
-    if (m.is("enemy1")) {
-      initialHealth = ENEMY1HP;
-    } else if (m.is("enemy2")) {
-      initialHealth = ENEMY2HP;
-    } else if (m.is("enemy3")) {
-      initialHealth = ENEMY3HP;
-    }
-    initialHealth -= bulletDamage;
-    mobs[m] = { health: initialHealth };
-  }
+});
 ```
+{% endcode %}
 
 ### Challenges
 
-I faced severe challenges with making each enemy act independently. Initially, I attempted to add multiple enemies with one tag and add logic that operates on each one independently. However, I could not get this to work successfully as they would all wait the same random amount of time before stopping and moving again. This was a frustrating challenge as when approaching this problem, it seemed easy to implement. After a few days of trying to get things to work, I decided to take a different approach. I tried a different approach where I added multiple enemies to the level generation which each have a different tag, then I added state transitions for each one individually. However, I soon realised that this was an impractical and clunky approach.
-
-<figure><img src="../.gitbook/assets/cycle6badapproach.png" alt="" width="137"><figcaption><p>This was a bad approach</p></figcaption></figure>
-
-So I went back to my old method and after a while, I managed to get it to work through the use of a function containing each state and calling that function for each enemy, as seen [above](cycle-1-6.md#outcome).
+Initially, I had the boss level and shop level stored in separate files as an array with 1 element which was a list of the tiles. However, I soon found it was much simpler to store them together in a single array to avoid confusion. I also had trouble deleting the old files that they were in (`shopLevel.js` and `bossLevel.js`) because whenever I deleted them they would just instantly reappear.
 
 ## Testing
 
 ### Tests
 
-| Test | Instructions                                                   | What I expect                                                             | What actually happens | Pass/Fail |
-| ---- | -------------------------------------------------------------- | ------------------------------------------------------------------------- | --------------------- | --------- |
-| 1    | Run code and start level by pressing 'T'.                      | Enemies appear in the level.                                              | As expected.          | Pass.     |
-| 2    | Wait.                                                          | Enemies swap between moving towards the player and standing still.        | As expected.          | Pass.     |
-| 3    | Shoot an enemy 5 times.                                        | The bullet disappears each time and on the 5th shot the enemy disappears. | As expected.          | Pass.     |
-| 4    | Go to the next level with 'R' and attempt to kill the enemies. | Enemies function and die the same as before.                              | As expected.          | Pass.     |
-
-### Images
-
-<div>
-
-<figure><img src="../.gitbook/assets/cycle62enemies.png" alt="" width="188"><figcaption><p>Enemies</p></figcaption></figure>
-
- 
-
-<figure><img src="../.gitbook/assets/cycle61enemy.png" alt="" width="188"><figcaption><p>1 enemy was killed, 1 remains</p></figcaption></figure>
-
-</div>
+| Test | Instructions                                                                        | What I expect                                                                | What actually happens | Pass/Fail |
+| ---- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------- | --------- |
+| 1    | Run code & start levels.                                                            | Empty level with player in the middle.                                       | As expected.          | Pass.     |
+| 2    | Press 'R' 5 times.                                                                  | Game cycles through 5 random levels.                                         | As expected.          | Pass.     |
+| 3    | Press 'R' again.                                                                    | Empty level with player towards the top left.                                | As expected.          | Pass.     |
+| 4    | Press 'R' again.                                                                    | Empty level with player in the middle.                                       | As expected.          | Pass.     |
+| 5    | Repeat tests 2  - 4 twice more.                                                     | Same results as in tests 2 - 4, but with different random levels for test 2. | As expected.          | Pass.     |
+| 6    | Press 'R' again.                                                                    | Game goes to end screen (empty screen).                                      | As expected.          | Pass.     |
+| 7    | Attempt to shoot the gun faster than the cooldown by clicking very fast repeatedly. | A bullet only spawns every 2 seconds.                                        | As expected.          | Pass.     |
 
 ### Evidence
 
-{% embed url="https://youtu.be/WN8-hrHo6sk" %}
+{% embed url="https://youtu.be/KihXnebhu_8" %}

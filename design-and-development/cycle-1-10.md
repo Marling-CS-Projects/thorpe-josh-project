@@ -1,187 +1,264 @@
-# 2.2.9 Cycle 9 - Bullet Damage & Coins
+# 2.2.10 Cycle 10 - Different Weapons & Inventory
 
 ## Design
 
 ### Objectives
 
-My main objective in this cycle is to add damage from the enemy bullets. I will also re-add features that I removed for simplicity while developing the enemy class in [Cycle 8b](cycle-1-9.md). My objectives are:
+In this cycle, I aim to set up a proper weapon and inventory system. My objectives are to:
 
-* [x] Re-add player health system and spikes
-* [x] Re-add health bar
-* [x] Re-add background colour
-* [x] Enemy bullets can damage the player
-* [x] Different enemy types deal different amounts of damage
-
-My secondary objective is to add a coin system to the game:
-
-* [x] Add a coin system where killing an enemy gives +1 coin
-* [x] The number of coins is displayed by a counter in the corner of the screen
-* [x] The coin counter accurately displays the number of coins, being updated after each enemy kill
+* [x] Change player bullet damage to be stored on each individual bullet
+* [x] Add 'Brass Spraygun' (machine gun with high rate of fire but low damage)
+* [x] Add 'Boomstick' (shotgun which fires multiple bullets at once)
+* [x] The current shooting is now the 'Gear gun' which is the weapon you start with
+* [x] Modify the statistics of each gun to balance them somewhat (I can properly balance everything towards the end of development)
+* [x] Guns can be changed with the number keys
+* [x] The inventory system displays your weapons on the number keys As you unlock new weapons they appear in the inventory in that order (i.e., the first weapon unlocked is key 1, the second is key 2, etc.)
 
 #### Smaller Changes
 
-* [x] Make the dash duration shorter but with a reduced cooldown time
+* [x] Adjust the size and position of the coin counter
+* [x] Move the enemy spawning logic into a separate file
 
 ### Usability Features
 
 ### Key Variables
 
-| Variable Name      | Use                                                                                                                                                                                                                                                                                                                                        |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `projectileSpeed`  | Defines the speed at which the projectile will move.                                                                                                                                                                                                                                                                                       |
-| `coins`            | This variable keeps track of the number of coins collected by the player throughout the game. It's incremented by 1 each time the player defeats an enemy. The `updateCoinCounter()` function is then called to update the displayed coin count on the UI.                                                                                 |
-| `coinCounter`      | This variable represents a UI element that displays the current coin count on the screen. It is positioned on the screen and is updated whenever the `coins` variable changes. This provides a visual representation of the current coin count to the player.                                                                              |
-| `shootDamage`      | Represents the amount of damage dealt by the enemy's bullets to the player upon collision. This value is assigned to each bullet entity when it is created. It's used in the collision event handler between the bullets and the player to reduce the player's health points by the specified `shootDamage` value when a collision occurs. |
-| `chosenLevelIndex` | Holds the index of the chosen level for the scene.                                                                                                                                                                                                                                                                                         |
+| Variable Name     | Use                                                                                                                                                                                    |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `weapons`         | An array containing objects that represent different weapon types. Each object includes properties like `unlocked`, `name`, `bulletDamage`, `bulletSpeed`, `cooldown`, and `accuracy`. |
+| `unlockedWeapons` | An array that stores unlocked weapon objects.                                                                                                                                          |
+| `currentWeapon`   | Holds the currently selected weapon from the `unlockedWeapons` array.                                                                                                                  |
+| `spreadAngle`     | A random angle used to simulate bullet inaccuracy.                                                                                                                                     |
+| `inventoryText`   | Represents the text entity displaying the player's unlocked weapons.                                                                                                                   |
 
 ### Pseudocode
 
 ```
-function shootProjectile(targetPos):
-    projectileSpeed = 500
-    direction = targetPos - this.entity.pos
+// Define weapon types
+const weapons = [
+    { unlocked: false, name: "Gear gun", bulletDamage: 20, bulletSpeed: 1200, cooldown: 1, accuracy: 7 },
+    { unlocked: false, name: "Brass spraygun", bulletDamage: 5, bulletSpeed: 1000, cooldown: 0.05, accuracy: 15 },
+    { unlocked: false, name: "Boomstick", bulletDamage: 10, bulletSpeed: 600, cooldown: 1, accuracy: 20 }
+];
 
-    create bullet entity with:
-        sprite = "egg"
-        position = this.entity.pos
-        area component
-        scale = (0.65, 0.65)
-        color = (255, 0, 0)
-        anchor = "center"
-        rendering order = 2
-        rotation = angle between this.entity.pos and targetPos + 270
-        movement = move in direction with projectileSpeed
-        tag "enemy_bullet"
-        shootDamage = this.shootDamage
-        destroy if offscreen
+// Define unlocked weapons array
+let unlockedWeapons = [];
 
-on collision between "enemy_bullet" and "player":
-    destroy bullet
-    reduce player's health by bullet's shootDamage
-    playerHP = player's current health
-    update health bar UI
+// Define current weapon
+let currentWeapon;
 
-function updateCoinCounter():
-    increment coins by 1
-    update coinCounter's text to "Coins:" + coins
+// Define gun cooldown status
+let gunCooldown = false;
 
-scene "level" with chosenLevelIndex:
-    create coinCounter UI element:
-        text = "Coins:" + coins
-        position = (1200, 10)
-        rendering order = 10
-        tag "coinCounter"
+// Function to unlock a weapon
+function unlockWeapon(index) {
+    weapons[index].unlocked = true;
+    unlockedWeapons.push(weapons[index]);
+}
 
-    ... // rest of scene code
+// Function to create and spawn a bullet
+function spawnBullet(truePosition, weapon) {
+    // Calculate aiming angle and spread angle
+    const POINT_CURSOR = angleBetweenPositions(truePosition, mousePosition());
+    const spreadAngle = randomSpreadAngle(weapon.accuracy);
 
-    on destroy:
-        destroy this entity
-        update coin count using updateCoinCounter()
+    // Create bullet entity with appropriate properties
+    createBulletEntity(truePosition, POINT_CURSOR, spreadAngle, weapon.bulletDamage);
+}
+
+// Define inventory text entity
+const inventoryText = createInventoryTextEntity();
+
+// Event listeners for unlocking weapons
+onKeyPress("o", () => {
+    unlockWeapon(1);
+    updateInventoryText();
+}); // Unlock machine gun
+onKeyPress("p", () => {
+    unlockWeapon(2);
+    updateInventoryText();
+}); // Unlock shotgun
+
+// Event listeners for selecting weapons
+onKeyPress("1", () => { selectWeapon(0); });
+onKeyPress("2", () => { selectWeapon(1); });
+onKeyPress("3", () => { selectWeapon(2); });
+
+// Event listener for shooting
+onMousePress("left", () => {
+    if (!gunCooldown) {
+        gunCooldown = true;
+        if (currentWeapon === weapons[2]) {
+            // Spawn multiple bullets for shotgun
+            for (let i = 0; i < 5; i++) {
+                spawnBullet(playerPosition().add(vec2(350, 50)), currentWeapon);
+            }
+        } else {
+            spawnBullet(playerPosition().add(vec2(350, 50)), currentWeapon);
+        }
+        wait(currentWeapon.cooldown, () => {
+            gunCooldown = false;
+        });
+    }
+});
 ```
 
 ## Development
 
 ### Outcome
 
-I re-added spikes and the health bar, content from [Cycle 5](cycle-1-5.md) after I removed them to develop [Cycle 8b](cycle-1-9.md).
+Each weapon is stored as an object in the `weapons` array which holds all the data for every weapon. Each weapon starts off being locked but can be unlocked for now with specific keys.
 
-I added `shootDamage` to the contructor and it is set to a different value for each enemy type. This value is then added to the bullets spawned by enemies.
+```typescript
+const weapons = [
+    { unlocked: false, name: "Gear gun", bulletDamage: 20, bulletSpeed: 1200, cooldown: 1, accuracy: 7 }, // Gear gun (pistol)
+    { unlocked: false, name: "Brass spraygun", bulletDamage: 5, bulletSpeed: 1000, cooldown: 0.05, accuracy: 15 },  // Brass spraygun (machine gun)
+    { unlocked: false, name: "Boomstick", bulletDamage: 10, bulletSpeed: 600, cooldown: 1, accuracy: 20 },  // boomstick (shotgun)
+];
+```
 
-<pre class="language-typescript" data-title="enemy class.ts"><code class="lang-typescript"><strong>    shootProjectile(targetPos: Vec2) {
-</strong>        const projectileSpeed = 500; // Adjust as needed
-        const direction = targetPos.sub(this.entity.pos);
+A weapon is unlocked by pushing it to the `unlockedWeapons` array. The pistol weapon is unlocked by default at the start of the game.
 
-        add([
-            sprite("egg"),
-            pos(this.entity.pos),
-            area(),
-            scale(0.65, 0.65),
-            color(255, 0, 0),
-            anchor("center"),
-            z(2),
-            rotate(this.entity.pos.angle(targetPos) + 270),
-            move(direction, projectileSpeed),
-            "enemy_bullet",
-            { shootDamage: this.shootDamage },
-            offscreen({ destroy: true }),
-        ]);
-    }
+```typescript
+    // Function to unlock a weapon
+function unlockWeapon(index) {
+    unlockedWeapons.push(weapons[index]);
+    unlockedWeapons[index].unlocked = true;
+}
+
+let unlockedWeapons = [];
+unlockWeapon(0); // Unlock pistol
+currentWeapon = unlockedWeapons[0];
+```
+
+I moved the enemy spawning logic to a separate file named `spawn enemies.ts` make `main.ts` easier to navigate.
+
+<pre class="language-typescript"><code class="lang-typescript">import { spawnEnemies} from "./spawn enemies";
+<strong>
+</strong><strong>scene("level", (chosenLevelIndex) => {
+</strong><strong>    ... //rest of code
+</strong>
+    spawnEnemies(chosenLevels, chosenLevelIndex, Enemy, player); //spawn in all enemy types
+
 </code></pre>
 
-When an enemy bullet and the player collide, the player will be damaged by the value of shootDamage.
+Bullet spawning code has been modified to use the values from `currentWeapon` which holds the object of the weapon currently in use. If the current weapon is the shotgun then 5 projectiles will be spawned instead of 1.
 
-{% code title="main.ts" %}
 ```typescript
-    onCollide("enemy_bullet", "player", (bullet, player) => {
-        destroy(bullet);
-        player.hurt(bullet.shootDamage);
-        playerHP = player.hp();
-        updateHealthBar();
+    let gunCooldown = false;
+    //calls spawnBullet on mouse press with cooldown
+    onMousePress("left", () => {
+        if (!gunCooldown) {
+            gunCooldown = true;
+            if (currentWeapon === weapons[2]) {
+                spawnBullet(player.pos.add(vec2(350, 50)), currentWeapon);
+                spawnBullet(player.pos.add(vec2(350, 50)), currentWeapon);
+                spawnBullet(player.pos.add(vec2(350, 50)), currentWeapon);
+                spawnBullet(player.pos.add(vec2(350, 50)), currentWeapon);
+                spawnBullet(player.pos.add(vec2(350, 50)), currentWeapon);
+            } else {
+                spawnBullet(player.pos.add(vec2(350, 50)), currentWeapon);
+            };
+            wait(currentWeapon.cooldown, () => {
+                gunCooldown = false;
+            });
+        }
     });
-```
-{% endcode %}
-
-I created a coin counter which increments by 1 for each enemy killed and I placed the const inside the level scene so that it's only visible when the levels have started.
-
-{% code title="main.ts" %}
-```typescript
-export function updateCoinCounter() {
-    coins += 1;
-    const coinCounter = get("coinCounter")[0];
-    coinCounter.text = "Coins:" + coins;
-} //outside scene code
-
-scene("level", (chosenLevelIndex) => { //scene start
-//inside scene code
-    const coinCounter = add([
-        text("Coins:" + coins),
-        pos(1200, 10),
-        z(10), // Place on top of other elements
-        "coinCounter",
-    ]);
     
-    ...//rest of scene
+    //creates a bullet at the player's position
+    function spawnBullet(truePosition, weapon) {
+        const POINT_CURSOR = truePosition.angle(mousePos()) + 180;
+
+        const spreadAngle = Math.random() * weapon.accuracy - weapon.accuracy / 2;
+        
+        add([
+            pos(truePosition),
+            sprite("egg"),
+            area(),
+            scale(0.65, 0.65),
+            color(127, 127, 255),
+            anchor("center"),
+            z(2),
+            rotate(POINT_CURSOR + 90 + spreadAngle),
+            move(POINT_CURSOR + spreadAngle , weapon.bulletSpeed),
+            offscreen({ destroy: true }),
+            { playerBulletDamage: weapon.bulletDamage },
+            "player_bullet",
+        ]);
+    };
 ```
-{% endcode %}
 
-`updateCoinCounter()` is called from the enemy class when an enemy is killed.
+The machine gun and shotgun can be unlocked with the 'o' and 'p' keys. The `unlockWeapon` function had to be repeated as it could not be called from inside a scene. Unlocking a weapon also adds it to the inventory display.
 
-{% code title="enemy class.ts" %}
-```typescript
-    destroy() {
-        destroy(this.entity);
-        updateCoinCounter();
+<pre class="language-typescript"><code class="lang-typescript"><strong>    // Function to unlock a weapon
+</strong>    function unlockWeapon(index) {
+        weapons[index].unlocked = true;
+        unlockedWeapons.push(weapons[index]);
     }
+    
+    onKeyPress("o", () => {
+        unlockWeapon(1);
+        inventoryText.updateText();
+    }); // Unlock machine gun
+    onKeyPress("p", () => {
+        unlockWeapon(2);
+        inventoryText.updateText();
+    }); // Unlock shotgun
+</code></pre>
+
+The current weapon can be switched with the number keys. Each number key corresponds to the order in which the weapons were unlocked. The if statements check that enough weapons have actually been unlocked to use each key, preventing an error.
+
+```typescript
+    onKeyPress("1", () => {
+        if (unlockedWeapons[0]) {
+            currentWeapon = unlockedWeapons[0];
+        }
+    })
+    onKeyPress("2", () => {
+        if (unlockedWeapons[1]) {
+            currentWeapon = unlockedWeapons[1];
+        }
+    })
+    onKeyPress("3", () => {
+        if (unlockedWeapons[2]) {
+            currentWeapon = unlockedWeapons[2];
+        }
+    })
 ```
-{% endcode %}
+
+The `updateText` function is stored inside `inventoryText`. It adds the name of the unlocked weapon to the inventory.
+
+```typescript
+ const inventoryText = add([
+        text("Inventory:\n1: -\n2: -\n3: -"),
+        pos(10, 60),
+        z(10),
+        {
+            updateText: function() {
+                const weaponText = unlockedWeapons.map((weapon, index) => {
+                    return `${index + 1}: ${weapon.unlocked ? weapon.name : "-"}`;
+                }).join("\n");
+                this.text = "Inventory:\n" + weaponText;
+            }
+        }
+    ]);
+}
+```
 
 ### Challenges
 
-I found adding `shootDamage` to a bullet was a bit difficult at first, however, once I found out how to do it, it was quite simple.
+It was challenging to find how to update the inventory when a new weapon is unlocked. I was not aware that embedding a function within inventoryText was possible as this was not described in the documentation. Instead, I came across an example of it while viewing some Kaboom code online and thought that it could work in this scenario.
 
 ## Testing
 
 ### Tests
 
-| Test | Instructions                                        | What I expect                                                                     | What actually happens                                                                                                                                              | Pass/Fail   |
-| ---- | --------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------- |
-| 1    | Start level with t and get hit by enemy projectiles | Health bar decreases and enemy bullet is destroyed.                               | As expected.                                                                                                                                                       | Pass.       |
-| 2    | Click to shoot at enemies.                          | Upon collision, the player bullet is destroyed.                                   | As expected.                                                                                                                                                       | Pass.       |
-| 3    | Continue to shoot at enemies.                       | After being repeatedly hit, enemies die and the coin counter is incremented by 1. | As expected except sometimes if an enemy dies just before it is about to attack, the bullet will be spawned despite the enemy having been killed a second earlier. | Borderline. |
-| 4    | Continue to get hit by enemy bullets.               | Health bar decreases until it is empty and the player dies.                       | As expected.                                                                                                                                                       | Pass.       |
-
-All tests were successful except for a small bug in test 3.  In an upcoming cycle. will implement a check just before an enemy bullet is spawned which checks that the enemy is still alive before the bullet is shot.
-
-{% embed url="https://youtu.be/4n-FJICG0yk" %}
-Example of the bug
-{% endembed %}
-
-### Images
-
-<figure><img src="../.gitbook/assets/cycle9coindisplay.png" alt="" width="418"><figcaption><p>Coin display after killing 4 enemies</p></figcaption></figure>
-
-The coin counter displays correctly but I will move it more to the right in the next cycle so that it's in the corner more.
+| Test | Instructions                                                                             | What I expect                                                                                                                                                                                                                                                                                                        | What actually happens                                                    | Pass/Fail |
+| ---- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | --------- |
+| 1    | Run code and start game. Attempt to press the 2 and 3 keys and fire the gun by clicking. | <ol><li>Gun should behave the same as pistol.</li></ol><ol start="2"><li>Inventory should only display Gear gun.</li></ol>                                                                                                                                                                                           | <ol><li>As expected.</li><li>As expected.</li></ol>                      | Pass.     |
+| 2    | Now try switching weapon after pressing keys 'O' and 'P'. Fire them with by clicking.    | <ol><li>'O' and 'P' unlock the brass spraygun and boomstick and they appear in the inventory after being unlocked.</li></ol><ol start="2"><li>Weapons can be switched between in the same same order as they were unlocked.</li></ol><ol start="3"><li>Accuracy and spread of each weapon are as expected.</li></ol> | <ol><li>As expected.</li><li>As expected.</li><li>As expected.</li></ol> | Pass.     |
+| 3    | Start a level and fire each weapon on enemies.                                           | <ol><li>Each weapon appears to do the correct damage.</li></ol><ol start="2"><li>Weapon bullets behave correctly.</li></ol>                                                                                                                                                                                          | <ol><li>As expected.</li><li>As expected.</li></ol>                      | Pass.     |
 
 ### Evidence
 
-{% embed url="https://youtu.be/7tloHcT0jB4" %}
+{% embed url="https://youtu.be/adhG-BJv2YQ" %}

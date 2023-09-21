@@ -1,246 +1,272 @@
-# 2.2.5 Cycle 5 - Health Bar & Player Death
+# 2.2.6 Cycle 6 - Basic Enemies
 
 ## Design
 
 ### Objectives
 
-My focus in this cycle is to add a health bar. My objectives are:
+My focus in this cycle is to add some enemies. My objectives are:
 
-* [x] Add player health bar
-* [x] Standing on spikes deals damage to the player
-* [x] Taking damage will lower the health bar
-* [x] Reaching 0 health causes the player to die
-
-#### Smaller Changes
-
-* [x] Set the player sprite's layer above the spike's layer
+* [x] Add enemies to the level generation so that they can appear in levels
+* [x] Enemies will move toward the player
+* [x] After a random amount of time, each enemy will stop and then move again
+* [x] Enemies have set health and will take damage upon collision with bullets
+* [x] Enemies die after all health is lost
 
 ### Usability Features
 
 ### Key Variables
 
-| Variable Name     | Use                                                                                                                                                                             |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `playerHP`        | Represents the current hit points of the player. It is initially set to 100 and gets updated when the player gets hurt.                                                         |
-| `ORIGINALHP`      | Represents the starting hit points of the player. It is set to the initial value of `playerHP` and is used to calculate the health bar width.                                   |
-| `HEALTHBARWIDTH`  | Represents the width of the health bar in pixels.                                                                                                                               |
-| `HEALTHBARHEIGHT` | Represents the height of the health bar in pixels.                                                                                                                              |
-| `healthBarBorder` | Represents the health bar's border entity. It is a rectangle with a width and height slightly larger than the health bar itself.                                                |
-| `healthBarBg`     | Represents the background of the health bar. It is a rectangle that provides the visual backdrop for the health bar.                                                            |
-| `healthBar`       | Represents the actual health bar entity. It is a rectangle whose width represents the player's current health.                                                                  |
-| `spikeCooldown`   | Represents a boolean flag indicating whether the player is currently in a cooldown state after colliding with a spike. It prevents the player from getting hurt too frequently. |
+| Variable Name(s)                       | Use                                                                                                                                                                                                                                                  |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ENEMY1HP`, `ENEMY2HP`  and `ENEMY3HP` | These constants represent the initial health points for different enemy types. They are used to set the initial health of enemies and determine when an enemy is defeated. For now, there is only 1 type of enemy so only `ENEMY1HP` is called upon. |
+| `bulletDamage`                         | This variable represents the amount of damage inflicted by a bullet. It is used to subtract the bullet's damage from an enemy's health.                                                                                                              |
+| `enemies1`                             | This variable stores an array of enemy objects of type "enemy1" present in the level. It is obtained using the `level.get` method.                                                                                                                   |
+| `_t`                                   | This variable is a time counter used in the enemy's movement logic. It is incremented by the `dt()` function, which returns the time since the last frame.                                                                                           |
+| `mobs`                                 | This variable represents a collection of mobile game objects. It is obtained using the `level.get` method and initially contains enemy objects. Later, it also stores additional mobile game objects collided with the player's bullets.             |
 
 ### Pseudocode
 
 ```
-// Initialize player's hit points and starting point
-let playerHP = 100
-const ORIGINALHP = playerHP
+// Constants
+const ENEMY1HP = 50
+const ENEMY2HP = 50
+const ENEMY3HP = 50
+let bulletDamage = 10
 
-// Define health bar dimensions
-const HEALTHBARWIDTH = 100
-const HEALTHBARHEIGHT = 20
-
-// Create health bar entities
-const healthBarBorder = createHealthBarBorder()
-const healthBarBg = createHealthBarBackground()
-const healthBar = createHealthBar()
-
-// Define spike cooldown flag
-let spikeCooldown = false
-
-// Detect player-spike collisions
-onCollide("player", "spike", () => {
-    if (!spikeCooldown) {
-        spikeCooldown = true
-        player.hurt(5)
-        playerHP = player.hp()
-        updateHealthBar()
-        wait(0.5, () => {
-            spikeCooldown = false
-        })
-    }
+// Level Setup
+level = addLevel(possibleLevels[levelId], {
+    tileWidth: 58,
+    tileHeight: 58,
+    pos: vec2(350, 45),
+    tiles: {
+        "=": () => [...],
+        "^": () => [...],
+        "+": () => [...],
+        "8": () => [...],
+        "@": () => [...],
+        "1": () => [
+            sprite("ghosty"),
+            area(),
+            anchor("center"),
+            z(2),
+            state("idle", ["idle", "move"]),
+            body(),
+            health(ENEMY1HP),
+            "enemy1",
+            "mob",
+        ],
+    },
 })
 
-// Handle player death
-player.on("death", () => {
-    destroy(player)
-    wait(0.3, () => {
-        go("lose")
-    })
-})
+// Enemy Movement
+function activateEnemy1(enemy1):
+    _t = 0
 
-// Update health bar width based on player's hit points
-function updateHealthBar() {
-    const newWidth = (playerHP / ORIGINALHP) * HEALTHBARWIDTH
-    healthBar.width = newWidth
-}
+    enemy1.onStateEnter("idle", time):
+        wait(time || rand(1, 3), () =>
+            enemy1.enterState("move", rand(1, 3))
+        )
 
-// Scene for when the player loses
-scene("lose", () => {
-    // Handle lose scene logic
-})
+    enemy1.onStateUpdate("idle"):
+        _t += dt()
+        t = _t % 2 - 1
+        enemy1.color = lerp(
+            rgb(255, 255, 255),
+            rgb(128, 128, 128),
+            t < 0 ? -t : t
+        )
 
-// Function to create health bar border entity
-function createHealthBarBorder() {
-    // Create and return health bar border entity
-}
+    enemy1.onStateEnter("move", time):
+        wait(time, () => enemy1.enterState("idle", rand(1, 5)))
+        enemy1.color = rgb(255, 255, 255)
 
-// Function to create health bar background entity
-function createHealthBarBackground() {
-    // Create and return health bar background entity
-}
+    enemy1.onStateUpdate("move"):
+        enemy1.moveTo(player.pos, 100)
 
-// Function to create health bar entity
-function createHealthBar() {
-    // Create and return health bar entity
-}
+    return enemy1
+
+// Activate Enemy Movement for each enemy1
+enemies1 = level.get("enemy1")
+for i = 0 to enemies1.length:
+    activateEnemy1(enemies1[i])
+
+// Bullet-Mob Collision
+mobs = level.get("mob")
+onCollide("player_bullet", "mob", (b, m):
+    destroy(b)
+    if mobs[m]:
+        mobs[m].health -= bulletDamage
+        if mobs[m].health <= 0:
+            destroy(m)
+            delete mobs[m]
+    else:
+        initialHealth = 0
+        if m.is("enemy1"):
+            initialHealth = ENEMY1HP
+        else if m.is("enemy2"):
+            initialHealth = ENEMY2HP
+        else if m.is("enemy3"):
+            initialHealth = ENEMY3HP
+        initialHealth -= bulletDamage
+        mobs[m] = { health: initialHealth }
+)
+
 ```
 
 ## Development
 
 ### Outcome
 
-I set the layer of the player above the layer of the spikes using the `z()` property.
-
-<pre class="language-javascript"><code class="lang-javascript"><strong>...
-</strong><strong>
-</strong><strong>"^": () => [
-</strong>sprite("spike"),
-area(),
-anchor("center"),
-z(0), //layer 0
-"entity",
-"spike",
-],
-
-...
-
-"@": () => [
-sprite("bean"),
-area(),
-anchor("center"),
-z(1), //layer 1
-body(),
-health(playerHP),
-"player",
-],
-</code></pre>
-
-I placed the following code outside of the level scene so that `playerHP` is not reset to 100 at the start of each level. Also, it would be a computational waste to repeatedly define constants.
-
 ```javascript
-// Sets the player hitpoints and saves the starting point
-let playerHP = 100; // Player's current hit points
-const ORIGINALHP = playerHP; // Starting hit points
-
-// Sets health bar dimensions
-const HEALTHBARWIDTH = 100; // Width of the health bar
-const HEALTHBARHEIGHT = 20; // Height of the health bar
+// Constants
+const ENEMY1HP = 50;
+const ENEMY2HP = 50;
+const ENEMY3HP = 50;
+let bulletDamage = 10;
 ```
 
-First I created the health bar border, health bar border and the health bar itself. They are rendered as coloured rectangles of a certain width and length. I set the layers so that the health bar border is at the back and is slightly bigger so you can see its edges around the health bar.
+I added a new tile definition to the level generation for enemies.
 
 ```javascript
-// Create the health bar border
-const healthBarBorder = add([
-  rect(HEALTHBARWIDTH + 4, HEALTHBARHEIGHT + 4), // Rectangle size including border
-  pos(10, 10), // Position of the health bar border
-  z(3), // Layer order for rendering
-  color(0, 0, 0), // Border color
-]);
-
-// Create the background of the health bar
-const healthBarBg = add([
-  rect(HEALTHBARWIDTH, HEALTHBARHEIGHT), // Rectangle size
-  pos(12, 12), // Position of the health bar background
-  z(4), // Layer order for rendering
-  color(79, 75, 75), // Background color
-]);
-
-// Create the health bar
-const healthBar = add([
-  rect(playerHP, HEALTHBARHEIGHT), // Initial width based on player's hit points
-  pos(12, 12), // Position of the health bar
-  z(5), // Layer order for rendering
-  color(92, 204, 12), // Health bar color
-]);
-```
-
-When the player collides with a spike the player takes 5 damage and the `updateHealthBar` function is called to update the width of the health bar using the player's new hp value. `spikeCooldown` is used to prevent the player from taking spike damage again within 0.5 seconds.
-
-```javascript
-let spikeCooldown = false; // Spike collision cooldown flag
-
-// Player and spike collision
-onCollide("player", "spike", () => {
-  if (!spikeCooldown) {
-    spikeCooldown = true;
-    player.hurt(5); // Reduce player's hit points
-    playerHP = player.hp(); // Update player's hit points
-    updateHealthBar(); // Update health bar width
-    wait(0.5, () => {
-      spikeCooldown = false; // Cooldown to prevent rapid triggering
-    });
-  }
+// Level Setup
+const level = addLevel(possibleLevels[levelId], {
+  tileWidth: 58,
+  tileHeight: 58,
+  pos: vec2(350, 45),
+  tiles: {
+    "=": () => [...],
+    "^": () => [...],
+    "+": () => [...],
+    "8": () => [...],
+    "@": () => [...],
+    "1": () => [
+      sprite("ghosty"),
+      area(),
+      anchor("center"),
+      z(2),
+      state("idle", ["idle", "move"]),
+      body(),
+      health(ENEMY1HP),
+      "enemy1",
+      "mob",
+    ],
+  },
 });
 ```
 
-`updateHealthBar` sets the new width of the health bar by finding the proportion of the original width it should be.
+The `activateEnemy1` function contains the idle and move states for an enemy and switches between them after a random time.
 
 ```javascript
-// Update the health bar width based on player's hit points
-function updateHealthBar() {
-  const newWidth = (playerHP / ORIGINALHP) * HEALTHBARWIDTH;
-  healthBar.width = newWidth;
-}
+const enemies1 = level.get("enemy1");
 
-```
+// Enemy Movement
+function activateEnemy1(enemy1) {
+  let _t = 0;
 
-If the player loses all health points then the levels are replaced with the 'lose' scene. This scene is empty so nothing happens yet when you lose.
-
-```javascript
-// Player death event
-player.on("death", () => {
-  destroy(player); // Destroy the player entity
-  wait(0.3, () => {
-    go("lose"); // Transition to the "lose" scene
+  enemy1.onStateEnter("idle", (time) => {
+    // Enemy goes into idle state for a random duration
+    wait(time || rand(1, 3), () =>
+      enemy1.enterState("move", rand(1, 3))
+    );
   });
-});
 
-scene("lose", () => {
-  // Logic and code for the "lose" scene
-});
+  enemy1.onStateUpdate("idle", () => {
+    // Update enemy's appearance/color while idle
+    _t += dt();
+    const t = _t % 2 - 1;
+    enemy1.color = lerp(
+      rgb(255, 255, 255),
+      rgb(128, 128, 128),
+      t < 0 ? -t : t
+    );
+  });
+
+  enemy1.onStateEnter("move", (time) => {
+    // Enemy goes into move state for a specified duration
+    wait(time, () => enemy1.enterState("idle", rand(1, 5)));
+    enemy1.color = rgb(255, 255, 255);
+  });
+
+  enemy1.onStateUpdate("move", () => {
+    // Enemy moves towards the player's position
+    enemy1.moveTo(player.pos, 100);
+  });
+
+  return enemy1;
+}
+```
+
+The `activateEnemy1` function is called for each `enemy1` present.
+
+```javascript
+// Activate Enemy Movement for each enemy1
+const enemies1 = level.get("enemy1");
+for (let i = 0; i < enemies1.length; i++) {
+  activateEnemy1(enemies1[i]);
+}
+```
+
+When a bullet collides with an enemy, the enemy loses `bulletDamage` health and if they lose all their health they die.
+
+```javascript
+// Bullet-Mob Collision
+const mobs = level.get("mob");
+onCollide("player_bullet", "mob", (b, m) => {
+  destroy(b);
+  if (mobs[m]) {
+    // If the mob already exists in the mobs object, reduce its health
+    mobs[m].health -= bulletDamage;
+    if (mobs[m].health <= 0) {
+      // If the mob's health reaches zero or below, destroy it
+      destroy(m);
+      delete mobs[m];
+    }
+  } else {
+    // If the mob is a new enemy type, initialize its health
+    let initialHealth = 0;
+    if (m.is("enemy1")) {
+      initialHealth = ENEMY1HP;
+    } else if (m.is("enemy2")) {
+      initialHealth = ENEMY2HP;
+    } else if (m.is("enemy3")) {
+      initialHealth = ENEMY3HP;
+    }
+    initialHealth -= bulletDamage;
+    mobs[m] = { health: initialHealth };
+  }
 ```
 
 ### Challenges
 
-Initially, I had planned to set the player's health to a variable which could then be changed and updated as needed. However, this was not possible due to Kaboom limitations therefore I did it the other way around instead.
+I faced severe challenges with making each enemy act independently. Initially, I attempted to add multiple enemies with one tag and add logic that operates on each one independently. However, I could not get this to work successfully as they would all wait the same random amount of time before stopping and moving again. This was a frustrating challenge as when approaching this problem, it seemed easy to implement. After a few days of trying to get things to work, I decided to take a different approach. I tried a different approach where I added multiple enemies to the level generation which each have a different tag, then I added state transitions for each one individually. However, I soon realised that this was an impractical and clunky approach.
+
+<figure><img src="../.gitbook/assets/cycle6badapproach.png" alt="" width="137"><figcaption><p>This was a bad approach</p></figcaption></figure>
+
+So I went back to my old method and after a while, I managed to get it to work through the use of a function containing each state and calling that function for each enemy, as seen [above](cycle-1-5.md#outcome).
 
 ## Testing
 
 ### Tests
 
-| Test | Instructions                                    | What I expect                                                                                                                                                                                                              | What actually happens                                                    | Pass/Fail |
-| ---- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | --------- |
-| 1    | Run code and start levels.                      | Correct health bar in the top left of the screen.                                                                                                                                                                          | As expected.                                                             | Pass.     |
-| 2    | Walk over spike with player.                    | <ol><li>Player's sprite passes over the spike instead of under.</li><li>The health bar decreases by a fixed amount.</li></ol>                                                                                              | <ol><li>As expected.</li><li>As expected.</li></ol>                      | Pass.     |
-| 3    | Repeatedly touch spikes in quick succession.    | <ol><li>Health bar decreases by constant amount each time.</li><li>Health bar does not decrease if the next spike is touched in too quick of a succession.</li><li>Health bar background becomes visible (grey).</li></ol> | <ol><li>As expected.</li><li>As expected.</li><li>As expected.</li></ol> | Pass.     |
-| 4    | Touch spikes until the health bar reaches zero. | Game switches to the end screen (which is currently empty).                                                                                                                                                                | As expected.                                                             | Pass.     |
-| 5    | Move, shoot and increase levels.                | All functions the same as in [Cycle 4](cycle-1-4.md).                                                                                                                                                                      | As expected.                                                             | Pass.     |
+| Test | Instructions                                                   | What I expect                                                             | What actually happens | Pass/Fail |
+| ---- | -------------------------------------------------------------- | ------------------------------------------------------------------------- | --------------------- | --------- |
+| 1    | Run code and start level by pressing 'T'.                      | Enemies appear in the level.                                              | As expected.          | Pass.     |
+| 2    | Wait.                                                          | Enemies swap between moving towards the player and standing still.        | As expected.          | Pass.     |
+| 3    | Shoot an enemy 5 times.                                        | The bullet disappears each time and on the 5th shot the enemy disappears. | As expected.          | Pass.     |
+| 4    | Go to the next level with 'R' and attempt to kill the enemies. | Enemies function and die the same as before.                              | As expected.          | Pass.     |
 
 ### Images
 
 <div>
 
-<figure><img src="../.gitbook/assets/cycle5healthbarfull.png" alt=""><figcaption><p>Full health bar</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle62enemies.png" alt="" width="188"><figcaption><p>Enemies</p></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/cycle5healthbardamaged.png" alt=""><figcaption><p>Health bar after standing on multiple spikes</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle61enemy.png" alt="" width="188"><figcaption><p>1 enemy was killed, 1 remains</p></figcaption></figure>
 
 </div>
 
 ### Evidence
 
-{% embed url="https://youtu.be/_iNutoGY3jY" %}
+{% embed url="https://youtu.be/WN8-hrHo6sk" %}

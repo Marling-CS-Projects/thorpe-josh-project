@@ -1,365 +1,382 @@
-# 2.2.15 Cycle 15 - Dash Cooldown Bar & Improved UI & Menus
+# 2.2.16 Cycle 16 - Boss Health Bar & Automatic Weapons & Fixing Bugs
 
 ## Design
 
 ### Objectives
 
-In this cycle, my goal is to improve the game UI and menus. My objectives are:
+In this cycle, I will add some smaller features and fixes. First, I would like to:
 
-* [x] Add a dash cooldown bar
-* [x] Make boss fight text and new floor text last until the next level
-* [x] Move around all the elements of the HUD so that it fits better
-* [x] Add a proper win screen
-* [x] Add a proper death screen
-* [x] Be able to return to the main menu from win or death
-* [x] The game should be fully repeatable after restarting
-* [x] Make main menu buttons and text bigger
-* [x] Add character descriptions in character selection
-* [x] Add menu titles to the main menu (including a name for the game)
-* [x] Add a background colour to the main menu
+* [x] Make the machine pistol and brass spraygun automatic weapons (you can hold down left mouse button to shoot them)
+* [x] &#x20;Change the player bullets to rectangles, except for the shotgun which fires small pellets
+* [x] Enemies and bosses fire red rectangles
+
+I would also like to add a boss healthbar to display how much of a boss's health is left.
+
+* [x] Add boss healthbar to boss fights
+
+Currently, my game is missing many checks which causes bugs or issues when carrying out unexpected behaviour. I will fix these issues in this cycle, which should help improve the robustness of my game. I will check each box when the issue has been resolved.
+
+* [x] Starting the game without selecting a character throws an error
+* [x] Dashing into the next level does not reset the speed after the dash
+* [x] Players can purchase weapons which they already own, which get put in the inventory twice
+* [x] Purchasing items will deduct one less coin than required
+* [x] Players can purchase items from the shop even when not in a shop level
 
 #### Smaller Changes
 
-* [x] Add a new sprite for Sir Galahad character
-* [x] Add a new sprite for Deadeye Dave character
-* [x] Move shopkeeper messages to the bottom of the screen
-* [x] Reduce the size of player sprites so that they can move in the level easier
+* [x] Add new sprites for the walls, spikes and boxes
+* [x] Further reduce the number of spikes and boxes in levels
+* [x] Adjust some of the enemy spawn locations in levels so that they are not too close to the player
+* [x] Rename Ironclad Carbine to Ironclad Rifle (easier name for players to understand)
+* [x] Adjust coin counter position
+* [x] Fix the dash cooldown bar border
 
 ### Usability Features
 
 ### Key Variables
 
-| Variable Name                                                   | Use                                                                                                                  |
-| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `winTitle`, `backButton`, `winText`, `loseTitle` and `loseText` | These variables are used to create text elements for the titles, and informational texts in the win and lose scenes. |
-| `menuBackground`                                                | This variable is a background rectangle for all the menu scenes to give them a background colour.                    |
-| `dashCooldownBarBackground` and `dashCooldownBarBorder`         | These are graphical elements for the cooldown bar.                                                                   |
-| `dashCooldownBar`                                               | Represents the actual cooldown progress bar.                                                                         |
-| `dashCooldown`                                                  | A boolean flag to check if the dash ability is on cooldown.                                                          |
-| `dashDuration`                                                  | Defines how long a dash lasts.                                                                                       |
-| `dashRecharge`                                                  | Defines the total recharge time for the dash ability.                                                                |
+| Variable Name                                       | Use                                                                                                                       |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `bossHealthBarBackground` and `bossHealthBarBorder` | These variables define UI elements for the boss's health bar. They represent the bar's background and border.             |
+| `bossHealthBar`                                     | This variable represents the bar part of the boss health bar. It is used to display the boss's health during boss fights. |
 
 ### Pseudocode
 
 ```
-// Define global variables
-let coins
-let enemiesRemaining
-let weapons
-let unlockedWeapons
-let currentWeapon
-let chosenLevels
-let dashCooldown
-let playerSpeed
-let dashDuration
-let dashRecharge
-let floorNumber
+// Define key constants
+const BOSSHEALTHBARHEIGHT =  // Set the height of the boss health bar
+const BOSSSPAWNINGPOS = vec2(1200, 450)  // Set the position for boss enemy spawning
 
-// Define game scenes
-scene("win", () => {
-    // Create win screen elements
-    // Handle "Return to Main Menu" button click
-});
+// Define the Player class
+class Player:
+    // Properties for player character
+    pos = vec2(x, y)
+    // ...
 
-scene("lose", () => {
-    // Create lose screen elements
-    // Handle "Return to Main Menu" button click
-    // Cleanup erroneous enemies
-});
+// Define the Enemy class
+class Enemy:
+    // Properties for enemies
+    // ...
 
-scene("mainMenu", () => {
-    // Initialize game state
-    coins = 0
-    enemiesRemaining = 0
-    unlockedWeapons = []
+// Define functions for spawning player bullets
+function spawnPlayerBullet(truePosition, weapon):
+    // Calculate bullet direction
+    POINT_CURSOR = angle(truePosition, mousePos()) + 180
+    // Calculate bullet spread
+    spreadAngle = random() * weapon.accuracy - weapon.accuracy / 2
+
+    // Create and add player bullet entity
+    addEntity(
+        shape = circle(5),
+        pos = truePosition,
+        color = color(255, 213, 0),
+        // Other properties and behaviors
+    )
+
+// Define functions for spawning enemy bullets
+function spawnEnemyBullet(targetPos, inaccuracy):
+    // Calculate bullet direction
+    direction = angle(enemy.pos, targetPos) + 180
+    // Calculate bullet spread
+    spreadAngle = random() * inaccuracy - inaccuracy / 2
+
+    // Create and add enemy bullet entity
+    addEntity(
+        shape = rect(7, 15),
+        pos = enemy.pos,
+        color = color(255, 7, 3),
+        // Other properties and behaviors
+    )
+
+// Define functions for managing boss UI elements
+function addBossUI():
+    bossFightText.opacity = 1
+    bossHealthBar.height = BOSSHEALTHBARHEIGHT
+    bossHealthBar.opacity = 1
+    bossHealthBarBackground.opacity = 1
+    bossHealthBarBorder.opacity = 1
+
+// Main game loop
+while gameIsRunning:
+    // Handle player input and movement
+    player.handleInput()
     
-    // Unlock the first weapon (e.g., pistol)
-    unlockWeapon(0)
+    // Check for collisions between player bullets and enemies
+    checkCollisions(playerBullets, enemies)
 
-    // Choose random levels
-    chooseLevels(chosenLevels)
+    // Check for collisions between enemy bullets and the player
+    checkCollisions(enemyBullets, player)
 
-    // Set up main menu elements
-    // Handle menu interactions (e.g., selecting levels, choosing weapons)
-});
-
-// Define game loop
-loop(() => {
-    // Update game logic
-    // Handle player input (e.g., dashing)
-    // Update enemy behavior
-    // Check win or lose conditions
-    // Update UI elements (e.g., coin count, cooldown bar)
-});
-
-// Define functions
-function unlockWeapon(index) {
-    // Unlock a weapon and add it to unlockedWeapons
-}
-
-function chooseLevels(chosenLevels) {
-    // Randomly select levels and add them to chosenLevels
-}
-
-function wait(time, callback) {
-    // Wait for a specified time and then execute a callback
-}
-
-// Define event handlers
-onMousePress("right", () => {
-    // Handle right mouse button click (e.g., player dash)
-});
-
-// Start the game in the main menu scene
-go("mainMenu")
+    // Spawn bullets and enemies based on game logic and conditions
+    if (chosenLevelIndex === 6):
+        spawnBoss("firstboss")
+        addBossUI()
+    else if (chosenLevelIndex === 13):
+        spawnBoss("secondboss")
+        addBossUI()
+    else if (chosenLevelIndex === 20):
+        spawnBoss("thirdboss")
+        bossFightText.text = "Final\nBoss!"
+        addBossUI()
 ```
 
 ## Development
 
 ### Outcome
 
-The win and lose scenes are very similar since they are both made up of a background, title, text and menu button. Below is the win scene.
+If the current weapon is the Boomstick then the bullets should be spherical pellets, otherwise, create them as rectangular bullets.
 
+{% code title="spawn bullet.ts" %}
 ```typescript
-// win scene -------------------------------------------------------------------
-scene("win", () => {
-    const menuBackground = add([
-        rect(width(), height()),
-        pos(width() / 2, height() / 2),
-        z(1),
-        anchor("center"),
-        color(168, 69, 12),
-        "menuBackground",
-    ]);
+export function spawnBullet(truePosition, weapon) {
+    const POINT_CURSOR = truePosition.angle(mousePos()) + 180;
 
-    const winTitle = add([
-        text("You Win!", {
-            size: 80,
-        }),
-        pos(width() / 2, 180),
-        anchor("center"),
-        z(10),
-        color(22, 219, 55),
-    ]);
+    const spreadAngle = Math.random() * weapon.accuracy - weapon.accuracy / 2;
 
-    const backButton = add([
-        text("Return to Main Menu", {
-            size: 40,
-        }),
-        pos(width() / 2, height() - 200),
-        anchor("center"),
-        area({ cursor: "pointer" }),
-        z(10),
-    ]);
 
-    const winText = add([
-        text("Well done adventurer!\nYou defeated the Shape King and his minions and restored balance to the world once more!\nLet us hope that he never returns!",
-            {
-                size: 50,
-                width: 1000,
-                align: "center",
-            }),
-        pos(width() / 2, height() / 2),
-        anchor("center"),
-        z(10),
-    ]);
-
-    backButton.onClick(() => {
-        go("mainMenu");
-    });
-});
+    if (weapon.name === "Boomstick") {
+        add([
+            pos(truePosition),
+            circle(5),
+            area(),
+            color(255, 213, 0),
+            anchor("center"),
+            z(2),
+            rotate(POINT_CURSOR + 90 + spreadAngle),
+            move(POINT_CURSOR + spreadAngle, weapon.bulletSpeed),
+            offscreen({ destroy: true }),
+            { playerBulletDamage: weapon.bulletDamage },
+            "player_bullet",
+        ]);
+    } else {
+        add([
+            pos(truePosition),
+            rect(7, 15),
+            area(),
+            color(255, 213, 0),
+            anchor("center"),
+            z(2),
+            rotate(POINT_CURSOR + 90 + spreadAngle),
+            move(POINT_CURSOR + spreadAngle, weapon.bulletSpeed),
+            offscreen({ destroy: true }),
+            { playerBulletDamage: weapon.bulletDamage },
+            "player_bullet",
+        ]);
+    }
+};
 ```
+{% endcode %}
 
-Below is the lose scene.
+I modified bullet spawning in the enemy class to use a rectangle too.
 
+{% code title="enemy class.ts" %}
 ```typescript
-// lose scene ---------------------------------------------------------------------
-scene("lose", () => {
-
-    const menuBackground = add([
-        rect(width(), height()),
-        pos(width() / 2, height() / 2),
-        z(1),
-        anchor("center"),
-        color(168, 69, 12),
-        "menuBackground",
-    ]);
-
-    const loseTitle = add([
-        text("You Died!", {
-            size: 80,
-        }),
-        pos(width() / 2, 180),
-        anchor("center"),
-        z(10),
-        color(252, 7, 3),
-    ]);
-
-    const backButton = add([
-        text("Return to Main Menu", {
-            size: 40,
-        }),
-        pos(width() / 2, height() - 200),
-        anchor("center"),
-        area({ cursor: "pointer" }),
-        z(10),
-    ]);
-
-    const winText = add([
-        text("The Shape King lives on! You made it to floor " + floorNumber + " of 3.\nThe Shape King must perish, try again to defeat him!",
-            {
-                size: 50,
-                align: "center",
-            }),
-        pos(width() / 2, height() / 2),
-        anchor("center"),
-        z(10),
-    ]);
-
-    backButton.onClick(() => {
-        go("mainMenu");
-    });
-
-    // Incase an errenous enemies spawn from a boss
-    wait(1, () => {
-        destroyAll("enemy");
-        destroyAll("enemy_bullet")
-    });
-    
-});
+ shootProjectile(targetPos: Vec2) {
+        let direction = this.entity.pos.angle(targetPos) + 180;
+        const spreadAngle = Math.random() * this.inaccuracy - this.inaccuracy / 2;
+        if (this.isAlive) {
+            add([
+                rect(7,15),
+                pos(this.entity.pos),
+                area(),
+                color(255, 7, 3),
+                anchor("center"),
+                z(2),
+                rotate(this.entity.pos.angle(targetPos) + 270),
+                move(direction + spreadAngle, this.bulletSpeed),
+                "enemy_bullet",
+                { shootDamage: this.shootDamage },
+                offscreen({ destroy: true }),
+            ]);
+        };
+    };
 ```
+{% endcode %}
 
-The dash cooldown bar is created similarly to the player's health bar in [Cycle 5](cycle-1-5.md).
+Like the dash cooldown bar and the player healthbar, the boss healthbar is made up of a background, a border, and the actual bar itself. When a boss level starts, the `opacity` of all the objects is set to 1, otherwise, it is 0 and they are invisible in regular levels. When a `player_bullet` collides with an `enemy`, if it is a boss then modify the boss health bar accordingly.
 
-```typescript
-const dashCooldownBarBackground = add([
-        rect(150, 14),
-        pos(1500, 50),
+<pre class="language-typescript" data-title="main.ts"><code class="lang-typescript"><strong>const bossHealthBar = add([
+</strong>        rect(80, BOSSHEALTHBARHEIGHT),
+        pos(160, 240),
+        z(10),
+        color(255, 0, 0),
+        anchor("top"),
+        opacity(0),
+        "bossHealthBar",
+
+    ]);
+
+    const bossHealthBarBackground = add([
+        rect(80, BOSSHEALTHBARHEIGHT),
+        pos(160, 240),
         z(9),
-        anchor("left"),
         color(79, 75, 75),
+        anchor("top"),
+        opacity(0),
+        "bossHealthBar",
     ]);
 
-    const dashCooldownBarBorder = add([
-        rect(154, 16),
-        pos(1498, 50),
-        anchor("left"),
-        z(3),
+    const bossHealthBarBorder = add([
+        rect(80 + 10, BOSSHEALTHBARHEIGHT + 12),
+        pos(158, 234),
+        anchor("top"),
+        opacity(0),
+        z(8),
         color(0, 0, 0),
+        "bossHealthBar",
     ]);
 
-    const dashCooldownBar = add([
-        rect(150, 14),
-        pos(1500, 50),
-        z(10),
-        color(0, 0, 255),
-        anchor("left"),
-    ]);
-
+    function addBossUI() {
+        bossFightText.opacity = 1;
+        bossHealthBar.height = BOSSHEALTHBARHEIGHT;
+        bossHealthBar.opacity = 1;
+        bossHealthBarBackground.opacity = 1;
+        bossHealthBarBorder.opacity = 1;
+    };
     
-```
+    // What to do for boss levels
+    const BOSSSPAWNINGPOS = vec2(1200, 450);
 
-The dashing code was modified to include the dash cooldown bar. When a dash has ended, the cooldown bar's width is set near zero and then set to increasingly greater widths in set steps, making it look like it is moving smoothly.
+    if (chosenLevelIndex === 6) {
+        // Spawn the boss
+        const enemy7 = new Enemy("firstboss", 7);
+        enemy7.spawn(BOSSSPAWNINGPOS, player);
+        addBossUI();
+        
 
+    } else if (chosenLevelIndex === 13) {
+        // Spawn the boss
+        const enemy8 = new Enemy("secondboss", 8);
+        enemy8.spawn(BOSSSPAWNINGPOS, player);
+       addBossUI();
+    } else if (chosenLevelIndex === 20) {
+        // Spawn the boss
+        const enemy9 = new Enemy("thirdboss", 9);
+        enemy9.spawn(BOSSSPAWNINGPOS, player);
+        // Update and show boss fight text
+        bossFightText.text = "Final\nBoss!"
+        addBossUI()
+    } else {
+        // Hide boss fight text
+        //bossFightText.opacity = 0;
+    };
+
+    onCollide("player_bullet", "enemy", (bullet, enemy) => {
+        if (enemy.instance.species >= 7) {
+            const newHeight = (enemy.instance.currentHealth / enemy.instance.maxHealth) * BOSSHEALTHBARHEIGHT;
+            bossHealthBar.height = newHeight;
+        };
+    });
+</code></pre>
+
+I added a check to the start button in character selection which checks that a character has been selected before proceeding.
+
+{% code title="main.ts" %}
 ```typescript
-let dashCooldown = false;
-    //dash
-    onMousePress("right", () => {
-        if (!dashCooldown) {
-            dashCooldown = true;
-            dashCooldownBar.width = 0;
-
-            playerSpeed += 300;
-            wait(dashDuration, () => {
-                playerSpeed -= 300;
-            });
-
-            const steps = 100;
-            const increment = 150 / steps;
-            const stepDuration = dashRecharge / steps * 1000;
-            let currentStep = 0;
-
-            function rechargeStep() {
-                currentStep++;
-                dashCooldownBar.width = increment * currentStep;
-
-                if (currentStep < steps) {
-                    setTimeout(rechargeStep, stepDuration);
-                } else {
-                    dashCooldown = false;
-                }
-            }
-
-            rechargeStep();
-
+    startButton.onClick(() => {
+        if (selectedCharacterSprite) {
+            let chosenLevelIndex = 0;
+            go("level", chosenLevelIndex);
         }
     });
 ```
+{% endcode %}
 
-To make the game replayable after dying or winning, I added/moved code which initialises a lot of aspects.
+At the start of a  new level, the player's speed is set to `originalSpeed` which is the original speed for that sprite. This makes sure that if the player dashes into the next level, the speed is reset properly.
 
-```typescript
-scene("mainMenu", () => {
+<pre class="language-typescript" data-title="main.ts"><code class="lang-typescript">let originalSpeed = 50; // Initialised as arbitary vale
 
-    coins = 0;
-    enemiesRemaining = 0;
+...
 
-        // Lock every weapon
-    for (const weapon of weapons) {
-        weapon.unlocked = false;
-    }
-
-        // Function to unlock a weapon
-    function unlockWeapon(index) {
-        unlockedWeapons.push(weapons[index]);
-        unlockedWeapons[index].unlocked = true;
-    }
-
-    unlockedWeapons = [];
-    unlockWeapon(0); // Unlock pistol
-    let currentWeapon = unlockedWeapons[0];
-
-
-        //Choose random levels
-    chosenLevels = [];
-    chooseLevels(chosenLevels);
+<strong>// Within character select scene
+</strong><strong>characterSprite.onClick(() => {
+</strong>            originalSpeed = characterSprite.speed;
+            ... // Other code
+        });
+    });
     
-    ... // Rest of the main menu code
+...
 
-}
+playerSpeed = originalSpeed; // Within level scene
+</code></pre>
+
+Added a check so that a weapon will not unlock if it has been unlocked already.
+
+{% code title="main.ts" %}
+```typescript
+// Function to unlock a weapon
+    function unlockWeapon(index) {
+        if (!weapons[index].unlocked && canUnlockWeapon(index)) {
+            ... // Weapon unlock and inventory update code
+        };
+    };
 ```
+{% endcode %}
+
+Added the `isInShop` flag which makes sure players can only try to buy weapons when in the shop menu.
+
+{% code title="main.ts" %}
+```typescript
+let isInShop = false;
+
+
+onCollide("player", "shopkeeper", () => {
+        if (chosenLevelIndex === 7 || chosenLevelIndex === 14) {
+            showShopText();
+            isInShop = true;
+        } else if (chosenLevelIndex === 0) {
+            showLoreText();
+        }
+    })
+    onCollideEnd("player", "shopkeeper", () => {
+        hideShopText();
+        hideLoreText();
+        isInShop = false;
+    })
+    
+
+onKeyPress("o", () => {
+        if (isInShop) {
+            unlockWeapon(1);
+        };
+    }); // Unlock machine gun
+    
+    ... // Other weapon unlock key presses
+```
+{% endcode %}
 
 #### New Sprites
 
-<div align="center" data-full-width="false">
 
-<figure><img src="../.gitbook/assets/cycle15davesprite.png" alt=""><figcaption><p>Deadeye Dave</p></figcaption></figure>
+
+<div>
+
+<figure><img src="../.gitbook/assets/cycle16wallsprite.png" alt=""><figcaption><p>Wall</p></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/cycle15galahadsprite.png" alt=""><figcaption><p>Sir Galahad</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle16boxsprite.png" alt=""><figcaption><p>Box</p></figcaption></figure>
+
+ 
+
+<figure><img src="../.gitbook/assets/cycle16spikesprite.png" alt=""><figcaption><p>Spike</p></figcaption></figure>
 
 </div>
-
-### Challenges
-
-For my initial attempt at resizing the player sprites, I tried using `scale()` to reduce the size when the player was added. However, this made the player collision very strange in that you could clip into the walls and other objects for some reason. To avoid this, I instead shrunk the sprites themselves using an image resizer and added them to the game as the version which the player plays.
 
 ## Testing
 
 ### Tests
 
-| Test | Instructions                                                                             | What I expect                                                                                                                                | What actually happens                               | Pass/Fail |
-| ---- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | --------- |
-| 1    | Start game and look around each menu.                                                    | Text sizes and titles are correct and in the right places.                                                                                   | As expected.                                        | Pass.     |
-| 2    | Go into character selection menu and click on different characters.                      | <ol><li>Character outline is correct size, position and colour.</li></ol><ol start="2"><li>Each character is using the new sprite.</li></ol> | <ol><li>As expected.</li><li>As expected.</li></ol> | Pass.     |
-| 3    | Start levels and activate dash.                                                          | Dash cooldown bar becomes empty and replenishes over time.                                                                                   | As expected.                                        | Pass.     |
-| 4    | Try to dash while bar is recharging.                                                     | Nothing happens. Cannot dash until bar has recharged.                                                                                        | As expected.                                        | Pass.     |
-| 5    | Cycle through the levels to reach the win screen.                                        | Win screen appears after the final boss and is correct.                                                                                      | As expected.                                        | Pass.     |
-| 6    | Restart game by using the menu button to go back into the main menu. Then play the game. | Game works without issue after being restarted.                                                                                              | As expected.                                        | Pass.     |
-| 7    | Get the player killed when health reaches 0.                                             | Lose screen appears with the correct floor number reached.                                                                                   | As expected.                                        | Pass.     |
-| 8    | Touch shopkeeper.                                                                        | Messages appear in the correct place.                                                                                                        | As expected.                                        | Pass.     |
+| Test | Instructions                                           | What I expect                                                      | What actually happens                                                      | Pass/Fail   |
+| ---- | ------------------------------------------------------ | ------------------------------------------------------------------ | -------------------------------------------------------------------------- | ----------- |
+| 1    | Fire the clockwork revolver and brass spraygun.        | Can hold down mouse to fire weapons. Releasing mouse stops firing. | As expected.                                                               | Pass.       |
+| 2    | Fire the boomstick.                                    | Bullets are circular pellets instead of rectangles.                | As expected.                                                               | Pass.       |
+| 3    | Engage in boss fight and kill boss.                    | Health bar depletes as the boss takes damage.                      | As expected, except the boss seems to die before the end of the healthbar. | Borderline. |
+| 4    | Dash into next level.                                  | Speed is reset to normal.                                          | As expected.                                                               | Pass.       |
+| 5    | Attempt to start game without selecting a character.   | Nothing happens.                                                   | As expected.                                                               | Pass.       |
+| 6    | Try to purchase a weapon which is already owned.       | Nothing happens.                                                   | As expected.                                                               | Pass.       |
+| 7    | Try to purchase items from the shop in a regular leve. | Nothing happens.                                                   | As expected.                                                               | Pass.       |
 
 ### Evidence
 
-{% embed url="https://youtu.be/OFSUixsebSE" %}
+{% embed url="https://youtu.be/vBQw5p7JjaQ" %}

@@ -1,409 +1,395 @@
-# 2.2.11 Cycle 11 - Main Menu & Character Select
+# 2.2.12 Cycle 12 - Proper Levels & Enemy Spawning
 
 ## Design
 
 ### Objectives
 
-In this cycle, my objective is to create a main menu at the start of the game with character selection. My objectives in this cycle are:
+In this cycle, my goal is to make some proper levels with enemies spawning in the correct places. My objectives in this cycle are to:
 
-* [x] When the game starts you are greeted with a main menu
-* [x] There are buttons for 'play', 'how to play', and 'credits' which each take you to a separate menu
-* [x] 'how to play' gives some basic instructions
-* [x] 'credits' gives sprite, sound effects and music credits
-* [x] 'play' goes to the character select menu
-* [x] You can choose from 3 characters, each with different statistics
-* [x] Click on the character and then click another play button to start the game
-* [x] When a character is clicked on, there is a white selection box behind it
-* [x] The selection box moves behind the next one which is clicked
-* [x] Health bar starting width scales with the health of the character
-
-#### Smaller Changes
-
-* [x] Add shopkeeper sprite in the shop levels
-* [x] Fix enemies shooting once after death bug
+* [x] Make some proper level layouts
+* [x] Change level spawning so that it pulls from 3 lists - 1 for each floor (so that I can increase enemy difficulty as you progress)
+* [x] Enemies spawn in proper locations within the level
+* [x] Text appears in the corner of your screen when entering a new floor saying the floor number
+* [x] Text appears declaring when you have entered a boss fight
+* [x] The player can advance through a door if all enemies have been killed
+* [x] Make player and enemy bullets be able to destroy the boxes (mushrooms)
 
 ### Usability Features
 
 ### Key Variables
 
-| Variable Name                                                      | Use                                                                                                                                                                                                         |
-| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `playButton`, `howToPlayButton`, `creditsButton`                   | These variables represent buttons displayed in different scenes. They are used to handle click events to transition between scenes.                                                                         |
-| `howToPlayText`, `creditsText`                                     | These variables represent text elements displaying instructions and credits. They are used to display information in the `howToPlay` and `credits` scenes.                                                  |
-| `characterData`                                                    | This variable stores an array of objects, each representing character information (e.g., name, sprite, health, speed).                                                                                      |
-| `characterSpacing`, `characterY`                                   | These variables define the spacing and vertical position of character elements in the `characterSelect` scene.                                                                                              |
-| `whiteOutline`                                                     | This variable represents a white outline element that appears when a character is selected. It is used to visually highlight the selected character.                                                        |
-| `characterName`, `characterSprite`                                 | These variables represent text and sprite elements for each character in the `characterSelect` scene. They are used to display character names and sprites and handle click events for character selection. |
-| `playerHP`, `playerSpeed`, `ORIGINALHP`, `selectedCharacterSprite` | These variables are used to store and manage player-related data, such as health, speed, and the selected character's sprite. They are modified when a character is selected and used in the `level` scene. |
-| `playButton` (in the `characterSelect` scene)                      | This variable represents a button to start the game. It handles the click event to transition to the `leve`l scene with the selected character.                                                             |
-| `backButton`                                                       | This variable represents a button to return to the main menu. It handles the click event to transition back to the main menu from different scenes.                                                         |
+| Variable Name      | Use                                                                                                                                                                        |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `floorNumber`      | This variable is used to store and track the current floor number. It is updated based on the chosen level index and used to display the floor number in `newFloorText`.   |
+| `enemiesRemaining` | This variable tracks the number of remaining enemies in a level. It is checked to determine whether the player can progress to the next level after defeating all enemies. |
 
 ### Pseudocode
 
 ```
-# Main Menu Scene
-scene("mainMenu"):
-    create playButton
-    create howToPlayButton
-    create creditsButton
+# Initialize game variables
+InitializeGameVariables()
 
-    playButton.onClick():
-        transition to "characterSelect" scene
+# Boss Fight Text
+bossFightText = CreateBossFightText()
 
-    howToPlayButton.onClick():
-        transition to "howToPlay" scene
+if (chosenLevelIndex is 6 or chosenLevelIndex is 13 or chosenLevelIndex is 20):
+    DisplayBossFightText()
+    WaitAndHideBossFightText()
 
-    creditsButton.onClick():
-        transition to "credits" scene
+# New Floor Text
+newFloorText = CreateNewFloorText()
 
-# How to Play Scene
-scene("howToPlay"):
-    create backButton
-    create howToPlayText
+if (chosenLevelIndex is 0):
+    SetFloorNumberTo1()
+    DisplayNewFloorText()
+    WaitAndHideNewFloorText()
+elif (chosenLevelIndex is 7):
+    SetFloorNumberTo2()
+    DisplayNewFloorText()
+    WaitAndHideNewFloorText()
+elif (chosenLevelIndex is 14):
+    SetFloorNumberTo3()
+    DisplayNewFloorText()
+    WaitAndHideNewFloorText()
 
-    backButton.onClick():
-        transition to "mainMenu" scene
+# Box Collision Handling
+HandleBoxCollisions()
 
-# Credits Scene
-scene("credits"):
-    create backButton
-    create creditsText
+# "door" Object
+doorObject = CreateDoorObject()
 
-    backButton.onClick():
-        transition to "mainMenu" scene
+HandlePlayerCollisionsWithDoor()
 
-# Character Selection Scene
-scene("characterSelect"):
-    create characterData
+# Player Bullets and Enemy Bullets
+DefineTagsForBullets()
 
-    for each character in characterData:
-        create characterName
-        create characterSprite
+# Remaining Enemies Tracking
+enemiesRemaining = CountRemainingEnemies()
 
-        characterSprite.onClick():
-            set playerHP to character's health
-            set ORIGINALHP to playerHP
-            set playerSpeed to character's speed
-            show whiteOutline around selected character
-
-    create playButton
-    create backButton
-
-    playButton.onClick():
-        set chosenLevelIndex to 0
-        transition to "level" scene with chosenLevelIndex
-
-    backButton.onClick():
-        transition to "mainMenu" scene
-
-# Level Scene
-scene("level", chosenLevelIndex):
-    # Game logic for the actual gameplay goes here
-
-# Initialize the game by starting at the Main Menu
-go("mainMenu")
+if (enemiesRemaining is 0):
+    ProceedToNextLevel()
 ```
 
 ## Development
 
 ### Outcome
 
-Each screen of the main menu is contained within a separate scene. To move between pages of the menu, the game moves between scenes.
+I created levels for each floor which are stored in separate files for ease of access.
 
+<figure><img src="../.gitbook/assets/cycle12files.png" alt=""><figcaption><p>Files for possible levels of each floor</p></figcaption></figure>
+
+Below are a couple of possible example levels from floor 2. As the floor increases, the levels become more difficult with more boxes and spikes and harder enemies spawn.
+
+<pre class="language-typescript" data-title="possibleLevels2.ts"><code class="lang-typescript"><strong>export const possibleLevels2 = [
+</strong>    {
+        id: 11,
+        enemy1Spawns: [],
+        enemy2Spawns: [
+            [397, 556],
+            [1297, 343],
+            [822, 273],
+        ],
+        enemy3Spawns: [
+            [816, 580],
+            [826, 111],
+        ],
+        enemy4Spawns: [],
+        enemy5Spawns: [],
+        enemy6Spawns: [],
+        layout: [
+            "====================",
+            "= +    ^ +         =",
+            "=  +            ^  =",
+            "=   +     +        =",
+            "= ^           +    =",
+            "= +     +  ^       =",
+            "=       ^     +    =",
+            "= +   +         ^  =",
+            "=@      +          #",
+            "=                  =",
+            "= +     ^      +   =",
+            "=         +  ^ +   =",
+            "= +           +  ++=",
+            "=   ^              =",
+            "=         ^^       =",
+            "====================",
+        ],
+    },
+    {
+        id: 12,
+        enemy1Spawns: [],
+        enemy2Spawns: [
+            [1152, 234],
+        ],
+        enemy3Spawns: [
+            [1099, 94],
+            [1189, 759],
+        ],
+        enemy4Spawns: [
+            [405, 264],
+        ],
+        enemy5Spawns: [],
+        enemy6Spawns: [],
+        layout: [
+            "====================",
+            "=   +              =",
+            "=  +  ^      +     =",
+            "= + ^ +   ^        =",
+            "=   +      +     + =",
+            "=     + ^      ^   =",
+            "=  +            +  =",
+            "=     + +  +    +  =",
+            "=@  +              #",
+            "=                  =",
+            "= + ^   +    ^  +  =",
+            "=      +        +  =",
+            "= +         +   +++=",
+            "=   ^              =",
+            "=         ^^       =",
+            "====================",
+        ],
+    },
+    
+    ... //rest of the levels
+]
+</code></pre>
+
+Below is the updated level selection code which now handles the three lists to draw for each floor. I moved it into a separate file since it got so long.
+
+{% code title="level selection.ts" %}
 ```typescript
-// Main Menu Scene
-scene("mainMenu", () => {
+import { possibleLevels } from "./possibleLevels";
+import { possibleLevels2 } from "./possibleLevels2";
+import { possibleLevels3 } from "./possibleLevels3";
+import { fixedLevels } from "./fixedLevels";
 
-    // Create "Play" button
-    const playButton = add([
-        text("Play", {
-            size: 40,
-        }),
-        pos(width() / 2, height() / 2 - 40),
-        anchor("center"),
-        area({ cursor: "pointer" }),
-        z(10),
-    ]);
 
-    // Create "How to Play" button
-    const howToPlayButton = add([
-        text("How to Play", {
-            size: 40,
-        }),
-        pos(width() / 2, height() / 2 + 20),
-        anchor("center"),
-        area({ cursor: "pointer" }),
-        z(10),
-    ]);
-
-    // Create "Credits" button
-    const creditsButton = add([
-        text("Credits", {
-            size: 40,
-        }),
-        pos(width() / 2, height() / 2 + 80),
-        anchor("center"),
-        area({ cursor: "pointer" }),
-        z(10),
-    ]);
-
-    // Handle Play button click
-    playButton.onClick(() => {
-        go("characterSelect"); // Transition to "Character Select" scene
+export function chooseLevels(chosenLevels) {
+    chosenLevels.push({
+        id: fixedLevels[0].id,
+        layout: fixedLevels[0].layout,
+        enemy1Spawns: fixedLevels[0].enemy1Spawns,
+        enemy2Spawns: fixedLevels[0].enemy2Spawns,
+        enemy3Spawns: fixedLevels[0].enemy3Spawns,
+        enemy4Spawns: fixedLevels[0].enemy4Spawns,
+        enemy5Spawns: fixedLevels[0].enemy5Spawns,
+        enemy6Spawns: fixedLevels[0].enemy6Spawns,
     });
-
-    // Handle How to Play button click
-    howToPlayButton.onClick(() => {
-        go("howToPlay"); // Transition to "How to Play" scene
+    for (let i = 0; i < 5; i++) {
+        let randomIndex = Math.floor(Math.random() * possibleLevels.length);
+        let randomLevel = {
+            id: possibleLevels[randomIndex].id,
+            layout: possibleLevels[randomIndex].layout,
+            enemy1Spawns: possibleLevels[randomIndex].enemy1Spawns,
+            enemy2Spawns: possibleLevels[randomIndex].enemy2Spawns,
+            enemy3Spawns: possibleLevels[randomIndex].enemy3Spawns,
+            enemy4Spawns: possibleLevels[randomIndex].enemy4Spawns,
+            enemy5Spawns: possibleLevels[randomIndex].enemy5Spawns,
+            enemy6Spawns: possibleLevels[randomIndex].enemy6Spawns,
+        };
+        chosenLevels.push(randomLevel);
+    }
+    chosenLevels.push({
+        id: fixedLevels[1].id,
+        layout: fixedLevels[1].layout,
+        enemy1Spawns: fixedLevels[1].enemy1Spawns,
+        enemy2Spawns: fixedLevels[1].enemy2Spawns,
+        enemy3Spawns: fixedLevels[1].enemy3Spawns,
+        enemy4Spawns: fixedLevels[1].enemy4Spawns,
+        enemy5Spawns: fixedLevels[1].enemy5Spawns,
+        enemy6Spawns: fixedLevels[1].enemy6Spawns,
     });
-
-    // Handle Credits button click
-    creditsButton.onClick(() => {
-        go("credits"); // Transition to "Credits" scene
+    chosenLevels.push({
+        id: fixedLevels[0].id,
+        layout: fixedLevels[0].layout,
+        enemy1Spawns: fixedLevels[0].enemy1Spawns,
+        enemy2Spawns: fixedLevels[0].enemy2Spawns,
+        enemy3Spawns: fixedLevels[0].enemy3Spawns,
+        enemy4Spawns: fixedLevels[0].enemy4Spawns,
+        enemy5Spawns: fixedLevels[0].enemy5Spawns,
+        enemy6Spawns: fixedLevels[0].enemy6Spawns,
     });
-});
-
+    for (let i = 0; i < 5; i++) {
+        let randomIndex = Math.floor(Math.random() * possibleLevels2.length);
+        let randomLevel = {
+            id: possibleLevels2[randomIndex].id,
+            layout: possibleLevels2[randomIndex].layout,
+            enemy1Spawns: possibleLevels2[randomIndex].enemy1Spawns,
+            enemy2Spawns: possibleLevels2[randomIndex].enemy2Spawns,
+            enemy3Spawns: possibleLevels2[randomIndex].enemy3Spawns,
+            enemy4Spawns: possibleLevels2[randomIndex].enemy4Spawns,
+            enemy5Spawns: possibleLevels2[randomIndex].enemy5Spawns,
+            enemy6Spawns: possibleLevels2[randomIndex].enemy6Spawns,
+        };
+        chosenLevels.push(randomLevel);
+    }
+    chosenLevels.push({
+        id: fixedLevels[1].id,
+        layout: fixedLevels[1].layout,
+        enemy1Spawns: fixedLevels[1].enemy1Spawns,
+        enemy2Spawns: fixedLevels[1].enemy2Spawns,
+        enemy3Spawns: fixedLevels[1].enemy3Spawns,
+        enemy4Spawns: fixedLevels[1].enemy4Spawns,
+        enemy5Spawns: fixedLevels[1].enemy5Spawns,
+        enemy6Spawns: fixedLevels[1].enemy6Spawns,
+    });
+    chosenLevels.push({
+        id: fixedLevels[0].id,
+        layout: fixedLevels[0].layout,
+        enemy1Spawns: fixedLevels[0].enemy1Spawns,
+        enemy2Spawns: fixedLevels[0].enemy2Spawns,
+        enemy3Spawns: fixedLevels[0].enemy3Spawns,
+        enemy4Spawns: fixedLevels[0].enemy4Spawns,
+        enemy5Spawns: fixedLevels[0].enemy5Spawns,
+        enemy6Spawns: fixedLevels[0].enemy6Spawns,
+    });
+    for (let i = 0; i < 5; i++) {
+        let randomIndex = Math.floor(Math.random() * possibleLevels3.length);
+        let randomLevel = {
+            id: possibleLevels3[randomIndex].id,
+            layout: possibleLevels3[randomIndex].layout,
+            enemy1Spawns: possibleLevels3[randomIndex].enemy1Spawns,
+            enemy2Spawns: possibleLevels3[randomIndex].enemy2Spawns,
+            enemy3Spawns: possibleLevels3[randomIndex].enemy3Spawns,
+            enemy4Spawns: possibleLevels3[randomIndex].enemy4Spawns,
+            enemy5Spawns: possibleLevels3[randomIndex].enemy5Spawns,
+            enemy6Spawns: possibleLevels3[randomIndex].enemy6Spawns,
+        };
+        chosenLevels.push(randomLevel);
+    }
+    chosenLevels.push({
+        id: fixedLevels[1].id,
+        layout: fixedLevels[1].layout,
+        enemy1Spawns: fixedLevels[1].enemy1Spawns,
+        enemy2Spawns: fixedLevels[1].enemy2Spawns,
+        enemy3Spawns: fixedLevels[1].enemy3Spawns,
+        enemy4Spawns: fixedLevels[1].enemy4Spawns,
+        enemy5Spawns: fixedLevels[1].enemy5Spawns,
+        enemy6Spawns: fixedLevels[1].enemy6Spawns,
+    });
+};
 ```
+{% endcode %}
 
-How to play page of the menu. It contains some text which describes how to play and a button which takes you back to the main menu.
+Here is the code within the level scene which is responsible for the boss and floor text which appears. The text entities are created with their `opacity` set to 0 and when the desired level appears, the `opacity` is set to 1 for a short duration which reveals the text before it is hidden again.
 
+{% code title="main.ts" %}
 ```typescript
-// How to Play Scene
-scene("howToPlay", () => {
-
-    // Create Back to Main Menu button
-    const backButton = add([
-        text("Back to Main Menu", {
-            size: 20,
+const bossFightText = add([
+        text("Boss Fight", {
+            size: 70,
         }),
-        pos(width() / 2, height() - 30),
-        anchor("center"),
+        pos(1550, 60),
         area({ cursor: "pointer" }),
         z(10),
+        opacity(0),
+        "bossFightText",
     ]);
 
-    // Create text explaining how to play
-    const howToPlayText = add([
-        text("Instructions:\n\nWASD to move\nLeft click to shoot\nRight click to dash\nNumber keys to switch weapons\nClear all the enemies in a room to advance\nEscape the dungeon!",
-        {
-            size: 24,
-            width: width() - 40,
-            align: "center",
-        }),
-        pos(width() / 2, height() / 2),
-        anchor("center"),
-        z(10),
-    ]);
-
-    // Handle Back to Main Menu button click
-    backButton.onClick(() => {
-        go("mainMenu"); // Transition back to Main Menu
-    });
-});
-```
-
-Credits page of the menu. It contains some text for the credits and a button which takes you back to the main menu.
-
-```typescript
-// Credits Scene
-scene("credits", () => {
-    // Create Back to Main Menu button
-    const backButton = add([
-        text("Back to Main Menu", {
-            size: 20,
-        }),
-        pos(width() / 2, height() - 30),
-        anchor("center"),
-        area({ cursor: "pointer" }),
-        z(10),
-    ]);
-
-    // Create text for credits
-    const creditsText = add([
-        text("Programming by Josh Thorpe\nMusic by none\nSprites by Kaboom",
-        {
-            size: 24,
-            width: width() - 40,
-            align: "center",
-        }),
-        pos(width() / 2, height() / 2),
-        anchor("center"),
-        z(10),
-    ]);
-
-    // Handle Back to Main Menu button click
-    backButton.onClick(() => {
-        go("mainMenu"); // Transition back to Main Menu
-    });
-});
-```
-
-Character selection page of the menu. The statistics of each character are stored in `characterData` and the player's stats are set to those of the character when each sprite is clicked. The play button starts the game with the player's current stats while the back button takes you back to the main menu.
-
-```typescript
-// Character Selection Scene
-scene("characterSelect", () => {
-
-    // Define character data
-    const characterData = [
-        {
-            name: "Scarlett Blackthorn",
-            sprite: "apple", // These are all the stats which vary for each character
-            health: 80,
-            speed: 300,
-            dashLength: 1,
-            dashCooldown: 2,
-        },
-        {
-            name: "Sir Galahad",
-            sprite: "egg",
-            health: 200,
-            speed: 175,
-            dashLength: 0.3,
-            dashCooldown: 3,
-        },
-        {
-            name: "Deadeye Dave",
-            sprite: "bean",
-            health: 100,
-            speed: 225,
-            dashLength: 0.5,
-            dashCooldown: 1,
-        },
-    ];
-
-    // Spacing of the character sprites on the selection screen
-    const characterSpacing = 310;
-    const characterY = height() / 2;
-
-    // Create a white box (hidden by default)
-    const whiteOutline = add([
-        rect(400, 600), // Rectangle size and dimensions
-        rgb(255, 255, 255), // white
-        z(10),
-        pos(0, characterY), // Initial position
-        anchor("center"),
-        z(8), // Behind the sprites
-        opacity(0), // Hidden by default
-    ]);
-
-    // Iterate through character data to create character selection elements
-    characterData.forEach((character, index) => {
-        // Create character name text
-        const characterName = add([
-            text(character.name, {
-                size: 40,
-            }),
-            pos((index + 2) * characterSpacing, characterY - 150),
-            anchor("center"),
-            z(10),
-            color(BLACK),
-        ]);
-
-        // Create character sprite
-        const characterSprite = add([
-            sprite(character.sprite),
-            pos((index + 2) * characterSpacing, characterY),
-            anchor("center"),
-            area({ cursor: "pointer" }), // Make it clickable
-            z(10),
-            "character", // Tag as a character
-            {
-                health: character.health,
-                speed: character.speed,
-            },
-            scale(3),
-        ]);
-
-        // Handle character selection
-        characterSprite.onClick(() => {
-            playerHP = characterSprite.health;
-            ORIGINALHP = playerHP;
-            playerSpeed = characterSprite.speed;
-            whiteOutline.pos = characterSprite.pos; // White outline moves to selected character
-            whiteOutline.opacity = 1; // Show white outline
-            selectedCharacterSprite = character.sprite;
+    if (chosenLevelIndex === 6 || chosenLevelIndex === 13 || chosenLevelIndex === 20) {
+        bossFightText.opacity = 1;
+        wait(2, () => {
+            bossFightText.opacity = 0;
         });
-    });
+    };
 
-    // Create Play button
-    const playButton = add([
-        text("Play", {
-            size: 40,
+        const newFloorText = add([
+        text("Floor " + floorNumber, {
+        size: 70,
         }),
-        pos(width() / 2, height() - 90),
-        anchor("center"),
-        area({ cursor: "pointer" }),
+        pos(1550, 60),
         z(10),
+        opacity(0),
+        "newFloorText",
     ]);
-
-    // Handle Play button click
-    playButton.onClick(() => {
-        let chosenLevelIndex = 0;
-        go("level", chosenLevelIndex); // Transition to the level scene with the selected character
-    });
-
-    // Create Back to Main Menu button
-    const backButton = add([
-        text("Back to Main Menu", {
-            size: 20,
-        }),
-        pos(width() / 2, height() - 30),
-        anchor("center"),
-        area({ cursor: "pointer" }),
-        z(10),
-    ]);
-
-    // Handle Back to Main Menu button click
-    backButton.onClick(() => {
-        go("mainMenu"); // Transition back to Main Menu
-    });
-});
-
-
-
+    
+    if (chosenLevelIndex === 0) {
+        floorNumber = 1;
+        newFloorText.text = "Floor " + floorNumber,
+        newFloorText.opacity = 1;
+        wait(2, () => {
+            newFloorText.opacity = 0;
+        });
+    } else if (chosenLevelIndex === 7) {
+        floorNumber = 2;
+        newFloorText.text = "Floor " + floorNumber,
+        newFloorText.opacity = 1;
+        wait(2, () => {
+            newFloorText.opacity = 0;
+        });
+    } else if (chosenLevelIndex === 14) {
+        floorNumber = 3;
+        newFloorText.text = "Floor " + floorNumber,
+        newFloorText.opacity = 1;
+        wait(2, () => {
+            newFloorText.opacity = 0;
+        });
+    };
 ```
+{% endcode %}
 
-The game starts in the main menu scene.
+When a `player_bullet` or `enemy_bullet` collides with a `box`, both the bullet and box are destroyed.
+
+{% code title="main.ts" %}
+```typescript
+//box collision
+    onCollide("player_bullet", "box", (bullet, box) => {
+        destroy(bullet); // Destroy the bullet
+        destroy(box);   // Destroy the box
+    });
+
+    onCollide("enemy_bullet", "box", (bullet, box) => {
+        destroy(bullet); // Destroy the bullet
+        destroy(box);   // Destroy the box
+    });
+```
+{% endcode %}
+
+Doors are added as part of the level tile map are are represented by a `#`.
+
+<pre class="language-typescript" data-title="main.ts"><code class="lang-typescript"><strong>    "#": () => [
+</strong>          sprite("door"),
+          area(),
+          anchor("center"),
+          z(2),
+          body(),
+          "door",
+      ],
+</code></pre>
+
+When the player touches the door, the game checks if there are any enemies present and if they have all been killed it advances to the next level. Otherwise, nothing happens.
 
 ```typescript
-go("mainMenu");
+ onCollide("player", "door", (bullet, box) => {
+        enemiesRemaining = get("enemy").length;
+        if (enemiesRemaining === 0) {
+            chosenLevelIndex += 1;
+            destroyAll("entity");
+            if (chosenLevelIndex > chosenLevels.length - 1) {
+                go("win");
+            } else {
+                go("level", chosenLevelIndex);
+            }
+        };
+    });
 ```
-
-The sprite of the player now depends on the character which was selected instead of being constant each time.
-
-```typescript
- "@": () => [ // @ represents the player in the tile maps
-                sprite(selectedCharacterSprite),
-                area(),
-                anchor("center"),
-                z(2),
-                body(),
-                health(playerHP),
-                "player",
-            ],
-```
-
-I have also added an `isAlive` flag in the enemy class which is used to check if the enemy is still alive before it spawns a bullet. This is to eliminate the bug where an enemy may still shoot its projectile shortly after dying.
 
 ### Challenges
 
-To use a variable between different scenes it must be declared globally at the start of the project. I found development a bit challenging until I realised this.
+It would have taken a very long time to type out each level individually so I used a random generator for the tile map and enemy spawn positions. This undoubtedly saved me a lot of time.
 
 ## Testing
 
 ### Tests
 
-| Test | Instructions                                               | What I expect                                                                                                                     | What actually happens                               | Pass/Fail |
-| ---- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | --------- |
-| 1    | Start game.                                                | Game starts on the main menu.                                                                                                     | As expected.                                        | Pass.     |
-| 2    | Click each button and then the return to main menu button. | Page opens each time before returning to main menu each time when the back button is clicked.                                     | As expected.                                        | Pass.     |
-| 3    | Open character selection menu and click on each sprite.    | White selection box moves to each one expected.                                                                                   | As expected.                                        | Pass.     |
-| 4    | Click play for each character.                             | <ol><li>Health bar is different for each character.</li></ol><ol start="2"><li>Each character has different move speed.</li></ol> | <ol><li>As expected.</li><li>As expected.</li></ol> | Pass.     |
-| 5    | Use r key to cycle through levels.                         | When there is a shop level there is a shopkeeper sprite in it.                                                                    | As expected.                                        | Pass.     |
-
-During testing, I noticed an instance of a bullet spawning from a deleted enemy when moving between levels. This can be seen in the evidence video below. I was surprised by this since I thought that the bug would be completely fixed with the `isAlive` flag I added to each enemy. It may have occurred due to a brief lag spike because I could not replicate it. If it happens again or more frequently, then I will address it in a later cycle.
+| Test | Instructions                                                      | What I expect                                                                                                                                                                                                                                                                        | What actually happens                                                                         | Pass/Fail |
+| ---- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- | --------- |
+| 1    | Cycle through levels.                                             | <ol><li>When starting a new floor, the floor test appears displaying the floor number.</li><li>When entering a boss fight, the boss fight text appears.</li><li>Each level has a seemingly random layout of spikes and boxes.</li><li>All enemies spawn withing the walls.</li></ol> | <ol><li>As expected.</li><li>As expected.</li><li>As expected.</li><li>As expected.</li></ol> | Pass.     |
+| 2    | Shoot at the boxes.                                               | Boxes are destroyed by bullets.                                                                                                                                                                                                                                                      | As expected.                                                                                  | Pass.     |
+| 3    | Let the enemies shoot boxes.                                      | Boxes are destroyed by enemy bullets.                                                                                                                                                                                                                                                | As expected.                                                                                  | Pass.     |
+| 4    | Attempt to go through a door while there are still enemies alive. | Nothing happens.                                                                                                                                                                                                                                                                     | As expected.                                                                                  | Pass.     |
+| 5    | Attempt to go through a door when all the enemies are dead.       | Game advances to next level.                                                                                                                                                                                                                                                         | As expected.                                                                                  | Pass.     |
 
 ### Evidence
 
-{% embed url="https://youtu.be/ecOnOjPC7qA" %}
+{% embed url="https://youtu.be/8OWUxVaDSTw" %}

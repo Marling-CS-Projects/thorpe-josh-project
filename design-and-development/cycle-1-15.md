@@ -1,649 +1,365 @@
-# 2.2.14 Cycle 14 - Boss Fights
+# 2.2.15 Cycle 15 - Dash Cooldown Bar & Improved UI & Menus
 
 ## Design
 
 ### Objectives
 
-In this cycle, my main goal is to add boss fights to the game. My objectives in this cycle are to:
+In this cycle, my goal is to improve the game UI and menus. My objectives are:
 
-* [x] Add boss enemies as new enemy types to the enemy class
-* [x] Bosses are bigger and stronger than normal enemies
-* [x] Boss 1 shoots like a regular enemy
-* [x] Boss 2 shoots in bursts
-* [x] Boss 3 shoots like a shotgun
-* [x] Bosses can spawn enemies around them with a % chance
-* [x] Harder bosses will spawn more challenging enemies
-* [x] Bosses have custom sprites
-* [x] Add spikes to boss levels
+* [x] Add a dash cooldown bar
+* [x] Make boss fight text and new floor text last until the next level
+* [x] Move around all the elements of the HUD so that it fits better
+* [x] Add a proper win screen
+* [x] Add a proper death screen
+* [x] Be able to return to the main menu from win or death
+* [x] The game should be fully repeatable after restarting
+* [x] Make main menu buttons and text bigger
+* [x] Add character descriptions in character selection
+* [x] Add menu titles to the main menu (including a name for the game)
+* [x] Add a background colour to the main menu
 
 #### Smaller Changes
 
-* [x] Destroy enemy and player bullets when they collide with a wall
-* [x] Make the door unmoveable
-* [x] Reduce the number of spikes and boxes on floor 3
-* [x] Remove spikes next to the player spawn location in all levels
-* [x] Make the background for the introduction message partially transparent
-* [x] Add bullet speed to enemy class parameters
-* [x] Somewhat balance the guns and enemies
+* [x] Add a new sprite for Sir Galahad character
+* [x] Add a new sprite for Deadeye Dave character
+* [x] Move shopkeeper messages to the bottom of the screen
+* [x] Reduce the size of player sprites so that they can move in the level easier
 
 ### Usability Features
 
 ### Key Variables
 
-| Variable Name     | Use                                                                                                                                        |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `BOSSSPAWNINGPOS` | This constant holds the position where boss enemies spawn. It is used to ensure that boss enemies consistently spawn at the same location. |
+| Variable Name                                                   | Use                                                                                                                  |
+| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `winTitle`, `backButton`, `winText`, `loseTitle` and `loseText` | These variables are used to create text elements for the titles, and informational texts in the win and lose scenes. |
+| `menuBackground`                                                | This variable is a background rectangle for all the menu scenes to give them a background colour.                    |
+| `dashCooldownBarBackground` and `dashCooldownBarBorder`         | These are graphical elements for the cooldown bar.                                                                   |
+| `dashCooldownBar`                                               | Represents the actual cooldown progress bar.                                                                         |
+| `dashCooldown`                                                  | A boolean flag to check if the dash ability is on cooldown.                                                          |
+| `dashDuration`                                                  | Defines how long a dash lasts.                                                                                       |
+| `dashRecharge`                                                  | Defines the total recharge time for the dash ability.                                                                |
 
 ### Pseudocode
 
 ```
-// Import necessary modules and functions
+// Define global variables
+let coins
+let enemiesRemaining
+let weapons
+let unlockedWeapons
+let currentWeapon
+let chosenLevels
+let dashCooldown
+let playerSpeed
+let dashDuration
+let dashRecharge
+let floorNumber
 
-// Define the Enemy class
-class Enemy {
-    // Properties declaration
+// Define game scenes
+scene("win", () => {
+    // Create win screen elements
+    // Handle "Return to Main Menu" button click
+});
 
-    // Constructor method
-    constructor(sprite, type) {
-        // Initialize properties based on the enemy type
-    }
+scene("lose", () => {
+    // Create lose screen elements
+    // Handle "Return to Main Menu" button click
+    // Cleanup erroneous enemies
+});
 
-    // Method to spawn the enemy at a given position
-    spawn(position, player) {
-        // Create the enemy entity
-        // Set entity properties and behaviors
-        // Activate the enemy
-    }
+scene("mainMenu", () => {
+    // Initialize game state
+    coins = 0
+    enemiesRemaining = 0
+    unlockedWeapons = []
+    
+    // Unlock the first weapon (e.g., pistol)
+    unlockWeapon(0)
 
-    // Method to update the enemy's health
-    updateHealth(amount) {
-        // Update the enemy's health and check for death
-    }
+    // Choose random levels
+    chooseLevels(chosenLevels)
 
-    // Method to destroy the enemy
-    destroy() {
-        // Destroy the entity, mark as not alive, and update the coin counter
-    }
+    // Set up main menu elements
+    // Handle menu interactions (e.g., selecting levels, choosing weapons)
+});
 
-    // Method to activate the enemy's behavior
-    activate(player) {
-        // Register an update event for the enemy
-        // Implement the enemy's movement, shooting, and spawning behavior
-    }
+// Define game loop
+loop(() => {
+    // Update game logic
+    // Handle player input (e.g., dashing)
+    // Update enemy behavior
+    // Check win or lose conditions
+    // Update UI elements (e.g., coin count, cooldown bar)
+});
 
-    // Method to shoot a projectile at a target position
-    shootProjectile(targetPos) {
-        // Calculate the shooting direction and spread angle
-        // Create a projectile entity and set its properties
-    }
-
-    // Method to spawn minions
-    spawnMinions(player) {
-        // Define positions for minions relative to the boss
-        // Check if the boss is alive
-        // Spawn minions at specified positions based on boss species
-    }
+// Define functions
+function unlockWeapon(index) {
+    // Unlock a weapon and add it to unlockedWeapons
 }
 
-// Export the Enemy class
-
-
-...
-
-
-// Define a constant for the boss enemy spawning position
-const BOSSSPAWNINGPOS = vec2(1200, 450);
-
-// Check the current level to determine boss spawns and boss fight text display
-if (chosenLevelIndex === 6) {
-    // Create a boss enemy instance of type 7
-    const enemy7 = new Enemy("firstboss", 7);
-    
-    // Spawn the boss enemy at the specified position
-    enemy7.spawn(BOSSSPAWNINGPOS, player);
-    
-    // Display boss fight text
-    bossFightText.opacity = 1;
-
-    // Wait for 2 seconds and then hide the boss fight text
-    wait(2, () => {
-        bossFightText.opacity = 0;
-    });
-} else if (chosenLevelIndex === 13) {
-    // Create a boss enemy instance of type 8
-    const enemy8 = new Enemy("secondboss", 8);
-    
-    // Spawn the boss enemy at the specified position
-    enemy8.spawn(BOSSSPAWNINGPOS, player);
-    
-    // Display boss fight text
-    bossFightText.opacity = 1;
-
-    // Wait for 2 seconds and then hide the boss fight text
-    wait(2, () => {
-        bossFightText.opacity = 0;
-    });
-} else if (chosenLevelIndex === 20) {
-    // Create a boss enemy instance of type 9
-    const enemy9 = new Enemy("thirdboss", 9);
-    
-    // Spawn the boss enemy at the specified position
-    enemy9.spawn(BOSSSPAWNINGPOS, player);
-    
-    // Display boss fight text
-    bossFightText.opacity = 1;
-
-    // Wait for 2 seconds and then hide the boss fight text
-    wait(2, () => {
-        bossFightText.opacity = 0;
-    });
+function chooseLevels(chosenLevels) {
+    // Randomly select levels and add them to chosenLevels
 }
+
+function wait(time, callback) {
+    // Wait for a specified time and then execute a callback
+}
+
+// Define event handlers
+onMousePress("right", () => {
+    // Handle right mouse button click (e.g., player dash)
+});
+
+// Start the game in the main menu scene
+go("mainMenu")
 ```
 
 ## Development
 
 ### Outcome
 
-I added the boss enemies as strong enemies within the `Enemy` class. Bosses will shoot differently. The first boss shoots normally, the second boss shoots in bursts, and the third boss shoots like a shotgun. After shooting, each boss has a chance to spawn a couple of enemies next to them, the strength of which depends on the boss.
+The win and lose scenes are very similar since they are both made up of a background, title, text and menu button. Below is the win scene.
 
-{% code title="enemy class.ts" %}
 ```typescript
-import { updateCoinCounter } from "./main";
+// win scene -------------------------------------------------------------------
+scene("win", () => {
+    const menuBackground = add([
+        rect(width(), height()),
+        pos(width() / 2, height() / 2),
+        z(1),
+        anchor("center"),
+        color(168, 69, 12),
+        "menuBackground",
+    ]);
 
-export class Enemy {
-    sprite: string;
-    maxHealth: number;
-    currentHealth: number;
-    entity: any;
-    isMoving: boolean;
-    idleTime: number;
-    shootDamage: number;
-    isAlive: boolean;
-    numSteps: number;
-    moveSpeed: number;
-    bulletSpeed: number;
-    inaccuracy: number;
-    species: number;
+    const winTitle = add([
+        text("You Win!", {
+            size: 80,
+        }),
+        pos(width() / 2, 180),
+        anchor("center"),
+        z(10),
+        color(22, 219, 55),
+    ]);
 
-    constructor(sprite: string, type: number) {
-        // Initialize properties based on the enemy type
-        if (type === 1) { // Enemy type 1
-            this.maxHealth = 50;
-            this.idleTime = (Math.random() * (4 - 2) + 2);
-            this.shootDamage = 7;
-            this.numSteps = 20;
-            this.moveSpeed = 100;
-            this.bulletSpeed = 650;
-            this.inaccuracy = 1;
-            this.species = 1;
-        } else if (type === 2) { // Enemy type 2
-            this.maxHealth = 75;
-            this.idleTime = (Math.random() * (2 - 0.5) + 0.5);
-            this.shootDamage = 10;
-            this.numSteps = 20;
-            this.moveSpeed = 100;
-            this.bulletSpeed = 700;
-            this.inaccuracy = 1;
-            this.species = 2;
-        } else if (type === 3) { // Enemy type 3
-            this.maxHealth = 100;
-            this.idleTime = (Math.random() * (4.5 - 3) + 3);
-            this.shootDamage = 14;
-            this.numSteps = 20;
-            this.moveSpeed = 100;
-            this.bulletSpeed = 700;
-            this.inaccuracy = 1;
-            this.species = 3;
-        } else if (type === 4) { // Enemy type 4
-            this.maxHealth = 150;
-            this.idleTime = (Math.random() * (3 - 1.5) + 1.5);
-            this.shootDamage = 17;
-            this.numSteps = 20;
-            this.moveSpeed = 100;
-            this.bulletSpeed = 750;
-            this.inaccuracy = 1;
-            this.species = 4;
-        } else if (type === 5) { // Enemy type 5
-            this.maxHealth = 200;
-            this.idleTime = (Math.random() * (2.5 - 1) + 1);
-            this.shootDamage = 20;
-            this.numSteps = 20;
-            this.moveSpeed = 100;
-            this.bulletSpeed = 750;
-            this.inaccuracy = 8;
-            this.species = 5;
-        } else if (type === 6) { // Enemy type 6
-            this.maxHealth = 250;
-            this.idleTime = (Math.random() * (5 - 3.5) + 3.5);
-            this.shootDamage = 25;
-            this.numSteps = 20;
-            this.moveSpeed = 100;
-            this.bulletSpeed = 750;
-            this.inaccuracy = 3;
-            this.species = 6;
-        } else if (type === 7) { // Boss type 1, enemy type 7
-            this.maxHealth = 350;
-            this.idleTime = (Math.random() * (3 - 2) + 2);
-            this.shootDamage = 25;
-            this.numSteps = 20;
-            this.moveSpeed = 100;
-            this.bulletSpeed = 800;
-            this.inaccuracy = 3;
-            this.species = 7;
-        } else if (type === 8) { // Boss type 2, enemy type 8
-            this.maxHealth = 600;
-            this.idleTime = (Math.random() * (2.5 - 1.5) + 1.5);
-            this.shootDamage = 16;
-            this.numSteps = 20;
-            this.moveSpeed = 100;
-            this.bulletSpeed = 1000;
-            this.inaccuracy = 7;
-            this.species = 8;
-        } else if (type === 9) { // Boss type 3, enemy type 9
-            this.maxHealth = 1200;
-            this.idleTime = (Math.random() * (2.5 - 1) + 1);
-            this.shootDamage = 20;
-            this.numSteps = 20;
-            this.moveSpeed = 100;
-            this.bulletSpeed = 750;
-            this.inaccuracy = 20;
-            this.species = 9;
-        };
-        this.sprite = sprite;
-        this.currentHealth = this.maxHealth;
-        this.entity = null;
-        this.isMoving = false;
-        this.isAlive = true;
-    }
+    const backButton = add([
+        text("Return to Main Menu", {
+            size: 40,
+        }),
+        pos(width() / 2, height() - 200),
+        anchor("center"),
+        area({ cursor: "pointer" }),
+        z(10),
+    ]);
 
-    spawn(position: Vec2, player: any) {
-        this.entity = add([
-            sprite(this.sprite),
-            body(),
-            area(),
-            pos(position),
-            anchor("center"),
-            z(2),
-            "enemy",
-        ]);
-        this.entity.instance = this
-        this.activate(player);
-    }
+    const winText = add([
+        text("Well done adventurer!\nYou defeated the Shape King and his minions and restored balance to the world once more!\nLet us hope that he never returns!",
+            {
+                size: 50,
+                width: 1000,
+                align: "center",
+            }),
+        pos(width() / 2, height() / 2),
+        anchor("center"),
+        z(10),
+    ]);
 
-    updateHealth(amount: number) {
-        this.currentHealth -= amount;
-        if (this.currentHealth <= 0) {
-            this.destroy();
-        }
-    }
+    backButton.onClick(() => {
+        go("mainMenu");
+    });
+});
+```
 
-    destroy() {
-        destroy(this.entity);
-        this.isAlive = false;
-        updateCoinCounter();
-    }
+Below is the lose scene.
 
-    activate(player: any) {
-        this.entity.on("update", async () => {
-            if (!this.isMoving) {
-                this.isMoving = true;
-                this.entity.color = rgb(255, 0, 0);
-                const targetPos = player.pos.add(vec2(350, 50));
-                const direction = targetPos.sub(this.entity.pos).unit();
+```typescript
+// lose scene ---------------------------------------------------------------------
+scene("lose", () => {
 
-                for (let i = 0; i < this.numSteps; i++) {
-                    const moveAmount = this.moveSpeed / this.numSteps;
-                    this.entity.moveBy(direction.scale(moveAmount));
-                    await wait(0.02); // Adjust the wait period between each step
-                };
+    const menuBackground = add([
+        rect(width(), height()),
+        pos(width() / 2, height() / 2),
+        z(1),
+        anchor("center"),
+        color(168, 69, 12),
+        "menuBackground",
+    ]);
 
-                await wait(1);
-                this.entity.color = rgb(0, 0, 255);
-                let latestTargetPos = player.pos.add(vec2(350, 50));
-                if (this.species <= 7) {
-                    this.shootProjectile(latestTargetPos);
+    const loseTitle = add([
+        text("You Died!", {
+            size: 80,
+        }),
+        pos(width() / 2, 180),
+        anchor("center"),
+        z(10),
+        color(252, 7, 3),
+    ]);
 
-                    // 50% chance to spawn minions after shooting
-                    if (Math.random() < 0.5) {
-                        this.spawnMinions(player);
-                    }
-                } else if (this.species === 8) {
-                    for (let p = 0; p < 5; p++) {
-                        latestTargetPos = player.pos.add(vec2(350, 50));
-                        this.shootProjectile(latestTargetPos);
-                        await wait(0.25);
-                    };
+    const backButton = add([
+        text("Return to Main Menu", {
+            size: 40,
+        }),
+        pos(width() / 2, height() - 200),
+        anchor("center"),
+        area({ cursor: "pointer" }),
+        z(10),
+    ]);
 
-                    // 50% chance to spawn minions after shooting
-                    if (Math.random() < 0.5) {
-                        this.spawnMinions(player);
-                    }
-                } else if (this.species === 9) {
-                    // Shoot 5 bullets at once for shotgun effect
-                    this.shootProjectile(latestTargetPos);
-                    this.shootProjectile(latestTargetPos);
-                    this.shootProjectile(latestTargetPos);
-                    this.shootProjectile(latestTargetPos);
-                    this.shootProjectile(latestTargetPos);
+    const winText = add([
+        text("The Shape King lives on! You made it to floor " + floorNumber + " of 3.\nThe Shape King must perish, try again to defeat him!",
+            {
+                size: 50,
+                align: "center",
+            }),
+        pos(width() / 2, height() / 2),
+        anchor("center"),
+        z(10),
+    ]);
 
-                    // 25% chance to spawn minions after shooting
-                    if (Math.random() < 0.25) {
-                        this.spawnMinions(player);
-                    }
+    backButton.onClick(() => {
+        go("mainMenu");
+    });
+
+    // Incase an errenous enemies spawn from a boss
+    wait(1, () => {
+        destroyAll("enemy");
+        destroyAll("enemy_bullet")
+    });
+    
+});
+```
+
+The dash cooldown bar is created similarly to the player's health bar in [Cycle 5](cycle-1-4.md).
+
+```typescript
+const dashCooldownBarBackground = add([
+        rect(150, 14),
+        pos(1500, 50),
+        z(9),
+        anchor("left"),
+        color(79, 75, 75),
+    ]);
+
+    const dashCooldownBarBorder = add([
+        rect(154, 16),
+        pos(1498, 50),
+        anchor("left"),
+        z(3),
+        color(0, 0, 0),
+    ]);
+
+    const dashCooldownBar = add([
+        rect(150, 14),
+        pos(1500, 50),
+        z(10),
+        color(0, 0, 255),
+        anchor("left"),
+    ]);
+
+    
+```
+
+The dashing code was modified to include the dash cooldown bar. When a dash has ended, the cooldown bar's width is set near zero and then set to increasingly greater widths in set steps, making it look like it is moving smoothly.
+
+```typescript
+let dashCooldown = false;
+    //dash
+    onMousePress("right", () => {
+        if (!dashCooldown) {
+            dashCooldown = true;
+            dashCooldownBar.width = 0;
+
+            playerSpeed += 300;
+            wait(dashDuration, () => {
+                playerSpeed -= 300;
+            });
+
+            const steps = 100;
+            const increment = 150 / steps;
+            const stepDuration = dashRecharge / steps * 1000;
+            let currentStep = 0;
+
+            function rechargeStep() {
+                currentStep++;
+                dashCooldownBar.width = increment * currentStep;
+
+                if (currentStep < steps) {
+                    setTimeout(rechargeStep, stepDuration);
+                } else {
+                    dashCooldown = false;
                 }
-                await wait(this.idleTime);
-                this.isMoving = false;
             }
-        });
+
+            rechargeStep();
+
+        }
+    });
+```
+
+To make the game replayable after dying or winning, I added/moved code which initialises a lot of aspects.
+
+```typescript
+scene("mainMenu", () => {
+
+    coins = 0;
+    enemiesRemaining = 0;
+
+        // Lock every weapon
+    for (const weapon of weapons) {
+        weapon.unlocked = false;
     }
 
+        // Function to unlock a weapon
+    function unlockWeapon(index) {
+        unlockedWeapons.push(weapons[index]);
+        unlockedWeapons[index].unlocked = true;
+    }
 
-    shootProjectile(targetPos: Vec2) {
-        let direction = this.entity.pos.angle(targetPos) + 180;
-        const spreadAngle = Math.random() * this.inaccuracy - this.inaccuracy / 2;
-        if (this.isAlive) {
-            add([
-                sprite("egg"),
-                pos(this.entity.pos),
-                area(),
-                scale(0.65, 0.65),
-                color(255, 0, 0),
-                anchor("center"),
-                z(2),
-                rotate(this.entity.pos.angle(targetPos) + 270),
-                move(direction + spreadAngle, this.bulletSpeed),
-                "enemy_bullet",
-                { shootDamage: this.shootDamage },
-                offscreen({ destroy: true }),
-            ]);
-        };
-    };
+    unlockedWeapons = [];
+    unlockWeapon(0); // Unlock pistol
+    let currentWeapon = unlockedWeapons[0];
 
-    spawnMinions(player: any) {
-        // Define the positions for the minions relative to the boss
-        const minionPositions: vec2[] = [
-            vec2(50, 0),
-            vec2(-50, 0),
-        ];
 
-        // Check to make sure boss is still alive before spawning enemies
-        if (this.isAlive) {
-            // Spawn minions at specified positions
-            for (const position of minionPositions) {
-                if (this.species === 7) {
-                    const enemy2 = new Enemy("bobo", 2);
-                    enemy2.spawn(this.entity.pos.add(position), player);
-                } else if (this.species === 8) {
-                    const enemy4 = new Enemy("dino", 4);
-                    enemy4.spawn(this.entity.pos.add(position), player);
-                } else if (this.species === 9) {
-                    const enemy6 = new Enemy("gigagantrum", 6);
-                    enemy6.spawn(this.entity.pos.add(position), player);
-                };
-            };
-        };
-    };
+        //Choose random levels
+    chosenLevels = [];
+    chooseLevels(chosenLevels);
+    
+    ... // Rest of the main menu code
 
-};
-```
-{% endcode %}
-
-When the current level is a boss level (`chosenLevelIndex` is 6, 13, or 20) then a boss is spawned. The strength of the boss depends on the level.
-
-```typescript
-const BOSSSPAWNINGPOS = vec2(1200, 450);
-    if (chosenLevelIndex === 6) {
-        const enemy7 = new Enemy("firstboss", 7);
-        enemy7.spawn(BOSSSPAWNINGPOS, player);
-        
-        bossFightText.opacity = 1;
-        wait(2, () => {
-            bossFightText.opacity = 0;
-        });
-    } else if (chosenLevelIndex === 13) {
-        const enemy8 = new Enemy("secondboss", 8);
-        enemy8.spawn(BOSSSPAWNINGPOS, player);
-        
-        bossFightText.opacity = 1;
-        wait(2, () => {
-            bossFightText.opacity = 0;
-        });
-    } else if (chosenLevelIndex === 20) {
-        const enemy9 = new Enemy("thirdboss", 9);
-        enemy9.spawn(BOSSSPAWNINGPOS, player);
-        
-        bossFightText.opacity = 1;
-        wait(2, () => {
-            bossFightText.opacity = 0;
-        });
-    };
+}
 ```
 
-The door was made stationary with `isStatic:true`.
+#### New Sprites
 
-```typescript
-            "#": () => [
-                sprite("door"),
-                area(),
-                anchor("center"),
-                z(2),
-                body({ isStatic: true }),
-                "door",
-            ],
-```
+<div align="center" data-full-width="false">
 
-Player and enemy bullets are destroyed when they collide with a wall.
-
-```typescript
-    onCollide("enemy_bullet", "wall", (bullet, box) => {
-        destroy(bullet); // Destroy the bullet
-    });
-
-    onCollide("player_bullet", "wall", (bullet, box) => {
-        destroy(bullet); // Destroy the bullet
-    });
-```
-
-#### Boss Sprites
-
-
-
-<div>
-
-<figure><img src="../.gitbook/assets/cycle14boss1sprite.png" alt=""><figcaption><p>Boss 1</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle15davesprite.png" alt=""><figcaption><p>Deadeye Dave</p></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/cycle14boss2sprite.png" alt=""><figcaption><p>Boss 2</p></figcaption></figure>
-
- 
-
-<figure><img src="../.gitbook/assets/cycle14boss3sprite.png" alt=""><figcaption><p>Boss 3</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle15galahadsprite.png" alt=""><figcaption><p>Sir Galahad</p></figcaption></figure>
 
 </div>
 
 ### Challenges
 
-Initially, I planned to implement bosses using a separate boss class with the special boss behaviour which I could then call when a boss level started.
-
-{% code title="boss class.ts" %}
-```typescript
-import { updateCoinCounter } from "./main";
-import { Enemy } from "./enemy class";
-
-export class Boss {
-    sprite: string;
-    maxHealth: number;
-    currentHealth: number;
-    entity: any;
-    isMoving: boolean;
-    idleTime: number;
-    shootDamage: number;
-    isAlive: boolean;
-    numSteps: number;
-    moveSpeed: number;
-    accuracy: number;
-    bulletSpeed: number;
-    type: number;
-
-    constructor(sprite: string, type: number) {
-        // Initialize properties based on the enemy type
-        if (type === 1) { // Boss type 1
-            this.maxHealth = 300;
-            this.idleTime = (Math.random() * (4 - 2.5) + 2.5);
-            this.shootDamage = 25;
-            this.numSteps = 20;
-            this.moveSpeed = 100;
-            this.accuracy = 3;
-            this.bulletSpeed = 800;
-            this.type = 1;
-        } else if (type === 2) { // Boss type 2
-            this.maxHealth = 500;
-            this.idleTime = (Math.random() * (4 - 2.5) + 2.5);
-            this.shootDamage = 10;
-            this.numSteps = 20;
-            this.moveSpeed = 100;
-            this.accuracy = 6;
-            this.bulletSpeed = 800;
-            this.type = 2;
-        } else if (type === 3) { // Boss type 3
-            this.maxHealth = 1000;
-            this.idleTime = (Math.random() * (3.5 - 2) + 2);
-            this.shootDamage = 12;
-            this.numSteps = 20;
-            this.moveSpeed = 100;
-            this.accuracy = 20;
-            this.bulletSpeed = 800;
-            this.type = 3;
-        };
-        this.sprite = sprite;
-        this.currentHealth = this.maxHealth;
-        this.entity = null;
-        this.isMoving = false;
-        this.isAlive = true;
-    }
-
-    spawn(position: Vec2, player: any) {
-        this.entity = add([
-            sprite(this.sprite),
-            body(),
-            area(),
-            pos(position),
-            anchor("center"),
-            z(2),
-            "boss",
-        ]);
-        this.entity.instance = this;
-        this.activate(player);
-    }
-
-    updateHealth(amount: number) {
-        this.currentHealth -= amount;
-        if (this.currentHealth <= 0) {
-            this.destroy();
-        }
-    }
-
-    destroy() {
-        this.isAlive = false;
-        if (this.type === 1) {
-            for (let i = 0; i < 10; i++) {
-                updateCoinCounter(); //will give 10 coins
-            }
-        } else if (this.type === 2) {
-            for (let i = 0; i < 15; i++) {
-                updateCoinCounter(); //will give 15 coins
-            }
-        }
-        destroy(this.entity);
-    }
-
-    activate(player: any) {
-            this.entity.on("update", async () => {
-                if (!this.isMoving) {
-                    this.isMoving = true;
-                    this.entity.color = rgb(255, 0, 0);
-                    const targetPos = player.pos.add(vec2(350, 50));
-                    const direction = targetPos.sub(this.entity.pos).unit();
-    
-                    for (let i = 0; i < this.numSteps; i++) {
-                        const moveAmount = this.moveSpeed / this.numSteps;
-                        this.entity.moveBy(direction.scale(moveAmount));
-                        await wait(0.02); // Adjust the wait period between each step
-                    };
-    
-                    await wait(1);
-                    this.entity.color = rgb(0, 0, 255);
-                    const latestTargetPos = player.pos.add(vec2(350, 50));
-                    //this.shootProjectile(latestTargetPos);
-                    await wait(this.idleTime);
-                    this.isMoving = false;
-                }
-            });
-        }
-
-    shootProjectile(targetPos: Vec2) {
-        const spreadAngle = Math.random() * this.accuracy - this.accuracy / 2;
-        const direction = targetPos.sub(this.entity.pos);
-        if (this.isAlive) {
-            add([
-                sprite("egg"),
-                pos(this.entity.pos),
-                area(),
-                scale(0.65, 0.65),
-                color(255, 0, 0),
-                anchor("center"),
-                z(2),
-                rotate(this.entity.pos.angle(targetPos) + 270),
-                move(direction + spreadAngle, this.bulletSpeed),
-                "enemy_bullet",
-                { shootDamage: this.shootDamage },
-                offscreen({ destroy: true }),
-            ]);
-        }
-    }
-
-    spawnMinions(player: any) {
-        // Define the positions for the minions relative to the boss
-        const minionPositions: vec2[] = [
-            vec2(50, 0),
-            vec2(-50, 0),
-        ];
-
-        // Spawn minions at specified positions
-        for (const position of minionPositions) {
-            if (this.type === 1) {
-                const enemy2 = new Enemy("bobo", 2);
-                enemy2.spawn(this.entity.pos.add(position), player)
-            } else if (this.type === 2) {
-                const enemy4 = new Enemy("dino", 4);
-                enemy4.spawn(this.entity.pos.add(position), player)
-            } else if (this.type === 3) {
-                const enemy6 = new Enemy("gigagantrum", 6);
-                enemy6.spawn(this.entity.pos.add(position), player)
-            };
-        }
-    }
-}
-```
-{% endcode %}
-
-However, I was experiencing strange behaviour despite most of the code being copied from the `Enemy` class. I realised that it would be much simpler to use the `Enemy` class for bosses and add a few special functions which only the boss enemies call. Below is a video of some of the issues experienced.
-
-{% embed url="https://youtu.be/x5ntEovn-fM" %}
+For my initial attempt at resizing the player sprites, I tried using `scale()` to reduce the size when the player was added. However, this made the player collision very strange in that you could clip into the walls and other objects for some reason. To avoid this, I instead shrunk the sprites themselves using an image resizer and added them to the game as the version which the player plays.
 
 ## Testing
 
 ### Tests
 
-| Test | Instructions                                            | What I expect                                                                                                                          | What actually happens | Pass/Fail |
-| ---- | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
-| 1    | Start levels and cycle to first boss fight.             | Boss has correct sprite and shoots towards enemy. Every so often spawns 2 enemies next to it after shooting.                           | As expected.          | Pass.     |
-| 2    | Cycle to second boss fight.                             | Boss has correct sprite and shoots a series of 5 bullets each attacks. Every so often spawns 2 enemies next to it after shooting.      | As expected.          | Pass.     |
-| 3    | Cycle to third boss fight.                              | Boss has correct sprite and shoots 5 bullets at once with a shotgun spread. Every so often spawns 2 enemies next to it after shooting. | As expected.          | Pass.     |
-| 4    | Shoot at each boss until it dies.                       | Boss dies and you can move to next room.                                                                                               | As expected.          | Pass.     |
-| 5    | Shoot at the walls and let enemy bullets hit the walls. | Bullets get destroyed by walls.                                                                                                        | As expected.          | Pass.     |
+| Test | Instructions                                                                             | What I expect                                                                                                                                | What actually happens                               | Pass/Fail |
+| ---- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | --------- |
+| 1    | Start game and look around each menu.                                                    | Text sizes and titles are correct and in the right places.                                                                                   | As expected.                                        | Pass.     |
+| 2    | Go into character selection menu and click on different characters.                      | <ol><li>Character outline is correct size, position and colour.</li></ol><ol start="2"><li>Each character is using the new sprite.</li></ol> | <ol><li>As expected.</li><li>As expected.</li></ol> | Pass.     |
+| 3    | Start levels and activate dash.                                                          | Dash cooldown bar becomes empty and replenishes over time.                                                                                   | As expected.                                        | Pass.     |
+| 4    | Try to dash while bar is recharging.                                                     | Nothing happens. Cannot dash until bar has recharged.                                                                                        | As expected.                                        | Pass.     |
+| 5    | Cycle through the levels to reach the win screen.                                        | Win screen appears after the final boss and is correct.                                                                                      | As expected.                                        | Pass.     |
+| 6    | Restart game by using the menu button to go back into the main menu. Then play the game. | Game works without issue after being restarted.                                                                                              | As expected.                                        | Pass.     |
+| 7    | Get the player killed when health reaches 0.                                             | Lose screen appears with the correct floor number reached.                                                                                   | As expected.                                        | Pass.     |
+| 8    | Touch shopkeeper.                                                                        | Messages appear in the correct place.                                                                                                        | As expected.                                        | Pass.     |
 
 ### Evidence
 
-{% embed url="https://youtu.be/kqrG9XFDp48" %}
+{% embed url="https://youtu.be/OFSUixsebSE" %}

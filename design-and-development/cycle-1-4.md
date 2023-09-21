@@ -1,121 +1,246 @@
-# 2.2.4 Cycle 4 - Bug Fixes & Changes
+# 2.2.5 Cycle 5 - Health Bar & Player Death
 
 ## Design
 
 ### Objectives
 
-My objectives in this cycle are:
+My focus in this cycle is to add a health bar. My objectives are:
 
-* [x] Fix the bullet spawn position
-* [x] Change the stage background
-* [x] Increase the player movement speed
-* [x] Add a check for beating the last level
+* [x] Add player health bar
+* [x] Standing on spikes deals damage to the player
+* [x] Taking damage will lower the health bar
+* [x] Reaching 0 health causes the player to die
+
+#### Smaller Changes
+
+* [x] Set the player sprite's layer above the spike's layer
 
 ### Usability Features
 
 ### Key Variables
 
-| Variable Name  | Use                                                                                                                                |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `playerSpeed`  | Determines the movement speed of the player character in the game.                                                                 |
-| `truePosition` | The calculated position relative to the player's position, used to determine where the bullet should be spawned in the game scene. |
+| Variable Name     | Use                                                                                                                                                                             |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `playerHP`        | Represents the current hit points of the player. It is initially set to 100 and gets updated when the player gets hurt.                                                         |
+| `ORIGINALHP`      | Represents the starting hit points of the player. It is set to the initial value of `playerHP` and is used to calculate the health bar width.                                   |
+| `HEALTHBARWIDTH`  | Represents the width of the health bar in pixels.                                                                                                                               |
+| `HEALTHBARHEIGHT` | Represents the height of the health bar in pixels.                                                                                                                              |
+| `healthBarBorder` | Represents the health bar's border entity. It is a rectangle with a width and height slightly larger than the health bar itself.                                                |
+| `healthBarBg`     | Represents the background of the health bar. It is a rectangle that provides the visual backdrop for the health bar.                                                            |
+| `healthBar`       | Represents the actual health bar entity. It is a rectangle whose width represents the player's current health.                                                                  |
+| `spikeCooldown`   | Represents a boolean flag indicating whether the player is currently in a cooldown state after colliding with a spike. It prevents the player from getting hurt too frequently. |
 
 ### Pseudocode
 
-For pseudocode on bullet spawning, see [Cycle 2](cycle-1-2.md). Below is the updated pseudocode for level incrementation.&#x20;
-
 ```
-On "r" key press
-    Increment the levelId by 1
-    Destroy all entities with the "entity" tag
-    If levelId is greater than the number of possibleLevels minus 1
-        Go to the "win" scene
-    Else
-        Go to the "level" scene with the updated levelId
+// Initialize player's hit points and starting point
+let playerHP = 100
+const ORIGINALHP = playerHP
+
+// Define health bar dimensions
+const HEALTHBARWIDTH = 100
+const HEALTHBARHEIGHT = 20
+
+// Create health bar entities
+const healthBarBorder = createHealthBarBorder()
+const healthBarBg = createHealthBarBackground()
+const healthBar = createHealthBar()
+
+// Define spike cooldown flag
+let spikeCooldown = false
+
+// Detect player-spike collisions
+onCollide("player", "spike", () => {
+    if (!spikeCooldown) {
+        spikeCooldown = true
+        player.hurt(5)
+        playerHP = player.hp()
+        updateHealthBar()
+        wait(0.5, () => {
+            spikeCooldown = false
+        })
+    }
+})
+
+// Handle player death
+player.on("death", () => {
+    destroy(player)
+    wait(0.3, () => {
+        go("lose")
+    })
+})
+
+// Update health bar width based on player's hit points
+function updateHealthBar() {
+    const newWidth = (playerHP / ORIGINALHP) * HEALTHBARWIDTH
+    healthBar.width = newWidth
+}
+
+// Scene for when the player loses
+scene("lose", () => {
+    // Handle lose scene logic
+})
+
+// Function to create health bar border entity
+function createHealthBarBorder() {
+    // Create and return health bar border entity
+}
+
+// Function to create health bar background entity
+function createHealthBarBackground() {
+    // Create and return health bar background entity
+}
+
+// Function to create health bar entity
+function createHealthBar() {
+    // Create and return health bar entity
+}
 ```
 
 ## Development
 
 ### Outcome
 
-```javascript
-kaboom({
-    font: "sans-serif", // Set game font to "sans-serif"
-    background: [153, 111, 101], // Set game background color to [153, 111, 101]
-});
-```
+I set the layer of the player above the layer of the spikes using the `z()` property.
 
-<pre class="language-javascript" data-full-width="false"><code class="lang-javascript"><strong>    // Movement speed
-</strong>    let playerSpeed = 250;
+<pre class="language-javascript"><code class="lang-javascript"><strong>...
+</strong><strong>
+</strong><strong>"^": () => [
+</strong>sprite("spike"),
+area(),
+anchor("center"),
+z(0), //layer 0
+"entity",
+"spike",
+],
+
+...
+
+"@": () => [
+sprite("bean"),
+area(),
+anchor("center"),
+z(1), //layer 1
+body(),
+health(playerHP),
+"player",
+],
 </code></pre>
 
-I updated the bullet spawning function to receive the actual position to spawn at called `truePosition` and to use that for calculations. This replaces the use of `playerPosition`.
+I placed the following code outside of the level scene so that `playerHP` is not reset to 100 at the start of each level. Also, it would be a computational waste to repeatedly define constants.
 
 ```javascript
-// Spawns the bullet
-function spawnBullet(truePosition) {
-    // Gets the direction
-    const POINT_CURSOR = truePosition.angle(mousePos()) + 180; // Calculate the angle between truePosition and mouse position, adjusted by 180 degrees
+// Sets the player hitpoints and saves the starting point
+let playerHP = 100; // Player's current hit points
+const ORIGINALHP = playerHP; // Starting hit points
 
-    // Adds the bullet
-    add([
-        pos(truePosition), // Set the position of the bullet to truePosition
-        sprite("egg"), // Assign the sprite "egg" to the bullet entity
-        area(), // Add a collision area to the bullet entity
-        scale(0.65, 0.65), // Scale the bullet entity to 65% of its original size
-        color(127, 127, 255), // Set the color of the bullet entity to a shade of purple
-        anchor("center"), // Set the anchor point of the bullet entity to its center
-        rotate(POINT_CURSOR + 90), // Rotate the bullet entity based on POINT_CURSOR, adjusted by 90 degrees
-        move(POINT_CURSOR, BULLET_SPEED), // Move the bullet entity in the direction of POINT_CURSOR at BULLET_SPEED units per second
-        offscreen({ destroy: true }), // Remove the bullet entity if it goes off-screen
-        "player_bullet", // Tag the bullet entity as "player_bullet"
-    ]);
-}
+// Sets health bar dimensions
+const HEALTHBARWIDTH = 100; // Width of the health bar
+const HEALTHBARHEIGHT = 20; // Height of the health bar
 ```
 
-I modified the level increment code to include a check for if the last level has been reached. If it attempts to increment on the last level then it will go to the "win" scene, which will be the end screen.
+First I created the health bar border, health bar border and the health bar itself. They are rendered as coloured rectangles of a certain width and length. I set the layers so that the health bar border is at the back and is slightly bigger so you can see its edges around the health bar.
 
 ```javascript
-// Increments levelId and goes to that level
-onKeyPress("r", () => {
-    levelId += 1; // Increment levelId by 1
-    destroyAll("entity"); // Remove all entities with the "entity" tag
-    if (levelId > possibleLevels.length - 1) {
-        go("win"); // Go to the "win" scene if levelId exceeds the number of possibleLevels
-    } else {
-        go("level", levelId); // Go to the "level" scene with the updated levelId
-    }
+// Create the health bar border
+const healthBarBorder = add([
+  rect(HEALTHBARWIDTH + 4, HEALTHBARHEIGHT + 4), // Rectangle size including border
+  pos(10, 10), // Position of the health bar border
+  z(3), // Layer order for rendering
+  color(0, 0, 0), // Border color
+]);
+
+// Create the background of the health bar
+const healthBarBg = add([
+  rect(HEALTHBARWIDTH, HEALTHBARHEIGHT), // Rectangle size
+  pos(12, 12), // Position of the health bar background
+  z(4), // Layer order for rendering
+  color(79, 75, 75), // Background color
+]);
+
+// Create the health bar
+const healthBar = add([
+  rect(playerHP, HEALTHBARHEIGHT), // Initial width based on player's hit points
+  pos(12, 12), // Position of the health bar
+  z(5), // Layer order for rendering
+  color(92, 204, 12), // Health bar color
+]);
+```
+
+When the player collides with a spike the player takes 5 damage and the `updateHealthBar` function is called to update the width of the health bar using the player's new hp value. `spikeCooldown` is used to prevent the player from taking spike damage again within 0.5 seconds.
+
+```javascript
+let spikeCooldown = false; // Spike collision cooldown flag
+
+// Player and spike collision
+onCollide("player", "spike", () => {
+  if (!spikeCooldown) {
+    spikeCooldown = true;
+    player.hurt(5); // Reduce player's hit points
+    playerHP = player.hp(); // Update player's hit points
+    updateHealthBar(); // Update health bar width
+    wait(0.5, () => {
+      spikeCooldown = false; // Cooldown to prevent rapid triggering
+    });
+  }
 });
 ```
 
-Currently, the 'win' scene is empty so nothing happens yet when you win.
+`updateHealthBar` sets the new width of the health bar by finding the proportion of the original width it should be.
 
 ```javascript
-// Defines the "win" scene
-scene("win", () => {
-    // Scene logic for the "win" scene can be added here
+// Update the health bar width based on player's hit points
+function updateHealthBar() {
+  const newWidth = (playerHP / ORIGINALHP) * HEALTHBARWIDTH;
+  healthBar.width = newWidth;
+}
+
+```
+
+If the player loses all health points then the levels are replaced with the 'lose' scene. This scene is empty so nothing happens yet when you lose.
+
+```javascript
+// Player death event
+player.on("death", () => {
+  destroy(player); // Destroy the player entity
+  wait(0.3, () => {
+    go("lose"); // Transition to the "lose" scene
+  });
+});
+
+scene("lose", () => {
+  // Logic and code for the "lose" scene
 });
 ```
 
 ### Challenges
 
-It was challenging to resolve the bullet spawn position issue since I struggled to locate what was wrong. Through testing, I found the issue to be something wrong with the use of `player.pos`. To resolve the issue I experimented with adding a vector onto `player.pos` to create `truePosition`. I did this until it resulted in the bullets appearing perfectly in the player. I'm not sure what's wrong with `player.pos` but it could be something to do with how I define `player` from the level generation. I'm not sure.
+Initially, I had planned to set the player's health to a variable which could then be changed and updated as needed. However, this was not possible due to Kaboom limitations therefore I did it the other way around instead.
 
 ## Testing
 
 ### Tests
 
-| Test | Instructions                               | What I expect                                                                                                  | What actually happens | Pass/Fail |
-| ---- | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
-| 1    | Run code.                                  | Background is the correct colour ([this](https://color-hex.org/color/996f65)).                                 | As expected.          | Pass.     |
-| 2    | Move around with WASD and dash.            | Player moves faster than in [Cycle 3](cycle-1-3.md).                                                           | As expected.          | Pass.     |
-| 3    | Repeatedly press r to increment the level. | Game switches to the next level each time and after the last level goes to a blank background (the end scene). | As expected.          | Pass.     |
-| 4    | Click mouse repeatedly.                    | Bullets appear in the player and move towards mouse cursor until going offscreen.                              | As expected.          | Pass.     |
+| Test | Instructions                                    | What I expect                                                                                                                                                                                                              | What actually happens                                                    | Pass/Fail |
+| ---- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | --------- |
+| 1    | Run code and start levels.                      | Correct health bar in the top left of the screen.                                                                                                                                                                          | As expected.                                                             | Pass.     |
+| 2    | Walk over spike with player.                    | <ol><li>Player's sprite passes over the spike instead of under.</li><li>The health bar decreases by a fixed amount.</li></ol>                                                                                              | <ol><li>As expected.</li><li>As expected.</li></ol>                      | Pass.     |
+| 3    | Repeatedly touch spikes in quick succession.    | <ol><li>Health bar decreases by constant amount each time.</li><li>Health bar does not decrease if the next spike is touched in too quick of a succession.</li><li>Health bar background becomes visible (grey).</li></ol> | <ol><li>As expected.</li><li>As expected.</li><li>As expected.</li></ol> | Pass.     |
+| 4    | Touch spikes until the health bar reaches zero. | Game switches to the end screen (which is currently empty).                                                                                                                                                                | As expected.                                                             | Pass.     |
+| 5    | Move, shoot and increase levels.                | All functions the same as in [Cycle 4](cycle-1-3.md).                                                                                                                                                                      | As expected.                                                             | Pass.     |
 
 ### Images
 
-<figure><img src="../.gitbook/assets/cycle4backgroundcolour.png" alt="" width="375"><figcaption><p>Correct background colour</p></figcaption></figure>
+<div>
+
+<figure><img src="../.gitbook/assets/cycle5healthbarfull.png" alt=""><figcaption><p>Full health bar</p></figcaption></figure>
+
+ 
+
+<figure><img src="../.gitbook/assets/cycle5healthbardamaged.png" alt=""><figcaption><p>Health bar after standing on multiple spikes</p></figcaption></figure>
+
+</div>
 
 ### Evidence
 
-{% embed url="https://youtu.be/1pqgNkmAqj4" %}
+{% embed url="https://youtu.be/_iNutoGY3jY" %}

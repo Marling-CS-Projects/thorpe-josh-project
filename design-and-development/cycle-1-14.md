@@ -1,351 +1,649 @@
-# 2.2.13 Cycle 13 - Shop & More Weapons
+# 2.2.14 Cycle 14 - Boss Fights
 
 ## Design
 
 ### Objectives
 
-In this cycle, I plan to add the shop feature. My objectives in this cycle are to:
+In this cycle, my main goal is to add boss fights to the game. My objectives in this cycle are to:
 
-* [x] Make the shopkeeper unmoveable when you walk into him
-* [x] Add 2 new weapons (Clockwork Revolver and Ironclad Carbine)
-* [x] Touching the shopkeeper at a shop level will display a message that says the prices for each item
-* [x] Each item can be bought with each key if the player has enough coins to meet the price
-* [x] All the locked weapons are in the shop
-* [x] Add healing potion in the shop
-* [x] Add doors to shop and boss fight levels
-* [x] Change the first shop level to an introduction level which displays a starting message when touching the shopkeeper
-* [x] Pressing 'm' key will add a coin. This is a temporary feature which will make it easier for me to test each weapon works correctly.
+* [x] Add boss enemies as new enemy types to the enemy class
+* [x] Bosses are bigger and stronger than normal enemies
+* [x] Boss 1 shoots like a regular enemy
+* [x] Boss 2 shoots in bursts
+* [x] Boss 3 shoots like a shotgun
+* [x] Bosses can spawn enemies around them with a % chance
+* [x] Harder bosses will spawn more challenging enemies
+* [x] Bosses have custom sprites
+* [x] Add spikes to boss levels
 
 #### Smaller Changes
 
-* [x] Fix the health bar bug with it not updating correctly
-* [x] Add a new sprite for enemy 4
-* [x] Add a new sprite for enemy 5
-* [x] Add a new sprite for enemy 6
-* [x] Add a new sprite for Scarlet Blackthorn character
+* [x] Destroy enemy and player bullets when they collide with a wall
+* [x] Make the door unmoveable
+* [x] Reduce the number of spikes and boxes on floor 3
+* [x] Remove spikes next to the player spawn location in all levels
+* [x] Make the background for the introduction message partially transparent
+* [x] Add bullet speed to enemy class parameters
+* [x] Somewhat balance the guns and enemies
 
 ### Usability Features
 
 ### Key Variables
 
-| Variable Name                   | Use                                                                                                                                                                                                |
-| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `shopText` and `message`        | These variables are used to create and display a shop dialogue box with a black background and text. `shopText` is the black background, and `message` is the text displayed in the shop dialogue. |
-| `loreText` and `message`        | These variables are used to create and display a lore dialogue box with a black background and text. `loreText` is the black background, and `message` is the text displayed in the lore dialogue. |
-| `weapons` and `unlockedWeapons` | These arrays store information about the available weapons in the game and the weapons that the player has unlocked, respectively.                                                                 |
-| `currentWeapon`                 | This variable represents the weapon currently equipped by the player.                                                                                                                              |
+| Variable Name     | Use                                                                                                                                        |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `BOSSSPAWNINGPOS` | This constant holds the position where boss enemies spawn. It is used to ensure that boss enemies consistently spawn at the same location. |
 
 ### Pseudocode
 
 ```
-# Display Shop and Lore Text
-function showShopText():
-    Create shopText (black background)
-    Create message (shop dialogue text)
+// Import necessary modules and functions
 
-function showLoreText():
-    Create loreText (black background)
-    Create message (lore dialogue text)
+// Define the Enemy class
+class Enemy {
+    // Properties declaration
 
-# Hide Shop and Lore Text
-function hideShopText():
-    Destroy all entities with tag "shopDialogue"
+    // Constructor method
+    constructor(sprite, type) {
+        // Initialize properties based on the enemy type
+    }
 
-function hideLoreText():
-    Destroy all entities with tag "loreDialogue"
+    // Method to spawn the enemy at a given position
+    spawn(position, player) {
+        // Create the enemy entity
+        // Set entity properties and behaviors
+        // Activate the enemy
+    }
 
-# Handle Player Collisions
-onCollide("player", "shopkeeper"):
-    If chosenLevelIndex is 7 or 14:
-        ShowShopText()
-    Else if chosenLevelIndex is 0:
-        ShowLoreText()
+    // Method to update the enemy's health
+    updateHealth(amount) {
+        // Update the enemy's health and check for death
+    }
 
-onCollideEnd("player", "shopkeeper"):
-    HideShopText()
-    HideLoreText()
+    // Method to destroy the enemy
+    destroy() {
+        // Destroy the entity, mark as not alive, and update the coin counter
+    }
 
-# Unlock Weapons
-function unlockWeapon(index):
-    If canUnlockWeapon(index):
-        Mark weapon as unlocked
-        Add unlocked weapon to the player's inventory
-        Deduct weapon cost from player's coins
-        Update coin counter
-        Update inventory text
+    // Method to activate the enemy's behavior
+    activate(player) {
+        // Register an update event for the enemy
+        // Implement the enemy's movement, shooting, and spawning behavior
+    }
 
-# Handle Key Press Events
-onKeyPress("o"):
-    UnlockWeapon(1) # Machine gun
+    // Method to shoot a projectile at a target position
+    shootProjectile(targetPos) {
+        // Calculate the shooting direction and spread angle
+        // Create a projectile entity and set its properties
+    }
 
-onKeyPress("p"):
-    UnlockWeapon(2) # Shotgun
+    // Method to spawn minions
+    spawnMinions(player) {
+        // Define positions for minions relative to the boss
+        // Check if the boss is alive
+        // Spawn minions at specified positions based on boss species
+    }
+}
 
-onKeyPress("u"):
-    UnlockWeapon(3) # Machine pistol
+// Export the Enemy class
 
-onKeyPress("i"):
-    UnlockWeapon(4) # Rifle
 
-onKeyPress("l"):
-    RestoreHealth() # Restore player's health
+...
 
-onKeyPress("1"):
-    EquipWeapon(1) # Equip weapon 1
 
-# Additional Equip Weapon Key Presses (2, 3, 4, 5)...
+// Define a constant for the boss enemy spawning position
+const BOSSSPAWNINGPOS = vec2(1200, 450);
 
-onKeyPress("m"):
-    UpdateCoinCounter() # Add a coin
+// Check the current level to determine boss spawns and boss fight text display
+if (chosenLevelIndex === 6) {
+    // Create a boss enemy instance of type 7
+    const enemy7 = new Enemy("firstboss", 7);
+    
+    // Spawn the boss enemy at the specified position
+    enemy7.spawn(BOSSSPAWNINGPOS, player);
+    
+    // Display boss fight text
+    bossFightText.opacity = 1;
 
-# Update Health Bar
-function updateHealthBar():
-    Calculate new health bar width based on playerHP
-    Set healthBar's width to the new width
+    // Wait for 2 seconds and then hide the boss fight text
+    wait(2, () => {
+        bossFightText.opacity = 0;
+    });
+} else if (chosenLevelIndex === 13) {
+    // Create a boss enemy instance of type 8
+    const enemy8 = new Enemy("secondboss", 8);
+    
+    // Spawn the boss enemy at the specified position
+    enemy8.spawn(BOSSSPAWNINGPOS, player);
+    
+    // Display boss fight text
+    bossFightText.opacity = 1;
 
-# Define Health Bar Components
-Create healthBarBorder (border of health bar)
-Create healthBarBg (background of health bar)
-Create healthBar (actual health bar)
+    // Wait for 2 seconds and then hide the boss fight text
+    wait(2, () => {
+        bossFightText.opacity = 0;
+    });
+} else if (chosenLevelIndex === 20) {
+    // Create a boss enemy instance of type 9
+    const enemy9 = new Enemy("thirdboss", 9);
+    
+    // Spawn the boss enemy at the specified position
+    enemy9.spawn(BOSSSPAWNINGPOS, player);
+    
+    // Display boss fight text
+    bossFightText.opacity = 1;
+
+    // Wait for 2 seconds and then hide the boss fight text
+    wait(2, () => {
+        bossFightText.opacity = 0;
+    });
+}
 ```
 
 ## Development
 
 ### Outcome
 
-The introduction text and the shop text are handled in the same way. In the introduction level and shop levels respectively, when the player touches the shopkeeper the message and background are added. When the player stops touching the shopkeeper they are removed.
+I added the boss enemies as strong enemies within the `Enemy` class. Bosses will shoot differently. The first boss shoots normally, the second boss shoots in bursts, and the third boss shoots like a shotgun. After shooting, each boss has a chance to spawn a couple of enemies next to them, the strength of which depends on the boss.
 
+{% code title="enemy class.ts" %}
 ```typescript
-// Function to show shop text
-    function showShopText() {
-        const shopText = add([
-            rect(1250,300), // Create a black background for the text
-            pos(width() / 2, height() / 2),
-            z(11),
+import { updateCoinCounter } from "./main";
+
+export class Enemy {
+    sprite: string;
+    maxHealth: number;
+    currentHealth: number;
+    entity: any;
+    isMoving: boolean;
+    idleTime: number;
+    shootDamage: number;
+    isAlive: boolean;
+    numSteps: number;
+    moveSpeed: number;
+    bulletSpeed: number;
+    inaccuracy: number;
+    species: number;
+
+    constructor(sprite: string, type: number) {
+        // Initialize properties based on the enemy type
+        if (type === 1) { // Enemy type 1
+            this.maxHealth = 50;
+            this.idleTime = (Math.random() * (4 - 2) + 2);
+            this.shootDamage = 7;
+            this.numSteps = 20;
+            this.moveSpeed = 100;
+            this.bulletSpeed = 650;
+            this.inaccuracy = 1;
+            this.species = 1;
+        } else if (type === 2) { // Enemy type 2
+            this.maxHealth = 75;
+            this.idleTime = (Math.random() * (2 - 0.5) + 0.5);
+            this.shootDamage = 10;
+            this.numSteps = 20;
+            this.moveSpeed = 100;
+            this.bulletSpeed = 700;
+            this.inaccuracy = 1;
+            this.species = 2;
+        } else if (type === 3) { // Enemy type 3
+            this.maxHealth = 100;
+            this.idleTime = (Math.random() * (4.5 - 3) + 3);
+            this.shootDamage = 14;
+            this.numSteps = 20;
+            this.moveSpeed = 100;
+            this.bulletSpeed = 700;
+            this.inaccuracy = 1;
+            this.species = 3;
+        } else if (type === 4) { // Enemy type 4
+            this.maxHealth = 150;
+            this.idleTime = (Math.random() * (3 - 1.5) + 1.5);
+            this.shootDamage = 17;
+            this.numSteps = 20;
+            this.moveSpeed = 100;
+            this.bulletSpeed = 750;
+            this.inaccuracy = 1;
+            this.species = 4;
+        } else if (type === 5) { // Enemy type 5
+            this.maxHealth = 200;
+            this.idleTime = (Math.random() * (2.5 - 1) + 1);
+            this.shootDamage = 20;
+            this.numSteps = 20;
+            this.moveSpeed = 100;
+            this.bulletSpeed = 750;
+            this.inaccuracy = 8;
+            this.species = 5;
+        } else if (type === 6) { // Enemy type 6
+            this.maxHealth = 250;
+            this.idleTime = (Math.random() * (5 - 3.5) + 3.5);
+            this.shootDamage = 25;
+            this.numSteps = 20;
+            this.moveSpeed = 100;
+            this.bulletSpeed = 750;
+            this.inaccuracy = 3;
+            this.species = 6;
+        } else if (type === 7) { // Boss type 1, enemy type 7
+            this.maxHealth = 350;
+            this.idleTime = (Math.random() * (3 - 2) + 2);
+            this.shootDamage = 25;
+            this.numSteps = 20;
+            this.moveSpeed = 100;
+            this.bulletSpeed = 800;
+            this.inaccuracy = 3;
+            this.species = 7;
+        } else if (type === 8) { // Boss type 2, enemy type 8
+            this.maxHealth = 600;
+            this.idleTime = (Math.random() * (2.5 - 1.5) + 1.5);
+            this.shootDamage = 16;
+            this.numSteps = 20;
+            this.moveSpeed = 100;
+            this.bulletSpeed = 1000;
+            this.inaccuracy = 7;
+            this.species = 8;
+        } else if (type === 9) { // Boss type 3, enemy type 9
+            this.maxHealth = 1200;
+            this.idleTime = (Math.random() * (2.5 - 1) + 1);
+            this.shootDamage = 20;
+            this.numSteps = 20;
+            this.moveSpeed = 100;
+            this.bulletSpeed = 750;
+            this.inaccuracy = 20;
+            this.species = 9;
+        };
+        this.sprite = sprite;
+        this.currentHealth = this.maxHealth;
+        this.entity = null;
+        this.isMoving = false;
+        this.isAlive = true;
+    }
+
+    spawn(position: Vec2, player: any) {
+        this.entity = add([
+            sprite(this.sprite),
+            body(),
+            area(),
+            pos(position),
             anchor("center"),
-            opacity(0.5),
-            color(0, 0, 0),
-            "shopDialogue",
+            z(2),
+            "enemy",
         ]);
-
-        // Create and display the shop dialogue message
-        const message = add([
-            text("Welcome back adventurer! I can sell you some of my wares.\nIf you have enough coins you can buy an item in my shop with the corresponding key press.\n10 coins - Brass Spraygun: O key\n10 coins - Boomstick: P key\n15 coins - Clockwork Revolver: U key\n15 coins - Ironclad Carbine: I key\nAdditionally for 5 coins you can restore 10 health with a potion - L key.",  {
-                size: 30,
-                width: width() - 40,
-                align: "center",
-            }),
-            pos(width() / 2, height() / 2),
-            z(12),
-            anchor("center"),
-            color(255, 255, 255),
-            "shopDialogue",
-        ]);
+        this.entity.instance = this
+        this.activate(player);
     }
 
-    // Function to show lore text
-    function showLoreText() {
-    // Create a black background for the lore text
-    const loreText = add([
-        rect(1600, 150),
-        pos(width() / 2, height() / 2),
-        z(11),
-        anchor("center"),
-        color(0, 0, 0),
-        "loreDialogue",
-    ]);
-
-    // Create and display the lore dialogue message
-    const message = add([
-        text("The Evil Shapes are invading our world from another dimension!\nYou must defeat The Evil Shapes through 3 floors and defeat the Shape King to restore balance before it is too late.\nEnemies get stronger the further you go. If you find me later I can sell you some items to help.\nGood luck!",  {
-                size: 30,
-                width: width() - 40,
-                align: "center",
-            }),
-        pos(width() / 2, (height() / 2)),
-        z(12),
-        opacity(0.5),
-        anchor("center"),
-        color(255, 255, 255),
-        "loreDialogue",
-    ]);
-}
-
-    // Function to hide shop text
-    function hideShopText() {
-        // Destroy all entities with the "shopDialogue" tag
-        destroyAll("shopDialogue",);
-    }
-
-        // Function to hide shop text
-    function hideLoreText() {
-        // Destroy all entities with the "loreDialogue" tag
-        destroyAll("loreDialogue",);
-    }
-
-    // Handle collision between player and shopkeeper
-    onCollide("player", "shopkeeper", () => {
-        if (chosenLevelIndex === 7 || chosenLevelIndex === 14) {
-        showShopText(); // Show shop text if on certain levels
-        } else if (chosenLevelIndex === 0) {
-            showLoreText(); // Show lore text if on level 0
-        }
-    })
-    
-    // Handle the end of collision between player and shopkeeper
-    onCollideEnd("player", "shopkeeper", () => {
-        hideShopText();
-        hideLoreText();
-    })
-```
-
-I modified the function to unlock a weapon so that there must be enough coins to purchase the desired weapon. If there are enough coins then the amount of coins gets subtracted from the total coin balance.
-
-```typescript
-    // Attempt to unlock a weapon
-    function unlockWeapon(index) {
-        if (canUnlockWeapon(index)) {
-            weapons[index].unlocked = true;
-            unlockedWeapons.push(weapons[index]);
-            coins -= weapons[index].cost;
-            updateCoinCounter();
-            inventoryText.updateText();
+    updateHealth(amount: number) {
+        this.currentHealth -= amount;
+        if (this.currentHealth <= 0) {
+            this.destroy();
         }
     }
 
-    // Key press events to unlock weapons
-    onKeyPress("o", () => {
-        unlockWeapon(1);
-    }); // Unlock machine gun
-    onKeyPress("p", () => {
-        unlockWeapon(2);
-    }); // Unlock shotgun
-        onKeyPress("u", () => {
-        unlockWeapon(3);
-    }); // Unlock machine pistol
-    onKeyPress("i", () => {
-        unlockWeapon(4);
-    }); // Unlock rifle
+    destroy() {
+        destroy(this.entity);
+        this.isAlive = false;
+        updateCoinCounter();
+    }
+
+    activate(player: any) {
+        this.entity.on("update", async () => {
+            if (!this.isMoving) {
+                this.isMoving = true;
+                this.entity.color = rgb(255, 0, 0);
+                const targetPos = player.pos.add(vec2(350, 50));
+                const direction = targetPos.sub(this.entity.pos).unit();
+
+                for (let i = 0; i < this.numSteps; i++) {
+                    const moveAmount = this.moveSpeed / this.numSteps;
+                    this.entity.moveBy(direction.scale(moveAmount));
+                    await wait(0.02); // Adjust the wait period between each step
+                };
+
+                await wait(1);
+                this.entity.color = rgb(0, 0, 255);
+                let latestTargetPos = player.pos.add(vec2(350, 50));
+                if (this.species <= 7) {
+                    this.shootProjectile(latestTargetPos);
+
+                    // 50% chance to spawn minions after shooting
+                    if (Math.random() < 0.5) {
+                        this.spawnMinions(player);
+                    }
+                } else if (this.species === 8) {
+                    for (let p = 0; p < 5; p++) {
+                        latestTargetPos = player.pos.add(vec2(350, 50));
+                        this.shootProjectile(latestTargetPos);
+                        await wait(0.25);
+                    };
+
+                    // 50% chance to spawn minions after shooting
+                    if (Math.random() < 0.5) {
+                        this.spawnMinions(player);
+                    }
+                } else if (this.species === 9) {
+                    // Shoot 5 bullets at once for shotgun effect
+                    this.shootProjectile(latestTargetPos);
+                    this.shootProjectile(latestTargetPos);
+                    this.shootProjectile(latestTargetPos);
+                    this.shootProjectile(latestTargetPos);
+                    this.shootProjectile(latestTargetPos);
+
+                    // 25% chance to spawn minions after shooting
+                    if (Math.random() < 0.25) {
+                        this.spawnMinions(player);
+                    }
+                }
+                await wait(this.idleTime);
+                this.isMoving = false;
+            }
+        });
+    }
 
 
-    // Key press events to equip weapons (1, 2, 3, 4, 5, etc.)
-    onKeyPress("1", () => {
-
-    ... // Other weapon equip keys
-    
-    onKeyPress("4", () => {
-        if (unlockedWeapons[3]) {
-            currentWeapon = unlockedWeapons[3];
-        }
-    })
-    onKeyPress("5", () => {
-        if (unlockedWeapons[4]) {
-            currentWeapon = unlockedWeapons[4];
-        }
-    })
-```
-
-If the player has enough coins, they can restore a portion of their health.
-
-```typescript
-    function restoreHealth() {
-        if (coins >= 5) {
-            coins -= 5; // Deduct 5 coins
-            playerHP += 10; // Restore 10 health
-            updateHealthBar(); // Update the health bar
-            updateCoinCounter(); // Update the coin counter
+    shootProjectile(targetPos: Vec2) {
+        let direction = this.entity.pos.angle(targetPos) + 180;
+        const spreadAngle = Math.random() * this.inaccuracy - this.inaccuracy / 2;
+        if (this.isAlive) {
+            add([
+                sprite("egg"),
+                pos(this.entity.pos),
+                area(),
+                scale(0.65, 0.65),
+                color(255, 0, 0),
+                anchor("center"),
+                z(2),
+                rotate(this.entity.pos.angle(targetPos) + 270),
+                move(direction + spreadAngle, this.bulletSpeed),
+                "enemy_bullet",
+                { shootDamage: this.shootDamage },
+                offscreen({ destroy: true }),
+            ]);
         };
     };
 
-// Listen for the "l" key press to restore health
-onKeyPress("l", () => {
-    restoreHealth();
-});
-```
+    spawnMinions(player: any) {
+        // Define the positions for the minions relative to the boss
+        const minionPositions: vec2[] = [
+            vec2(50, 0),
+            vec2(-50, 0),
+        ];
 
-I added this temporary feature to make testing each weapon during development easier. Pressing m adds a coin to the coin count.
+        // Check to make sure boss is still alive before spawning enemies
+        if (this.isAlive) {
+            // Spawn minions at specified positions
+            for (const position of minionPositions) {
+                if (this.species === 7) {
+                    const enemy2 = new Enemy("bobo", 2);
+                    enemy2.spawn(this.entity.pos.add(position), player);
+                } else if (this.species === 8) {
+                    const enemy4 = new Enemy("dino", 4);
+                    enemy4.spawn(this.entity.pos.add(position), player);
+                } else if (this.species === 9) {
+                    const enemy6 = new Enemy("gigagantrum", 6);
+                    enemy6.spawn(this.entity.pos.add(position), player);
+                };
+            };
+        };
+    };
+
+};
+```
+{% endcode %}
+
+When the current level is a boss level (`chosenLevelIndex` is 6, 13, or 20) then a boss is spawned. The strength of the boss depends on the level.
 
 ```typescript
-    // Key press event to add a coin
-    onKeyPress("m", () => {
-        updateCoinCounter();
+const BOSSSPAWNINGPOS = vec2(1200, 450);
+    if (chosenLevelIndex === 6) {
+        const enemy7 = new Enemy("firstboss", 7);
+        enemy7.spawn(BOSSSPAWNINGPOS, player);
+        
+        bossFightText.opacity = 1;
+        wait(2, () => {
+            bossFightText.opacity = 0;
+        });
+    } else if (chosenLevelIndex === 13) {
+        const enemy8 = new Enemy("secondboss", 8);
+        enemy8.spawn(BOSSSPAWNINGPOS, player);
+        
+        bossFightText.opacity = 1;
+        wait(2, () => {
+            bossFightText.opacity = 0;
+        });
+    } else if (chosenLevelIndex === 20) {
+        const enemy9 = new Enemy("thirdboss", 9);
+        enemy9.spawn(BOSSSPAWNINGPOS, player);
+        
+        bossFightText.opacity = 1;
+        wait(2, () => {
+            bossFightText.opacity = 0;
+        });
+    };
+```
+
+The door was made stationary with `isStatic:true`.
+
+```typescript
+            "#": () => [
+                sprite("door"),
+                area(),
+                anchor("center"),
+                z(2),
+                body({ isStatic: true }),
+                "door",
+            ],
+```
+
+Player and enemy bullets are destroyed when they collide with a wall.
+
+```typescript
+    onCollide("enemy_bullet", "wall", (bullet, box) => {
+        destroy(bullet); // Destroy the bullet
+    });
+
+    onCollide("player_bullet", "wall", (bullet, box) => {
+        destroy(bullet); // Destroy the bullet
     });
 ```
 
-I adjusted `healthBar`'s width simply to be equal to `playerHP` instead of using the maths which I had come before. This fixed the bug with the health bar increasing instead of decreasing after getting damaged.
+#### Boss Sprites
 
-```typescript
-    // Health bar components
-    const healthBarBorder = add([
-        rect(ORIGINALHP + 4, HEALTHBARHEIGHT + 4),
-        pos(10, 10),
-        z(3),
-        color(0, 0, 0),
-    ]);
-    const healthBarBg = add([
-        rect(ORIGINALHP, HEALTHBARHEIGHT),
-        pos(12, 12),
-        z(4),
-        color(79, 75, 75),
-    ]);
-    const healthBar = add([
-        rect(playerHP, HEALTHBARHEIGHT),
-        pos(12, 12),
-        z(5),
-        color(92, 204, 12),
-    ]);
-    
-    //health bar updater
-    function updateHealthBar() {
-        const newWidth = playerHP;
-        healthBar.width = newWidth;
-    }
-```
 
-#### New Sprites
-
-Over the coming cycles, I will replace some of the sprites in the game. Below are the sprites I added in this cycle.
 
 <div>
 
-<figure><img src="../.gitbook/assets/cycle13scarlettsprite.png" alt=""><figcaption><p>Scarlet Blackthorn</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle14boss1sprite.png" alt=""><figcaption><p>Boss 1</p></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/cycle13enemy4sprite.png" alt=""><figcaption><p>Enemy 4</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle14boss2sprite.png" alt=""><figcaption><p>Boss 2</p></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/cycle13enemy5sprite.png" alt=""><figcaption><p>Enemy 5</p></figcaption></figure>
-
- 
-
-<figure><img src="../.gitbook/assets/cycle13enemy6sprite.png" alt=""><figcaption><p>Enemy 6</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle14boss3sprite.png" alt=""><figcaption><p>Boss 3</p></figcaption></figure>
 
 </div>
 
 ### Challenges
 
-Describe challenges you faced and how they were overcome.
+Initially, I planned to implement bosses using a separate boss class with the special boss behaviour which I could then call when a boss level started.
+
+{% code title="boss class.ts" %}
+```typescript
+import { updateCoinCounter } from "./main";
+import { Enemy } from "./enemy class";
+
+export class Boss {
+    sprite: string;
+    maxHealth: number;
+    currentHealth: number;
+    entity: any;
+    isMoving: boolean;
+    idleTime: number;
+    shootDamage: number;
+    isAlive: boolean;
+    numSteps: number;
+    moveSpeed: number;
+    accuracy: number;
+    bulletSpeed: number;
+    type: number;
+
+    constructor(sprite: string, type: number) {
+        // Initialize properties based on the enemy type
+        if (type === 1) { // Boss type 1
+            this.maxHealth = 300;
+            this.idleTime = (Math.random() * (4 - 2.5) + 2.5);
+            this.shootDamage = 25;
+            this.numSteps = 20;
+            this.moveSpeed = 100;
+            this.accuracy = 3;
+            this.bulletSpeed = 800;
+            this.type = 1;
+        } else if (type === 2) { // Boss type 2
+            this.maxHealth = 500;
+            this.idleTime = (Math.random() * (4 - 2.5) + 2.5);
+            this.shootDamage = 10;
+            this.numSteps = 20;
+            this.moveSpeed = 100;
+            this.accuracy = 6;
+            this.bulletSpeed = 800;
+            this.type = 2;
+        } else if (type === 3) { // Boss type 3
+            this.maxHealth = 1000;
+            this.idleTime = (Math.random() * (3.5 - 2) + 2);
+            this.shootDamage = 12;
+            this.numSteps = 20;
+            this.moveSpeed = 100;
+            this.accuracy = 20;
+            this.bulletSpeed = 800;
+            this.type = 3;
+        };
+        this.sprite = sprite;
+        this.currentHealth = this.maxHealth;
+        this.entity = null;
+        this.isMoving = false;
+        this.isAlive = true;
+    }
+
+    spawn(position: Vec2, player: any) {
+        this.entity = add([
+            sprite(this.sprite),
+            body(),
+            area(),
+            pos(position),
+            anchor("center"),
+            z(2),
+            "boss",
+        ]);
+        this.entity.instance = this;
+        this.activate(player);
+    }
+
+    updateHealth(amount: number) {
+        this.currentHealth -= amount;
+        if (this.currentHealth <= 0) {
+            this.destroy();
+        }
+    }
+
+    destroy() {
+        this.isAlive = false;
+        if (this.type === 1) {
+            for (let i = 0; i < 10; i++) {
+                updateCoinCounter(); //will give 10 coins
+            }
+        } else if (this.type === 2) {
+            for (let i = 0; i < 15; i++) {
+                updateCoinCounter(); //will give 15 coins
+            }
+        }
+        destroy(this.entity);
+    }
+
+    activate(player: any) {
+            this.entity.on("update", async () => {
+                if (!this.isMoving) {
+                    this.isMoving = true;
+                    this.entity.color = rgb(255, 0, 0);
+                    const targetPos = player.pos.add(vec2(350, 50));
+                    const direction = targetPos.sub(this.entity.pos).unit();
+    
+                    for (let i = 0; i < this.numSteps; i++) {
+                        const moveAmount = this.moveSpeed / this.numSteps;
+                        this.entity.moveBy(direction.scale(moveAmount));
+                        await wait(0.02); // Adjust the wait period between each step
+                    };
+    
+                    await wait(1);
+                    this.entity.color = rgb(0, 0, 255);
+                    const latestTargetPos = player.pos.add(vec2(350, 50));
+                    //this.shootProjectile(latestTargetPos);
+                    await wait(this.idleTime);
+                    this.isMoving = false;
+                }
+            });
+        }
+
+    shootProjectile(targetPos: Vec2) {
+        const spreadAngle = Math.random() * this.accuracy - this.accuracy / 2;
+        const direction = targetPos.sub(this.entity.pos);
+        if (this.isAlive) {
+            add([
+                sprite("egg"),
+                pos(this.entity.pos),
+                area(),
+                scale(0.65, 0.65),
+                color(255, 0, 0),
+                anchor("center"),
+                z(2),
+                rotate(this.entity.pos.angle(targetPos) + 270),
+                move(direction + spreadAngle, this.bulletSpeed),
+                "enemy_bullet",
+                { shootDamage: this.shootDamage },
+                offscreen({ destroy: true }),
+            ]);
+        }
+    }
+
+    spawnMinions(player: any) {
+        // Define the positions for the minions relative to the boss
+        const minionPositions: vec2[] = [
+            vec2(50, 0),
+            vec2(-50, 0),
+        ];
+
+        // Spawn minions at specified positions
+        for (const position of minionPositions) {
+            if (this.type === 1) {
+                const enemy2 = new Enemy("bobo", 2);
+                enemy2.spawn(this.entity.pos.add(position), player)
+            } else if (this.type === 2) {
+                const enemy4 = new Enemy("dino", 4);
+                enemy4.spawn(this.entity.pos.add(position), player)
+            } else if (this.type === 3) {
+                const enemy6 = new Enemy("gigagantrum", 6);
+                enemy6.spawn(this.entity.pos.add(position), player)
+            };
+        }
+    }
+}
+```
+{% endcode %}
+
+However, I was experiencing strange behaviour despite most of the code being copied from the `Enemy` class. I realised that it would be much simpler to use the `Enemy` class for bosses and add a few special functions which only the boss enemies call. Below is a video of some of the issues experienced.
+
+{% embed url="https://youtu.be/x5ntEovn-fM" %}
 
 ## Testing
 
 ### Tests
 
-| Test | Instructions                                               | What I expect                                                                                     | What actually happens | Pass/Fail |
-| ---- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | --------------------- | --------- |
-| 1    | Start game and touch shopkeeper.                           | Introduction text appears.                                                                        | As expected.          | Pass.     |
-| 2    | Move away from shopkeeper.                                 | Message disappears.                                                                               | As expected.          | Pass.     |
-| 3    | Cycle through levels and observe enemy sprites.            | Enemies 4, 5 and 6 should be using the new sprites.                                               | As expected.          | Pass.     |
-| 4    | Touch the shopkeeper in shop levels.                       | Shop message appears.                                                                             | As expected.          | Pass.     |
-| 5    | Repeat test 2 for shop levels.                             | Message disappears.                                                                               | As expected.          | Pass.     |
-| 6    | Attempt to buy each item in the shop without enough coins. | Nothing happens and items are not bought.                                                         | As expected.          | Pass.     |
-| 7    | Add coins with m and attempt to buy each item.             | Each item can be bought and weapons appear in the inventory in the order that they are purchased. | As expected.          | Pass.     |
-| 8    | Buy health restorations.                                   | Health increases by the same amount each time.                                                    | As expected.          | Pass.     |
-| 9    | Restart game as Scarlett Blackthorn character.             | Game uses her new sprite.                                                                         | As expected.          | Pass.     |
-
-The new sprite for my Scarlett Blackthorn character is a bit big so I will scale her down and make sure when I add new sprites for other characters that they are scaled down too.
+| Test | Instructions                                            | What I expect                                                                                                                          | What actually happens | Pass/Fail |
+| ---- | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
+| 1    | Start levels and cycle to first boss fight.             | Boss has correct sprite and shoots towards enemy. Every so often spawns 2 enemies next to it after shooting.                           | As expected.          | Pass.     |
+| 2    | Cycle to second boss fight.                             | Boss has correct sprite and shoots a series of 5 bullets each attacks. Every so often spawns 2 enemies next to it after shooting.      | As expected.          | Pass.     |
+| 3    | Cycle to third boss fight.                              | Boss has correct sprite and shoots 5 bullets at once with a shotgun spread. Every so often spawns 2 enemies next to it after shooting. | As expected.          | Pass.     |
+| 4    | Shoot at each boss until it dies.                       | Boss dies and you can move to next room.                                                                                               | As expected.          | Pass.     |
+| 5    | Shoot at the walls and let enemy bullets hit the walls. | Bullets get destroyed by walls.                                                                                                        | As expected.          | Pass.     |
 
 ### Evidence
 
-{% embed url="https://youtu.be/mRRvETbc29U" %}
+{% embed url="https://youtu.be/kqrG9XFDp48" %}
