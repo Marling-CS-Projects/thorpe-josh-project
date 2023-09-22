@@ -304,7 +304,7 @@ I adjusted `healthBar`'s width simply to be equal to `playerHP` instead of using
 
 #### New Sprites
 
-Over the coming cycles, I will replace some of the sprites in the game. Below are the sprites I added in this cycle.
+Over the coming cycles, I will be replacing some of the sprites in the game with proper versions. Below are the new sprites I added in this cycle.
 
 <div>
 
@@ -323,10 +323,6 @@ Over the coming cycles, I will replace some of the sprites in the game. Below ar
 <figure><img src="../.gitbook/assets/cycle13enemy6sprite.png" alt=""><figcaption><p>Enemy 6</p></figcaption></figure>
 
 </div>
-
-### Challenges
-
-Describe challenges you faced and how they were overcome.
 
 ## Testing
 

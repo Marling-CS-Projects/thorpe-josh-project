@@ -247,7 +247,7 @@ The `updateText` function is stored inside `inventoryText`. It adds the name of 
 
 ### Challenges
 
-It was challenging to find how to update the inventory when a new weapon is unlocked. I was not aware that embedding a function within inventoryText was possible as this was not described in the documentation. Instead, I came across an example of it while viewing some Kaboom code online and thought that it could work in this scenario.
+It was challenging to find out how to update the inventory when a new weapon is unlocked. I was not aware that embedding a function within inventoryText was possible as this was not described in the documentation. Instead, I came across an example of it while viewing some Kaboom code online and made use of it in my code.
 
 ## Testing
 

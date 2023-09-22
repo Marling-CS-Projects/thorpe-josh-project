@@ -24,8 +24,6 @@ In this cycle, my goal is to add a working pause menu which pauses the entire ga
 
 ### Usability Features
 
-maybe put something here
-
 ### Key Variables
 
 | Variable Name      | Use                                                                                                                                                               |
@@ -327,18 +325,20 @@ To add notches to the boss healthbar, I added a small horizontal line at 3 locat
 
 ### Challenges
 
-Describe challenges you faced and how they were overcome
+I found it challenging to pause and unpause the movement of the player and enemy bullets. Initially, I tried removing the move component and re-adding it with saved values when resuming. However, the bullets would not move again after pausing. I was becoming sceptical that it was possible and I was going to resort to letting the bullets move but not dealing any damage to the player if they hit while paused. Thankfully though, I found that Kaboom has `.paused`, which made it super easy to stop and start the bullet movement.
 
 ## Testing
 
 ### Tests
 
-| Test | Instructions   | What I expect      | What actually happens | Pass/Fail |
-| ---- | -------------- | ------------------ | --------------------- | --------- |
-| 1    | Run code.      | Thing happens.     | As expected.          | Pass.     |
-| 2    | Press buttons. | Something happens. | As expected.          | Pass.     |
-
-Comment on any failed tests and how you plan to resolve them
+| Test | Instructions                                     | What I expect                                                                                                              | What actually happens                               | Pass/Fail |
+| ---- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | --------- |
+| 1    | Start levels and press escape.                   | <ul><li>Floor for levels has different background colour to the HUD.</li><li>Game pauses and pause menu appears.</li></ul> | <ul><li>As expected.</li><li>As expected.</li></ul> | Pass.     |
+| 2    | Press escape again.                              | Game unpauses.                                                                                                             | As expected.                                        | Pass.     |
+| 3    | Dash before pausing game.                        | Dash cooldown bar stops moving mid-cooldown.                                                                               | As expected.                                        | Pass.     |
+| 4    | Take damage by getting shot and touching spikes. | <p>Each time the player gets damaged:</p><ul><li>Screen shakes.</li><li>Screen flashes red.</li></ul>                      | <ul><li>As expected.</li><li>As expected.</li></ul> | Pass.     |
+| 5    | Kill boss in boss fight.                         | Boss health bar scales correctly and is empty when the boss dies.                                                          | As expected.                                        | Pass.     |
+| 6    | Buy health potion.                               | Deducts 5 coins.                                                                                                           | As expected.                                        | Pass.     |
 
 ### Evidence
 

@@ -388,7 +388,7 @@ I have also added an `isAlive` flag in the enemy class which is used to check if
 
 ### Challenges
 
-To use a variable between different scenes it must be declared globally at the start of the project. I found development a bit challenging until I realised this.
+To use a variable between different scenes it must be declared globally at the start of the project. It took me a little while to figure this out which made it a bit challenging when making the character selection system.
 
 ## Testing
 
