@@ -4,9 +4,9 @@
 
 <figure><img src="../.gitbook/assets/systemsdiagramv2.png" alt=""><figcaption></figcaption></figure>
 
-This systems diagram shows the different parts of my game that I will focus on creating. I have split each section into smaller sub-sections. Throughout the development stage, I will pick one or two of these sections to focus on at a time to gradually build up and piece together the game. I have broken the project down in this way as it roughly corresponds to my [success criteria](../analysis/1.5-success-criteria.md).
+This systems diagram shows the different parts of my game that I will focus on creating. I have split each section into smaller sub-sections. Throughout the development stage, I will pick one or two of these sections to focus on to build up the game gradually over time. I have broken the project down in this way as it roughly corresponds to my [success criteria](../analysis/1.5-success-criteria.md).
 
-The diagram is colour coded to show how important each feature is to my game, with the most important features in <mark style="color:red;">red</mark>, the least important in <mark style="color:green;">green</mark>, and those that are in between in <mark style="color:orange;">orange</mark>. A colourless version is also below for easier viewing.
+The diagram is colour-coded to show how important each feature is to my game, with the most important features in <mark style="color:red;">red</mark>, the least important in <mark style="color:green;">green</mark>, and those that are in between in <mark style="color:orange;">orange</mark>. A black-and-white version is also below for easier viewing.
 
 <figure><img src="../.gitbook/assets/systemsdiagramv1.png" alt=""><figcaption></figcaption></figure>
 
@@ -27,12 +27,12 @@ It's important that users are able to complete my game with completeness and acc
 
 Efficiency refers to the speed and accuracy with which a user can complete the goal. To maximise efficiency, I will create a menu system that is easy to navigate through in order to find what you are looking for. Also, I will keep informational dialogue concise to avoid unnecessary complexity.
 
-The controls too must also be efficient in that they are intuitive to use and allow the user to carry out multiple actions.
+The controls must also be efficient in that they are intuitive to use and allow the user to carry out multiple actions.
 
 #### Aims
 
 * Create a menu system that is quick and easy to navigate through
-* Create a controls system that isn't too complicated but allows the player to do multiple actions
+* Create a control system that isn't too complicated but allows the player to do multiple actions
 
 ### Engaging
 
@@ -61,56 +61,3 @@ My game should be easy to play and not be overly complicated. To do this, I will
 
 * Create a list of controls for the game
 * Create a simple tutorial that helps players learn how to play the game
-
-## Pseudocode for the Game
-
-### Pseudocode for game
-
-This is the basic layout of the object to store the details of the game. This will be what is rendered as it will inherit all-important code for the scenes.
-
-```
-object Game
-    type: Phaser
-    parent: id of HTML element
-    width: width
-    height: height
-    physics: set up for physics
-    scenes: add all menus, levels and other scenes
-end object
-
-render Game to HTML web page
-```
-
-### Pseudocode for a level
-
-This shows the basic layout of code for a Phaser scene. It shows where each task will be executed.
-
-```
-class Level extends Phaser Scene
-
-    procedure preload
-        load all sprites and music
-    end procedure
-    
-    procedure create
-        start music
-        draw background
-        create players
-        create platforms
-        create puzzle elements
-        create enemies
-        create obstacles
-        create finishing position
-        create key bindings
-    end procedure
-    
-    procedure update
-        handle key presses
-        move player
-        move interactable objects
-        update animations
-        check if player at exit
-    end procedure
-    
-end class
-```
