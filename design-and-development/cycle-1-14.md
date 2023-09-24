@@ -435,11 +435,11 @@ The door was made stationary with `isStatic:true`.
 Player and enemy bullets are destroyed when they collide with a wall.
 
 ```typescript
-    onCollide("enemy_bullet", "wall", (bullet, box) => {
+    onCollide("enemy_bullet", "wall", (bullet, wall) => {
         destroy(bullet); // Destroy the bullet
     });
 
-    onCollide("player_bullet", "wall", (bullet, box) => {
+    onCollide("player_bullet", "wall", (bullet, wall) => {
         destroy(bullet); // Destroy the bullet
     });
 ```

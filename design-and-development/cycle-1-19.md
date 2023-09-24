@@ -6,7 +6,7 @@
 
 In this cycle, I will. My objectives in this cycle are:
 
-* [ ] Balance the weapons, enemies, bosses and levels accordingly so that the game feels fun and fair
+* [ ] Balance the weapons, enemies, bosses and levels accordingly so that the game feels fun to play and fair
 * [ ] Ensure that no enemies spawn too close to the player
 * [ ] Remove the test features I added for development purposes
 
