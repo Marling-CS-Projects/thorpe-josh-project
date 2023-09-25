@@ -28,14 +28,14 @@
 * [2.2.9 Cycle 9 - Bullet Damage & Coins](design-and-development/cycle-1-9.md)
 * [2.2.10 Cycle 10 - Different Weapons & Inventory](design-and-development/cycle-1-10.md)
 * [2.2.11 Cycle 11 - Main Menu & Character Select](design-and-development/cycle-1-11.md)
-* [2.2.12 Cycle 12 - Proper Levels & Enemy Spawning](design-and-development/cycle-1-12.md)
+* [2.2.12 Cycle 12 - Proper Enemy Spawning & Levels](design-and-development/cycle-1-12.md)
 * [2.2.13 Cycle 13 - Shop & More Weapons](design-and-development/cycle-1-13.md)
 * [2.2.14 Cycle 14 - Boss Fights](design-and-development/cycle-1-14.md)
 * [2.2.15 Cycle 15 - Dash Cooldown Bar & Improved UI & Menus](design-and-development/cycle-1-15.md)
-* [2.2.16 Cycle 16 - Boss Health Bar & Automatic Weapons & Fixing Bugs](design-and-development/cycle-1-16.md)
+* [2.2.16 Cycle 16 - Boss Health Bar, Automatic Weapons & Fixing Bugs](design-and-development/cycle-1-16.md)
 * [2.2.17 Cycle 17 - Pause Menu & Damage Effect](design-and-development/cycle-1-17.md)
-* [2.2.18 Cycle 18 - Sound & Redone Menus \[IN PROGRESS\]](design-and-development/cycle-1-18.md)
-* [2.2.19 Cycle 19 - Game Balance & Removing Test Features \[UPCOMING\]](design-and-development/cycle-1-19.md)
+* [2.2.18 Cycle 18 - Sound & Redone Menus](design-and-development/cycle-1-18.md)
+* [2.2.19 Cycle 19 - Balancing & Removing Test Features](design-and-development/cycle-1-19.md)
 
 ## 3 Testing <a href="#testing" id="testing"></a>
 

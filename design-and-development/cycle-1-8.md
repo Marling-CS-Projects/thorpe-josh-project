@@ -13,6 +13,8 @@ My objective in this cycle is to redo enemies using a class system. My objective
 
 ### Usability Features
 
+Add this section
+
 ### Key Variables
 
 | Variable Name                   | Use                                                                                                                                                                                                         |

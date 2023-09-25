@@ -28,6 +28,8 @@ In this cycle, my main goal is to add boss fights to the game. My objectives in 
 
 ### Usability Features
 
+Add this section
+
 ### Key Variables
 
 | Variable Name     | Use                                                                                                                                        |
@@ -631,6 +633,8 @@ export class Boss {
 However, I was experiencing strange behaviour despite most of the code being copied from the `Enemy` class. I realised that it would be much simpler to use the `Enemy` class for bosses and add a few special functions which only the boss enemies call. Below is a video of some of the issues experienced.
 
 {% embed url="https://youtu.be/x5ntEovn-fM" %}
+
+I later found the blue screen issue to be with how the random angle for the boss shooting inaccuracy was calculated, but by then I had already decided that having bosses as part of the enemy class was simpler anyway.
 
 ## Testing
 

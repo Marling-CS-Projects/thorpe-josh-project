@@ -24,6 +24,8 @@ My secondary objective is to add a coin system to the game:
 
 ### Usability Features
 
+Add this section
+
 ### Key Variables
 
 | Variable Name      | Use                                                                                                                                                                                                                                                                                                                                        |

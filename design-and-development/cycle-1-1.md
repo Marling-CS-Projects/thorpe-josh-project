@@ -12,6 +12,8 @@ My focus in this cycle will be on aiming and bullets. My objectives are:
 
 ### Usability Features
 
+Add this section
+
 ### Key Variables
 
 | Variable Name    | Use                                                                                                                                                                                                                            |

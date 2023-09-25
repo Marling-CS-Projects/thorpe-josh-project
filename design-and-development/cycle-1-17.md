@@ -13,16 +13,17 @@ In this cycle, my goal is to add a working pause menu which pauses the entire ga
 * [x] Add background for the floor in levels
 * [x] Change game background colour to fit for the HUD around the level
 
-#### Smaller Features
+#### Smaller Changes
 
 * [x] Fix the boss healthbar ending early
 * [x] Add a new door sprite
 * [x] Add notch lines to the boss health bar
-* [x] When starting a new game after death, reset the weapon to gear gun
 * [x] Fix buying a health potion deducting 4 coins instead of 5
 * [x] Reduce spikes in boss levels
 
 ### Usability Features
+
+Add this section
 
 ### Key Variables
 

@@ -1,10 +1,10 @@
-# 2.2.18 Cycle 18 - Sound & Redone Menus \[IN PROGRESS]
+# 2.2.18 Cycle 18 - Sound & Redone Menus
 
 ## Design
 
 ### Objectives
 
-In this cycle, I will. My objectives in this cycle are:
+In this cycle, my goal is to add sound effects and music and make the menus look much better. My objectives in this cycle are to:
 
 * [x] Add sound effects for key events
 * [x] Add music
@@ -19,36 +19,79 @@ Now for redesigning the menus. I am still unhappy with how the main menu looks w
 * [x] Replace how to play menu text with a graphic I made
 * [x] Add an exciting font for the titles of each menu
 
-#### Smaller Features
+#### Smaller Changes
 
 * [x] Player and enemy bullets are destroyed when colliding with the door
-* [x] Remove debug logging for when the game is paused and unpaused
 * [x] Killing a boss gives 5 coins instead of 1
 * [x] Add a new enemy 3 sprite
-* [x] Add a crown to final boss sprite
+* [x] Add a crown to the final boss sprite
 * [x] Add a new shopkeeper sprite
 
 ### Usability Features
 
+Add this section
+
 ### Key Variables
 
-| Variable Name | Use                   |
-| ------------- | --------------------- |
-| foo           | does something useful |
+| Variable Name | Use                                                                                                                                                                                                                                                      |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `gameMusic`   | This variable is used to store the reference to the game's background music sound. It is created using the `play` function and set to loop indefinitely. This variable allows me to control the game's background music, such as stopping or pausing it. |
 
 ### Pseudocode
 
 ```
-procedure do_something
-    
-end procedure
+// Define and load game sounds
+loadSound("menuclick", "/sounds/select-sound-121244.mp3");
+loadSound("shoppurchase", "/sounds/collectcoin.mp3");
+// ... (other sound loading statements)
+
+// Play background music with looping
+const gameMusic = play("music", { loop: true });
+
+// Function to create and configure buttons
+function addButton(txt, position, func) {
+  // Create a button object
+  const button = createButton(txt, position);
+  
+  // Set button hover and click behavior
+  button.onHoverUpdate(() => {
+    // Scale and cursor change on hover
+  });
+  button.onHoverEnd(() => {
+    // Reset scale on hover end
+  });
+  button.onClick(func);
+  
+  return button;
+}
+
+// Create Play button
+addButton("Play", vec2(width() / 2, height() / 2 - 40), () => { 
+  play("menuclick"); // Play a sound
+  go("characterSelect"); // Navigate to character select screen
+});
+
+// Create How to Play button
+addButton("How to Play", vec2(width() / 2, height() / 2 + 60), () => { 
+  play("menuclick"); // Play a sound
+  go("howToPlay"); // Navigate to how to play screen
+});
+
+// Create Credits button
+addButton("Credits", vec2(width() / 2, height() / 2 + 160), () => {
+  play("menuclick"); // Play a sound
+  go("credits"); // Navigate to credits screen
+});
+
+// Display the game title
+const gameTitle = createGameTitle();
 ```
 
 ## Development
 
 ### Outcome
 
-explain the code
+All the sounds are loaded at the start of the project.
 
 ```typescript
 loadSound("menuclick", "/sounds/select-sound-121244.mp3");
@@ -66,31 +109,22 @@ loadSound("shopkeepernote", "/sounds/pickupCoin.wav");
 loadSound("recoverhealth", "/sounds/health-pickup-6860.mp3");
 ```
 
-explain some more
+The music begins playing when you start and it will loop indefinitely.
 
-```typescript
-const gameMusic = play("music", {loop: true}); 
-```
+<pre class="language-typescript"><code class="lang-typescript"><strong>const gameMusic = play("music", {loop: true}); 
+</strong></code></pre>
 
-explain another part
-
-```typescript
-gameMusic.paused = false;
-volume(1);
-```
-
-and another
+The music is paused in the win and lose scenes and unpaused in the main menu scene. Below is also an example of one of the sounds which is played when the win scene starts.
 
 ```typescript
 gameMusic.paused = true;
 play("gamewin");
 ```
 
-aa
+I created a new function that adds all the parts of a button and controls what happens on click depending on what is passed into the function. This makes buttons much nicer and makes my code more concise and efficient because the code doesn't have to be duplicated for each button.
 
-```typescript
-function addButton(txt, position, func) {
-  // add a parent background object
+<pre class="language-typescript"><code class="lang-typescript"><strong>function addButton(txt, position, func) {
+</strong>  // add a parent background object
   const button = add([
     rect(240, 80, { radius: 8 }),
     pos(position),
@@ -127,9 +161,9 @@ function addButton(txt, position, func) {
     
   return button;
 };
-```
+</code></pre>
 
-bb
+Examples of how the buttons are called in the main menu.
 
 ```typescript
 addButton("Play", vec2(width() / 2, height() / 2 - 40), () => { 
@@ -146,7 +180,7 @@ addButton("Play", vec2(width() / 2, height() / 2 - 40), () => {
     });
 ```
 
-cc
+The title for each menu is now a sprite object rather than a text object.
 
 ```typescript
 const gameTitle = add([
@@ -158,7 +192,7 @@ const gameTitle = add([
     ]);
 ```
 
-dd
+Bullets are destroyed when they collide with the door.
 
 ```typescript
 // Destroy bullets when they collide with the door
@@ -171,7 +205,7 @@ dd
     });
 ```
 
-ee
+If the enemy is a boss, it will give 5 coins on death, otherwise, it will give one.
 
 {% code title="enemy class.ts" %}
 ```typescript
@@ -211,21 +245,34 @@ destroy() {
 
 <figure><img src="../.gitbook/assets/howtoplayguide.png" alt=""><figcaption></figcaption></figure>
 
-### Challenges
+#### Menu Titles
 
-Describe challenges you faced and how they were overcome
+
+
+<figure><img src="../.gitbook/assets/cooltextorange.png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/cooltext443815865418373.png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/cooltext443815885407719.png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/cooltext443815948390323.png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/cooltext443816062054504.png" alt=""><figcaption></figcaption></figure>
 
 ## Testing
 
 ### Tests
 
-| Test | Instructions   | What I expect      | What actually happens | Pass/Fail |
-| ---- | -------------- | ------------------ | --------------------- | --------- |
-| 1    | Run code.      | Thing happens.     | As expected.          | Pass.     |
-| 2    | Press buttons. | Something happens. | As expected.          | Pass.     |
-
-Comment on any failed tests and how you plan to resolve them
+| Test | Instructions               | What I expect                                                                                                                                                | What actually happens                                                                         | Pass/Fail |
+| ---- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- | --------- |
+| 1    | Start game.                | <ul><li>Music plays.</li><li>New buttons look correct.</li></ul>                                                                                             | <ul><li>As expected.</li><li>As expected.</li></ul>                                           | Pass.     |
+| 2    | Click on each menu.        | <ul><li>Each title is correct.</li><li>How to play menu uses new graphic.</li><li>Credit text is updated.</li><li>Each button functions correctly.</li></ul> | <ul><li>As expected.</li><li>As expected.</li><li>As expected.</li><li>As expected.</li></ul> | Pass.     |
+| 3    | Play through the game.     | Sound effects play for each of the events I added.                                                                                                           | As expected.                                                                                  | Pass.     |
+| 4    | Pause and unpause game.    | Music is quieter when paused.                                                                                                                                | As expected.                                                                                  | Pass.     |
+| 5    | Shoot door.                | Bullets are destroyed.                                                                                                                                       | As expected.                                                                                  | Pass.     |
+| 6    | Kill boss.                 | Gives 5 coins.                                                                                                                                               | As expected.                                                                                  | Pass.     |
+| 7    | Go to lose and win scenes. | <ul><li>Music stops.</li><li>Same checks as in test 2.</li></ul>                                                                                             | <ul><li>As expected.</li><li>As expected.</li></ul>                                           | Pass.     |
 
 ### Evidence
 
-Put YouTube video testing link here
+{% embed url="https://youtu.be/PB5NmFp6gLA" %}

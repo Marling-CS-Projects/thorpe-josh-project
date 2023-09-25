@@ -17,6 +17,8 @@ My focus in this cycle is to add a health bar. My objectives are:
 
 ### Usability Features
 
+Add this section
+
 ### Key Variables
 
 | Variable Name     | Use                                                                                                                                                                             |

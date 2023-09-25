@@ -27,6 +27,8 @@ In this cycle, my goal is to improve the game UI and menus. My objectives are:
 
 ### Usability Features
 
+Add this section
+
 ### Key Variables
 
 | Variable Name                                                   | Use                                                                                                                  |

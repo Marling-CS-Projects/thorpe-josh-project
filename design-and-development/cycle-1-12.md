@@ -1,4 +1,4 @@
-# 2.2.12 Cycle 12 - Proper Levels & Enemy Spawning
+# 2.2.12 Cycle 12 - Proper Enemy Spawning & Levels
 
 ## Design
 
@@ -15,6 +15,8 @@ In this cycle, my goal is to make some proper levels with enemies spawning in th
 * [x] Make player and enemy bullets be able to destroy the boxes (mushrooms)
 
 ### Usability Features
+
+Add this section
 
 ### Key Variables
 

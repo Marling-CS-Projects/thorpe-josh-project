@@ -26,6 +26,8 @@ In this cycle, I plan to add the shop feature. My objectives in this cycle are t
 
 ### Usability Features
 
+Add this section
+
 ### Key Variables
 
 | Variable Name                   | Use                                                                                                                                                                                                |

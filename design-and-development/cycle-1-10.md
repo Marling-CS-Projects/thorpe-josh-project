@@ -21,6 +21,8 @@ In this cycle, I aim to set up a proper weapon and inventory system. My objectiv
 
 ### Usability Features
 
+Add this section
+
 ### Key Variables
 
 | Variable Name     | Use                                                                                                                                                                                    |

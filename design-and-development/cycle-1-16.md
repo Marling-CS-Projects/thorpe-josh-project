@@ -1,4 +1,4 @@
-# 2.2.16 Cycle 16 - Boss Health Bar & Automatic Weapons & Fixing Bugs
+# 2.2.16 Cycle 16 - Boss Health Bar, Automatic Weapons & Fixing Bugs
 
 ## Design
 
@@ -25,13 +25,14 @@ Currently, my game is missing many checks which causes bugs or issues when carry
 #### Smaller Changes
 
 * [x] Add new sprites for the walls, spikes and boxes
-* [x] Further reduce the number of spikes and boxes in levels
 * [x] Adjust some of the enemy spawn locations in levels so that they are not too close to the player
 * [x] Rename Ironclad Carbine to Ironclad Rifle (easier name for players to understand)
 * [x] Adjust coin counter position
 * [x] Fix the dash cooldown bar border
 
 ### Usability Features
+
+Add this section
 
 ### Key Variables
 

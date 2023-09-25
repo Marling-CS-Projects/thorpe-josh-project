@@ -18,6 +18,8 @@ I also want to add a cooldown to the gun so that the player can't just click the
 
 ### Usability Features
 
+Add this section
+
 ### Key Variables
 
 | Variable Name     | Use                                                                                                                                                                                                                                                                                                                                                                                                                                           |

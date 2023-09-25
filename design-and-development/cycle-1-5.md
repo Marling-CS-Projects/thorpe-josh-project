@@ -14,6 +14,8 @@ My focus in this cycle is to add some enemies. My objectives are:
 
 ### Usability Features
 
+Add this section
+
 ### Key Variables
 
 | Variable Name(s)                       | Use                                                                                                                                                                                                                                                  |

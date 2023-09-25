@@ -15,6 +15,8 @@ My focus in this cycle is on room generation. My objectives are:
 
 ### Usability Features
 
+Add this section
+
 ### Key Variables
 
 | Variable Name    | Use                                                                                                                                                          |
