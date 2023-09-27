@@ -6,9 +6,7 @@
 
 My main objective in this cycle is to add damage from the enemy bullets. I will also re-add features that I removed for simplicity while developing the enemy class in [Cycle 8b](cycle-1-8.md). My objectives are:
 
-* [x] Re-add player health system and spikes
-* [x] Re-add health bar
-* [x] Re-add background colour
+* [x] Re-add removed features
 * [x] Enemy bullets can damage the player
 * [x] Different enemy types deal different amounts of damage
 
@@ -24,7 +22,7 @@ My secondary objective is to add a coin system to the game:
 
 ### Usability Features
 
-Add this section
+Adding a coin counter will be useful for the player because it allows them to see how close they are to being able to buy something in the shop. Also, some players may find it rewarding to see the counter go up as they kill enemies.
 
 ### Key Variables
 

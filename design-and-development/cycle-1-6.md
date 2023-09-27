@@ -16,10 +16,6 @@ I also want to add a cooldown to the gun so that the player can't just click the
 
 * [x] Add a gun cooldown which limits how fast the gun can shoot
 
-### Usability Features
-
-Add this section
-
 ### Key Variables
 
 | Variable Name     | Use                                                                                                                                                                                                                                                                                                                                                                                                                                           |

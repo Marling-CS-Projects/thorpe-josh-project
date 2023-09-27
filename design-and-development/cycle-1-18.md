@@ -229,35 +229,35 @@ destroy() {
 
 <div>
 
-<figure><img src="../.gitbook/assets/Sprite-0001newenemy2.png" alt=""><figcaption><p>Enemy 3</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle18enemy2sprite.png" alt=""><figcaption><p>Enemy 2</p></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/finalbossnew.png" alt=""><figcaption><p>Final Boss</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle18shopkeepersprite.png" alt=""><figcaption><p>Shopkeeper</p></figcaption></figure>
 
  
 
-<figure><img src="../.gitbook/assets/happycircle.png" alt=""><figcaption><p>Shopkeeper</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle18newboss3sprite.png" alt=""><figcaption><p>Final Boss</p></figcaption></figure>
 
 </div>
 
 #### How to Play Graphic
 
-<figure><img src="../.gitbook/assets/howtoplayguide.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle18howtoplaygraphic.png" alt=""><figcaption></figcaption></figure>
 
 #### Menu Titles
 
 
 
-<figure><img src="../.gitbook/assets/cooltextorange.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle18gametitletext.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/cooltext443815865418373.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle18howtoplaytitletext.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/cooltext443815885407719.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle18creditstitletext.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/cooltext443815948390323.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle18wintitletext.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/cooltext443816062054504.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/cycle18losetitletext.png" alt=""><figcaption></figcaption></figure>
 
 ## Testing
 

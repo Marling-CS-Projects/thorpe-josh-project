@@ -17,7 +17,7 @@ My focus in this cycle is to add a health bar. My objectives are:
 
 ### Usability Features
 
-Add this section
+Adding a player health bar allows users to see how much health is remaining so that they can change their strategy or playstyle accordingly. It gives users more information and ultimately makes it easier to enjoy my game.
 
 ### Key Variables
 

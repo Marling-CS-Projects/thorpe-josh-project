@@ -12,10 +12,6 @@ My focus in this cycle is to add some enemies. My objectives are:
 * [x] Enemies have set health and will take damage upon collision with bullets
 * [x] Enemies die after all health is lost
 
-### Usability Features
-
-Add this section
-
 ### Key Variables
 
 | Variable Name(s)                       | Use                                                                                                                                                                                                                                                  |

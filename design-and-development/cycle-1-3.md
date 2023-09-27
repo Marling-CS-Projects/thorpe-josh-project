@@ -11,10 +11,6 @@ My objectives in this cycle are:
 * [x] Increase the player movement speed
 * [x] Add a check for beating the last level
 
-### Usability Features
-
-Add this section
-
 ### Key Variables
 
 | Variable Name  | Use                                                                                                                                |

@@ -16,12 +16,12 @@ Usability is an important aspect of my game as I want it to be accessible to as 
 
 ### Effective
 
-It's important that users are able to complete my game with completeness and accuracy. To do this, I will ensure it is easy for players to understand how to win by introducing the objective at the start of the game. Additionally, I will make the path through each floor clear so that there is no confusion over where the players need to go.
+It's important that users are able to complete my game with completeness and accuracy. To do this, I will ensure it is easy for players to understand how to win by introducing the objective at the start of the game. Additionally, I will make the route through the game clear so that there is no confusion over where the players need to go.
 
 #### Aims
 
-* Create bosses as clear objectives to determine the end of a level
-* Create a clear path through each floor
+* Create bosses as clear objectives to determine the end of a floor
+* Make the overall objective and path of the game clear
 
 ### Efficiency
 

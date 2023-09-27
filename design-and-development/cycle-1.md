@@ -14,7 +14,7 @@ My focus in the first cycle will be on the player and movement. My objectives ar
 
 ### Usability Features
 
-Add this section
+Movement controls are one of the key features which is required to allow users to play my game.
 
 ### Key Variables
 

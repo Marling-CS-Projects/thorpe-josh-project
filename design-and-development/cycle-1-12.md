@@ -16,7 +16,7 @@ In this cycle, my goal is to make some proper levels with enemies spawning in th
 
 ### Usability Features
 
-Add this section
+The text for boss fights and new floors will help players keep track of how far they are into the game and what they are likely to expect next.
 
 ### Key Variables
 

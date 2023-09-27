@@ -11,10 +11,6 @@ My objective in this cycle is to redo enemies using a class system. My objective
 * [x] Each enemy type has different statistics
 * [x] Add enemy projectile attacks
 
-### Usability Features
-
-Add this section
-
 ### Key Variables
 
 | Variable Name                   | Use                                                                                                                                                                                                         |

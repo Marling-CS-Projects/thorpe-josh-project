@@ -12,7 +12,7 @@ My focus in this cycle will be on aiming and bullets. My objectives are:
 
 ### Usability Features
 
-Add this section
+Shooting controls are one of the key features which is required to allow users to play my game.
 
 ### Key Variables
 

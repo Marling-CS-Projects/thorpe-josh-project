@@ -21,7 +21,7 @@ In this cycle, I aim to set up a proper weapon and inventory system. My objectiv
 
 ### Usability Features
 
-Add this section
+An inventory system means that players know which keys to press to switch to each weapon. This makes it easier for players to use their weapons more effectively.
 
 ### Key Variables
 

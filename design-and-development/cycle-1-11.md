@@ -24,7 +24,7 @@ In this cycle, my objective is to create a main menu at the start of the game wi
 
 ### Usability Features
 
-Add this section
+The how to play menu will help players learn how to play the game. The selection box in the character select menu shows players which character they are currently set to play as.
 
 ### Key Variables
 

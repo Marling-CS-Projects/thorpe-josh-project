@@ -13,10 +13,6 @@ My focus in this cycle is on room generation. My objectives are:
 * [x] Press r to move on to the next room (this will be replaced with a door when all enemies have been defeated)
 * [x] Add player collision for walls and boxes so the player can not walk through
 
-### Usability Features
-
-Add this section
-
 ### Key Variables
 
 | Variable Name    | Use                                                                                                                                                          |
