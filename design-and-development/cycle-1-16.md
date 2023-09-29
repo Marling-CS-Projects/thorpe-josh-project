@@ -32,7 +32,7 @@ Currently, my game is missing many checks which causes bugs or issues when carry
 
 ### Usability Features
 
-Add this section
+The boss's health bar shows players how much health the boss has remaining so they know how close they are to the next level. This can be motivating to know how much health stands in your way.
 
 ### Key Variables
 

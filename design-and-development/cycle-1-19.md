@@ -16,10 +16,6 @@ In this cycle, my goal is to make the game ready for players by removing the tes
 * [x] Change key unlocks in shop so that they are in the order of the keyboard
 * [x] Add the mass property to each entity to dictate how easily they are pushed around
 
-### Usability Features
-
-Add this section
-
 ### Pseudocode
 
 ```
@@ -72,4 +68,4 @@ Now that the final cycle of my game has been completed I will begin overall test
 
 ### Evidence
 
-Put YouTube video testing link here
+{% embed url="https://youtu.be/fKQJHg7ysso" %}

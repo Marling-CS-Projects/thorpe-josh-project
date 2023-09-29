@@ -26,7 +26,7 @@ In this cycle, I plan to add the shop feature. My objectives in this cycle are t
 
 ### Usability Features
 
-Add this section
+The introduction level at the start of the game teaches players the game objective and provides some interesting story.
 
 ### Key Variables
 

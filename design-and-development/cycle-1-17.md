@@ -23,7 +23,7 @@ In this cycle, my goal is to add a working pause menu which pauses the entire ga
 
 ### Usability Features
 
-Add this section
+The pause menu allows players to pause the game mid-fight to go and do something else and come back. This makes it easier for players to play my game even if they might need to go for a moment to do other things.
 
 ### Key Variables
 

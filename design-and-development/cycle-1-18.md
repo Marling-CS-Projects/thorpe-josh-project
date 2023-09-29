@@ -29,7 +29,7 @@ Now for redesigning the menus. I am still unhappy with how the main menu looks w
 
 ### Usability Features
 
-Add this section
+Redone buttons in the menus make it clear where the actual buttons are and how to navigate the menus.
 
 ### Key Variables
 

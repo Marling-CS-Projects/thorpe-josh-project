@@ -28,7 +28,7 @@ In this cycle, my main goal is to add boss fights to the game. My objectives in 
 
 ### Usability Features
 
-Add this section
+Unique sprites for each boss make them look more menacing and make it easier fo rthe player to recognise how they are more dangerous.
 
 ### Key Variables
 

@@ -27,7 +27,7 @@ In this cycle, my goal is to improve the game UI and menus. My objectives are:
 
 ### Usability Features
 
-Add this section
+Improving the UI, HUD and menus makes it easier for users to play my game and understand what's going on. Furthermore, the dash health bar informs players when the dash is off cooldown, which makes it easier for them to use it.
 
 ### Key Variables
 
