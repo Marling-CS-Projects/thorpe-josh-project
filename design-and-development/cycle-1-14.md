@@ -640,13 +640,7 @@ I later found the blue screen issue to be with how the random angle for the boss
 
 ### Tests
 
-| Test | Instructions                                            | What I expect                                                                                                                          | What actually happens | Pass/Fail |
-| ---- | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | --------- |
-| 1    | Start levels and cycle to first boss fight.             | Boss has correct sprite and shoots towards enemy. Every so often spawns 2 enemies next to it after shooting.                           | As expected.          | Pass.     |
-| 2    | Cycle to second boss fight.                             | Boss has correct sprite and shoots a series of 5 bullets each attacks. Every so often spawns 2 enemies next to it after shooting.      | As expected.          | Pass.     |
-| 3    | Cycle to third boss fight.                              | Boss has correct sprite and shoots 5 bullets at once with a shotgun spread. Every so often spawns 2 enemies next to it after shooting. | As expected.          | Pass.     |
-| 4    | Shoot at each boss until it dies.                       | Boss dies and you can move to next room.                                                                                               | As expected.          | Pass.     |
-| 5    | Shoot at the walls and let enemy bullets hit the walls. | Bullets get destroyed by walls.                                                                                                        | As expected.          | Pass.     |
+<table><thead><tr><th width="130">Test</th><th>Instructions</th><th>What I expect</th><th>What actually happens</th><th>Pass/Fail</th></tr></thead><tbody><tr><td>1</td><td>Start levels and cycle to first boss fight.</td><td>Boss has correct sprite and shoots towards enemy. Every so often spawns 2 enemies next to it after shooting.</td><td>As expected.</td><td>Pass.</td></tr><tr><td>2</td><td>Cycle to second boss fight.</td><td>Boss has correct sprite and shoots a series of 5 bullets each attacks. Every so often spawns 2 enemies next to it after shooting.</td><td>As expected.</td><td>Pass.</td></tr><tr><td>3</td><td>Cycle to third boss fight.</td><td>Boss has correct sprite and shoots 5 bullets at once with a shotgun spread. Every so often spawns 2 enemies next to it after shooting.</td><td>As expected.</td><td>Pass.</td></tr><tr><td>4</td><td>Shoot at each boss until it dies.</td><td>Boss dies and you can move to next room.</td><td>As expected.</td><td>Pass.</td></tr><tr><td>5</td><td>Shoot at the walls and let enemy bullets hit the walls.</td><td>Bullets get destroyed by walls.</td><td>As expected.</td><td>Pass.</td></tr></tbody></table>
 
 ### Evidence
 

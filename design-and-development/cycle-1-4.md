@@ -217,7 +217,7 @@ scene("lose", () => {
 
 ### Challenges
 
-Initially, I had planned to set the player's health to a variable which could then be changed and updated as needed. However, this was not possible due to Kaboom limitations therefore I did it the other way around instead.
+Initially, I had planned to set the player's health to a variable which could then be changed and updated as needed. However, this was not possible due to Kaboom's limitations therefore I did it the other way around instead.
 
 ## Testing
 

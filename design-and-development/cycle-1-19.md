@@ -61,7 +61,7 @@ I did the best job I could at balancing the game however it will be hard to know
 
 | Test | Instructions                                                 | What I expect                                                                                             | What actually happens                               | Pass/Fail |
 | ---- | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | --------- |
-| 1    | Play game.                                                   | <ul><li>No enemies spawn too close to the player.</li><li>Enemies no longer flash blue and red.</li></ul> | <ul><li>As expected.</li><li>As expected.</li></ul> | Pass.     |
+| 1    | Play the game.                                               | <ul><li>No enemies spawn too close to the player.</li><li>Enemies no longer flash blue and red.</li></ul> | <ul><li>As expected.</li><li>As expected.</li></ul> | Pass.     |
 | 2    | Try to use the development features by pressing 'M' and 'R'. | Nothing happens.                                                                                          | As expected.                                        | Pass.     |
 
 Now that the final cycle of my game has been completed I will begin overall testing in Section 3. This will include [testing for function and robustness](../testing/3.1-robustness.md), [usability testing](../testing/3.2-usability-testing.md), and [checking development tests](../testing/3.3-checking-development-tests.md).
