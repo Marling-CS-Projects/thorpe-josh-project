@@ -95,8 +95,8 @@ loadSprite("bean", "/sprites/bean.png");
 
 // Create the player character
 const player = add([
-  sprite("bean"), // Assign the "bean" sprite to the player character
-  pos(100, 200), // Set the initial position of the player character
+  sprite("bean"), // Assign it the "bean" sprite
+  pos(100, 200), // Set the initial position
 ]);
 ```
 

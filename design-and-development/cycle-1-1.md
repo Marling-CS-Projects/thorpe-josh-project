@@ -51,43 +51,33 @@ On mouse press
 ### Outcome
 
 ```javascript
-// Load the sprite named "egg" from the file path "/sprites/egg.png"
 loadSprite("egg", "/sprites/egg.png");
 
-// Set the constant variable BULLET_SPEED to 1000
+// Define the movement speed of bullets
 const BULLET_SPEED = 1000;
 ```
 
 When the `spawnBullet` function is called, it finds the bearing to the mouse cursor and then creates a bullet at the player's location. The bullet is rotated to point at the cursor position before being set to move at `BULLET_SPEED`.
 
 ```javascript
-// Define the function spawnBullet with playerPosition as the parameter
 function spawnBullet(playerPosition) {
-    // Calculate the direction to move based on the player's position and the mouse position
+    // Calculate the direction to move based on the player and mouse position
     const POINT_CURSOR = player.pos.angle(mousePos()) + 180;
     
     // Create a bullet entity with the following properties
     add([
-        // Set the sprite to "egg"
         sprite("egg"),
-        // Add an area component for collision detection
-        area(),
-        // Scale the bullet sprite to 0.65 of its original size in both x and y directions
+        area(), // An area component for collision detection
         scale(0.65, 0.65),
-        // Set the position to the player's position
-        pos(playerPosition),
-        // Set the color of the bullet to a shade of blue
+        pos(playerPosition), // Set the position to the player's position
         color(127, 127, 255),
-        // Set the anchor point of the bullet sprite to the center
         anchor("center"),
         // Rotate the bullet sprite to point in the direction of travel
         rotate(POINT_CURSOR + 90),
         // Move the bullet in the direction specified by POINT_CURSOR with the given speed
         move(POINT_CURSOR, BULLET_SPEED),
-        // Destroy the bullet entity if it goes offscreen
-        offscreen({ destroy: true }),
-        // Assign the tag "player_bullet" to the bullet entity
-        "player_bullet",
+        offscreen({ destroy: true }), // Destroy the bullet entity if it goes offscreen
+        "player_bullet", // Adding the tag "player_bullet" so I can reference it later
     ]);
 }
 ```
@@ -95,7 +85,7 @@ function spawnBullet(playerPosition) {
 Clicking the left mouse button calls the spawnBullet function and passes it the player's position.
 
 ```javascript
-// Add an event listener for mouse press
+// Spawn a bullet when the mouse is clicked
 onMousePress(() => spawnBullet(player.pos));
 ```
 

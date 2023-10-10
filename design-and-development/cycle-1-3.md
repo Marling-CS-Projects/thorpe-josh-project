@@ -53,20 +53,19 @@ I updated the bullet spawning function to receive the actual position to spawn a
 // Spawns the bullet
 function spawnBullet(truePosition) {
     // Gets the direction
-    const POINT_CURSOR = truePosition.angle(mousePos()) + 180; // Calculate the angle between truePosition and mouse position, adjusted by 180 degrees
+    const POINT_CURSOR = truePosition.angle(mousePos()) + 180; // Angle adjusted by 180 degrees
 
-    // Adds the bullet
     add([
         pos(truePosition), // Set the position of the bullet to truePosition
-        sprite("egg"), // Assign the sprite "egg" to the bullet entity
-        area(), // Add a collision area to the bullet entity
-        scale(0.65, 0.65), // Scale the bullet entity to 65% of its original size
-        color(127, 127, 255), // Set the color of the bullet entity to a shade of purple
-        anchor("center"), // Set the anchor point of the bullet entity to its center
-        rotate(POINT_CURSOR + 90), // Rotate the bullet entity based on POINT_CURSOR, adjusted by 90 degrees
-        move(POINT_CURSOR, BULLET_SPEED), // Move the bullet entity in the direction of POINT_CURSOR at BULLET_SPEED units per second
-        offscreen({ destroy: true }), // Remove the bullet entity if it goes off-screen
-        "player_bullet", // Tag the bullet entity as "player_bullet"
+        sprite("egg"),
+        area(),
+        scale(0.65, 0.65),
+        color(127, 127, 255),
+        anchor("center"),
+        rotate(POINT_CURSOR + 90), // Rotation adjusted by 90 degrees
+        move(POINT_CURSOR, BULLET_SPEED),
+        offscreen({ destroy: true }),
+        "player_bullet",
     ]);
 }
 ```
@@ -76,7 +75,7 @@ I modified the level increment code to include a check for if the last level has
 ```javascript
 // Increments levelId and goes to that level
 onKeyPress("r", () => {
-    levelId += 1; // Increment levelId by 1
+    levelId += 1;
     destroyAll("entity"); // Remove all entities with the "entity" tag
     if (levelId > possibleLevels.length - 1) {
         go("win"); // Go to the "win" scene if levelId exceeds the number of possibleLevels

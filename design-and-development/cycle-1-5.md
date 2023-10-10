@@ -116,7 +116,7 @@ onCollide("player_bullet", "mob", (b, m):
 ### Outcome
 
 ```javascript
-// Constants
+// Define constants
 const ENEMY1HP = 50;
 const ENEMY2HP = 50;
 const ENEMY3HP = 50;
@@ -126,18 +126,18 @@ let bulletDamage = 10;
 I added a new tile definition to the level generation for enemies.
 
 ```javascript
-// Level Setup
+// Level setup
 const level = addLevel(possibleLevels[levelId], {
   tileWidth: 58,
   tileHeight: 58,
   pos: vec2(350, 45),
-  tiles: {
+  tiles: { // Adding other tiles
     "=": () => [...],
     "^": () => [...],
     "+": () => [...],
     "8": () => [...],
     "@": () => [...],
-    "1": () => [
+    "1": () => [ // Enemies added as part of the tile map
       sprite("ghosty"),
       area(),
       anchor("center"),
@@ -154,10 +154,10 @@ const level = addLevel(possibleLevels[levelId], {
 
 The `activateEnemy1` function contains the idle and move states for an enemy and switches between them after a random time.
 
-```javascript
-const enemies1 = level.get("enemy1");
-
-// Enemy Movement
+<pre class="language-javascript"><code class="lang-javascript"><strong>// Creat a list referencing every enemy
+</strong><strong>const enemies1 = level.get("enemy1");
+</strong>
+// Enemy movement function
 function activateEnemy1(enemy1) {
   let _t = 0;
 
@@ -175,7 +175,7 @@ function activateEnemy1(enemy1) {
     enemy1.color = lerp(
       rgb(255, 255, 255),
       rgb(128, 128, 128),
-      t < 0 ? -t : t
+      t &#x3C; 0 ? -t : t
     );
   });
 
@@ -192,7 +192,7 @@ function activateEnemy1(enemy1) {
 
   return enemy1;
 }
-```
+</code></pre>
 
 The `activateEnemy1` function is called for each `enemy1` present.
 
@@ -207,7 +207,7 @@ for (let i = 0; i < enemies1.length; i++) {
 When a bullet collides with an enemy, the enemy loses `bulletDamage` health and if they lose all their health they die.
 
 ```javascript
-// Bullet-Mob Collision
+// Bullet-mob collision
 const mobs = level.get("mob");
 onCollide("player_bullet", "mob", (b, m) => {
   destroy(b);

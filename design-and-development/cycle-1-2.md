@@ -119,10 +119,8 @@ The `possibleLevels` array is imported from another file and the necessary sprit
 
 {% code title="main.js" %}
 ```javascript
-// Import the level data from "./possibleLevels"
 import { possibleLevels } from "./possibleLevels";
 
-// Load sprite resources
 loadSprite("door", "/sprites/door.png");
 loadSprite("grass", "/sprites/grass.png");
 loadSprite("spike", "/sprites/spike.png");
@@ -183,7 +181,7 @@ Pressing 't' starts the level scene with an of `levelId` 0. I'm using scenes to 
 ```javascript
 // Start the game when "t" key is pressed
 onKeyPress("t", () => {
-    let levelId = 0; // Initialize the level identifier
+    let levelId = 0;
     go("level", levelId); // Go to the first level
 });
 ```
@@ -198,47 +196,47 @@ scene("level", (levelId) => {
 
     // Create the level object using the level data from possibleLevels
     const level = addLevel(possibleLevels[levelId], {
-        tileWidth: 58, // Define the width of each tile block
-        tileHeight: 58, // Define the height of each tile block
-        pos: vec2(350, 45), // Define the position of the level's tile map on the screen
+        tileWidth: 58, // Define the width and height of each tile block
+        tileHeight: 58,
+        pos: vec2(350, 45),
         tiles: {
-            "=": () => [
-                sprite("grass"), // Set the sprite for grass tiles
+            "=": () => [ // Setup walls
+                sprite("grass"),
                 area(),
                 anchor("center"),
                 body({ isStatic: true }), // Make the sprite solid and impassable
-                "entity", // Add the entity component
-                "wall", // Add the wall component
+                "entity",
+                "wall",
             ],
-            "^": () => [
-                sprite("spike"), // Set the sprite for spike tiles
+            "^": () => [ // Setup spikes
+                sprite("spike"),
                 area(),
                 anchor("center"),
-                "entity", // Add the entity component
-                "spike", // Add the spike component
+                "entity",
+                "spike",
             ],
-            "+": () => [
-                sprite("mushroom"), // Set the sprite for mushroom tiles
+            "+": () => [ // Setup boxes
+                sprite("mushroom"),
                 area(),
                 anchor("center"),
-                body({ isStatic: true }), // Make the sprite solid
-                "entity", // Add the entity component
-                "box", // Add the box component
+                body({ isStatic: true }),
+                "entity",
+                "box",
             ],
-            "8": () => [
-                sprite("door"), // Set the sprite for door tiles
+            "8": () => [ // Setup doors
+                sprite("door"),
                 area(),
                 anchor("center"),
-                body({ isStatic: true }), // Make the sprite solid
-                "entity", // Add the entity component
-                "door", // Add the door component
+                body({ isStatic: true }),
+                "entity",
+                "door",
             ],
-            "@": () => [
+            "@": () => [ // Setup player
                 sprite("bean"), // Set the sprite for the player
                 area(),
                 anchor("center"),
-                body(), // Enable physics for the player
-                "player", // Add the player component
+                body(),
+                "player",
             ],
         }
     });
@@ -249,7 +247,7 @@ Pressing r will restart the scene with the next level from `possibleLevels`.
 
 {% code title="main.js" %}
 ```javascript
-    // Event handler for the "r" key press to advance to the next level
+    // "r" key press to advance to the next level
     onKeyPress("r", () => {
         levelId += 1; // Increment the level identifier
         destroyAll("entity"); // Destroy all entities

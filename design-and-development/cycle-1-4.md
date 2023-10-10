@@ -111,7 +111,7 @@ I set the layer of the player above the layer of the spikes using the `z()` prop
 </strong>sprite("spike"),
 area(),
 anchor("center"),
-z(0), //layer 0
+z(0), // Layer 0
 "entity",
 "spike",
 ],
@@ -122,7 +122,7 @@ z(0), //layer 0
 sprite("bean"),
 area(),
 anchor("center"),
-z(1), //layer 1
+z(1), // Layer 1
 body(),
 health(playerHP),
 "player",
@@ -133,12 +133,12 @@ I placed the following code outside of the level scene so that `playerHP` is not
 
 ```javascript
 // Sets the player hitpoints and saves the starting point
-let playerHP = 100; // Player's current hit points
-const ORIGINALHP = playerHP; // Starting hit points
+let playerHP = 100;
+const ORIGINALHP = playerHP;
 
 // Sets health bar dimensions
-const HEALTHBARWIDTH = 100; // Width of the health bar
-const HEALTHBARHEIGHT = 20; // Height of the health bar
+const HEALTHBARWIDTH = 100;
+const HEALTHBARHEIGHT = 20;
 ```
 
 First I created the health bar border, health bar border and the health bar itself. They are rendered as coloured rectangles of a certain width and length. I set the layers so that the health bar border is at the back and is slightly bigger so you can see its edges around the health bar.
@@ -146,26 +146,26 @@ First I created the health bar border, health bar border and the health bar itse
 ```javascript
 // Create the health bar border
 const healthBarBorder = add([
-  rect(HEALTHBARWIDTH + 4, HEALTHBARHEIGHT + 4), // Rectangle size including border
-  pos(10, 10), // Position of the health bar border
+  rect(HEALTHBARWIDTH + 4, HEALTHBARHEIGHT + 4),
+  pos(10, 10),
   z(3), // Layer order for rendering
-  color(0, 0, 0), // Border color
+  color(0, 0, 0),
 ]);
 
 // Create the background of the health bar
 const healthBarBg = add([
-  rect(HEALTHBARWIDTH, HEALTHBARHEIGHT), // Rectangle size
-  pos(12, 12), // Position of the health bar background
+  rect(HEALTHBARWIDTH, HEALTHBARHEIGHT),
+  pos(12, 12),
   z(4), // Layer order for rendering
-  color(79, 75, 75), // Background color
+  color(79, 75, 75),
 ]);
 
 // Create the health bar
 const healthBar = add([
-  rect(playerHP, HEALTHBARHEIGHT), // Initial width based on player's hit points
-  pos(12, 12), // Position of the health bar
+  rect(playerHP, HEALTHBARHEIGHT),
+  pos(12, 12),
   z(5), // Layer order for rendering
-  color(92, 204, 12), // Health bar color
+  color(92, 204, 12),
 ]);
 ```
 
@@ -178,8 +178,8 @@ let spikeCooldown = false; // Spike collision cooldown flag
 onCollide("player", "spike", () => {
   if (!spikeCooldown) {
     spikeCooldown = true;
-    player.hurt(5); // Reduce player's hit points
-    playerHP = player.hp(); // Update player's hit points
+    player.hurt(5); // Reduce player's hitpoints
+    playerHP = player.hp(); // Update player's hitpoints
     updateHealthBar(); // Update health bar width
     wait(0.5, () => {
       spikeCooldown = false; // Cooldown to prevent rapid triggering
@@ -191,12 +191,11 @@ onCollide("player", "spike", () => {
 `updateHealthBar` sets the new width of the health bar by finding the proportion of the original width it should be.
 
 ```javascript
-// Update the health bar width based on player's hit points
+// Update the health bar width based on player's hitpoints
 function updateHealthBar() {
   const newWidth = (playerHP / ORIGINALHP) * HEALTHBARWIDTH;
   healthBar.width = newWidth;
 }
-
 ```
 
 If the player loses all health points then the levels are replaced with the 'lose' scene. This scene is empty so nothing happens yet when you lose.

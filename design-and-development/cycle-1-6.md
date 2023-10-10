@@ -137,7 +137,6 @@ export const fixedLevels = [
 
 {% code title="main.js" %}
 ```javascript
-// Import necessary modules
 import { fixedLevels } from "./fixedLevels";
 
 let chosenLevels = [] // Array to store selected levels
@@ -155,16 +154,15 @@ for (let j = 0; j < 3; j++) {
 ```
 {% endcode %}
 
-`addLevel()` and the check for the last level were updated to use the `chosenLevels` array.
+Both `addLevel()` and the check for the last level were updated to use the `chosenLevels` array.
 
 {% code title="main.js" %}
 ```javascript
 // Get the current level configuration
 const level = addLevel(chosenLevels[levelId], {...})
 
-// Event handler for "r" key press
 onKeyPress("r", () => {
-    ...; // Other code
+    ... // Other code
      // Check if levelId exceeds the chosenLevels array length
     if (levelId > chosenLevels.length - 1) {
         go("win"); // Go to the "win" scene if all levels are completed
@@ -179,10 +177,9 @@ I modified how the `addBullet()` function is called so that it can only be calle
 
 {% code title="main.js" %}
 ```javascript
-let gunCooldownTime = 2; // Cooldown time for the gun in seconds
-
+let gunCooldownTime = 2; // Cooldown time for the gun (seconds)
 let gunCooldown = false; // Flag to track gun cooldown status
-// Event handler for left mouse button press
+
 onMousePress("left", () => {
     // Check if the gun is not on cooldown
     if (!gunCooldown) {
