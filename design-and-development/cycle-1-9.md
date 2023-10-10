@@ -85,10 +85,10 @@ scene "level" with chosenLevelIndex:
 
 I re-added spikes and the health bar, content from [Cycle 5](cycle-1-4.md) after I removed them to develop [Cycle 8b](cycle-1-8.md).
 
-I added `shootDamage` to the contructor and it is set to a different value for each enemy type. This value is then added to the bullets spawned by enemies.
+I added `shootDamage` to the constructor and it is set to a different value for each enemy type. This value is then added to the bullets spawned by enemies.
 
 <pre class="language-typescript" data-title="enemy class.ts"><code class="lang-typescript"><strong>    shootProjectile(targetPos: Vec2) {
-</strong>        const projectileSpeed = 500; // Adjust as needed
+</strong>        const projectileSpeed = 500; // Enemy bullet speed
         const direction = targetPos.sub(this.entity.pos);
 
         add([
@@ -102,21 +102,21 @@ I added `shootDamage` to the contructor and it is set to a different value for e
             rotate(this.entity.pos.angle(targetPos) + 270),
             move(direction, projectileSpeed),
             "enemy_bullet",
-            { shootDamage: this.shootDamage },
+            { shootDamage: this.shootDamage }, // Holds the damage to deal when colliding with player
             offscreen({ destroy: true }),
         ]);
     }
 </code></pre>
 
-When an enemy bullet and the player collide, the player will be damaged by the value of shootDamage.
+When an enemy bullet and the player collide, the player will be damaged by the value of `shootDamage`.
 
 {% code title="main.ts" %}
 ```typescript
     onCollide("enemy_bullet", "player", (bullet, player) => {
-        destroy(bullet);
-        player.hurt(bullet.shootDamage);
+        destroy(bullet); // Destroy the enemy bullet
+        player.hurt(bullet.shootDamage); // Reduce the player's hitpoints
         playerHP = player.hp();
-        updateHealthBar();
+        updateHealthBar(); 
     });
 ```
 {% endcode %}
@@ -125,14 +125,15 @@ I created a coin counter which increments by 1 for each enemy killed and I place
 
 {% code title="main.ts" %}
 ```typescript
+// Outside of the level scene
 export function updateCoinCounter() {
-    coins += 1;
+    coins += 1; // Increases coins by 1
     const coinCounter = get("coinCounter")[0];
-    coinCounter.text = "Coins:" + coins;
-} //outside scene code
+    coinCounter.text = "Coins:" + coins; // Modify text to display new value for coins
+}
 
-scene("level", (chosenLevelIndex) => { //scene start
-//inside scene code
+scene("level", (chosenLevelIndex) => { // Scene start
+// Inside the level scene
     const coinCounter = add([
         text("Coins:" + coins),
         pos(1200, 10),
@@ -140,7 +141,7 @@ scene("level", (chosenLevelIndex) => { //scene start
         "coinCounter",
     ]);
     
-    ...//rest of scene
+    ...// Rest of the code
 ```
 {% endcode %}
 
@@ -150,7 +151,7 @@ scene("level", (chosenLevelIndex) => { //scene start
 ```typescript
     destroy() {
         destroy(this.entity);
-        updateCoinCounter();
+        updateCoinCounter(); // Add a coin after killing an enemy
     }
 ```
 {% endcode %}

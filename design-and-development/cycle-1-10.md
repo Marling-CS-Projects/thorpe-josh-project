@@ -109,7 +109,7 @@ onMousePress("left", () => {
 
 ### Outcome
 
-Each weapon is stored as an object in the `weapons` array which holds all the data for every weapon. Each weapon starts off being locked but can be unlocked for now with specific keys.
+Each weapon is stored as an object in the `weapons` array which holds all the data for every weapon. Each weapon starts off as locked and can be unlocked at the moment by pressing different keys.
 
 ```typescript
 const weapons = [
@@ -124,23 +124,23 @@ A weapon is unlocked by pushing it to the `unlockedWeapons` array. The pistol we
 ```typescript
     // Function to unlock a weapon
 function unlockWeapon(index) {
-    unlockedWeapons.push(weapons[index]);
-    unlockedWeapons[index].unlocked = true;
+    unlockedWeapons.push(weapons[index]); // Add to unlockedWeapons array
+    unlockedWeapons[index].unlocked = true; // Set unlocked to true in the original weapons array
 }
 
 let unlockedWeapons = [];
-unlockWeapon(0); // Unlock pistol
+unlockWeapon(0); // Unlock the pistol when the game starts
 currentWeapon = unlockedWeapons[0];
 ```
 
-I moved the enemy spawning logic to a separate file named `spawn enemies.ts` make `main.ts` easier to navigate.
+I moved the enemy spawning logic to a separate file named `spawn enemies.ts` to help make `main.ts` easier to navigate.
 
 <pre class="language-typescript"><code class="lang-typescript">import { spawnEnemies} from "./spawn enemies";
 <strong>
 </strong><strong>scene("level", (chosenLevelIndex) => {
-</strong><strong>    ... //rest of code
+</strong><strong>    ... // Rest of the code
 </strong>
-    spawnEnemies(chosenLevels, chosenLevelIndex, Enemy, player); //spawn in all enemy types
+    spawnEnemies(chosenLevels, chosenLevelIndex, Enemy, player); // Spawn all enemy types
 
 </code></pre>
 
@@ -148,11 +148,12 @@ Bullet spawning code has been modified to use the values from `currentWeapon` wh
 
 ```typescript
     let gunCooldown = false;
-    //calls spawnBullet on mouse press with cooldown
+    // Calls spawnBullet on mouse press with cooldown
     onMousePress("left", () => {
         if (!gunCooldown) {
             gunCooldown = true;
             if (currentWeapon === weapons[2]) {
+            // Spawn multiple bullets at once
                 spawnBullet(player.pos.add(vec2(350, 50)), currentWeapon);
                 spawnBullet(player.pos.add(vec2(350, 50)), currentWeapon);
                 spawnBullet(player.pos.add(vec2(350, 50)), currentWeapon);
@@ -167,7 +168,7 @@ Bullet spawning code has been modified to use the values from `currentWeapon` wh
         }
     });
     
-    //creates a bullet at the player's position
+    // Creates a bullet at the player's position
     function spawnBullet(truePosition, weapon) {
         const POINT_CURSOR = truePosition.angle(mousePos()) + 180;
 
@@ -201,19 +202,19 @@ The machine gun and shotgun can be unlocked with the 'o' and 'p' keys. The `unlo
     onKeyPress("o", () => {
         unlockWeapon(1);
         inventoryText.updateText();
-    }); // Unlock machine gun
+    }); // Unlocks the machine gun
     onKeyPress("p", () => {
         unlockWeapon(2);
         inventoryText.updateText();
-    }); // Unlock shotgun
+    }); // Unlocks the shotgun
 </code></pre>
 
 The current weapon can be switched with the number keys. Each number key corresponds to the order in which the weapons were unlocked. The if statements check that enough weapons have actually been unlocked to use each key, preventing an error.
 
 ```typescript
     onKeyPress("1", () => {
-        if (unlockedWeapons[0]) {
-            currentWeapon = unlockedWeapons[0];
+        if (unlockedWeapons[0]) { // Checks enough weapons have been unlocked
+            currentWeapon = unlockedWeapons[0]; // Switches to the weapon at that position
         }
     })
     onKeyPress("2", () => {
@@ -223,7 +224,7 @@ The current weapon can be switched with the number keys. Each number key corresp
     })
     onKeyPress("3", () => {
         if (unlockedWeapons[2]) {
-            currentWeapon = unlockedWeapons[2];
+            currentWeapon = unlockedWeapons[2]; 
         }
     })
 ```
@@ -232,10 +233,11 @@ The `updateText` function is stored inside `inventoryText`. It adds the name of 
 
 ```typescript
  const inventoryText = add([
-        text("Inventory:\n1: -\n2: -\n3: -"),
+        text("Inventory:\n1: -\n2: -\n3: -"), // Starting text
         pos(10, 60),
-        z(10),
+        z(10), // Displays on top of any other elements
         {
+            // Function for updating the inventory text
             updateText: function() {
                 const weaponText = unlockedWeapons.map((weapon, index) => {
                     return `${index + 1}: ${weapon.unlocked ? weapon.name : "-"}`;

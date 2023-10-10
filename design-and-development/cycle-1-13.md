@@ -122,7 +122,7 @@ The introduction text and the shop text are handled in the same way. In the intr
     function showShopText() {
         const shopText = add([
             rect(1250,300), // Create a black background for the text
-            pos(width() / 2, height() / 2),
+            pos(width() / 2, height() / 2), // Centred in the middle of the screen
             z(11),
             anchor("center"),
             opacity(0.5),
@@ -145,7 +145,7 @@ The introduction text and the shop text are handled in the same way. In the intr
         ]);
     }
 
-    // Function to show lore text
+    // Function to show the lore text
     function showLoreText() {
     // Create a black background for the lore text
     const loreText = add([
@@ -207,6 +207,7 @@ I modified the function to unlock a weapon so that there must be enough coins to
     // Attempt to unlock a weapon
     function unlockWeapon(index) {
         if (canUnlockWeapon(index)) {
+            // Only unlock the weapon if the player has enough coins
             weapons[index].unlocked = true;
             unlockedWeapons.push(weapons[index]);
             coins -= weapons[index].cost;
@@ -250,6 +251,7 @@ I modified the function to unlock a weapon so that there must be enough coins to
 If the player has enough coins, they can restore a portion of their health.
 
 ```typescript
+    // Function for replenishing health
     function restoreHealth() {
         if (coins >= 5) {
             coins -= 5; // Deduct 5 coins
@@ -259,7 +261,7 @@ If the player has enough coins, they can restore a portion of their health.
         };
     };
 
-// Listen for the "l" key press to restore health
+// The "l" key press restores health
 onKeyPress("l", () => {
     restoreHealth();
 });
@@ -297,9 +299,9 @@ I adjusted `healthBar`'s width simply to be equal to `playerHP` instead of using
         color(92, 204, 12),
     ]);
     
-    //health bar updater
+    // Health bar updater
     function updateHealthBar() {
-        const newWidth = playerHP;
+        const newWidth = playerHP; // Scale the new width to the players current hitpoints
         healthBar.width = newWidth;
     }
 ```

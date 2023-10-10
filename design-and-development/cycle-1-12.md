@@ -167,6 +167,7 @@ import { fixedLevels } from "./fixedLevels";
 
 
 export function chooseLevels(chosenLevels) {
+// Add the first fixed level to the chosen levels
     chosenLevels.push({
         id: fixedLevels[0].id,
         layout: fixedLevels[0].layout,
@@ -177,6 +178,8 @@ export function chooseLevels(chosenLevels) {
         enemy5Spawns: fixedLevels[0].enemy5Spawns,
         enemy6Spawns: fixedLevels[0].enemy6Spawns,
     });
+    
+    // Add 5 random levels from possibleLevels array to chosen levels
     for (let i = 0; i < 5; i++) {
         let randomIndex = Math.floor(Math.random() * possibleLevels.length);
         let randomLevel = {
@@ -190,7 +193,9 @@ export function chooseLevels(chosenLevels) {
             enemy6Spawns: possibleLevels[randomIndex].enemy6Spawns,
         };
         chosenLevels.push(randomLevel);
-    }
+    };
+    
+    // Add the second fixed level to the chosen levels
     chosenLevels.push({
         id: fixedLevels[1].id,
         layout: fixedLevels[1].layout,
@@ -201,6 +206,8 @@ export function chooseLevels(chosenLevels) {
         enemy5Spawns: fixedLevels[1].enemy5Spawns,
         enemy6Spawns: fixedLevels[1].enemy6Spawns,
     });
+    
+    // Add the first fixed level to the chosen levels again
     chosenLevels.push({
         id: fixedLevels[0].id,
         layout: fixedLevels[0].layout,
@@ -211,6 +218,8 @@ export function chooseLevels(chosenLevels) {
         enemy5Spawns: fixedLevels[0].enemy5Spawns,
         enemy6Spawns: fixedLevels[0].enemy6Spawns,
     });
+    
+     // Add 5 random levels from possibleLevels2 array to chosen levels
     for (let i = 0; i < 5; i++) {
         let randomIndex = Math.floor(Math.random() * possibleLevels2.length);
         let randomLevel = {
@@ -224,7 +233,9 @@ export function chooseLevels(chosenLevels) {
             enemy6Spawns: possibleLevels2[randomIndex].enemy6Spawns,
         };
         chosenLevels.push(randomLevel);
-    }
+    };
+    
+     // Add the second fixed level to the chosen levels again
     chosenLevels.push({
         id: fixedLevels[1].id,
         layout: fixedLevels[1].layout,
@@ -235,6 +246,8 @@ export function chooseLevels(chosenLevels) {
         enemy5Spawns: fixedLevels[1].enemy5Spawns,
         enemy6Spawns: fixedLevels[1].enemy6Spawns,
     });
+    
+     // Add the first fixed level to the chosen levels once more
     chosenLevels.push({
         id: fixedLevels[0].id,
         layout: fixedLevels[0].layout,
@@ -245,6 +258,8 @@ export function chooseLevels(chosenLevels) {
         enemy5Spawns: fixedLevels[0].enemy5Spawns,
         enemy6Spawns: fixedLevels[0].enemy6Spawns,
     });
+    
+     // Add 5 random levels from possibleLevels3 array to chosen levels
     for (let i = 0; i < 5; i++) {
         let randomIndex = Math.floor(Math.random() * possibleLevels3.length);
         let randomLevel = {
@@ -259,6 +274,8 @@ export function chooseLevels(chosenLevels) {
         };
         chosenLevels.push(randomLevel);
     }
+    
+     // Add the second fixed level to the chosen levels one final time
     chosenLevels.push({
         id: fixedLevels[1].id,
         layout: fixedLevels[1].layout,
@@ -275,10 +292,9 @@ export function chooseLevels(chosenLevels) {
 
 Here is the code within the level scene which is responsible for the boss and floor text which appears. The text entities are created with their `opacity` set to 0 and when the desired level appears, the `opacity` is set to 1 for a short duration which reveals the text before it is hidden again.
 
-{% code title="main.ts" %}
-```typescript
-const bossFightText = add([
-        text("Boss Fight", {
+<pre class="language-typescript" data-title="main.ts"><code class="lang-typescript">    // Create a text entity for the boss fight announcement
+<strong>    const bossFightText = add([
+</strong>        text("Boss Fight", {
             size: 70,
         }),
         pos(1550, 60),
@@ -288,13 +304,16 @@ const bossFightText = add([
         "bossFightText",
     ]);
 
+    // Check if the current level index corresponds to a boss fight level
     if (chosenLevelIndex === 6 || chosenLevelIndex === 13 || chosenLevelIndex === 20) {
+          // Display the boss fight text and then remove it after 2 seconds
         bossFightText.opacity = 1;
         wait(2, () => {
             bossFightText.opacity = 0;
         });
     };
 
+    // Create a text entity for displaying the new floor number
         const newFloorText = add([
         text("Floor " + floorNumber, {
         size: 70,
@@ -305,6 +324,7 @@ const bossFightText = add([
         "newFloorText",
     ]);
     
+    // Check the chosen level index to determine the floor number and display appropriate text
     if (chosenLevelIndex === 0) {
         floorNumber = 1;
         newFloorText.text = "Floor " + floorNumber,
@@ -327,21 +347,21 @@ const bossFightText = add([
             newFloorText.opacity = 0;
         });
     };
-```
-{% endcode %}
+</code></pre>
 
 When a `player_bullet` or `enemy_bullet` collides with a `box`, both the bullet and box are destroyed.
 
 {% code title="main.ts" %}
 ```typescript
-//box collision
-    onCollide("player_bullet", "box", (bullet, box) => {
-        destroy(bullet); // Destroy the bullet
+    //Box-bullet collision handling
+
+    onCollide("player_bullet", "box", (p_bullet, box) => {
+        destroy(p_bullet); // Destroy the player bullet
         destroy(box);   // Destroy the box
     });
 
-    onCollide("enemy_bullet", "box", (bullet, box) => {
-        destroy(bullet); // Destroy the bullet
+    onCollide("enemy_bullet", "box", (e_bullet, box) => {
+        destroy(e_bullet); // Destroy the enemy bullet
         destroy(box);   // Destroy the box
     });
 ```

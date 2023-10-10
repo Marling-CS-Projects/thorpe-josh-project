@@ -113,12 +113,10 @@ Early version of enemies and without bullet collision or damage
 
 ### Outcome
 
-I modified `possibleLevels` to include an id and the spawn locations of each enemy type for each level.
+I modified `possibleLevels` to include an ID and the spawn locations of each enemy type for each level.
 
-{% code title="possibleLevels.ts" %}
-```javascript
-export const possibleLevels = [
-    {
+<pre class="language-javascript" data-title="possibleLevels.ts"><code class="lang-javascript"><strong>export const possibleLevels = [
+</strong>    {
         id: 1,
         enemy1Spawns: [
             [100, 200], // [x, y] pair for enemy spawn position
@@ -149,12 +147,11 @@ export const possibleLevels = [
             "====================",
         ],
     },
-    ... //more levels
+    ... // More levels
 ];
-```
-{% endcode %}
+</code></pre>
 
-`fixedLevels` was also modified in the same way, however, the enemy spawns are empty for now.
+`fixedLevels` was also modified in the same way, however, the enemy spawns are empty since I don't want any enemies to spawn in these levels.
 
 {% code title="fixedLevels.ts" %}
 ```typescript
@@ -200,7 +197,7 @@ interface chosenLevelFormat {
 
 let chosenLevels: chosenLevelFormat[] = [];
 
-// random level selection
+// Random level selection
 for (let j = 0; j < 3; j++) {
     chosenLevels.push({ id: fixedLevels[0].id, layout: fixedLevels[0].layout, enemy1Spawns: fixedLevels[0].enemy1Spawns, enemy2Spawns: fixedLevels[0].enemy2Spawns, enemy3Spawns: fixedLevels[0].enemy3Spawns });
     for (let i = 0; i < 5; i++) {
@@ -227,18 +224,21 @@ class Enemy {
 
     constructor(sprite: string, type: number) {
         if (type === 1) {
+            // Set max health and idle time for type 1 enemy
             this.maxHealth = 100;
             let min = 2;
             let max = 4;
             let diff = max - min;
             this.idleTime = (Math.random() * diff) + min;
         } else if (type === 2) {
+            // Set max health and idle time for type 2 enemy
             this.maxHealth = 50;
             let min = 0.5;
             let max = 2;
             let diff = max - min;
             this.idleTime = (Math.random() * diff) + min;
         } else if (type === 3) {
+            // Set max health and idle time for type 3 enemy
             this.maxHealth = 200;
             let min = 3;
             let max = 4.5;
@@ -252,6 +252,7 @@ class Enemy {
     }
 
     spawn(position: Vec2, player: any) {
+        // Create an enemy entity and set its properties
         this.entity = add([
             sprite(this.sprite),
             body(),
@@ -261,10 +262,12 @@ class Enemy {
             z(2),
             "enemy",
         ]);
+        // Activate the enemy
         this.activate(player);
     }
 
     updateHealth(amount: number) {
+        // Update the enemy's health and destroy it if health reaches zero
         this.currentHealth -= amount;
         if (this.currentHealth <= 0) {
             this.destroy();
@@ -272,37 +275,41 @@ class Enemy {
     }
 
     destroy() {
+        // Destroy the enemy entity
         destroy(this.entity);
     }
 
-   activate(player: any) {
-    this.entity.on("update", async () => {
-        if (!this.isMoving) {
-            this.isMoving = true;
-            this.entity.color = rgb(255, 0, 0);
-            const targetPos = player.pos.add(vec2(350, 50));
-            const direction = targetPos.sub(this.entity.pos).unit();
+    activate(player: any) {
+        // Set up an update loop for the enemy
+        this.entity.on("update", async () => {
+            if (!this.isMoving) {
+                this.isMoving = true;
+                this.entity.color = rgb(255, 0, 0);
+                const targetPos = player.pos.add(vec2(350, 50));
+                const direction = targetPos.sub(this.entity.pos).unit();
 
-            const MOVE_SPEED = 100; // Adjust as needed
-            const NUM_STEPS = 20; // Adjust the number of steps for smoother gliding
+                const MOVE_SPEED = 100; // Adjust as needed
+                const NUM_STEPS = 20; // Adjust the number of steps for smoother gliding
 
-            for (let i = 0; i < NUM_STEPS; i++) {
-                const moveAmount = MOVE_SPEED / NUM_STEPS;
-                this.entity.moveBy(direction.scale(moveAmount));
-                await wait(0.02); // Adjust the wait period between each step
-            };
+                // Move the enemy towards the player in steps
+                for (let i = 0; i < NUM_STEPS; i++) {
+                    const moveAmount = MOVE_SPEED / NUM_STEPS;
+                    this.entity.moveBy(direction.scale(moveAmount));
+                    await wait(0.02); // Adjust the wait period between each step
+                };
 
-            await wait(1);
-            this.entity.color = rgb(0, 0, 255);
-            const latestTargetPos = player.pos.add(vec2(350, 50));
-            this.shootProjectile(latestTargetPos);
-            await wait(this.idleTime);
-            this.isMoving = false;
-        }
-    });
-}
+                await wait(1);
+                this.entity.color = rgb(0, 0, 255);
+                const latestTargetPos = player.pos.add(vec2(350, 50));
+                this.shootProjectile(latestTargetPos);
+                await wait(this.idleTime);
+                this.isMoving = false;
+            }
+        });
+    }
 
     shootProjectile(targetPos: Vec2) {
+        // Create a projectile aimed at the target position
         const BULLET_SPEED = 500;
         const direction = targetPos.sub(this.entity.pos);
 

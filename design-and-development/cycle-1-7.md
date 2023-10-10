@@ -32,18 +32,22 @@ Enemies were stored as part of the tile map for each level so were spawned when 
 Function for enemy movement using states.
 
 ```typescript
+// Function to activate an enemy with state transitions
 function activateEnemy1(enem) {
-    let _t = 0;
+    let _t = 0; // Initialize a time variable
 
     enem.onStateEnter("idle", (time) => {
+    // Wait for a random time and then transition to the "move" state
       wait(time || rand(1, 3), () =>
         enem.enterState("move", rand(1, 3))
       );
     });
 
+  // While in the "idle" state, change the enemy's colour gradually
+  enem.onStateUpdate("idle", () => {
     enem.onStateUpdate("idle", () => {
-      _t += dt();
-      const t = _t % 2 - 1;
+      _t += dt(); // Increment the time variable
+      const t = _t % 2 - 1; // Calculate a value for interpolation
       enem.color = lerp(
         rgb(255, 255, 255),
         rgb(128, 128, 128),
@@ -52,6 +56,7 @@ function activateEnemy1(enem) {
     });
 
     enem.onStateEnter("move", (time) => {
+    // Spawn a bullet and transition back to "idle" state after a specified time
         if (mobs[enem]) {
         spawnEnemyBullet(enem.pos.add(vec2(350, 50)), 1)
         }
@@ -60,12 +65,13 @@ function activateEnemy1(enem) {
     });
 
     enem.onStateUpdate("move", () => {
+    // Make the enemy move towards the player's position
       enem.moveTo(player.pos, 100);
     });
   }
 
-    let mobs = level.get("mob");
-    //calls enemy movement for each enemy
+    let mobs = level.get("mob"); // Get a list of enemies from the level
+    // Call the activateEnemy1 function for each enemy in the list
     for (let i = 0; i < mobs.length; i++) {
         activateEnemy1(mobs[i]);
     }
@@ -74,7 +80,8 @@ function activateEnemy1(enem) {
 Collision handling and function for enemy bullets.
 
 ```typescript
-    function spawnEnemyBullet(enemyPos, type) {
+   // Function to spawn an enemy bullet with specific properties
+ function spawnEnemyBullet(enemyPos, type) {
     const POINTPLAYER = enemyPos.angle(player.pos.add(vec2(350, 50))) + 180;
     add([
         pos(enemyPos),
@@ -92,15 +99,16 @@ Collision handling and function for enemy bullets.
 };
 
     onCollide("player_bullet", "mob", (b, m) => {
-        destroy(b);
+        destroy(b); // Destroy the player bullet
         if (mobs[m]) {
-            mobs[m].health -= bulletDamage;
+            mobs[m].health -= bulletDamage; // Reduce the enemy's health
             if (mobs[m].health <= 0) {
-                delete mobs[m];
-                destroy(m);
+                delete mobs[m]; // Remove the enemy from the list if its health reaches zero
+                destroy(m); // Destroy the enemy entity
             }
         } else {
             let initialHealth = 0
+             // Determine the initial health of the enemy based on its type
             if (m.is("enemy1")) {
                 initialHealth = ENEMY1HP;
             } else if (m.is("enemy2")) {
@@ -109,7 +117,7 @@ Collision handling and function for enemy bullets.
                 initialHealth = ENEMY3HP;
             }
             initialHealth = initialHealth - bulletDamage;
-            mobs[m] = { health: initialHealth }; 
+            mobs[m] = { health: initialHealth };  // Update the enemy's health in the list
         }
     });
 ```

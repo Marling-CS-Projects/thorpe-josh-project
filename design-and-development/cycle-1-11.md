@@ -113,7 +113,7 @@ go("mainMenu")
 Each screen of the main menu is contained within a separate scene. To move between pages of the menu, the game moves between scenes.
 
 ```typescript
-// Main Menu Scene
+// Main Menu scene
 scene("mainMenu", () => {
 
     // Create "Play" button
@@ -170,7 +170,7 @@ scene("mainMenu", () => {
 How to play page of the menu. It contains some text which describes how to play and a button which takes you back to the main menu.
 
 ```typescript
-// How to Play Scene
+// How to Play scene
 scene("howToPlay", () => {
 
     // Create Back to Main Menu button
@@ -184,7 +184,7 @@ scene("howToPlay", () => {
         z(10),
     ]);
 
-    // Create text explaining how to play
+    // Create text entity explaining how to play
     const howToPlayText = add([
         text("Instructions:\n\nWASD to move\nLeft click to shoot\nRight click to dash\nNumber keys to switch weapons\nClear all the enemies in a room to advance\nEscape the dungeon!",
         {
@@ -220,7 +220,7 @@ scene("credits", () => {
         z(10),
     ]);
 
-    // Create text for credits
+    // Create a text entity for the credits
     const creditsText = add([
         text("Programming by Josh Thorpe\nMusic by none\nSprites by Kaboom",
         {
@@ -243,7 +243,7 @@ scene("credits", () => {
 Character selection page of the menu. The statistics of each character are stored in `characterData` and the player's stats are set to those of the character when each sprite is clicked. The play button starts the game with the player's current stats while the back button takes you back to the main menu.
 
 ```typescript
-// Character Selection Scene
+// Character Selection scene
 scene("characterSelect", () => {
 
     // Define character data
@@ -281,11 +281,11 @@ scene("characterSelect", () => {
     // Create a white box (hidden by default)
     const whiteOutline = add([
         rect(400, 600), // Rectangle size and dimensions
-        rgb(255, 255, 255), // white
+        rgb(255, 255, 255), // White
         z(10),
         pos(0, characterY), // Initial position
         anchor("center"),
-        z(8), // Behind the sprites
+        z(8), // Layer which is behind the sprites
         opacity(0), // Hidden by default
     ]);
 
@@ -328,7 +328,7 @@ scene("characterSelect", () => {
         });
     });
 
-    // Create Play button
+    // Create Play Game button
     const playButton = add([
         text("Play", {
             size: 40,
@@ -339,7 +339,7 @@ scene("characterSelect", () => {
         z(10),
     ]);
 
-    // Handle Play button click
+    // Handle Play Game button click
     playButton.onClick(() => {
         let chosenLevelIndex = 0;
         go("level", chosenLevelIndex); // Transition to the level scene with the selected character
