@@ -153,7 +153,7 @@ Below are a couple of possible example levels from floor 2. As the floor increas
     },
     
     ... //rest of the levels
-]
+];
 </code></pre>
 
 Below is the updated level selection code which now handles the three lists to draw for each floor. I moved it into a separate file since it got so long.
@@ -273,7 +273,7 @@ export function chooseLevels(chosenLevels) {
             enemy6Spawns: possibleLevels3[randomIndex].enemy6Spawns,
         };
         chosenLevels.push(randomLevel);
-    }
+    };
     
      // Add the second fixed level to the chosen levels one final time
     chosenLevels.push({
@@ -391,7 +391,7 @@ When the player touches the door, the game checks if there are any enemies prese
                 go("win");
             } else {
                 go("level", chosenLevelIndex);
-            }
+            };
         };
     });
 ```

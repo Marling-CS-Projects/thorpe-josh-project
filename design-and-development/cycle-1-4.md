@@ -184,7 +184,7 @@ onCollide("player", "spike", () => {
     wait(0.5, () => {
       spikeCooldown = false; // Cooldown to prevent rapid triggering
     });
-  }
+  };
 });
 ```
 
@@ -195,7 +195,7 @@ onCollide("player", "spike", () => {
 function updateHealthBar() {
   const newWidth = (playerHP / ORIGINALHP) * HEALTHBARWIDTH;
   healthBar.width = newWidth;
-}
+};
 ```
 
 If the player loses all health points then the levels are replaced with the 'lose' scene. This scene is empty so nothing happens yet when you lose.

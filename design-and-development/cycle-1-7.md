@@ -68,13 +68,13 @@ function activateEnemy1(enem) {
     // Make the enemy move towards the player's position
       enem.moveTo(player.pos, 100);
     });
-  }
+  };
 
     let mobs = level.get("mob"); // Get a list of enemies from the level
     // Call the activateEnemy1 function for each enemy in the list
     for (let i = 0; i < mobs.length; i++) {
         activateEnemy1(mobs[i]);
-    }
+    };
 ```
 
 Collision handling and function for enemy bullets.
@@ -105,7 +105,7 @@ Collision handling and function for enemy bullets.
             if (mobs[m].health <= 0) {
                 delete mobs[m]; // Remove the enemy from the list if its health reaches zero
                 destroy(m); // Destroy the enemy entity
-            }
+            };
         } else {
             let initialHealth = 0
              // Determine the initial health of the enemy based on its type
@@ -118,7 +118,7 @@ Collision handling and function for enemy bullets.
             }
             initialHealth = initialHealth - bulletDamage;
             mobs[m] = { health: initialHealth };  // Update the enemy's health in the list
-        }
+        };
     });
 ```
 

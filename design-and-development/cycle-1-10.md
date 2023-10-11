@@ -126,7 +126,7 @@ A weapon is unlocked by pushing it to the `unlockedWeapons` array. The pistol we
 function unlockWeapon(index) {
     unlockedWeapons.push(weapons[index]); // Add to unlockedWeapons array
     unlockedWeapons[index].unlocked = true; // Set unlocked to true in the original weapons array
-}
+};
 
 let unlockedWeapons = [];
 unlockWeapon(0); // Unlock the pistol when the game starts
@@ -140,8 +140,7 @@ I moved the enemy spawning logic to a separate file named `spawn enemies.ts` to 
 </strong><strong>scene("level", (chosenLevelIndex) => {
 </strong><strong>    ... // Rest of the code
 </strong>
-    spawnEnemies(chosenLevels, chosenLevelIndex, Enemy, player); // Spawn all enemy types
-
+    spawnEnemies(chosenLevels, chosenLevelIndex, Enemy, player);// Spawn all enemy types
 </code></pre>
 
 Bullet spawning code has been modified to use the values from `currentWeapon` which holds the object of the weapon currently in use. If the current weapon is the shotgun then 5 projectiles will be spawned instead of 1.
@@ -165,13 +164,12 @@ Bullet spawning code has been modified to use the values from `currentWeapon` wh
             wait(currentWeapon.cooldown, () => {
                 gunCooldown = false;
             });
-        }
+        };
     });
     
     // Creates a bullet at the player's position
     function spawnBullet(truePosition, weapon) {
         const POINT_CURSOR = truePosition.angle(mousePos()) + 180;
-
         const spreadAngle = Math.random() * weapon.accuracy - weapon.accuracy / 2;
         
         add([
@@ -197,7 +195,7 @@ The machine gun and shotgun can be unlocked with the 'o' and 'p' keys. The `unlo
 </strong>    function unlockWeapon(index) {
         weapons[index].unlocked = true;
         unlockedWeapons.push(weapons[index]);
-    }
+    };
     
     onKeyPress("o", () => {
         unlockWeapon(1);
@@ -215,18 +213,18 @@ The current weapon can be switched with the number keys. Each number key corresp
     onKeyPress("1", () => {
         if (unlockedWeapons[0]) { // Checks enough weapons have been unlocked
             currentWeapon = unlockedWeapons[0]; // Switches to the weapon at that position
-        }
-    })
+        };
+    });
     onKeyPress("2", () => {
         if (unlockedWeapons[1]) {
             currentWeapon = unlockedWeapons[1];
-        }
-    })
+        };
+    });
     onKeyPress("3", () => {
         if (unlockedWeapons[2]) {
             currentWeapon = unlockedWeapons[2]; 
-        }
-    })
+        };
+    });
 ```
 
 The `updateText` function is stored inside `inventoryText`. It adds the name of the unlocked weapon to the inventory.
@@ -243,10 +241,10 @@ The `updateText` function is stored inside `inventoryText`. It adds the name of 
                     return `${index + 1}: ${weapon.unlocked ? weapon.name : "-"}`;
                 }).join("\n");
                 this.text = "Inventory:\n" + weaponText;
-            }
-        }
+            };
+        };
     ]);
-}
+};
 ```
 
 ### Challenges

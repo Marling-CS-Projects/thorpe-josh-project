@@ -142,7 +142,7 @@ onKeyDown("space", () => {
         cooldown = false; // Reset the cooldown flag after the dash duration
       });
     });
-  }
+  };
 });
 ```
 

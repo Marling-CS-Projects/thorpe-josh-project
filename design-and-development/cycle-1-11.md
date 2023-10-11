@@ -361,9 +361,6 @@ scene("characterSelect", () => {
         go("mainMenu"); // Transition back to Main Menu
     });
 });
-
-
-
 ```
 
 The game starts in the main menu scene.

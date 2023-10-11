@@ -191,7 +191,7 @@ function activateEnemy1(enemy1) {
   });
 
   return enemy1;
-}
+};
 </code></pre>
 
 The `activateEnemy1` function is called for each `enemy1` present.
@@ -201,7 +201,7 @@ The `activateEnemy1` function is called for each `enemy1` present.
 const enemies1 = level.get("enemy1");
 for (let i = 0; i < enemies1.length; i++) {
   activateEnemy1(enemies1[i]);
-}
+};
 ```
 
 When a bullet collides with an enemy, the enemy loses `bulletDamage` health and if they lose all their health they die.
@@ -218,7 +218,7 @@ onCollide("player_bullet", "mob", (b, m) => {
       // If the mob's health reaches zero or below, destroy it
       destroy(m);
       delete mobs[m];
-    }
+    };
   } else {
     // If the mob is a new enemy type, initialize its health
     let initialHealth = 0;
@@ -228,10 +228,10 @@ onCollide("player_bullet", "mob", (b, m) => {
       initialHealth = ENEMY2HP;
     } else if (m.is("enemy3")) {
       initialHealth = ENEMY3HP;
-    }
+    };
     initialHealth -= bulletDamage;
     mobs[m] = { health: initialHealth };
-  }
+  };
 ```
 
 ### Challenges

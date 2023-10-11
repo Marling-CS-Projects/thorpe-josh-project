@@ -127,19 +127,17 @@ function togglePause() {
         if (gameState === "playing") {
             gameState = "paused";
 
-            // Add pause menu elements
-
-            // Background
+            // Pause menu background
             const pauseBackground = add([
                 rect(width(), height()),
                 pos(width() / 2, height() / 2),
                 anchor("center"),
                 z(11),
-                opacity(0.5),
+                opacity(0.5), // Partially transparent
                 "pauseMenu",
             ]);
 
-            // Title
+            // Pause menu title
             const pauseTitle = add([
                 text("Game Paused", {
                     size: 100,
@@ -151,7 +149,7 @@ function togglePause() {
                 "pauseMenu",
             ]);
 
-            // Text
+            // Pause menu text
             const pauseText = add([
                 text("Press the escape key again to resume.", {
                     size: 35,
@@ -163,11 +161,13 @@ function togglePause() {
                 "pauseMenu",
             ]);
 
+            // Pause player bullets
             let playerBullets = get("player_bullet")
             playerBullets.forEach((bullet) => {
                 bullet.paused = true;
             });
-
+            
+            // Pause enemy bullets
             let enemyBullets = get("enemy_bullet")
             enemyBullets.forEach((bullet) => {
                 bullet.paused = true;
@@ -175,14 +175,17 @@ function togglePause() {
 
 
         } else if (gameState === "paused") {
+            // Resume the game by destroying pause menu elements
             gameState = "playing";
             destroyAll("pauseMenu");
 
+            // Resume player bullets
             let playerBullets = get("player_bullet")
             playerBullets.forEach((bullet) => {
                 bullet.paused = false;
             });
 
+            // Resume enemy bullets
             let enemyBullets = get("enemy_bullet")
             enemyBullets.forEach((bullet) => {
                 bullet.paused = false;
@@ -194,6 +197,7 @@ function togglePause() {
 Pausing and unpausing are toggled using the escape key. By default when starting a level the `gameState` will be 'playing'.
 
 ```typescript
+    // The game is paused and unpaused with the esc key
     onKeyPress("escape", () => {
         togglePause();
     });
@@ -219,11 +223,12 @@ When the player takes damage, shake the screen and flash the red `flashOverlay` 
 </strong>        rect(width(), height()),
         pos(width() / 2, height() / 2),
         z(50), // Make sure it's above other elements
-        color(255, 0, 0), // Red color
+        color(255, 0, 0),
         anchor("center"),
         opacity(0), // Initially invisible
     ]);
 
+    // Function which is called whenever the player takes damage
     function playerDamageEffect() {
         shake(15);
         flashOverlay.opacity = 0.5;
@@ -233,7 +238,6 @@ When the player takes damage, shake the screen and flash the red `flashOverlay` 
             });
         };
     };
-
 </code></pre>
 
 I combined the enemy update health `onCollide` and the boss health bar `onCollide` into one to fix the issue of the boss health bar updating early.
@@ -250,11 +254,12 @@ I combined the enemy update health `onCollide` and the boss health bar `onCollid
     });
 ```
 
-I modified the addBossUI function to bring in some components of the boss health bar. This means that there will be less hidden elements when playing a normal level, which should improve performance slightly.&#x20;
+I modified the `addBossUI` function to include some components of the boss health bar. This means there will be fewer hidden elements when playing a level which should slightly improve performance.&#x20;
 
-To add notches to the boss healthbar, I added a small horizontal line at 3 locations which represent 75%, 50% and 25% boss health.
+To add notches to the boss healthbar, I added a small horizontal line at 3 locations representing 75%, 50% and 25% boss health.
 
 ```typescript
+ // Create the initial boss health bar
  const bossHealthBar = add([
         rect(80, BOSSHEALTHBARHEIGHT),
         pos(160, 240),
@@ -266,6 +271,7 @@ To add notches to the boss healthbar, I added a small horizontal line at 3 locat
 
     ]);
 
+    // Create the initial boss fight text
     const bossFightText = add([
         text("Boss\nFight!", {
             size: 80,
@@ -277,9 +283,9 @@ To add notches to the boss healthbar, I added a small horizontal line at 3 locat
         "bossFightText",
     ]);
 
-
+    // Function to add/update boss UI elements
     function addBossUI() {
-
+        // Function to add/update boss UI elements
         const bossHealthBarBackground = add([
             rect(80, BOSSHEALTHBARHEIGHT),
             pos(160, 240),
@@ -289,6 +295,7 @@ To add notches to the boss healthbar, I added a small horizontal line at 3 locat
             "bossHealthBar",
         ]);
 
+        // Create the border for the boss health bar
         const bossHealthBarBorder = add([
             rect(80 + 10, BOSSHEALTHBARHEIGHT + 10),
             pos(160, 235),
@@ -302,6 +309,7 @@ To add notches to the boss healthbar, I added a small horizontal line at 3 locat
         bossHealthBar.opacity = 1;
         bossFightText.opacity = 1;
 
+        // Create notches on the boss health bar
         let lineSpawnY = 240;
         const BARLINEINCREMENT = BOSSHEALTHBARHEIGHT / 4
         for (let v = 0; v < 3; v++) {

@@ -171,7 +171,7 @@ export const possibleLevels = [
     ],
     ...
     //rest of the levels
-    ]
+    ];
 ```
 {% endcode %}
 
@@ -238,7 +238,7 @@ scene("level", (levelId) => {
                 body(),
                 "player",
             ],
-        }
+        };
     });
 ```
 {% endcode %}

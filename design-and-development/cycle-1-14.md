@@ -89,9 +89,7 @@ class Enemy {
 
 // Export the Enemy class
 
-
 ...
-
 
 // Define a constant for the boss enemy spawning position
 const BOSSSPAWNINGPOS = vec2(1200, 450);
@@ -256,7 +254,7 @@ export class Enemy {
         this.entity = null;
         this.isMoving = false;
         this.isAlive = true;
-    }
+    };
 
     spawn(position: Vec2, player: any) {
         this.entity = add([
@@ -270,20 +268,20 @@ export class Enemy {
         ]);
         this.entity.instance = this
         this.activate(player);
-    }
+    };
 
     updateHealth(amount: number) {
         this.currentHealth -= amount;
         if (this.currentHealth <= 0) {
             this.destroy();
-        }
-    }
+        };
+    };
 
     destroy() {
         destroy(this.entity);
         this.isAlive = false;
         updateCoinCounter();
-    }
+    };
 
     activate(player: any) {
         this.entity.on("update", async () => {
@@ -308,7 +306,7 @@ export class Enemy {
                     // 50% chance to spawn minions after shooting
                     if (Math.random() < 0.5) {
                         this.spawnMinions(player);
-                    }
+                    };
                 } else if (this.species === 8) {
                     for (let p = 0; p < 5; p++) {
                         latestTargetPos = player.pos.add(vec2(350, 50));
@@ -319,7 +317,7 @@ export class Enemy {
                     // 50% chance to spawn minions after shooting
                     if (Math.random() < 0.5) {
                         this.spawnMinions(player);
-                    }
+                    };
                 } else if (this.species === 9) {
                     // Shoot 5 bullets at once for shotgun effect
                     this.shootProjectile(latestTargetPos);
@@ -331,13 +329,13 @@ export class Enemy {
                     // 25% chance to spawn minions after shooting
                     if (Math.random() < 0.25) {
                         this.spawnMinions(player);
-                    }
-                }
+                    };
+                };
                 await wait(this.idleTime);
                 this.isMoving = false;
-            }
+            };
         });
-    }
+    };
 
 
     shootProjectile(targetPos: Vec2) {
@@ -385,7 +383,6 @@ export class Enemy {
             };
         };
     };
-
 };
 ```
 {% endcode %}
@@ -395,25 +392,31 @@ When the current level is a boss level (`chosenLevelIndex` is 6, 13, or 20) then
 ```typescript
 const BOSSSPAWNINGPOS = vec2(1200, 450);
     if (chosenLevelIndex === 6) {
+        // If it's level 6, spawn the first boss (Enemy type 7)
         const enemy7 = new Enemy("firstboss", 7);
         enemy7.spawn(BOSSSPAWNINGPOS, player);
         
+        // Display boss fight text and hide it after 2 seconds
         bossFightText.opacity = 1;
         wait(2, () => {
             bossFightText.opacity = 0;
         });
     } else if (chosenLevelIndex === 13) {
+        // If it's level 13, spawn the second boss (Enemy type 8)
         const enemy8 = new Enemy("secondboss", 8);
         enemy8.spawn(BOSSSPAWNINGPOS, player);
         
+        // Display boss fight text and hide it after 2 seconds
         bossFightText.opacity = 1;
         wait(2, () => {
             bossFightText.opacity = 0;
         });
     } else if (chosenLevelIndex === 20) {
+        // If it's level 20, spawn the third boss (Enemy type 9)
         const enemy9 = new Enemy("thirdboss", 9);
         enemy9.spawn(BOSSSPAWNINGPOS, player);
         
+        // Display boss fight text and hide it after 2 seconds
         bossFightText.opacity = 1;
         wait(2, () => {
             bossFightText.opacity = 0;
@@ -434,7 +437,7 @@ The door was made stationary with `isStatic:true`.
             ],
 ```
 
-Player and enemy bullets are destroyed when they collide with a wall.
+The player and enemy bullets are destroyed when they collide with a wall.
 
 ```typescript
     onCollide("enemy_bullet", "wall", (bullet, wall) => {

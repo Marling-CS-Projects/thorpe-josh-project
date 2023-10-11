@@ -109,12 +109,12 @@ loadSound("shopkeepernote", "/sounds/pickupCoin.wav");
 loadSound("recoverhealth", "/sounds/health-pickup-6860.mp3");
 ```
 
-The music begins playing when you start and it will loop indefinitely.
+The music begins playing when you start and it will loop indefinitely until being paused.
 
 <pre class="language-typescript"><code class="lang-typescript"><strong>const gameMusic = play("music", {loop: true}); 
 </strong></code></pre>
 
-The music is paused in the win and lose scenes and unpaused in the main menu scene. Below is also an example of one of the sounds which is played when the win scene starts.
+The music is paused in the win and lose scenes and unpaused in the main menu scene. Below is an example of the sound which is played when the win scene starts.
 
 ```typescript
 gameMusic.paused = true;
@@ -124,7 +124,7 @@ play("gamewin");
 I created a new function that adds all the parts of a button and controls what happens on click depending on what is passed into the function. This makes buttons much nicer and makes my code more concise and efficient because the code doesn't have to be duplicated for each button.
 
 <pre class="language-typescript"><code class="lang-typescript"><strong>function addButton(txt, position, func) {
-</strong>  // add a parent background object
+</strong>  // Add a parent background object
   const button = add([
     rect(240, 80, { radius: 8 }),
     pos(position),
@@ -135,28 +135,24 @@ I created a new function that adds all the parts of a button and controls what h
     outline(4),
   ]);
 
-  // add a child object that displays the text
+  // Add a child object that displays the text
   button.add([
     text(txt),
     anchor("center"),
     color(0, 0, 0),
   ]);
 
-  // onHoverUpdate() comes from area() component
-  // it runs every frame when the object is being hovered
+  // Button is enlarged when hovered over
   button.onHoverUpdate(() => {
     button.scale = vec2(1.2);
     setCursor("pointer");
   });
-
-  // onHoverEnd() comes from area() component
-  // it runs once when the object stopped being hovered
+  
   button.onHoverEnd(() => {
     button.scale = vec2(1);
   });
 
-  // onClick() comes from area() component
-  // it runs once when the object is clicked
+  // Action runs when button is clicked
   button.onClick(func);
     
   return button;
@@ -212,6 +208,7 @@ If the enemy is a boss, it will give 5 coins on death, otherwise, it will give o
 destroy() {
         this.isAlive = false;
         if (this.species >= 7) {
+            // 5 coins for a boss
             updateCoinCounter();
             updateCoinCounter();
             updateCoinCounter();

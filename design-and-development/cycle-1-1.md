@@ -79,7 +79,7 @@ function spawnBullet(playerPosition) {
         offscreen({ destroy: true }), // Destroy the bullet entity if it goes offscreen
         "player_bullet", // Adding the tag "player_bullet" so I can reference it later
     ]);
-}
+};
 ```
 
 Clicking the left mouse button calls the spawnBullet function and passes it the player's position.

@@ -143,7 +143,7 @@ The introduction text and the shop text are handled in the same way. In the intr
             color(255, 255, 255),
             "shopDialogue",
         ]);
-    }
+    };
 
     // Function to show the lore text
     function showLoreText() {
@@ -171,19 +171,19 @@ The introduction text and the shop text are handled in the same way. In the intr
         color(255, 255, 255),
         "loreDialogue",
     ]);
-}
+};
 
     // Function to hide shop text
     function hideShopText() {
         // Destroy all entities with the "shopDialogue" tag
         destroyAll("shopDialogue",);
-    }
+    };
 
         // Function to hide shop text
     function hideLoreText() {
         // Destroy all entities with the "loreDialogue" tag
         destroyAll("loreDialogue",);
-    }
+    };
 
     // Handle collision between player and shopkeeper
     onCollide("player", "shopkeeper", () => {
@@ -191,14 +191,14 @@ The introduction text and the shop text are handled in the same way. In the intr
         showShopText(); // Show shop text if on certain levels
         } else if (chosenLevelIndex === 0) {
             showLoreText(); // Show lore text if on level 0
-        }
-    })
+        };
+    });
     
     // Handle the end of collision between player and shopkeeper
     onCollideEnd("player", "shopkeeper", () => {
         hideShopText();
         hideLoreText();
-    })
+    });
 ```
 
 I modified the function to unlock a weapon so that there must be enough coins to purchase the desired weapon. If there are enough coins then the amount of coins gets subtracted from the total coin balance.
@@ -213,8 +213,8 @@ I modified the function to unlock a weapon so that there must be enough coins to
             coins -= weapons[index].cost;
             updateCoinCounter();
             inventoryText.updateText();
-        }
-    }
+        };
+    };
 
     // Key press events to unlock weapons
     onKeyPress("o", () => {
@@ -239,13 +239,13 @@ I modified the function to unlock a weapon so that there must be enough coins to
     onKeyPress("4", () => {
         if (unlockedWeapons[3]) {
             currentWeapon = unlockedWeapons[3];
-        }
-    })
+        };
+    });
     onKeyPress("5", () => {
         if (unlockedWeapons[4]) {
             currentWeapon = unlockedWeapons[4];
-        }
-    })
+        };
+    });
 ```
 
 If the player has enough coins, they can restore a portion of their health.
@@ -303,7 +303,7 @@ I adjusted `healthBar`'s width simply to be equal to `playerHP` instead of using
     function updateHealthBar() {
         const newWidth = playerHP; // Scale the new width to the players current hitpoints
         healthBar.width = newWidth;
-    }
+    };
 ```
 
 #### New Sprites

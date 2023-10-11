@@ -120,11 +120,12 @@ go("mainMenu")
 
 ### Outcome
 
-The win and lose scenes are very similar since they are both made up of a background, title, text and menu button. Below is the win scene.
+The win and lose scenes are very similar since they are both made up of a background, title, text and menu button. Below is how the win scene is set up.
 
 ```typescript
-// win scene -------------------------------------------------------------------
+// Start of the win scene
 scene("win", () => {
+    // Create the menu background
     const menuBackground = add([
         rect(width(), height()),
         pos(width() / 2, height() / 2),
@@ -134,6 +135,7 @@ scene("win", () => {
         "menuBackground",
     ]);
 
+    // Create the "You Win!" title
     const winTitle = add([
         text("You Win!", {
             size: 80,
@@ -144,6 +146,7 @@ scene("win", () => {
         color(22, 219, 55),
     ]);
 
+    // Create the "Return to Main Menu" button
     const backButton = add([
         text("Return to Main Menu", {
             size: 40,
@@ -154,6 +157,7 @@ scene("win", () => {
         z(10),
     ]);
 
+    // Create the win message text
     const winText = add([
         text("Well done adventurer!\nYou defeated the Shape King and his minions and restored balance to the world once more!\nLet us hope that he never returns!",
             {
@@ -166,18 +170,18 @@ scene("win", () => {
         z(10),
     ]);
 
+    // Define an action for the "Return to Main Menu" button
     backButton.onClick(() => {
         go("mainMenu");
     });
 });
 ```
 
-Below is the lose scene.
+Below is the lose scene, it has very similar elements to those in the win scene.
 
-```typescript
-// lose scene ---------------------------------------------------------------------
-scene("lose", () => {
-
+<pre class="language-typescript"><code class="lang-typescript"><strong>// Start of the lose scene
+</strong>scene("lose", () => {
+    // Create the menu background
     const menuBackground = add([
         rect(width(), height()),
         pos(width() / 2, height() / 2),
@@ -186,7 +190,8 @@ scene("lose", () => {
         color(168, 69, 12),
         "menuBackground",
     ]);
-
+    
+    // Create the "You Died!" title
     const loseTitle = add([
         text("You Died!", {
             size: 80,
@@ -197,6 +202,7 @@ scene("lose", () => {
         color(252, 7, 3),
     ]);
 
+    // Create the "Return to Main Menu" button
     const backButton = add([
         text("Return to Main Menu", {
             size: 40,
@@ -207,7 +213,8 @@ scene("lose", () => {
         z(10),
     ]);
 
-    const winText = add([
+    // Create the lose message text
+    const loseText = add([
         text("The Shape King lives on! You made it to floor " + floorNumber + " of 3.\nThe Shape King must perish, try again to defeat him!",
             {
                 size: 50,
@@ -218,83 +225,89 @@ scene("lose", () => {
         z(10),
     ]);
 
+    // Define an action for the "Return to Main Menu" button
     backButton.onClick(() => {
         go("mainMenu");
     });
 
-    // Incase an errenous enemies spawn from a boss
+    // Clear any lingering enemies and enemy bullets after 1 second
     wait(1, () => {
         destroyAll("enemy");
         destroyAll("enemy_bullet")
     });
     
 });
-```
+</code></pre>
 
 The dash cooldown bar is created similarly to the player's health bar in [Cycle 5](cycle-1-4.md).
 
 ```typescript
+// Create a background for the dash cooldown bar
 const dashCooldownBarBackground = add([
-        rect(150, 14),
-        pos(1500, 50),
-        z(9),
-        anchor("left"),
-        color(79, 75, 75),
-    ]);
+    rect(150, 14),
+    pos(1500, 50),
+    z(9),
+    anchor("left"),
+    color(79, 75, 75),
+]);
 
-    const dashCooldownBarBorder = add([
-        rect(154, 16),
-        pos(1498, 50),
-        anchor("left"),
-        z(3),
-        color(0, 0, 0),
-    ]);
+// Create a border for the dash cooldown bar
+const dashCooldownBarBorder = add([
+    rect(154, 16), // The size of the border is slightly larger than the bar
+    pos(1498, 50),
+    anchor("left"),
+    z(3),
+    color(0, 0, 0),
+]);
 
-    const dashCooldownBar = add([
-        rect(150, 14),
-        pos(1500, 50),
-        z(10),
-        color(0, 0, 255),
-        anchor("left"),
-    ]);
-
-    
+// Create the dash cooldown bar itself
+const dashCooldownBar = add([
+    rect(150, 14),
+    pos(1500, 50),      
+    z(10),               
+    color(0, 0, 255),
+    anchor("left"),
+]);
 ```
 
 The dashing code was modified to include the dash cooldown bar. When a dash has ended, the cooldown bar's width is set near zero and then set to increasingly greater widths in set steps, making it look like it is moving smoothly.
 
 ```typescript
+// Initialize the dashCooldown flag to false
 let dashCooldown = false;
-    //dash
+    // Dash ability when the right mouse button is pressed
     onMousePress("right", () => {
         if (!dashCooldown) {
             dashCooldown = true;
             dashCooldownBar.width = 0;
-
+            // Increase player's speed during the dash
             playerSpeed += 300;
+             // Wait for the dashDuration and then reset player's speed
             wait(dashDuration, () => {
                 playerSpeed -= 300;
             });
-
+            
+            // Configure how the dash cooldown bar will refill
             const steps = 100;
             const increment = 150 / steps;
             const stepDuration = dashRecharge / steps * 1000;
             let currentStep = 0;
 
+            // Define a function for each step of the recharge
             function rechargeStep() {
                 currentStep++;
                 dashCooldownBar.width = increment * currentStep;
 
                 if (currentStep < steps) {
+                    // Schedule the next step after stepDuration
                     setTimeout(rechargeStep, stepDuration);
                 } else {
                     dashCooldown = false;
-                }
-            }
-
+                };
+            };
+            // Start the recharge process
             rechargeStep();
-
-        }
+        };
     });
 ```
 
@@ -306,29 +319,29 @@ scene("mainMenu", () => {
     coins = 0;
     enemiesRemaining = 0;
 
-        // Lock every weapon
+    // Lock every weapon
     for (const weapon of weapons) {
         weapon.unlocked = false;
-    }
+    };
 
-        // Function to unlock a weapon
+    // Function to unlock a weapon
     function unlockWeapon(index) {
         unlockedWeapons.push(weapons[index]);
         unlockedWeapons[index].unlocked = true;
-    }
+    };
 
     unlockedWeapons = [];
     unlockWeapon(0); // Unlock pistol
     let currentWeapon = unlockedWeapons[0];
 
 
-        //Choose random levels
+    //Choose random levels
     chosenLevels = [];
     chooseLevels(chosenLevels);
     
-    ... // Rest of the main menu code
+    ... // Rest of the main menu code before the game starts
 
-}
+};
 ```
 
 #### New Sprites

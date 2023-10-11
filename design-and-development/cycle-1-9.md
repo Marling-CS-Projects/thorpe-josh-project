@@ -105,7 +105,7 @@ I added `shootDamage` to the constructor and it is set to a different value for 
             { shootDamage: this.shootDamage }, // Holds the damage to deal when colliding with player
             offscreen({ destroy: true }),
         ]);
-    }
+    };
 </code></pre>
 
 When an enemy bullet and the player collide, the player will be damaged by the value of `shootDamage`.
@@ -130,7 +130,7 @@ export function updateCoinCounter() {
     coins += 1; // Increases coins by 1
     const coinCounter = get("coinCounter")[0];
     coinCounter.text = "Coins:" + coins; // Modify text to display new value for coins
-}
+};
 
 scene("level", (chosenLevelIndex) => { // Scene start
 // Inside the level scene
@@ -152,7 +152,7 @@ scene("level", (chosenLevelIndex) => { // Scene start
     destroy() {
         destroy(this.entity);
         updateCoinCounter(); // Add a coin after killing an enemy
-    }
+    };
 ```
 {% endcode %}
 

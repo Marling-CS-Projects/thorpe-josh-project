@@ -130,12 +130,14 @@ If the current weapon is the Boomstick then the bullets should be spherical pell
 {% code title="spawn bullet.ts" %}
 ```typescript
 export function spawnBullet(truePosition, weapon) {
+    // Calculate the angle between the truePosition and the mouse cursor
     const POINT_CURSOR = truePosition.angle(mousePos()) + 180;
-
+    // Generate a random spread angle within the weapon's accuracy
     const spreadAngle = Math.random() * weapon.accuracy - weapon.accuracy / 2;
 
 
     if (weapon.name === "Boomstick") {
+    // Create a circular bullet for the "Boomstick" weapon
         add([
             pos(truePosition),
             circle(5),
@@ -150,6 +152,7 @@ export function spawnBullet(truePosition, weapon) {
             "player_bullet",
         ]);
     } else {
+    // Create a rectangular bullet for other weapons
         add([
             pos(truePosition),
             rect(7, 15),
@@ -163,7 +166,7 @@ export function spawnBullet(truePosition, weapon) {
             { playerBulletDamage: weapon.bulletDamage },
             "player_bullet",
         ]);
-    }
+    };
 };
 ```
 {% endcode %}
@@ -173,7 +176,9 @@ I modified bullet spawning in the enemy class to use a rectangle too.
 {% code title="enemy class.ts" %}
 ```typescript
  shootProjectile(targetPos: Vec2) {
+        // Calculate the angle between the entity's position and the target position
         let direction = this.entity.pos.angle(targetPos) + 180;
+        // Generate a random spread angle within the enemy's accuracy
         const spreadAngle = Math.random() * this.inaccuracy - this.inaccuracy / 2;
         if (this.isAlive) {
             add([
@@ -196,8 +201,11 @@ I modified bullet spawning in the enemy class to use a rectangle too.
 
 Like the dash cooldown bar and the player healthbar, the boss healthbar is made up of a background, a border, and the actual bar itself. When a boss level starts, the `opacity` of all the objects is set to 1, otherwise, it is 0 and they are invisible in regular levels. When a `player_bullet` collides with an `enemy`, if it is a boss then modify the boss health bar accordingly.
 
-<pre class="language-typescript" data-title="main.ts"><code class="lang-typescript"><strong>const bossHealthBar = add([
-</strong>        rect(80, BOSSHEALTHBARHEIGHT),
+{% code title="main.ts" %}
+```typescript
+    // Create the boss health bar
+    const bossHealthBar = add([
+        rect(80, BOSSHEALTHBARHEIGHT),
         pos(160, 240),
         z(10),
         color(255, 0, 0),
@@ -207,6 +215,7 @@ Like the dash cooldown bar and the player healthbar, the boss healthbar is made 
 
     ]);
 
+    // Create the background for the boss health bar
     const bossHealthBarBackground = add([
         rect(80, BOSSHEALTHBARHEIGHT),
         pos(160, 240),
@@ -217,6 +226,7 @@ Like the dash cooldown bar and the player healthbar, the boss healthbar is made 
         "bossHealthBar",
     ]);
 
+    // Create the border for the boss health bar
     const bossHealthBarBorder = add([
         rect(80 + 10, BOSSHEALTHBARHEIGHT + 12),
         pos(158, 234),
@@ -227,6 +237,7 @@ Like the dash cooldown bar and the player healthbar, the boss healthbar is made 
         "bossHealthBar",
     ]);
 
+    // Function to add the boss UI elements
     function addBossUI() {
         bossFightText.opacity = 1;
         bossHealthBar.height = BOSSHEALTHBARHEIGHT;
@@ -235,57 +246,62 @@ Like the dash cooldown bar and the player healthbar, the boss healthbar is made 
         bossHealthBarBorder.opacity = 1;
     };
     
-    // What to do for boss levels
+    // Determine what to do for boss levels
     const BOSSSPAWNINGPOS = vec2(1200, 450);
 
     if (chosenLevelIndex === 6) {
-        // Spawn the boss
+        // Spawn the first boss
         const enemy7 = new Enemy("firstboss", 7);
         enemy7.spawn(BOSSSPAWNINGPOS, player);
         addBossUI();
-        
 
     } else if (chosenLevelIndex === 13) {
-        // Spawn the boss
+        // Spawn the second boss
         const enemy8 = new Enemy("secondboss", 8);
         enemy8.spawn(BOSSSPAWNINGPOS, player);
        addBossUI();
+       
     } else if (chosenLevelIndex === 20) {
-        // Spawn the boss
+        // Spawn the third boss
         const enemy9 = new Enemy("thirdboss", 9);
         enemy9.spawn(BOSSSPAWNINGPOS, player);
         // Update and show boss fight text
         bossFightText.text = "Final\nBoss!"
         addBossUI()
     } else {
-        // Hide boss fight text
-        //bossFightText.opacity = 0;
+        // Hide the boss fight text for non-boss levels
+        bossFightText.opacity = 0;
     };
 
+    // Define collision behavior for player bullets and boss enemies
     onCollide("player_bullet", "enemy", (bullet, enemy) => {
         if (enemy.instance.species >= 7) {
+            // Calculate the new height of the boss health bar based on enemy's health
             const newHeight = (enemy.instance.currentHealth / enemy.instance.maxHealth) * BOSSHEALTHBARHEIGHT;
             bossHealthBar.height = newHeight;
         };
     });
-</code></pre>
+```
+{% endcode %}
 
 I added a check to the start button in character selection which checks that a character has been selected before proceeding.
 
 {% code title="main.ts" %}
 ```typescript
     startButton.onClick(() => {
+        // Checks that a character has been selected before starting the game
         if (selectedCharacterSprite) {
             let chosenLevelIndex = 0;
             go("level", chosenLevelIndex);
-        }
+        };
     });
 ```
 {% endcode %}
 
-At the start of a  new level, the player's speed is set to `originalSpeed` which is the original speed for that sprite. This makes sure that if the player dashes into the next level, the speed is reset properly.
+At the start of a new level, the player's speed is set to `originalSpeed` which is the original speed for that sprite. This makes sure that if the player dashes into the next level, the speed is reset properly.
 
-<pre class="language-typescript" data-title="main.ts"><code class="lang-typescript">let originalSpeed = 50; // Initialised as arbitary vale
+<pre class="language-typescript" data-title="main.ts"><code class="lang-typescript">let originalSpeed = 50;
+// Initialised as arbitary value
 
 ...
 
@@ -298,7 +314,8 @@ At the start of a  new level, the player's speed is set to `originalSpeed` which
     
 ...
 
-playerSpeed = originalSpeed; // Within level scene
+// Within level scene
+playerSpeed = originalSpeed;
 </code></pre>
 
 Added a check so that a weapon will not unlock if it has been unlocked already.
@@ -318,25 +335,28 @@ Added the `isInShop` flag which makes sure players can only try to buy weapons w
 
 {% code title="main.ts" %}
 ```typescript
-let isInShop = false;
+    // Flag starts as false
+    let isInShop = false;
 
-
-onCollide("player", "shopkeeper", () => {
+    // When the player touches the shopkeeper, isInShop is true
+    onCollide("player", "shopkeeper", () => {
         if (chosenLevelIndex === 7 || chosenLevelIndex === 14) {
             showShopText();
             isInShop = true;
         } else if (chosenLevelIndex === 0) {
             showLoreText();
-        }
-    })
+        };
+    });
+    
     onCollideEnd("player", "shopkeeper", () => {
         hideShopText();
         hideLoreText();
         isInShop = false;
-    })
+    });
     
 
-onKeyPress("o", () => {
+    onKeyPress("o", () => {
+        // Must be in the shop to unlock a weapon
         if (isInShop) {
             unlockWeapon(1);
         };

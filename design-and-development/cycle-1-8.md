@@ -193,7 +193,7 @@ interface chosenLevelFormat {
     enemy1Spawns: [number, number][];
     enemy2Spawns: [number, number][];
     enemy3Spawns: [number, number][];
-}
+};
 
 let chosenLevels: chosenLevelFormat[] = [];
 
@@ -204,9 +204,9 @@ for (let j = 0; j < 3; j++) {
         let randomIndex = Math.floor(Math.random() * possibleLevels.length);
         let randomLevel = { id: possibleLevels[randomIndex].id, layout: possibleLevels[randomIndex].layout, enemy1Spawns: possibleLevels[randomIndex].enemy1Spawns, enemy2Spawns: possibleLevels[randomIndex].enemy2Spawns, enemy3Spawns: possibleLevels[randomIndex].enemy3Spawns };
         chosenLevels.push(randomLevel);
-    }
+    };
     chosenLevels.push({ id: fixedLevels[1].id, layout: fixedLevels[1].layout, enemy1Spawns: fixedLevels[1].enemy1Spawns, enemy2Spawns: fixedLevels[1].enemy2Spawns, enemy3Spawns: fixedLevels[1].enemy3Spawns });
-}
+};
 ```
 {% endcode %}
 
@@ -249,7 +249,7 @@ class Enemy {
         this.currentHealth = this.maxHealth;
         this.entity = null;
         this.isMoving = false;
-    }
+    };
 
     spawn(position: Vec2, player: any) {
         // Create an enemy entity and set its properties
@@ -264,20 +264,20 @@ class Enemy {
         ]);
         // Activate the enemy
         this.activate(player);
-    }
+    };
 
     updateHealth(amount: number) {
         // Update the enemy's health and destroy it if health reaches zero
         this.currentHealth -= amount;
         if (this.currentHealth <= 0) {
             this.destroy();
-        }
-    }
+        };
+    };
 
     destroy() {
         // Destroy the enemy entity
         destroy(this.entity);
-    }
+    };
 
     activate(player: any) {
         // Set up an update loop for the enemy
@@ -304,9 +304,9 @@ class Enemy {
                 this.shootProjectile(latestTargetPos);
                 await wait(this.idleTime);
                 this.isMoving = false;
-            }
+            };
         });
-    }
+    };
 
     shootProjectile(targetPos: Vec2) {
         // Create a projectile aimed at the target position
@@ -326,8 +326,8 @@ class Enemy {
             "enemy_projectile",
             offscreen({ destroy: true }),
         ]);
-    }
-}
+    };
+};
 ```
 {% endcode %}
 

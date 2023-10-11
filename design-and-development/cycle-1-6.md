@@ -147,10 +147,10 @@ for (let j = 0; j < 3; j++) {
         let randomIndex = Math.floor(Math.random() * possibleLevels.length); // Randomly select a level index
         let randomLevel = possibleLevels[randomIndex]; // Get the randomly selected level
         chosenLevels.push(randomLevel); // Add the random level to chosenLevels
-    }
+    };
 
     chosenLevels.push(fixedLevels[1]); // Add boss level
-}
+};
 ```
 {% endcode %}
 
@@ -168,7 +168,7 @@ onKeyPress("r", () => {
         go("win"); // Go to the "win" scene if all levels are completed
     } else {
         go("level", levelId); // Go to the next level scene
-    }
+    };
 });
 ```
 {% endcode %}
@@ -188,7 +188,7 @@ onMousePress("left", () => {
         wait(gunCooldownTime, () => {
             gunCooldown = false; // Reset the gun cooldown flag after the specified cooldown time
         });
-    }
+    };
 });
 ```
 {% endcode %}

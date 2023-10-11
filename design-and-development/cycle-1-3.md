@@ -67,7 +67,7 @@ function spawnBullet(truePosition) {
         offscreen({ destroy: true }),
         "player_bullet",
     ]);
-}
+};
 ```
 
 I modified the level increment code to include a check for if the last level has been reached. If it attempts to increment on the last level then it will go to the "win" scene, which will be the end screen.
@@ -81,7 +81,7 @@ onKeyPress("r", () => {
         go("win"); // Go to the "win" scene if levelId exceeds the number of possibleLevels
     } else {
         go("level", levelId); // Go to the "level" scene with the updated levelId
-    }
+    };
 });
 ```
 
