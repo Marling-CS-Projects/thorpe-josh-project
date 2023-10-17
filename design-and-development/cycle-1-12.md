@@ -1,4 +1,4 @@
-# 2.2.12 Cycle 12 - Proper Enemy Spawning & Levels
+# 2.2.12 Cycle 12 - Proper Enemy Spawning & Improved Levels
 
 ## Design
 
@@ -12,7 +12,7 @@ In this cycle, my goal is to make some proper levels with enemies spawning in th
 * [x] Text appears in the corner of your screen when entering a new floor saying the floor number
 * [x] Text appears declaring when you have entered a boss fight
 * [x] The player can advance through a door if all enemies have been killed
-* [x] Make player and enemy bullets be able to destroy the boxes (mushrooms)
+* [x] Make player and enemy bullets destroy the boxes (mushrooms) when colliding with them
 
 ### Usability Features
 

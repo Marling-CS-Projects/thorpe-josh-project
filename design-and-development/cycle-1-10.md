@@ -10,7 +10,7 @@ In this cycle, I aim to set up a proper weapon and inventory system. My objectiv
 * [x] Add 'Brass Spraygun' (machine gun with high rate of fire but low damage)
 * [x] Add 'Boomstick' (shotgun which fires multiple bullets at once)
 * [x] The current shooting is now the 'Gear gun' which is the weapon you start with
-* [x] Modify the statistics of each gun to balance them somewhat (I can properly balance everything towards the end of development)
+* [x] Somewhat balance the statistics of each weapon (I will properly balance everything at the end of my development)
 * [x] Guns can be changed with the number keys
 * [x] The inventory system displays your weapons on the number keys As you unlock new weapons they appear in the inventory in that order (i.e., the first weapon unlocked is key 1, the second is key 2, etc.)
 
