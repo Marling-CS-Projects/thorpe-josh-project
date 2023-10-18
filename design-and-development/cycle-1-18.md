@@ -4,19 +4,19 @@
 
 ### Objectives
 
-In this cycle, my goal is to add sound effects and music and make the menus look much better. My objectives in this cycle are to:
+In this cycle, I plan to add music and sound effects to my game which provide feedback to the player after key events. The music should also make the game feel more exciting. My objectives in this cycle are to:
 
 * [x] Add sound effects for key events
-* [x] Add music
-* [x] Update credits for music and sound effects
+* [x] Add music which loops throughout the game
+* [x] Update the credits menu to include credits for the music and sound effects
 * [x] Music becomes quieter when the game is paused
-* [x] Music stops in the lose and win scenes
+* [x] Music pauses in the win and lose scenes
 
-Now for redesigning the menus. I am still unhappy with how the main menu looks when you enter the game. I want it to feel nicer with buttons which look properly clickable.
+My secondary objective in this cycle is to improve the menu screens. I am still unhappy with the main menu when you enter the game because the buttons do not feel properly clickable and the whole menu seems a bit bland which isn't very fun for the player. I plan to:
 
-* [x] Turn menu buttons into actual buttons
-* [x] Remove the menu background colour
-* [x] Replace how to play menu text with a graphic I made
+* [x] Make the menu buttons look like actual buttons
+* [x] Remove the object which creates a separate menu colour and change the project background colour
+* [x] Replace the how to play menu text with a new graphic I made
 * [x] Add an exciting font for the titles of each menu
 
 #### Smaller Changes
@@ -91,7 +91,7 @@ const gameTitle = createGameTitle();
 
 ### Outcome
 
-All the sounds are loaded at the start of the project.
+All the game sounds are loaded at the start of the project.
 
 ```typescript
 loadSound("menuclick", "/sounds/select-sound-121244.mp3");
@@ -103,13 +103,14 @@ loadSound("gamewin", "/sounds/grand-final-orchestral-tutti-9927.mp3");
 loadSound("enemyhit","/sounds/hitHurt1.wav");
 loadSound("playerdeath", "/sounds/failure notification.wav");
 loadSound("playerhurt", "/sounds/hitHurt.wav");
-loadSound("music", "/sounds/cruising-down-8bit-lane-159615.mp3");
 loadSound("bosslevel", "/sounds/boss horn.mp3");
 loadSound("shopkeepernote", "/sounds/pickupCoin.wav");
 loadSound("recoverhealth", "/sounds/health-pickup-6860.mp3");
+
+loadSound("music", "/sounds/cruising-down-8bit-lane-159615.mp3");
 ```
 
-The music begins playing when you start and it will loop indefinitely until being paused.
+The music begins playing when the game starts and will continuously loop. It will play unless paused.
 
 <pre class="language-typescript"><code class="lang-typescript"><strong>const gameMusic = play("music", {loop: true}); 
 </strong></code></pre>
@@ -152,14 +153,14 @@ I created a new function that adds all the parts of a button and controls what h
     button.scale = vec2(1);
   });
 
-  // Action runs when button is clicked
+  // Action runs when the button is clicked
   button.onClick(func);
     
   return button;
 };
 </code></pre>
 
-Examples of how the buttons are called in the main menu.
+Below is an example of how the buttons are made in the main menu.
 
 ```typescript
 addButton("Play", vec2(width() / 2, height() / 2 - 40), () => { 
@@ -176,7 +177,7 @@ addButton("Play", vec2(width() / 2, height() / 2 - 40), () => {
     });
 ```
 
-The title for each menu is now a sprite object rather than a text object.
+The title for each menu is now a sprite entity rather than a text entity which allows for the exciting font.
 
 ```typescript
 const gameTitle = add([
@@ -188,7 +189,7 @@ const gameTitle = add([
     ]);
 ```
 
-Bullets are destroyed when they collide with the door.
+The player and enemy bullets are both destroyed when they collide with the door.
 
 ```typescript
 // Destroy bullets when they collide with the door
@@ -215,6 +216,7 @@ destroy() {
             updateCoinCounter();
             updateCoinCounter();
         } else {
+            // 1 coin for an ordinary enemy
             updateCoinCounter();
         };
         destroy(this.entity);

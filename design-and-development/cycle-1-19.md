@@ -7,14 +7,14 @@
 In this cycle, my goal is to make the game ready for players by removing the testing features and balancing the game as best as possible so that it is fun to play. My objectives in this cycle are to:
 
 * [x] Balance the weapons, enemies, bosses and levels accordingly so that the game feels fun to play and fair
+  * [x] Increase the number of pellets from the Boomstick
 * [x] Ensure that no enemies spawn too close to the player
 * [x] Remove the test features I added for development purposes
 
 #### Smaller Changes
 
-* [x] Increase the number of pellets from the Boomstick
-* [x] Change key unlocks in shop so that they are in the order of the keyboard
-* [x] Add the mass property to each entity to dictate how easily they are pushed around
+* [x] Change the shop text so that the weapons are in the order of the keys pressed to unlock
+* [x] Add the mass property to each entity to change how easily different enemies can push each other around (I want the bosses to feel heavier)
 
 ### Pseudocode
 
@@ -33,9 +33,9 @@ Create a player entity with the following components:
 
 ### Outcome
 
-I changed the statistics of the characters, weapons and enemies and changed some of the level spawning so that the game feels much more balanced.
+I changed many of the statistics for the characters, weapons and enemies and changed some of the level spawning so that the game feels much more balanced and fair to play.
 
-Example of the mass property for the player entity.
+Example use of the mass property when creating the player.
 
 ```typescript
 "@": () => [
@@ -43,13 +43,13 @@ Example of the mass property for the player entity.
                 area(),
                 anchor("center"),
                 z(4),
-                body({mass: 3}),
+                body({mass: 3}), // Mass of 3
                 health(playerHP),
                 "player",
             ],
 ```
 
-I commented out the code for adding coins and cycling levels and removed the colour of enemies changing when they are about to shoot.
+I commented out the code for adding coins and cycling levels and removed the colour of enemies changing when they are about to shoot as these were features I only intended to have during development.
 
 ### Challenges
 

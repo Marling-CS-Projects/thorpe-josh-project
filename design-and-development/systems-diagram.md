@@ -6,7 +6,7 @@
 
 This systems diagram shows the different parts of my game that I will focus on creating. I have split each section into smaller sub-sections. Throughout the development stage, I will pick one or two of these sections to focus on to build up the game gradually over time. I have broken the project down in this way as it roughly corresponds to my [success criteria](../analysis/1.5-success-criteria.md).
 
-The diagram is colour-coded to show how important each feature is to my game, with the most important features in <mark style="color:red;">red</mark>, the least important in <mark style="color:green;">green</mark>, and those that are in between in <mark style="color:orange;">orange</mark>. A black-and-white version is also below for easier viewing.
+The diagram is colour-coded to show how important each feature is to my game, with the most important features in <mark style="color:red;">red</mark>, the least important in <mark style="color:green;">green</mark>, and those that are someh in <mark style="color:orange;">orange</mark>. A black-and-white version is also below for easier viewing.
 
 <figure><img src="../.gitbook/assets/systemsdiagramv1.png" alt=""><figcaption></figcaption></figure>
 
