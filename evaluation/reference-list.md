@@ -119,3 +119,9 @@ Schardon, L., 2023. Kaboom.js Tutorials – Complete Guide for Easy Game Dev \[W
 ## 2.1 Design Frame
 
 Rocket Brush Studio, 2021. Why Pixel Art Games Have Become Widely Popular \[WWW Document]. Rocket Brush Studio. URL [https://rocketbrush.com/blog/pixel-art-games-popular](https://rocketbrush.com/blog/pixel-art-games-popular) (accessed 6.1.23).
+
+
+
+## 4.1 Evaluation of Success Criteria
+
+PEGI, 2023. What do the labels mean? \[WWW Document]. Pegi Public Site. URL [https://pegi.info/what-do-the-labels-mean](https://pegi.info/what-do-the-labels-mean) (accessed 10.20.23).

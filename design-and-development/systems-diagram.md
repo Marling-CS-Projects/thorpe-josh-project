@@ -36,7 +36,7 @@ The controls must also be efficient in that they are intuitive to use and allow 
 
 ### Engaging
 
-Creating a fun and engaging game is crucial. To achieve this, I'll design three levels and include a variety of weapons for players to enjoy and stay entertained. Furthermore, the game will stay exciting and engaging by including randomisation in chests and shop items, as well as randomly selected levels. This ensures that each playthrough offers a fresh and unique experience. Also, using a pixel art style may help draw in more people as pixel art games have become widely popular in recent years. [(Rocket Brush Studio, 2021)](../analysis/reference-list.md#2.1-design-frame)
+Creating a fun and engaging game is crucial. To achieve this, I'll design three levels and include a variety of weapons for players to enjoy and stay entertained. Furthermore, the game will stay exciting and engaging by including randomisation in chests and shop items, as well as randomly selected levels. This ensures that each playthrough offers a fresh and unique experience. Also, using a pixel art style may help draw in more people as pixel art games have become widely popular in recent years. [(Rocket Brush Studio, 2021)](../evaluation/reference-list.md#2.1-design-frame)
 
 #### Aims
 
