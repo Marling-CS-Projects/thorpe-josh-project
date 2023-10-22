@@ -36,28 +36,28 @@ The controls must also be efficient in that they are intuitive to use and allow 
 
 ### Engaging
 
-Creating a fun and engaging game is crucial. To achieve this, I'll design three levels and include a variety of weapons for players to enjoy and stay entertained. Furthermore, the game will stay exciting and engaging by including randomisation in chests and shop items, as well as randomly selected levels. This ensures that each playthrough offers a fresh and unique experience. Also, using a pixel art style may help draw in more people as pixel art games have become widely popular in recent years. [(Rocket Brush Studio, 2021)](../5-references/reference-list.md#2.1-design-frame)
+Creating a fun and engaging game is crucial. To achieve this, I'll include a variety of weapons for players to enjoy and stay entertained. Furthermore, the game will stay exciting and engaging by including randomisation in chests, enemies and levels. This ensures that each playthrough offers a fresh and unique experience. Also, using a pixel art style should be a good pick to make my game engaging because pixel art games have become widely popular in recent years. [(Rocket Brush Studio, 2021)](../5-references/reference-list.md#2.1-design-frame)
 
 #### Aims
 
-* Create a series of levels to work through
-* Randomise map generation so the game feels different each time
+* Ensure that players can play with different weapons
+* Randomise floor generation so the game feels different each time
 * Incorporate a style of game art that suits the game
 
 ### Error Tolerant
 
-My game should have as few errors as possible and if an error does occur, it should be corrected by my program. To do this, I will write my code so that my game will function in as many different game scenarios as possible to ensure that it will not crash when someone is playing it.
+My game should have as few errors as possible and if an error does occur, it should be corrected by my program. To minimise errors, I will write my code so that it considers all possible user inputs and functions correctly in as many different game scenarios as possible. This should ensure that my game doesn't crash. The performance of my game also must not damage the user's experience, therefore my game should run smoothly without freezing.
 
 #### Aims
 
-* The game doesn't crash
+* The game doesn't crash or freeze
 * The game does not contain any bugs that damage the user experience
 
 ### Easy To Learn
 
-My game should be easy to play and not be overly complicated. To do this, I will create simple controls for the game as outlined [here](../analysis/1.4a-features-of-the-proposed-solution.md#controls). I will make sure that no more controls are added than are needed in order to keep them as simple as possible for the players.
+My game should be easy to pick up and play and not be overly complicated. To do this, I will create simple controls for the game as outlined [here](../analysis/1.4a-features-of-the-proposed-solution.md#controls). I will make sure that no more controls are added than are needed in order to keep them as simple as possible for the players. I must also make sure that players know how to play and what the controls are.
 
 #### Aims
 
-* Create a list of controls for the game
-* Create a simple tutorial that helps players learn how to play the game
+* Create a how to play screen which helps players learn the controls
+* Create a simple tutorial that tells players the game's objective
