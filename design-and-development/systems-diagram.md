@@ -42,7 +42,7 @@ Creating a fun and engaging game is crucial. To achieve this, I'll include a var
 
 * Ensure that players can play with different weapons
 * Randomise floor generation so the game feels different each time
-* Incorporate a style of game art that suits the game
+* Incorporate an art style that suits the game
 
 ### Error Tolerant
 
