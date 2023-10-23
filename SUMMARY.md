@@ -33,7 +33,7 @@
 * [2.2.15 Cycle 15 - Dash Cooldown Bar & Improved UI & Menus](design-and-development/cycle-1-15.md)
 * [2.2.16 Cycle 16 - Boss Health Bar, Automatic Weapons & Fixing Bugs](design-and-development/cycle-1-16.md)
 * [2.2.17 Cycle 17 - Pause Menu & Damage Effect](design-and-development/cycle-1-17.md)
-* [2.2.18 Cycle 18 - Sound & Redone Menus](design-and-development/cycle-1-18.md)
+* [2.2.18 Cycle 18 - Sound & Improved Menus](design-and-development/cycle-1-18.md)
 * [2.2.19 Cycle 19 - Balancing & Removing Test Features](design-and-development/cycle-1-19.md)
 
 ## 3 Testing <a href="#testing" id="testing"></a>

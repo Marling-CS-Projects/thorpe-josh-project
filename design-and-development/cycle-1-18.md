@@ -1,4 +1,4 @@
-# 2.2.18 Cycle 18 - Sound & Redone Menus
+# 2.2.18 Cycle 18 - Sound & Improved Menus
 
 ## Design
 
@@ -12,17 +12,17 @@ In this cycle, I plan to add music and sound effects to my game which provide fe
 * [x] Music becomes quieter when the game is paused
 * [x] Music pauses in the win and lose scenes
 
-My secondary objective in this cycle is to improve the menu screens. I am still unhappy with the main menu when you enter the game because the buttons do not feel properly clickable and the whole menu seems a bit bland which isn't very fun for the player. I plan to:
+My secondary objective in this cycle is to improve the menu screens. I am still unhappy with the main menu when you enter the game because the buttons do not feel properly clickable and the whole menu seems a bit bland which isn't very fun for the player. This is also bad because the menu is the first thing the player sees when playing my game, so it shouldn't put them off.  My secondary objectives in this cycle are to:
 
 * [x] Make the menu buttons look like actual buttons
 * [x] Remove the object which creates a separate menu colour and change the project background colour
-* [x] Replace the how to play menu text with a new graphic I made
+* [x] Replace the how to play menu text with a new visual graphic I made
 * [x] Add an exciting font for the titles of each menu
 
 #### Smaller Changes
 
 * [x] Player and enemy bullets are destroyed when colliding with the door
-* [x] Killing a boss gives 5 coins instead of 1
+* [x] Increase boss reward from 1 to 5 coins
 * [x] Add a new enemy 3 sprite
 * [x] Add a crown to the final boss sprite
 * [x] Add a new shopkeeper sprite

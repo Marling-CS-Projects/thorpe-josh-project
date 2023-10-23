@@ -14,21 +14,21 @@ I would also like to add a boss healthbar to display how much of a boss's health
 
 * [x] Add boss healthbar to boss fights
 
-Currently, my game is missing many checks which causes bugs or issues when carrying out unexpected behaviour. I will fix these issues in this cycle, which should help improve the robustness of my game. I will check each box when the issue has been resolved.
+Currently, I have not added many necessary checks to prevent any bugs or issues when carrying out unexpected behaviour. Adding these should help improve the robustness of my game. I will check each box when the issue has been resolved.
 
-* [x] Starting the game without selecting a character throws an error
-* [x] Dashing into the next level does not reset the speed after the dash
-* [x] Players can purchase weapons which they already own, which get put in the inventory twice
-* [x] Purchasing items will deduct one less coin than required
-* [x] Players can purchase items from the shop even when not in a shop level
+* [x] Make sure the player has a character selected before starting the game
+* [x] Set the player speed to the default value at the start of each level
+* [x] Add a check so that players can only purchase a new weapon once
+* [x] You must be in a shop level to buy items
 
 #### Smaller Changes
 
 * [x] Add new sprites for the walls, spikes and boxes
-* [x] Adjust some of the enemy spawn locations in levels so that they are not too close to the player
+* [x] Adjust some of the enemy spawn locations in levels so that they aren't too close to the player
 * [x] Rename Ironclad Carbine to Ironclad Rifle (easier name for players to understand)
-* [x] Adjust coin counter position
+* [x] Adjust the coin counter's position
 * [x] Fix the dash cooldown bar border
+* [x] Fix buying items deducting one less coin than they are supposed to
 
 ### Usability Features
 
