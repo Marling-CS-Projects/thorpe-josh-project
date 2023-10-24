@@ -75,7 +75,7 @@ scene("mainMenu", () => {
     enemiesRemaining = 0
     unlockedWeapons = []
     
-    // Unlock the first weapon (e.g., pistol)
+    // Unlock the first weapon (pistol)
     unlockWeapon(0)
 
     // Choose random levels
