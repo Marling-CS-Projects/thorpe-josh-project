@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Rouge Style RPG Game](README.md)
+* [Rogue Style RPG Game](README.md)
 
 ## 1 Analysis <a href="#analysis" id="analysis"></a>
 
