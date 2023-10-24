@@ -23,21 +23,21 @@ In this cycle, my goal is to add a working pause menu which pauses the entire ga
 
 ### Usability Features
 
-The pause menu allows players to pause the game mid-fight to go and do something else and come back. This makes it easier for players to play my game even if they might need to go for a moment to do other things.
+The pause menu allows players to stop the game part of the way through and be able to come back and get right back in. This means the player's progress is not lost if they want to take a break.
 
 ### Key Variables
 
-| Variable Name      | Use                                                                                                                                                               |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `floorBackground`  | Represents the background of the `level` scene's floor. It's a rectangle with specific dimensions, position, colour, and z-index.                                 |
-| `gameState`        | A variable that stores the current state of the game (either "playing" or "paused"). It is used to control the game flow and manage pause functionality.          |
-| `pauseBackground`  | A background element displayed when the game is paused. It's a semi-transparent rectangle that covers the entire game area.                                       |
-| `pauseTitle`       | Text element displaying "Game Paused" in the pause menu. It's centred at the top of the screen when the game is paused.                                           |
-| `pauseText`        | Text element displaying instructions for resuming the game. It's centred on the screen when the game is paused.                                                   |
-| `playerBullets`    | An array containing all the player's bullets. It is used to pause and unpause player bullets when the game state changes.                                         |
-| `enemyBullets`     | An array containing all the enemy's bullets. It is used to pause and unpause enemy bullets when the game state changes.                                           |
-| `flashOverlay`     | A red-coloured rectangle that flashes to create a damage effect on the screen when the player takes damage.                                                       |
-| `BARLINEINCREMENT` | A constant variable defining the vertical spacing between notches on the boss health bar. It determines the intervals at which lines are drawn on the health bar. |
+| Variable Name      | Use                                                                                                                               |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| `floorBackground`  | Represents the background of the `level` scene's floor. It's a rectangle with specific dimensions, position, colour, and z-index. |
+| `gameState`        | A variable that stores the current state of the game (either "playing" or "paused"). It is used to manage pause functionality.    |
+| `pauseBackground`  | A background element displayed when the game is paused. It's a semi-transparent rectangle that covers the entire game area.       |
+| `pauseTitle`       | Text element displaying "Game Paused" in the pause menu.                                                                          |
+| `pauseText`        | Text element displaying instructions for resuming the game when in the pause menu.                                                |
+| `playerBullets`    | An array containing all the player's bullets. It is used to pause and unpause player bullets when the game state changes.         |
+| `enemyBullets`     | An array containing all the enemy's bullets. It is used to pause and unpause enemy bullets when the game state changes.           |
+| `flashOverlay`     | A red rectangle which flashes to create a damage effect on the screen when the player takes damage.                               |
+| `BARLINEINCREMENT` | A constant variable defining the vertical spacing between notches on the boss health bar.                                         |
 
 ### Pseudocode
 
@@ -334,7 +334,7 @@ To add notches to the boss healthbar, I added a small horizontal line at 3 locat
 
 ### Challenges
 
-I found it challenging to pause and unpause the movement of the player and enemy bullets. Initially, I tried removing the move component and re-adding it with saved values when resuming. However, the bullets would not move again after pausing. I was becoming sceptical that it was possible and I was going to resort to letting the bullets move but not dealing any damage to the player if they hit while paused. Thankfully though, I found that Kaboom has `.paused`, which made it super easy to stop and start the bullet movement.
+I found it challenging to pause and unpause the movement of the player and enemy bullets. Initially, I tried removing the move component and re-adding it with saved values when resuming. However, the bullets would not move again after pausing. I was becoming sceptical that it was possible and I was going to resort to letting the bullets move but not dealing any damage to the player if they hit while paused. Thankfully though, I found that Kaboom has `.paused`, which made it super easy to stop and start the bullet movement and I'm super thankful I was able to figure this out.
 
 ## Testing
 

@@ -4,25 +4,25 @@
 
 ### Objectives
 
-My focus in the first cycle will be on the player and movement. My objectives are:
+My focus in the first cycle will be on adding the player and movement controls. My objectives are:
 
 * [x] Load a player sprite
 * [x] Be able to move the player with WASD keys
 * [x] Dash can be activated to increase movement speed
 * [x] Dash can only be used every 3 seconds
-* [x] Dash lasts a second
+* [x] Movement speed increase lasts for 1 second
 
 ### Usability Features
 
-Movement controls are one of the key features which is required to allow users to play my game.
+Movement controls are needed to allow the player to move around the game scene and be able to play my game.
 
 ### Key Variables
 
-| Variable Name | Use                                                                                                                             |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `player`      | Represents the player character in the game. It is created using the `add` function and assigned a sprite and initial position. |
-| `speed`       | Represents the movement speed of the player character. It is initially set to 200.                                              |
-| `cooldown`    | A boolean variable used to track whether the dash ability is on cooldown or not. It is initially set to `false`.                |
+| Variable Name | Use                                                                                                                               |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `player`      | Represents the player character in the game. It is created using the `add` function and assigned a sprite and initial position.   |
+| `speed`       | Represents the movement speed of the player character. It is initially set to 200 and later increased when the dash is activated. |
+| `cooldown`    | A boolean variable used to track whether the dash ability is on cooldown or not. It is initially set to `false`.                  |
 
 ### Pseudocode
 
@@ -100,28 +100,27 @@ const player = add([
 ]);
 ```
 
-Pressing the WASD keys moves the player sprite in the corresponding direction by `speed` pixels per second. By holding the movement speed as a variable, I can easily change the player's speed without having to modify the entire code.
+Pressing the WASD keys moves the player sprite in the corresponding direction by `speed` pixels per second. By storing the movement speed as a variable, I can easily change the player's speed in the future.
 
 ```javascript
 // Set the initial movement speed
 let speed = 200;
 
-
 // Define the movement controls
 onKeyDown("a", () => {
-  player.move(-speed, 0); // Move the player character to the left (negative x-direction)
+  player.move(-speed, 0); // Move left
 });
 
 onKeyDown("d", () => {
-  player.move(speed, 0); // Move the player character to the right (positive x-direction)
+  player.move(speed, 0); // Move right
 });
 
 onKeyDown("w", () => {
-  player.move(0, -speed); // Move the player character upwards (negative y-direction)
+  player.move(0, -speed); // Move up
 });
 
 onKeyDown("s", () => {
-  player.move(0, speed); // Move the player character downwards (positive y-direction)
+  player.move(0, speed); // Move down
 });
 ```
 
@@ -131,15 +130,15 @@ Pressing the spacebar increases `speed` by 300 for half a second. The `cooldown`
 // Set the dash ability cooldown flag
 let cooldown = false;
 
-// Activate the dash ability
+// Activate the dash ability when the spacebar is pressed
 onKeyDown("space", () => {
   if (!cooldown) {
     cooldown = true;
-    speed += 300; // Increase the movement speed for dashing
+    speed += 300; // Increase movement speed for dashing
     wait(0.5, () => {
-      speed -= 300; // Restore the original movement speed
+      speed -= 300; // Restore original movement speed
       wait(3, () => {
-        cooldown = false; // Reset the cooldown flag after the dash duration
+        cooldown = false; // Reset the cooldown flag after dash has ended
       });
     });
   };
@@ -148,7 +147,7 @@ onKeyDown("space", () => {
 
 ### Challenges
 
-I had planned for the dash to be activated using the right mouse button, however, I couldn't find kaboom's support for detecting right clicks. Therefore I made it activate with the spacebar instead.
+I wanted to activate the dash using the right mouse button but I couldn't find how to detect right clicks with Kaboom. Therefore I made it activate with the spacebar instead.
 
 ```typescript
 onKeyDown("space", () => {

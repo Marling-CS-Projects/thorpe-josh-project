@@ -21,17 +21,17 @@ In this cycle, I aim to set up a proper weapon and inventory system. My objectiv
 
 ### Usability Features
 
-An inventory system means that players know which keys to press to switch to each weapon. This makes it easier for players to use their weapons more effectively.
+An inventory display means that players know which keys to press to switch to each weapon, as this could be different if players buy different weapons in each run.
 
 ### Key Variables
 
-| Variable Name     | Use                                                                                                                                                                                    |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `weapons`         | An array containing objects that represent different weapon types. Each object includes properties like `unlocked`, `name`, `bulletDamage`, `bulletSpeed`, `cooldown`, and `accuracy`. |
-| `unlockedWeapons` | An array that stores unlocked weapon objects.                                                                                                                                          |
-| `currentWeapon`   | Holds the currently selected weapon from the `unlockedWeapons` array.                                                                                                                  |
-| `spreadAngle`     | A random angle used to simulate bullet inaccuracy.                                                                                                                                     |
-| `inventoryText`   | Represents the text entity displaying the player's unlocked weapons.                                                                                                                   |
+| Variable Name     | Use                                                                                          |
+| ----------------- | -------------------------------------------------------------------------------------------- |
+| `weapons`         | An array containing objects that represent different weapon types with differing statistics. |
+| `unlockedWeapons` | An array that stores unlocked weapon objects.                                                |
+| `currentWeapon`   | Holds the currently selected weapon from the `unlockedWeapons` array.                        |
+| `spreadAngle`     | A random angle used to simulate bullet inaccuracy.                                           |
+| `inventoryText`   | Represents the text entity displaying the player's unlocked weapons.                         |
 
 ### Pseudocode
 
@@ -246,10 +246,6 @@ The `updateText` function is stored inside `inventoryText`. It adds the name of 
     ]);
 };
 ```
-
-### Challenges
-
-It was challenging to find out how to update the inventory when a new weapon is unlocked. I was not aware that embedding a function within inventoryText was possible as this was not described in the documentation. Instead, I came across an example of it while viewing some Kaboom code online and made use of it in my code.
 
 ## Testing
 

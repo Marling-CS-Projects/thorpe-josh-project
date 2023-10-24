@@ -1,4 +1,4 @@
-# 2.2.13 Cycle 13 - Shop & More Weapons
+# 2.2.13 Cycle 13 - Shop, Intro Level & More Weapons
 
 ## Design
 
@@ -26,16 +26,14 @@ In this cycle, I plan to add the shop feature. My objectives in this cycle are t
 
 ### Usability Features
 
-The introduction level at the start of the game teaches players the game objective and provides some interesting story.
+The introduction level at the start of the game teaches players the game objectives and explains the fundamentals of the game.
 
 ### Key Variables
 
-| Variable Name                   | Use                                                                                                                                                                                                |
-| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `shopText` and `message`        | These variables are used to create and display a shop dialogue box with a black background and text. `shopText` is the black background, and `message` is the text displayed in the shop dialogue. |
-| `loreText` and `message`        | These variables are used to create and display a lore dialogue box with a black background and text. `loreText` is the black background, and `message` is the text displayed in the lore dialogue. |
-| `weapons` and `unlockedWeapons` | These arrays store information about the available weapons in the game and the weapons that the player has unlocked, respectively.                                                                 |
-| `currentWeapon`                 | This variable represents the weapon currently equipped by the player.                                                                                                                              |
+| Variable Name            | Use                                                                                                                                                                                                |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `shopText` and `message` | These variables are used to create and display a shop dialogue box with a black background and text. `shopText` is the black background, and `message` is the text displayed in the shop dialogue. |
+| `loreText` and `message` | These variables are used to create and display a lore dialogue box with a black background and text. `loreText` is the black background, and `message` is the text displayed in the lore dialogue. |
 
 ### Pseudocode
 
@@ -308,7 +306,7 @@ I adjusted `healthBar`'s width simply to be equal to `playerHP` instead of using
 
 #### New Sprites
 
-Over the coming cycles, I will be replacing some of the sprites in the game with proper versions. Below are the new sprites I added in this cycle.
+Over the coming cycles, I will be replacing some of the sprites in the game with custom sprites made by me. Below are the new sprites I added in this cycle.
 
 <div>
 
@@ -327,6 +325,10 @@ Over the coming cycles, I will be replacing some of the sprites in the game with
 <figure><img src="../.gitbook/assets/cycle13enemy6sprite.png" alt=""><figcaption><p>Enemy 6</p></figcaption></figure>
 
 </div>
+
+### Challenges
+
+I found it quite difficult to develop a working weapon unlock system because I kept being able to use weapons which were still locked. I added a separate array for unlocked weapons which is used to switch the current weapon and I got it to work a lot better. I admit that my solution isn't perfect but it does the job as intended, even if the code is not the most efficient.
 
 ## Testing
 

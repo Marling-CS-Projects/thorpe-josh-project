@@ -128,10 +128,10 @@ While implementing attempting to implement enemy attacks I experienced a bug whe
 
 {% embed url="https://youtu.be/Makqcr3obds" %}
 
-Then I was able to make it so that after an enemy died, the remaining enemies stopped firing too.&#x20;
+Then after trying to fix this, I was able to make it so that after an enemy died, the remaining enemies stopped firing too.&#x20;
 
-I concluded that this approach was challenging to make work correctly. Therefore I decided to rework my approach to enemies with an object-oriented approach.&#x20;
+I concluded that this approach was too challenging to make work correctly and was not at all efficient. Therefore I decided to rework enemies with an object-oriented approach in what I have separated into [Cycle 8b](cycle-1-8.md).
 
 ## Testing
 
-During development, I quickly realised that my approach was buggy and would not be easy to develop long-term, so I decided that approaching the cycle in this way was not a good idea. See [Cycle 8b](cycle-1-8.md) for the restart of Cycle 8.
+During development, I quickly realised that my approach was buggy and would not be easy to develop long-term, so I decided that approaching the cycle in this way was not a good idea.

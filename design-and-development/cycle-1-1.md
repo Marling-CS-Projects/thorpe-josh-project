@@ -4,23 +4,23 @@
 
 ### Objectives
 
-My focus in this cycle will be on aiming and bullets. My objectives are:
+My focus in this cycle will be on adding a weapon which the player can aim and shoot with the mouse. My objectives are:
 
 * [x] Clicking the mouse creates a bullet at the player's position
-* [x] The bullet moves towards where the cursor was upon click
-* [x] The bullet is orientated to point in the direction of travel
+* [x] The bullet sprite is orientated to point in the direction of travel
+* [x] The bullet moves towards the cursor position
 
 ### Usability Features
 
-Shooting controls are one of the key features which is required to allow users to play my game.
+Just like the movement controls in Cycle 1, aiming and firing controls are a crucial part of the control scheme in my game. They enable players to execute all the necessary actions required to play.
 
 ### Key Variables
 
-| Variable Name    | Use                                                                                                                                                                                                                            |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `BULLET_SPEED`   | This constant variable represents the speed of the bullet when it is spawned. It is set to a value of 1000.                                                                                                                    |
-| `POINT_CURSOR`   | This variable is assigned the value of the player's position angle (in degrees) plus 180, indicating the direction in which the bullet should move. The angle is calculated using the `player.pos.angle(mousePos())` function. |
-| `playerPosition` | This parameter is passed to the `spawnBullet` function and represents the position of the player. It is used to set the initial position of the bullet.                                                                        |
+| Variable Name    | Use                                                                                                                                                                                                                              |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `BULLET_SPEED`   | This constant value represents the speed of the bullet when it is spawned. It is set to a value of 1000.                                                                                                                         |
+| `POINT_CURSOR`   | This variable is assigned the value of the player's position angle (in degrees) plus 180 and indicates the direction in which the bullet should move. The angle is calculated using the `player.pos.angle(mousePos())` function. |
+| `playerPosition` | This parameter is passed to the `spawnBullet` function and represents the position of the player. It is used to set the initial position of the bullet.                                                                          |
 
 ### Pseudocode
 
@@ -28,6 +28,7 @@ Shooting controls are one of the key features which is required to allow users t
 Load sprite "egg" from file path "/sprites/egg.png"
 Set constant BULLET_SPEED to 1000
 
+// Create a bullet at the player's position
 Function spawnBullet with parameter playerPosition
     Set POINT_CURSOR to player's position angle (in degrees) plus 180
     Create a bullet entity with the following properties:
@@ -42,6 +43,7 @@ Function spawnBullet with parameter playerPosition
         Destroy if it goes offscreen
         Tag as "player_bullet"
 
+// Spawn a bullet when the mouse is clicked
 On mouse press
     Call spawnBullet with the player's position
 ```
@@ -57,14 +59,14 @@ loadSprite("egg", "/sprites/egg.png");
 const BULLET_SPEED = 1000;
 ```
 
-When the `spawnBullet` function is called, it finds the bearing to the mouse cursor and then creates a bullet at the player's location. The bullet is rotated to point at the cursor position before being set to move at `BULLET_SPEED`.
+When the `spawnBullet` function is called, it finds the bearing to the mouse cursor from the player and then creates a bullet at the player's location. The bullet is rotated to point at the cursor position before being set to move at `BULLET_SPEED`.
 
 ```javascript
 function spawnBullet(playerPosition) {
     // Calculate the direction to move based on the player and mouse position
     const POINT_CURSOR = player.pos.angle(mousePos()) + 180;
     
-    // Create a bullet entity with the following properties
+    // Create a bullet entity
     add([
         sprite("egg"),
         area(), // An area component for collision detection
@@ -77,12 +79,12 @@ function spawnBullet(playerPosition) {
         // Move the bullet in the direction specified by POINT_CURSOR with the given speed
         move(POINT_CURSOR, BULLET_SPEED),
         offscreen({ destroy: true }), // Destroy the bullet entity if it goes offscreen
-        "player_bullet", // Adding the tag "player_bullet" so I can reference it later
+        "player_bullet", // Adding tag
     ]);
 };
 ```
 
-Clicking the left mouse button calls the spawnBullet function and passes it the player's position.
+Clicking the left mouse button calls the spawnBullet function and passes it the player's current position.
 
 ```javascript
 // Spawn a bullet when the mouse is clicked
@@ -93,10 +95,10 @@ onMousePress(() => spawnBullet(player.pos));
 
 I experienced bugs where the bullet was:
 
-* Moving in the opposite direction to the cursor
+* Moving in the opposite direction (away from the cursor instead of towards)
 * Travelling side-on as opposed to pointing in the direction of travel
 
-To fix this I had to add 180 degrees and 90 degrees to the angles for movement direction and rotation so the bullet moves correctly.
+To fix this I had to add 180 degrees and 90 degrees to the angles for movement direction and rotation respectively so that now the bullet moves correctly.
 
 ## Testing
 

@@ -27,7 +27,7 @@ In this cycle, my goal is to improve the game UI and menus. My objectives are:
 
 ### Usability Features
 
-Improving the UI, HUD and menus makes it easier for users to play my game and understand what's going on. Furthermore, the dash health bar informs players when the dash is off cooldown, which makes it easier for them to use it.
+Improving the UI and menus in my game makes player interactions with these more efficient and easier. Furthermore, the dash health bar provides players with additional information while keeping the overall UI as simple as possible.
 
 ### Key Variables
 
@@ -358,7 +358,7 @@ scene("mainMenu", () => {
 
 ### Challenges
 
-For my initial attempt at resizing the player sprites, I tried using `scale()` to reduce the size when the player was added. However, this made the player collision very strange in that you could clip into the walls and other objects for some reason. To avoid this, I instead shrunk the sprites themselves using an image resizer and added them to the game as the version which the player plays.
+For my initial attempt at resizing the player sprites, I tried using `scale()` to reduce the size when the player was added. However, this made the player collision very strange in that you could clip into the walls and other objects for some reason. To avoid this, I instead shrunk the sprites themselves using an online image resizing tool and added them to the game as separate sprites which are used for the player entity, while the original sizes remain in the character selection display.
 
 ## Testing
 

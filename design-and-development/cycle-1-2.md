@@ -9,17 +9,21 @@ My focus in this cycle is on room generation. My objectives are:
 * [x] Create rooms in a grid system
 * [x] Rooms consist of walls, spikes, and boxes
 * [x] Every room is stored in an array so that the next one can be added when the last is defeated
-* [x] Press t to start playing rooms (this will be replaced with a main menu system)
-* [x] Press r to move on to the next room (this will be replaced with a door when all enemies have been defeated)
+* [x] Press t to start playing rooms
+* [x] Press r to move on to the next room
 * [x] Add player collision for walls and boxes so the player can not walk through
+
+### Usability Features
+
+The tiles in the level use contrasting colours so that players can more easily tell them apart. This also makes my game more accessible for users with visual impairment.
 
 ### Key Variables
 
-| Variable Name    | Use                                                                                                                                                          |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `possibleLevels` | Is imported from the `./possibleLevels` file and is an array containing level data for the game.                                                             |
-| `levelId`        | Represents the current level's identifier.                                                                                                                   |
-| `level`          | Is the level object created using `addLevel()` function and contains the tile map for the current level. It is used to define the tiles and their behaviors. |
+| Variable Name    | Use                                                                                                                                                                |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `possibleLevels` | This array is imported from the `./possibleLevels` file and contains level data for the game.                                                                      |
+| `levelId`        | This variable represents the current level identifier.                                                                                                             |
+| `level`          | This is the level object created using `addLevel()` function and contains the tile map for the current level. It is used to define the tiles and their properties. |
 
 ### Pseudocode
 
@@ -170,12 +174,12 @@ export const possibleLevels = [
     "====================",
     ],
     ...
-    //rest of the levels
+    // Rest of the levels
     ];
 ```
 {% endcode %}
 
-Pressing 't' starts the level scene with an of `levelId` 0. I'm using scenes to organise the project since it makes it easy to understand what is happening.
+Pressing 't' starts the level scene with a `levelId` of 0. I'm using scenes to organise the project because it makes my code easier to understand.
 
 {% code title="main.js" %}
 ```javascript
@@ -232,7 +236,7 @@ scene("level", (levelId) => {
                 "door",
             ],
             "@": () => [ // Setup player
-                sprite("bean"), // Set the sprite for the player
+                sprite("bean"),
                 area(),
                 anchor("center"),
                 body(),
@@ -247,16 +251,16 @@ Pressing r will restart the scene with the next level from `possibleLevels`.
 
 {% code title="main.js" %}
 ```javascript
-    // "r" key press to advance to the next level
+    // "r" key to advance the level
     onKeyPress("r", () => {
         levelId += 1; // Increment the level identifier
         destroyAll("entity"); // Destroy all entities
-        go("level", levelId); // Go to the next level
+        go("level", levelId); // Go to next level
     });
 ```
 {% endcode %}
 
-Defines the player from the player sprite which is placed when the level is added. This new system makes it easier to change the location the player appears for each level.
+The player sprite is added to the game as part of the tile map and then a reference to it is obtained so that I can call actions using its position. Adding the player as part of the tile map means that it is much easier to change the player's spawn location in the level.
 
 {% code title="main.js" %}
 ```javascript
@@ -265,7 +269,7 @@ Defines the player from the player sprite which is placed when the level is adde
 ```
 {% endcode %}
 
-I moved the player movement and bullet code inside a scene so that key presses do not activate the code until the scene has been activated (levels have begun). This will be useful when I create a main menu at the start of the game.
+I moved the player movement and bullet code inside a scene so that these inputs have no effect until the scene has been activated (levels have begun). This will be useful for later when I create a main menu at the start of the game.
 
 {% code title="main.js" %}
 ```javascript
@@ -277,7 +281,7 @@ I moved the player movement and bullet code inside a scene so that key presses d
 
 ### Challenges
 
-While adjusting the tile dimensions and the position of the level on the screen, the player's starting position was sometimes outside the level. To simplify things, I made the player's starting point part of the level so that it is always easy to control where the player starts. This will also make it easier in the future when I replace the test levels with some proper levels.
+While adjusting the tile dimensions and the position of the level on the screen, the player's starting position was sometimes outside the level. To simplify things, I made the player's starting point part of the tilemap for levels so that it is always easy to control where the player starts. This will also make it easier in the future when I replace the test levels with some proper levels.
 
 <figure><img src="../.gitbook/assets/cycle3playerstart.png" alt=""><figcaption><p>The player sprites starts as part of the level</p></figcaption></figure>
 

@@ -29,13 +29,13 @@ My secondary objective in this cycle is to improve the menu screens. I am still 
 
 ### Usability Features
 
-Redone buttons in the menus make it clear where the actual buttons are and how to navigate the menus.
+The main menu and character selection allow users to easily navigate through my game with ease and enjoyment. The colours are specifically chosen to be clear and easy to use.
 
 ### Key Variables
 
-| Variable Name | Use                                                                                                                                                                                                                                                      |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `gameMusic`   | This variable is used to store the reference to the game's background music sound. It is created using the `play` function and set to loop indefinitely. This variable allows me to control the game's background music, such as stopping or pausing it. |
+| Variable Name | Use                                                                                                                                                                                                                 |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `gameMusic`   | This variable is used to reference the game's background music sound. It is created using the `play` function and set to loop indefinitely. This variable allows me to control the music by stopping or pausing it. |
 
 ### Pseudocode
 
@@ -258,19 +258,23 @@ destroy() {
 
 <figure><img src="../.gitbook/assets/cycle18losetitletext.png" alt=""><figcaption></figcaption></figure>
 
+## Challenges
+
+Adding sound to my game was a new experience for me so I had to look quite a bit into the Kaboom documentation but thankfully it is quite similar to adding sprites, which by now I am very familiar with. The only difficult thing with it is making sure the file type is correct otherwise trying to run the game gives lots of errors which I found quite confusing until I realised.
+
 ## Testing
 
 ### Tests
 
-| Test | Instructions               | What I expect                                                                                                                                                | What actually happens                                                                         | Pass/Fail |
-| ---- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- | --------- |
-| 1    | Start game.                | <ul><li>Music plays.</li><li>New buttons look correct.</li></ul>                                                                                             | <ul><li>As expected.</li><li>As expected.</li></ul>                                           | Pass.     |
-| 2    | Click on each menu.        | <ul><li>Each title is correct.</li><li>How to play menu uses new graphic.</li><li>Credit text is updated.</li><li>Each button functions correctly.</li></ul> | <ul><li>As expected.</li><li>As expected.</li><li>As expected.</li><li>As expected.</li></ul> | Pass.     |
-| 3    | Play through the game.     | Sound effects play for each of the events I added.                                                                                                           | As expected.                                                                                  | Pass.     |
-| 4    | Pause and unpause game.    | Music is quieter when paused.                                                                                                                                | As expected.                                                                                  | Pass.     |
-| 5    | Shoot door.                | Bullets are destroyed.                                                                                                                                       | As expected.                                                                                  | Pass.     |
-| 6    | Kill boss.                 | Gives 5 coins.                                                                                                                                               | As expected.                                                                                  | Pass.     |
-| 7    | Go to lose and win scenes. | <ul><li>Music stops.</li><li>Same checks as in test 2.</li></ul>                                                                                             | <ul><li>As expected.</li><li>As expected.</li></ul>                                           | Pass.     |
+| Test | Instructions               | What I expect                                                    | What actually happens                               | Pass/Fail |
+| ---- | -------------------------- | ---------------------------------------------------------------- | --------------------------------------------------- | --------- |
+| 1    | Start game.                | <ul><li>Music plays.</li><li>New buttons look correct.</li></ul> | <ul><li>As expected.</li><li>As expected.</li></ul> | Pass.     |
+| 2    | Click on each menu.        | Each button functions correctly.                                 | As expected.                                        | Pass.     |
+| 3    | Play through the game.     | Sound effects play for each of the events I added.               | As expected.                                        | Pass.     |
+| 4    | Pause and unpause game.    | Music is quieter when paused.                                    | As expected.                                        | Pass.     |
+| 5    | Shoot door.                | Bullets are destroyed on collision with door.                    | As expected.                                        | Pass.     |
+| 6    | Kill boss.                 | Gives 5 coins.                                                   | As expected.                                        | Pass.     |
+| 7    | Go to lose and win scenes. | <ul><li>Music stops.</li><li>Same checks as in test 2.</li></ul> | <ul><li>As expected.</li><li>As expected.</li></ul> | Pass.     |
 
 ### Evidence
 

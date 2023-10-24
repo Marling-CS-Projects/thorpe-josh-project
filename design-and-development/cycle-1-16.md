@@ -24,10 +24,7 @@ Currently, I have not added many necessary checks to prevent any bugs or issues 
 #### Smaller Changes
 
 * [x] Add new sprites for the walls, spikes and boxes
-* [x] Adjust some of the enemy spawn locations in levels so that they aren't too close to the player
 * [x] Rename Ironclad Carbine to Ironclad Rifle (easier name for players to understand)
-* [x] Adjust the coin counter's position
-* [x] Fix the dash cooldown bar border
 * [x] Fix buying items deducting one less coin than they are supposed to
 
 ### Usability Features
@@ -384,19 +381,25 @@ Added the `isInShop` flag which makes sure players can only try to buy weapons w
 
 </div>
 
+## Challenges
+
+Automatic weapons were difficult to implement because it was hard to get the behaviour to occur only once when clicked but not when the mouse was held down. It took me a while to stop the automatic firing from stacking on top of each other when the mouse was held down.
+
 ## Testing
 
 ### Tests
 
-| Test | Instructions                                           | What I expect                                                      | What actually happens                                                      | Pass/Fail   |
-| ---- | ------------------------------------------------------ | ------------------------------------------------------------------ | -------------------------------------------------------------------------- | ----------- |
-| 1    | Fire the clockwork revolver and brass spraygun.        | Can hold down mouse to fire weapons. Releasing mouse stops firing. | As expected.                                                               | Pass.       |
-| 2    | Fire the boomstick.                                    | Bullets are circular pellets instead of rectangles.                | As expected.                                                               | Pass.       |
-| 3    | Engage in boss fight and kill boss.                    | Health bar depletes as the boss takes damage.                      | As expected, except the boss seems to die before the end of the healthbar. | Borderline. |
-| 4    | Dash into next level.                                  | Speed is reset to normal.                                          | As expected.                                                               | Pass.       |
-| 5    | Attempt to start game without selecting a character.   | Nothing happens.                                                   | As expected.                                                               | Pass.       |
-| 6    | Try to purchase a weapon which is already owned.       | Nothing happens.                                                   | As expected.                                                               | Pass.       |
-| 7    | Try to purchase items from the shop in a regular leve. | Nothing happens.                                                   | As expected.                                                               | Pass.       |
+| Test | Instructions                                           | What I expect                                                      | What actually happens                                               | Pass/Fail   |
+| ---- | ------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------- | ----------- |
+| 1    | Fire the clockwork revolver and brass spraygun.        | Can hold down mouse to fire weapons. Releasing mouse stops firing. | As expected.                                                        | Pass.       |
+| 2    | Fire the boomstick.                                    | Bullets are circular pellets instead of rectangles.                | As expected.                                                        | Pass.       |
+| 3    | Engage in boss fight and kill boss.                    | Health bar depletes as the boss takes damage.                      | As expected, except the healthbar was not empty when the boss died. | Borderline. |
+| 4    | Dash into next level.                                  | Speed is normal at the start of each level.                        | As expected.                                                        | Pass.       |
+| 5    | Attempt to start game without selecting a character.   | Nothing happens.                                                   | As expected.                                                        | Pass.       |
+| 6    | Try to purchase a weapon which is already owned.       | Nothing happens.                                                   | As expected.                                                        | Pass.       |
+| 7    | Try to purchase items from the shop in a regular leve. | Nothing happens.                                                   | As expected.                                                        | Pass.       |
+
+Testing was successful except when the boss died, the boss's health bar was not completely empty, instead suggesting that the boss was still alive when it was not. I will address this issue with the health bar in the next cycle.
 
 ### Evidence
 

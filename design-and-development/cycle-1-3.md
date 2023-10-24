@@ -4,19 +4,18 @@
 
 ### Objectives
 
-My objectives in this cycle are:
+In this cycle, I want to fix some issues in my game and make some small changes. My objectives are:
 
-* [x] Fix the bullet spawn position
-* [x] Change the stage background
+* [x] Fix the bullet spawn position being outside the player
+* [x] Change the stage background colour
 * [x] Increase the player movement speed
-* [x] Add a check for beating the last level
+* [x] Add a check for beating the last level to prevent errors
 
 ### Key Variables
 
-| Variable Name  | Use                                                                                                                                |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `playerSpeed`  | Determines the movement speed of the player character in the game.                                                                 |
-| `truePosition` | The calculated position relative to the player's position, used to determine where the bullet should be spawned in the game scene. |
+| Variable Name  | Use                                                                                                               |
+| -------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `truePosition` | The calculated position bullets should spawn at, calculated by taking `playerPosition` and adding a vector to it. |
 
 ### Pseudocode
 
@@ -50,9 +49,8 @@ kaboom({
 I updated the bullet spawning function to receive the actual position to spawn at called `truePosition` and to use that for calculations. This replaces the use of `playerPosition`.
 
 ```javascript
-// Spawns the bullet
 function spawnBullet(truePosition) {
-    // Gets the direction
+    // Calculate the direction to move based on the player and mouse position
     const POINT_CURSOR = truePosition.angle(mousePos()) + 180; // Angle adjusted by 180 degrees
 
     add([
@@ -62,10 +60,13 @@ function spawnBullet(truePosition) {
         scale(0.65, 0.65),
         color(127, 127, 255),
         anchor("center"),
-        rotate(POINT_CURSOR + 90), // Rotation adjusted by 90 degrees
+        // Rotate the bullet sprite to point in the direction of travel
+        rotate(POINT_CURSOR + 90),
+        // Move the bullet in the direction specified by POINT_CURSOR with the given speed
         move(POINT_CURSOR, BULLET_SPEED),
+        // Destroy the bullet entity if it goes offscreen
         offscreen({ destroy: true }),
-        "player_bullet",
+        "player_bullet", // Adding tag
     ]);
 };
 ```
@@ -76,7 +77,7 @@ I modified the level increment code to include a check for if the last level has
 // Increments levelId and goes to that level
 onKeyPress("r", () => {
     levelId += 1;
-    destroyAll("entity"); // Remove all entities with the "entity" tag
+    destroyAll("entity"); // Destroy all entities
     if (levelId > possibleLevels.length - 1) {
         go("win"); // Go to the "win" scene if levelId exceeds the number of possibleLevels
     } else {
@@ -96,7 +97,7 @@ scene("win", () => {
 
 ### Challenges
 
-It was challenging to resolve the bullet spawn position issue since I struggled to locate what was wrong. Through testing, I found the issue to be something wrong with the use of `player.pos`. To resolve the issue I experimented with adding a vector onto `player.pos` to create `truePosition`. I did this until it resulted in the bullets appearing perfectly in the player. I'm not sure what's wrong with `player.pos` but it could be something to do with how I define `player` from the level generation. I'm not sure.
+It was challenging resolving the bullet spawn position issue since I struggled to locate what was wrong. Through debugging, I found the issue to be something wrong with the use of `player.pos`. To resolve the issue I experimented with adding a vector onto `player.pos` to create `truePosition`. I fine-tuned this vector until it resulted in the bullets appearing perfectly in the player.
 
 ## Testing
 

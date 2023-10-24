@@ -23,18 +23,16 @@ In this cycle, my main goal is to add boss fights to the game. My objectives in 
 * [x] Reduce the number of spikes and boxes on floor 3
 * [x] Remove spikes next to the player spawn location in all levels
 * [x] Make the background for the introduction message partially transparent
-* [x] Add bullet speed to enemy class parameters
-* [x] Somewhat balance the guns and enemies
 
 ### Usability Features
 
-Unique sprites for each boss make them look more menacing and make it easier fo rthe player to recognise how they are more dangerous.
+Unique sprites for each boss make them look more menacing and make it easier for the player to recognise how they are more dangerous by providing visual contrast.
 
 ### Key Variables
 
-| Variable Name     | Use                                                                                                                                        |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `BOSSSPAWNINGPOS` | This constant holds the position where boss enemies spawn. It is used to ensure that boss enemies consistently spawn at the same location. |
+| Variable Name     | Use                                                                                                                                  |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `BOSSSPAWNINGPOS` | This constant holds the position where boss enemies spawn. It is used to ensure that boss enemies always spawn at the same location. |
 
 ### Pseudocode
 
@@ -469,175 +467,11 @@ The player and enemy bullets are destroyed when they collide with a wall.
 
 ### Challenges
 
-Initially, I planned to implement bosses using a separate boss class with the special boss behaviour which I could then call when a boss level started.
-
-{% code title="boss class.ts" %}
-```typescript
-import { updateCoinCounter } from "./main";
-import { Enemy } from "./enemy class";
-
-export class Boss {
-    sprite: string;
-    maxHealth: number;
-    currentHealth: number;
-    entity: any;
-    isMoving: boolean;
-    idleTime: number;
-    shootDamage: number;
-    isAlive: boolean;
-    numSteps: number;
-    moveSpeed: number;
-    accuracy: number;
-    bulletSpeed: number;
-    type: number;
-
-    constructor(sprite: string, type: number) {
-        // Initialize properties based on the enemy type
-        if (type === 1) { // Boss type 1
-            this.maxHealth = 300;
-            this.idleTime = (Math.random() * (4 - 2.5) + 2.5);
-            this.shootDamage = 25;
-            this.numSteps = 20;
-            this.moveSpeed = 100;
-            this.accuracy = 3;
-            this.bulletSpeed = 800;
-            this.type = 1;
-        } else if (type === 2) { // Boss type 2
-            this.maxHealth = 500;
-            this.idleTime = (Math.random() * (4 - 2.5) + 2.5);
-            this.shootDamage = 10;
-            this.numSteps = 20;
-            this.moveSpeed = 100;
-            this.accuracy = 6;
-            this.bulletSpeed = 800;
-            this.type = 2;
-        } else if (type === 3) { // Boss type 3
-            this.maxHealth = 1000;
-            this.idleTime = (Math.random() * (3.5 - 2) + 2);
-            this.shootDamage = 12;
-            this.numSteps = 20;
-            this.moveSpeed = 100;
-            this.accuracy = 20;
-            this.bulletSpeed = 800;
-            this.type = 3;
-        };
-        this.sprite = sprite;
-        this.currentHealth = this.maxHealth;
-        this.entity = null;
-        this.isMoving = false;
-        this.isAlive = true;
-    }
-
-    spawn(position: Vec2, player: any) {
-        this.entity = add([
-            sprite(this.sprite),
-            body(),
-            area(),
-            pos(position),
-            anchor("center"),
-            z(2),
-            "boss",
-        ]);
-        this.entity.instance = this;
-        this.activate(player);
-    }
-
-    updateHealth(amount: number) {
-        this.currentHealth -= amount;
-        if (this.currentHealth <= 0) {
-            this.destroy();
-        }
-    }
-
-    destroy() {
-        this.isAlive = false;
-        if (this.type === 1) {
-            for (let i = 0; i < 10; i++) {
-                updateCoinCounter(); //will give 10 coins
-            }
-        } else if (this.type === 2) {
-            for (let i = 0; i < 15; i++) {
-                updateCoinCounter(); //will give 15 coins
-            }
-        }
-        destroy(this.entity);
-    }
-
-    activate(player: any) {
-            this.entity.on("update", async () => {
-                if (!this.isMoving) {
-                    this.isMoving = true;
-                    this.entity.color = rgb(255, 0, 0);
-                    const targetPos = player.pos.add(vec2(350, 50));
-                    const direction = targetPos.sub(this.entity.pos).unit();
-    
-                    for (let i = 0; i < this.numSteps; i++) {
-                        const moveAmount = this.moveSpeed / this.numSteps;
-                        this.entity.moveBy(direction.scale(moveAmount));
-                        await wait(0.02); // Adjust the wait period between each step
-                    };
-    
-                    await wait(1);
-                    this.entity.color = rgb(0, 0, 255);
-                    const latestTargetPos = player.pos.add(vec2(350, 50));
-                    //this.shootProjectile(latestTargetPos);
-                    await wait(this.idleTime);
-                    this.isMoving = false;
-                }
-            });
-        }
-
-    shootProjectile(targetPos: Vec2) {
-        const spreadAngle = Math.random() * this.accuracy - this.accuracy / 2;
-        const direction = targetPos.sub(this.entity.pos);
-        if (this.isAlive) {
-            add([
-                sprite("egg"),
-                pos(this.entity.pos),
-                area(),
-                scale(0.65, 0.65),
-                color(255, 0, 0),
-                anchor("center"),
-                z(2),
-                rotate(this.entity.pos.angle(targetPos) + 270),
-                move(direction + spreadAngle, this.bulletSpeed),
-                "enemy_bullet",
-                { shootDamage: this.shootDamage },
-                offscreen({ destroy: true }),
-            ]);
-        }
-    }
-
-    spawnMinions(player: any) {
-        // Define the positions for the minions relative to the boss
-        const minionPositions: vec2[] = [
-            vec2(50, 0),
-            vec2(-50, 0),
-        ];
-
-        // Spawn minions at specified positions
-        for (const position of minionPositions) {
-            if (this.type === 1) {
-                const enemy2 = new Enemy("bobo", 2);
-                enemy2.spawn(this.entity.pos.add(position), player)
-            } else if (this.type === 2) {
-                const enemy4 = new Enemy("dino", 4);
-                enemy4.spawn(this.entity.pos.add(position), player)
-            } else if (this.type === 3) {
-                const enemy6 = new Enemy("gigagantrum", 6);
-                enemy6.spawn(this.entity.pos.add(position), player)
-            };
-        }
-    }
-}
-```
-{% endcode %}
-
-However, I was experiencing strange behaviour despite most of the code being copied from the `Enemy` class. I realised that it would be much simpler to use the `Enemy` class for bosses and add a few special functions which only the boss enemies call. Below is a video of some of the issues experienced.
+Initially, I planned to implement bosses using a separate boss class with the special boss behaviour which I could then call when a boss level started. However, I was experiencing strange behaviour despite most of the code being copied from the `Enemy` class. I realised that it would be much simpler to use the `Enemy` class for bosses and add a few special functions which only the boss enemies call. Below is a video of some of the issues experienced.
 
 {% embed url="https://youtu.be/x5ntEovn-fM" %}
 
-I later found the blue screen issue to be with how the random angle for the boss shooting inaccuracy was calculated, but by then I had already decided that having bosses as part of the enemy class was simpler anyway.
+I later found the blue screen issue was due to how the random angle for the boss shooting inaccuracy was calculated, and had nothing to do with the way the class was implemented. By this point, however, I had nearly completed the cycle and had already decided that having bosses as part of the enemy class was much simpler anyway because they are effectively just stronger enemies.
 
 ## Testing
 

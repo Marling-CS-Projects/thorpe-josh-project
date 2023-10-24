@@ -8,9 +8,9 @@ In this cycle, my objective is to create a main menu at the start of the game wi
 
 * [x] When the game starts you are greeted with a main menu
 * [x] There are buttons for 'play', 'how to play', and 'credits' which each take you to a separate menu
-* [x] 'how to play' gives some basic instructions
-* [x] 'credits' gives sprite, sound effects and music credits
-* [x] 'play' goes to the character select menu
+* [x] 'How to play' gives some basic instructions
+* [x] 'Credits' gives sprite, sound effects and music credits
+* [x] 'Play' goes to the character select menu
 * [x] You can choose from 3 characters, each with different statistics
 * [x] Click on the character and then click another play button to start the game
 * [x] When a character is clicked on, there is a white selection box behind it
@@ -20,25 +20,25 @@ In this cycle, my objective is to create a main menu at the start of the game wi
 #### Smaller Changes
 
 * [x] Add shopkeeper sprite in the shop levels
-* [x] Fix enemies shooting once after death bug
+* [x] Fix enemies shooting after dying
 
 ### Usability Features
 
-The how to play menu will help players learn how to play the game. The selection box in the character select menu shows players which character they are currently set to play as.
+The how to play menu will help players learn how to play the game and explain the controls. The selection box in the character select menu shows players which character is selected so that it is easier to see who they are about to play as.
 
 ### Key Variables
 
-| Variable Name                                                      | Use                                                                                                                                                                                                         |
-| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `playButton`, `howToPlayButton`, `creditsButton`                   | These variables represent buttons displayed in different scenes. They are used to handle click events to transition between scenes.                                                                         |
-| `howToPlayText`, `creditsText`                                     | These variables represent text elements displaying instructions and credits. They are used to display information in the `howToPlay` and `credits` scenes.                                                  |
-| `characterData`                                                    | This variable stores an array of objects, each representing character information (e.g., name, sprite, health, speed).                                                                                      |
-| `characterSpacing`, `characterY`                                   | These variables define the spacing and vertical position of character elements in the `characterSelect` scene.                                                                                              |
-| `whiteOutline`                                                     | This variable represents a white outline element that appears when a character is selected. It is used to visually highlight the selected character.                                                        |
-| `characterName`, `characterSprite`                                 | These variables represent text and sprite elements for each character in the `characterSelect` scene. They are used to display character names and sprites and handle click events for character selection. |
-| `playerHP`, `playerSpeed`, `ORIGINALHP`, `selectedCharacterSprite` | These variables are used to store and manage player-related data, such as health, speed, and the selected character's sprite. They are modified when a character is selected and used in the `level` scene. |
-| `playButton` (in the `characterSelect` scene)                      | This variable represents a button to start the game. It handles the click event to transition to the `leve`l scene with the selected character.                                                             |
-| `backButton`                                                       | This variable represents a button to return to the main menu. It handles the click event to transition back to the main menu from different scenes.                                                         |
+| Variable Name                                                      | Use                                                                                                                                                                                              |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `playButton`, `howToPlayButton`, `creditsButton`                   | These variables represent buttons displayed in different scenes. They are used to handle click events to transition between scenes.                                                              |
+| `howToPlayText`, `creditsText`                                     | These variables represent text elements displaying instructions and credits. They are used to display information in the `howToPlay` and `credits` scenes.                                       |
+| `characterData`                                                    | This variable stores an array of objects, each representing character information (e.g., name, sprite, health, speed).                                                                           |
+| `characterSpacing`, `characterY`                                   | These variables define the spacing and vertical position of character elements in the `characterSelect` scene.                                                                                   |
+| `whiteOutline`                                                     | This variable represents a white outline element that appears when a character is selected. It is used to visually highlight the selected character.                                             |
+| `characterName`, `characterSprite`                                 | These variables represent text and sprite elements for each character in the `characterSelect` scene.                                                                                            |
+| `playerHP`, `playerSpeed`, `ORIGINALHP`, `selectedCharacterSprite` | These variables are used to store player-related data, such as health, speed, and the selected character's sprite. They are modified when a character is selected and used in the `level` scene. |
+| `playButton` (in the `characterSelect` scene)                      | This variable represents a button to start the game. It handles the click event to transition to the `level` scene with the selected character.                                                  |
+| `backButton`                                                       | This variable represents a button to return to the main menu. It handles the click event to transition back to the main menu from different scenes.                                              |
 
 ### Pseudocode
 
@@ -387,7 +387,7 @@ I have also added an `isAlive` flag in the enemy class which is used to check if
 
 ### Challenges
 
-To use a variable between different scenes it must be declared globally at the start of the project. It took me a little while to figure this out which made it a bit challenging when making the character selection system.
+To use a variable between different scenes it must be declared globally at the start of the project. It took me a little while to figure this out which challenged me when making the character selection system because it was creating errors which confused me.
 
 ## Testing
 

@@ -7,7 +7,7 @@
 My main objective in this cycle is to alter the level system within the game so that:
 
 * [x] Each floor starts with a shop room (empty for now)
-* [x] 5 random levels are chosen from the `possibleLevels` array and these are played next
+* [x] 5 random levels are chosen from the possibleLevels array and these are played next
 * [x] A floor ends with a boss room (empty for now)
 
 #### Smaller Changes
@@ -18,12 +18,12 @@ I also want to add a cooldown to the gun so that the player can't just click the
 
 ### Key Variables
 
-| Variable Name     | Use                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fixedLevels`     | An array of fixed level configurations, where each level is represented as an array of strings. It is imported from the `fixedLevels.js` module.                                                                                                                                                                                                                                                                                              |
-| `chosenLevels`    | An array that stores the selected levels for gameplay. It initially starts as an empty array and is populated with level configurations based on the `fixedLevels` array and randomly chosen levels from `possibleLevels` (which is not defined in the provided code snippet). The structure of `chosenLevels` is `[shop level, random level 1, random level 2, ..., random level 5, boss level]`, and this sequence is repeated three times. |
-| `gunCooldownTime` | A variable that represents the cooldown time in seconds for the player's gun. It is set to 2 seconds.                                                                                                                                                                                                                                                                                                                                         |
-| `gunCooldown`     | A boolean variable that keeps track of whether the gun is on cooldown or not. It is initially set to `false` and is used to prevent the player from firing the gun during the cooldown period.                                                                                                                                                                                                                                                |
+| Variable Name     | Use                                                                                                                                                                                                                                                                                                                                                                                |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fixedLevels`     | This is an array of fixed level configurations, where each level is represented as an array of strings for the tile map.                                                                                                                                                                                                                                                           |
+| `chosenLevels`    | This is an array that stores the selected levels for gameplay. It initially starts as an empty array and is populated with level configurations based on the `fixedLevels` array and randomly chosen levels from `possibleLevels`. The structure of `chosenLevels` is a shop level, 5 random levels, then a boss level and this sequence is repeated three times for three floors. |
+| `gunCooldownTime` | This variable represents the cooldown time in seconds for the player's gun.                                                                                                                                                                                                                                                                                                        |
+| `gunCooldown`     | A boolean variable that keeps track of whether the gun is on cooldown or not. It is initially set to `false` and is used to prevent the player from firing the gun during the cooldown period.                                                                                                                                                                                     |
 
 ### Pseudocode
 
@@ -178,7 +178,7 @@ I modified how the `addBullet()` function is called so that it can only be calle
 {% code title="main.js" %}
 ```javascript
 let gunCooldownTime = 2; // Cooldown time for the gun (seconds)
-let gunCooldown = false; // Flag to track gun cooldown status
+let gunCooldown = false; // Flag to track gun cooldown
 
 onMousePress("left", () => {
     // Check if the gun is not on cooldown
@@ -195,7 +195,7 @@ onMousePress("left", () => {
 
 ### Challenges
 
-Initially, I had the boss level and shop level stored in separate files as an array with 1 element which was a list of the tiles. However, I soon found it was much simpler to store them together in a single array to avoid confusion. I also had trouble deleting the old files that they were in (`shopLevel.js` and `bossLevel.js`) because whenever I deleted them they would just instantly reappear.
+Initially, I had the boss level and shop level stored in separate files as an array with 1 element which was a list of the tiles. However, I soon found it was much simpler to store them together in a single array to avoid confusion.
 
 ## Testing
 

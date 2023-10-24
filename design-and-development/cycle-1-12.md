@@ -20,10 +20,10 @@ The text for boss fights and new floors will help players keep track of how far 
 
 ### Key Variables
 
-| Variable Name      | Use                                                                                                                                                                        |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `floorNumber`      | This variable is used to store and track the current floor number. It is updated based on the chosen level index and used to display the floor number in `newFloorText`.   |
-| `enemiesRemaining` | This variable tracks the number of remaining enemies in a level. It is checked to determine whether the player can progress to the next level after defeating all enemies. |
+| Variable Name      | Use                                                                                                                                                                                    |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `floorNumber`      | This variable is used to store and track the current floor number. It is updated based on the chosen level index and used to display the floor number in `newFloorText`.               |
+| `enemiesRemaining` | This variable tracks the number of remaining enemies in a level. It is checked to determine whether the player can progress to the next level or if they still need to defeat enemies. |
 
 ### Pseudocode
 

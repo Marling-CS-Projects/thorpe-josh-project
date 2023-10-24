@@ -4,7 +4,7 @@
 
 ### Objectives
 
-My focus in this cycle is to add some enemies. My objectives are:
+My focus in this cycle is to add some enemies which will fight the player. My objectives are:
 
 * [x] Add enemies to the level generation so that they can appear in levels
 * [x] Enemies will move toward the player
@@ -18,9 +18,8 @@ My focus in this cycle is to add some enemies. My objectives are:
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ENEMY1HP`, `ENEMY2HP`  and `ENEMY3HP` | These constants represent the initial health points for different enemy types. They are used to set the initial health of enemies and determine when an enemy is defeated. For now, there is only 1 type of enemy so only `ENEMY1HP` is called upon. |
 | `bulletDamage`                         | This variable represents the amount of damage inflicted by a bullet. It is used to subtract the bullet's damage from an enemy's health.                                                                                                              |
-| `enemies1`                             | This variable stores an array of enemy objects of type "enemy1" present in the level. It is obtained using the `level.get` method.                                                                                                                   |
+| `enemies1`                             | This variable stores an array of enemy objects of type "enemy1" present in the level and used for actions on every enemy in the level.                                                                                                               |
 | `_t`                                   | This variable is a time counter used in the enemy's movement logic. It is incremented by the `dt()` function, which returns the time since the last frame.                                                                                           |
-| `mobs`                                 | This variable represents a collection of mobile game objects. It is obtained using the `level.get` method and initially contains enemy objects. Later, it also stores additional mobile game objects collided with the player's bullets.             |
 
 ### Pseudocode
 
@@ -123,7 +122,7 @@ const ENEMY3HP = 50;
 let bulletDamage = 10;
 ```
 
-I added a new tile definition to the level generation for enemies.
+I added a new tile definition for enemies to the level generation.
 
 ```javascript
 // Level setup
@@ -131,17 +130,18 @@ const level = addLevel(possibleLevels[levelId], {
   tileWidth: 58,
   tileHeight: 58,
   pos: vec2(350, 45),
-  tiles: { // Adding other tiles
+  tiles: {
     "=": () => [...],
     "^": () => [...],
     "+": () => [...],
     "8": () => [...],
     "@": () => [...],
-    "1": () => [ // Enemies added as part of the tile map
+    "1": () => [
       sprite("ghosty"),
       area(),
       anchor("center"),
       z(2),
+      // Enemy starts in idle state, idle and move are possible states
       state("idle", ["idle", "move"]),
       body(),
       health(ENEMY1HP),
@@ -154,7 +154,7 @@ const level = addLevel(possibleLevels[levelId], {
 
 The `activateEnemy1` function contains the idle and move states for an enemy and switches between them after a random time.
 
-<pre class="language-javascript"><code class="lang-javascript"><strong>// Creat a list referencing every enemy
+<pre class="language-javascript"><code class="lang-javascript"><strong>// Create a list referencing every enemy
 </strong><strong>const enemies1 = level.get("enemy1");
 </strong>
 // Enemy movement function
@@ -169,7 +169,7 @@ function activateEnemy1(enemy1) {
   });
 
   enemy1.onStateUpdate("idle", () => {
-    // Update enemy's appearance/color while idle
+    // Update enemy's colour while idle
     _t += dt();
     const t = _t % 2 - 1;
     enemy1.color = lerp(
@@ -236,7 +236,9 @@ onCollide("player_bullet", "mob", (b, m) => {
 
 ### Challenges
 
-I faced severe challenges with making each enemy act independently. Initially, I attempted to add multiple enemies with one tag and add logic that operates on each one independently. However, I could not get this to work successfully as they would all wait the same random amount of time before stopping and moving again. This was a frustrating challenge as when approaching this problem, it seemed easy to implement. After a few days of trying to get things to work, I decided to take a different approach. I tried a different approach where I added multiple enemies to the level generation which each have a different tag, then I added state transitions for each one individually. However, I soon realised that this was an impractical and clunky approach.
+I faced severe challenges with making each enemy act independently. Initially, I attempted to add multiple enemies with one tag and add logic that operates on each one independently. However, I could not get this to work successfully as they would all wait the same random amount of time before stopping and moving again. This was a frustrating challenge as when approaching this problem at first, it seemed easy.
+
+After a while of trying to get things to work, I decided to take a different approach where I added multiple enemies to the level generation each having a different tag, then I added state transitions for each one individually. However, I soon realised that this was an impractical and clunky approach.
 
 <figure><img src="../.gitbook/assets/cycle6badapproach.png" alt="" width="137"><figcaption><p>This was a bad approach</p></figcaption></figure>
 

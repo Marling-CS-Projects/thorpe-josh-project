@@ -4,9 +4,9 @@
 
 ### Objectives
 
-My focus in this cycle is to add a health bar. My objectives are:
+My focus in this cycle is to add a health bar which shows the player's current health and when they take damage. My objectives are:
 
-* [x] Add player health bar
+* [x] Add the player health bar
 * [x] Standing on spikes deals damage to the player
 * [x] Taking damage will lower the health bar
 * [x] Reaching 0 health causes the player to die
@@ -17,7 +17,7 @@ My focus in this cycle is to add a health bar. My objectives are:
 
 ### Usability Features
 
-Adding a player health bar allows users to see how much health is remaining so that they can change their strategy or playstyle accordingly. It gives users more information and ultimately makes it easier to enjoy my game.
+Adding a health bar allows players to make better-informed decisions within my game for example by playing more cautiously when they can see that they have low health.
 
 ### Key Variables
 
